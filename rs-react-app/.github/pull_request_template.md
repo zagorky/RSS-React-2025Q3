@@ -10,7 +10,7 @@
 
 
 2. Screenshot:
-3. Deploy: [link](rs-react-zagorky.netlify.app)
+3. Deploy: [link](https://rs-react-zagorky.netlify.app/)
 4. Done 14.07.2025 / deadline 14.07.2025
 5. Score: 0/100
 ### Task 1
