@@ -5,3 +5,5 @@ export const apiEndpoints = {
 };
 
 export const LIMIT = 10;
+
+export const LS_KEY = 'ZAGORKY:retrievedQuery';
