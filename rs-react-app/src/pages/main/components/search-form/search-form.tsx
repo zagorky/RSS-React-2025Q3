@@ -30,7 +30,7 @@ export class SearchForm extends Component<Props, State> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="search-form" onSubmit={this.handleSubmit}>
         <label htmlFor="search-input">
           <span>Search</span>
           <input
