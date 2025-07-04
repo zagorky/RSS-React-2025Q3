@@ -34,11 +34,14 @@
 }
 
 .loader-container {
-    @apply m-auto p-4 rounded-lg shadow-lg;
+    @apply m-auto p-4 rounded-lg shadow-lg flex flex-col items-center gap-3;
 }
 
 .loader-spinner {
     @apply  animate-spin rounded-full h-7 w-7 border-3 border-[var(--color-primary-600)] border-r-[var(--color-secondary-600)];
+}
+.loader-text{
+    @apply text-[var(--color-text-on-primary)]
 }
 
 .main-wrapper {
