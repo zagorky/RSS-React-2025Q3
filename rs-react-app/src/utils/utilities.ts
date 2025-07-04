@@ -7,3 +7,7 @@ export const retrieveQueryFormLS = () => {
 export const setQueryToLS = (value: string) => {
   localStorage.setItem(LS_KEY, value);
 };
+
+export const normalizeError = (error: unknown) => {
+  return error instanceof Error ? error.message : 'Fetching data error';
+};
