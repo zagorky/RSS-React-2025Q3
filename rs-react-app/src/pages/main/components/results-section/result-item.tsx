@@ -12,10 +12,10 @@ export class ResultItem extends Component<Props, unknown> {
 
   render() {
     return (
-      <li>
+      <li className="contents">
         <div className="result-item-wrapper">
-          <div>{this.title}</div>
-          <div>{this.synopsis}</div>
+          <p className="result-item-title">{this.title}</p>
+          <p className="result-item-decs">{this.synopsis}</p>
         </div>
       </li>
     );

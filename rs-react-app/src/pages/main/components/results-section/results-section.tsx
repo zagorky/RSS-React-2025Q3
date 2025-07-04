@@ -71,7 +71,7 @@ export class ResultsSection extends Component<Props, State> {
 
     return (
       <section>
-        <ul>
+        <ul className="result-section">
           {results.map((result) => (
             <ResultItem key={result.title_english} data={result} />
           ))}
