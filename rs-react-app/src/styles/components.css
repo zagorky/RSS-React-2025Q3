@@ -1,0 +1,14 @@
+.btn {
+    @apply min-w-24 size-max px-1 py-1 border transition-all duration-200 ease-in-out;
+    @apply border-[var(--color-border-light)] bg-[var(--color-secondary-800)] text-[var(--color-text-on-secondary)];
+    @apply font-bold rounded-lg cursor-pointer;
+    @apply hover:bg-[var(--color-secondary-700)];
+    @apply disabled:bg-[var(--color-error-200)] disabled:text-[var(--color-gray-900)] disabled:opacity-80 disabled:pointer-events-none;
+    @apply max-[750px]:min-w-15 max-[750px]:text-xs;
+}
+
+.inpt {
+    @apply px-2 py-1 m-1 border border-[var(--color-border-light)] rounded-md shadow-sm;
+    @apply focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-[var(--color-primary-500)];
+    @apply transition duration-200;
+}
