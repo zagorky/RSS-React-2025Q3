@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App.tsx';
 
-const root = document.getElementById('root');
+import './index.css';
+import App from './App';
+
+const root = document.querySelector('#root');
 
 if (root === null || root === undefined) {
   throw new Error('Root must be provided');
