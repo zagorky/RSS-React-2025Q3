@@ -8,6 +8,7 @@ export default defineConfig({
   build: {
     minify: true,
     target: 'esnext',
+    outDir: 'dist',
   },
   css: {
     modules: {
