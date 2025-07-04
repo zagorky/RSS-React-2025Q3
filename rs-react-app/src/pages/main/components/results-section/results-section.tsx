@@ -60,7 +60,7 @@ export class ResultsSection extends Component<Props, State> {
       return <Loader />;
     }
     if (error) {
-      return <ErrorFallback />;
+      return <ErrorFallback error={error} />;
     }
     if (!results) {
       return <EmptyList />;
@@ -70,10 +70,10 @@ export class ResultsSection extends Component<Props, State> {
     }
 
     return (
-      <section>
+      <section className="flex items-center justify-center">
         <ul className="result-section">
           {results.map((result) => (
-            <ResultItem key={result.title_english} data={result} />
+            <ResultItem key={result.mal_id} data={result} />
           ))}
         </ul>
       </section>

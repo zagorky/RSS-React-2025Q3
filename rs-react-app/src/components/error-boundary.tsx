@@ -7,22 +7,22 @@ import {
 
 type Props = {
   children: ReactNode;
-  fallback: ReactNode;
+  fallback: (error: Error) => ReactNode;
 };
 
 type State = {
-  hasError: boolean;
+  error: Error | null;
 };
 export class ErrorBoundary extends Component<Props, State> {
-  state: State = { hasError: false };
+  state: State = { error: null };
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error) {
+    return { error: error };
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(
-      'Rendering Error',
+      '~~~Rendering Error~~~~',
       error,
       info.componentStack,
       captureOwnerStack()
@@ -30,8 +30,8 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   render() {
-    if (this.state.hasError) {
-      return this.props.fallback;
+    if (this.state.error) {
+      return this.props.fallback(this.state.error);
     }
 
     return this.props.children;
