@@ -1,7 +1,31 @@
-import { Component } from 'react';
+import { Component, type MouseEvent, type ReactNode } from 'react';
 
-export class Button extends Component {
+type Props = {
+  children: ReactNode;
+  className?: string;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+};
+
+export class Button extends Component<Props> {
+  static readonly defaultProps = {
+    type: 'button',
+    disabled: false,
+  };
+
   render() {
-    return <button type="button"></button>;
+    const { className = '', onClick, type, disabled, children } = this.props;
+    const buttonClasses = `${className} btn`.trim();
+    return (
+      <button
+        onClick={onClick}
+        className={buttonClasses}
+        type={type}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    );
   }
 }
