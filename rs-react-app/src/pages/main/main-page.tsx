@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { ErrorBoundary } from '../../components/error-boundary';
 import { ErrorFallback } from '../../components/error-fallback';
 import { retrieveQueryFormLS } from '../../utils/utilities';
-import { ErrorSection } from './components/error-section/error-section';
+import { ErrorButton } from './components/error-section/error-button';
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
 
@@ -22,15 +22,19 @@ export class MainPage extends Component<unknown, State> {
     this.setState({ searchQuery: query });
   };
 
+  handleErrorFallback = (error: Error) => {
+    return <ErrorFallback error={error} />;
+  };
+
   render() {
     return (
-      <main>
+      <>
         <SearchForm onSubmit={(query) => this.handleSearch(query)} />
-        <ErrorBoundary fallback={<ErrorFallback />}>
+        <ErrorBoundary fallback={this.handleErrorFallback}>
           <ResultsSection searchQuery={this.state.searchQuery} />
+          <ErrorButton />
         </ErrorBoundary>
-        <ErrorSection />
-      </main>
+      </>
     );
   }
 }

@@ -1,7 +1,7 @@
-import { MainPage } from './pages/main/main-page';
+import { Layout } from './common-ui/layout/layout';
 
 function App() {
-  return <MainPage />;
+  return <Layout />;
 }
 
 export default App;
