@@ -7,6 +7,7 @@ import {
 
 type Props = {
   children: ReactNode;
+  fallback: ReactNode;
 };
 
 type State = {
@@ -30,7 +31,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return <p>Try again</p>;
+      return this.props.fallback;
     }
 
     return this.props.children;
