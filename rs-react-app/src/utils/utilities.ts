@@ -5,5 +5,5 @@ export const retrieveQueryFormLS = () => {
 };
 
 export const setQueryToLS = (value: string) => {
-  localStorage.setItem(LS_KEY, JSON.stringify(value));
+  localStorage.setItem(LS_KEY, value);
 };

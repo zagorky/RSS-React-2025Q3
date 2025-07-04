@@ -22,11 +22,11 @@ export class SearchForm extends Component<Props, State> {
     this.setState({ value: event.target.value });
   };
 
-  handleSubmit(event: FormEvent) {
+  handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     this.props.onSubmit(this.state.value);
     setQueryToLS(this.state.value);
-  }
+  };
 
   render() {
     return (
