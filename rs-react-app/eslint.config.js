@@ -63,7 +63,6 @@ export default tseslint.config(
       'import/first': 'error',
       // common
       curly: ['error', 'all'],
-      'quote-props': ['error', 'always'],
       'prefer-const': 'error',
       'prefer-arrow-callback': 'error',
       'no-confusing-arrow': ['error', { allowParens: true }],
