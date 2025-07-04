@@ -3,7 +3,7 @@ export type ResponseType = {
   pagination: PaginationType;
 };
 
-type DataItem = {
+export type DataItem = {
   mal_id: 0;
   url: string;
   images: { jpg: ImageType; webp: ImageType };
