@@ -1,17 +1,19 @@
 1. Task: 
-  -[ ] [Task1: React project setup. Class components. Error boundary.](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md)
-  -[ ] [Task2: Unit Testing](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/tests.md)
-  -[ ] [Task3: Routing and Hooks](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/functional-routing.md)
-  -[ ] [Task4: State Management and Context API](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/state-management.md)
-  -[ ] [Task5: API Querying in React](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/queries.md)
-  -[ ] [Task6: Next.js. Server Side Rendering](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/nextjs-ssr-ssg.md)
-  -[ ] [Task7: React Forms](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/forms.md)
-  -[ ] [Task8: React Performance](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/performance.md)
-
+  - [ ] [Task1: React project setup. Class components. Error boundary.](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md)
+  - [ ] [Task2: Unit Testing](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/tests.md)
+  - [ ] [Task3: Routing and Hooks](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/functional-routing.md)
+  - [ ] [Task4: State Management and Context API](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/state-management.md)
+  - [ ] [Task5: API Querying in React](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/queries.md)
+  - [ ] [Task6: Next.js. Server Side Rendering](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/nextjs-ssr-ssg.md)
+  - [ ] [Task7: React Forms](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/forms.md)
+  - [ ] [Task8: React Performance](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/performance.md)
 
 2. Screenshot:
-3. Deploy: [link](https://rs-react-zagorky.netlify.app/)
+
+3. Deploy: [link](https://zagorky-class-components.netlify.app/)
+
 4. Done 14.07.2025 / deadline 14.07.2025
+
 5. Score: 0/100
 ### Task 1
  - [ ] Eslint is set up, when lint command is run it doesn't produce any errors (if there are warnings score might be less) - 15 points 
