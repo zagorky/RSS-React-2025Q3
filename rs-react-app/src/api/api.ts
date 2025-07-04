@@ -8,7 +8,11 @@ const getUrl = (query?: string) => {
 
 export const fetchRequest = async (query?: string) => {
   const url = getUrl(query);
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
   if (!response.ok) {
     throw new Error(`Fetch error: ${response.statusText}`);
