@@ -6,9 +6,16 @@ import react from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactDom from 'eslint-plugin-react-dom';
+import unicornPlugin from 'eslint-plugin-unicorn';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  unicornPlugin.configs.recommended,
+
+  { ignores: ['dist', '**/*.js', '**/*.config.js', '**/*.config.ts'] },
   {
     extends: [
       js.configs.recommended,
@@ -19,14 +26,26 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      sourceType: 'module',
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'react-compiler': reactCompiler,
+      'jsx-a11y': jsxA11y,
+      'react-dom': reactDom,
+      perfectionist: perfectionistPlugin,
+      import: importPlugin,
     },
     rules: {
+      //react
+      ...jsxA11y.configs.recommended.rules,
+      ...reactDom.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
@@ -35,10 +54,57 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      //perfectionist
+      'perfectionist/sort-imports': 'error',
+      // import
+      'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
+      'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+      'import/no-cycle': ['error', { maxDepth: Infinity }],
+      'import/first': 'error',
+      // common
+      curly: ['error', 'all'],
+      'quote-props': ['error', 'always'],
+      'prefer-const': 'error',
+      'prefer-arrow-callback': 'error',
+      'no-confusing-arrow': ['error', { allowParens: true }],
+      // unicorn
+      'unicorn/filename-case': 'off',
+      'unicorn/no-array-callback-reference': 'off',
+      'unicorn/prefer-at': 'off',
+      'unicorn/no-array-for-each': 'off',
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/number-literal-case': 'off',
+      'unicorn/numeric-separators-style': 'off',
+      'unicorn/prefer-global-this': 'off',
+      'unicorn/prevent-abbreviations': [
+        'error',
+        {
+          allowList: {
+            acc: true,
+            env: true,
+            i: true,
+            j: true,
+            props: true,
+            Props: true,
+            args: true,
+            ImportMetaEnv: true,
+          },
+        },
+      ],
     },
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
       },
     },
   }
