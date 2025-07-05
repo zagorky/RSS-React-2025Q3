@@ -14,8 +14,8 @@ interface State {
 export class MainPage extends Component<unknown, State> {
   constructor(props: unknown) {
     super(props);
-    const savedQuery = retrieveQueryFormLS();
-    this.state = { searchQuery: savedQuery };
+    const retrievedQuery = retrieveQueryFormLS();
+    this.state = { searchQuery: retrievedQuery };
   }
 
   handleSearch = (query: string) => {
