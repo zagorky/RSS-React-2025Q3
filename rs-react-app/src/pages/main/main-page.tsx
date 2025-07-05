@@ -1,8 +1,7 @@
+import { ErrorFallback } from '~components/error-fallback/error-fallback';
+import { ErrorBoundary } from '~pages/main/components/results-section/error-boundary';
 import { retrieveQueryFormLS } from '~utils/utilities';
 import { Component } from 'react';
-
-import { ErrorBoundary } from '~/components/error-boundary';
-import { ErrorFallback } from '~/components/error-fallback';
 
 import { ErrorButton } from './components/error-section/error-button';
 import { ResultsSection } from './components/results-section/results-section';

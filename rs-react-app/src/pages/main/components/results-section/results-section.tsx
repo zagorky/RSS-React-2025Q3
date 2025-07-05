@@ -1,6 +1,6 @@
 import { fetchRequest } from '~api/api';
-import { Loader } from '~components/common-ui/loader/loader';
-import { ErrorFallback } from '~components/error-fallback';
+import { ErrorFallback } from '~components/error-fallback/error-fallback';
+import { Loader } from '~components/loader/loader';
 import { DataItem } from '~types/types';
 import { normalizeError } from '~utils/utilities';
 import { Component } from 'react';

@@ -13,6 +13,7 @@ type Props = {
 type State = {
   error: Error | null;
 };
+
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { error: null };
 
@@ -22,7 +23,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(
-      '~~~Rendering Error~~~~',
+      '~~~Rendering Error~~~',
       error,
       info.componentStack,
       captureOwnerStack()
