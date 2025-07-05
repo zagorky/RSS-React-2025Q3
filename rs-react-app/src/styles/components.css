@@ -13,7 +13,7 @@
 }
 
 .basic-content-wrapper {
-  @apply m-auto flex gap-8 flex-col items-center justify-center;
+  @apply m-auto flex flex-col items-center justify-center gap-8;
 }
 
 .main-wrapper {

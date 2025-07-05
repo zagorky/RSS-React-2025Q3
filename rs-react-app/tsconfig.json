@@ -16,7 +16,6 @@
       "~types/*": ["types/*"],
       "~styles/*": ["styles/*"],
       "~components/*": ["components/*"]
-    },
-//    "jsx": "react-jsx"
+    }
   }
 }
