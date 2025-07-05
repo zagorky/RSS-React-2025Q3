@@ -1,1 +1,1 @@
-cd rs-react-app && npm run lint && npm run type-check
+cd rs-react-app && npm run format:fix && npm run stylelint:fix && npm run lint && npm run type-check

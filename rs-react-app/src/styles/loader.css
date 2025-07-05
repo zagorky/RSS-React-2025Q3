@@ -1,18 +1,19 @@
 .loader-overlay {
-    @apply fixed inset-0 bg-[var(--color-bg-dark)] opacity-90 flex z-50;
+  @apply fixed inset-0 z-50 flex bg-[var(--color-bg-dark)] opacity-90;
 }
 
 .loader-container {
-    @apply m-auto flex flex-col items-center gap-3;
+  @apply m-auto flex flex-col items-center gap-3;
 }
 
-.basic-content-wrapper{
-    @apply m-auto flex flex-col items-center justify-center
+.basic-content-wrapper {
+  @apply m-auto flex flex-col items-center justify-center;
 }
 
 .loader-spinner {
-    @apply  animate-spin rounded-full h-7 w-7 border-3 border-[var(--color-primary-600)] border-r-[var(--color-secondary-600)];
+  @apply h-7 w-7 animate-spin rounded-full border-3 border-[var(--color-primary-600)] border-r-[var(--color-secondary-600)];
 }
-.loader-text{
-    @apply text-[var(--color-text-on-primary)]
+
+.loader-text {
+  @apply text-[var(--color-text-on-primary)];
 }
