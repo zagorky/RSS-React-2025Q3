@@ -17,6 +17,6 @@
       "~styles/*": ["styles/*"],
       "~components/*": ["components/*"]
     },
-    "jsx": "react-jsx"
+//    "jsx": "react-jsx"
   }
 }

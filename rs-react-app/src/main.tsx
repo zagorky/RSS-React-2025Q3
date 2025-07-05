@@ -1,9 +1,10 @@
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
-import { ErrorBoundary } from '~pages/main/components/results-section/error-boundary';
+import { StrictMode } from 'react';
 
 import './index.css';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+
+import { ErrorBoundary } from '~/error-boundary';
 
 import App from './App';
 

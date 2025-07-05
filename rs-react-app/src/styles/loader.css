@@ -6,10 +6,6 @@
   @apply m-auto flex flex-col items-center gap-3;
 }
 
-.basic-content-wrapper {
-  @apply m-auto flex flex-col items-center justify-center;
-}
-
 .loader-spinner {
   @apply h-7 w-7 animate-spin rounded-full border-3 border-[var(--color-primary-600)] border-r-[var(--color-secondary-600)];
 }

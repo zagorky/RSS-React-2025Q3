@@ -1,5 +1,3 @@
-import { ErrorFallback } from '~components/error-fallback/error-fallback';
-import { ErrorBoundary } from '~pages/main/components/results-section/error-boundary';
 import { retrieveQueryFormLS } from '~utils/utilities';
 import { Component } from 'react';
 
@@ -22,18 +20,12 @@ export class MainPage extends Component<unknown, State> {
     this.setState({ searchQuery: query });
   };
 
-  handleErrorFallback = (error: Error) => {
-    return <ErrorFallback error={error} />;
-  };
-
   render() {
     return (
       <>
         <SearchForm onSubmit={(query) => this.handleSearch(query)} />
-        <ErrorBoundary fallback={this.handleErrorFallback}>
-          <ResultsSection searchQuery={this.state.searchQuery} />
-          <ErrorButton />
-        </ErrorBoundary>
+        <ResultsSection searchQuery={this.state.searchQuery} />
+        <ErrorButton />
       </>
     );
   }
