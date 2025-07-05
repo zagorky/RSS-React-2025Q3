@@ -19,6 +19,10 @@ export class ErrorButton extends Component<unknown, State> {
       throw new Error('~~Test error button clicked!~~');
     }
 
-    return <Button onClick={this.triggerError}>Throw Error</Button>;
+    return (
+      <section className="error-section">
+        <Button onClick={this.triggerError}>Throw Error</Button>
+      </section>
+    );
   }
 }

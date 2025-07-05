@@ -1,0 +1,3 @@
+.search-form {
+    @apply flex p-4 flex-wrap items-center border-[var(--color-primary-600)] border-b-3 justify-center gap-6 w-full;
+}

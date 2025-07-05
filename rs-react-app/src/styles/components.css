@@ -12,10 +12,6 @@
   @apply transition duration-200;
 }
 
-.search-form {
-  @apply flex flex-wrap items-center justify-center gap-6;
-}
-
 .main-wrapper {
   @apply flex min-h-screen flex-col;
 }

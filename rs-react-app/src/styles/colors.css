@@ -71,6 +71,6 @@
   --gradient-accent: linear-gradient(
     45deg,
     var(--color-accent-400),
-    var(--color-primary-400)
+    var(--color-primary-700)
   );
 }
