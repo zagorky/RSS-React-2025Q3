@@ -1,9 +1,4 @@
-import {
-  captureOwnerStack,
-  Component,
-  type ErrorInfo,
-  type ReactNode,
-} from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -22,12 +17,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error(
-      '~~~Rendering Error~~~',
-      error,
-      info.componentStack,
-      captureOwnerStack()
-    );
+    console.error('~~~Rendering Error~~~', error, info.componentStack);
   }
 
   render() {
