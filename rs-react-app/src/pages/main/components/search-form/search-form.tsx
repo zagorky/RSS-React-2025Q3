@@ -1,7 +1,7 @@
+import { retrieveQueryFormLS, setQueryToLS } from '~utils/utilities';
 import { type ChangeEvent, Component, type FormEvent } from 'react';
 
-import { Button } from '../../../../common-ui/button/button';
-import { retrieveQueryFormLS, setQueryToLS } from '../../../../utils/utilities';
+import { Button } from '~/components/common-ui/button/button';
 
 type Props = {
   onSubmit: (value: string) => void;

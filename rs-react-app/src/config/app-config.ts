@@ -4,6 +4,4 @@ export const apiEndpoints = {
   anime: 'anime',
 };
 
-export const LIMIT = 10;
-
 export const LS_KEY = 'ZAGORKY:retrievedQuery';

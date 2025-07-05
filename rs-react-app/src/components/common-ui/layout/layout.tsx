@@ -1,6 +1,5 @@
+import { MainPage } from '~pages/main/main-page';
 import { Component } from 'react';
-
-import { MainPage } from '../../pages/main/main-page';
 
 export class Layout extends Component {
   render() {

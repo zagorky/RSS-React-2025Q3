@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { Button } from '../../../../common-ui/button/button';
+import { Button } from '~/components/common-ui/button/button';
 
 type State = {
   shouldThrow: boolean;

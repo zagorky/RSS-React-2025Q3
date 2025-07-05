@@ -1,4 +1,4 @@
-import { LS_KEY } from '../config/app-config';
+import { LS_KEY } from '~config/app-config';
 
 export const retrieveQueryFormLS = () => {
   return localStorage.getItem(LS_KEY) ?? '';

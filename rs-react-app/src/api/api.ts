@@ -1,4 +1,4 @@
-import { apiEndpoints, apiUrl } from '../config/app-config';
+import { apiEndpoints, apiUrl } from '~config/app-config';
 
 const getUrl = (query?: string) => {
   return query

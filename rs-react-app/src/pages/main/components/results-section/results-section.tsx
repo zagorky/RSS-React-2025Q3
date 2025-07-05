@@ -1,11 +1,10 @@
+import { fetchRequest } from '~api/api';
+import { Loader } from '~components/common-ui/loader/loader';
+import { ErrorFallback } from '~components/error-fallback';
+import { DataItem } from '~types/types';
+import { normalizeError } from '~utils/utilities';
 import { Component } from 'react';
 
-import type { DataItem } from '../../../../types/types';
-
-import { fetchRequest } from '../../../../api/api';
-import { Loader } from '../../../../common-ui/loader/loader';
-import { ErrorFallback } from '../../../../components/error-fallback';
-import { normalizeError } from '../../../../utils/utilities';
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 

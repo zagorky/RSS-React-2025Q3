@@ -1,4 +1,4 @@
-import { Layout } from './common-ui/layout/layout';
+import { Layout } from '~components/common-ui/layout/layout';
 
 function App() {
   return <Layout />;

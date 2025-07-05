@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import type { DataItem } from '~types/types';
 
-import type { DataItem } from '../../../../types/types';
+import { Component } from 'react';
 
 type Props = {
   data: DataItem;
