@@ -38,7 +38,6 @@ export class SearchForm extends Component<Props, State> {
             onChange={this.handleChange}
             id="search-input"
             type="text"
-            placeholder="Search"
           />
         </label>
         <Button type="submit">Search</Button>
