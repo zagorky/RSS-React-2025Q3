@@ -69,7 +69,7 @@ export class ResultsSection extends Component<Props, State> {
     }
 
     return (
-      <section className="flex items-center justify-center border-b-3 border-[var(--color-primary-600)]">
+      <section className="flex items-center justify-center">
         <ul className="result-section">
           {results.map((result) => (
             <ResultItem key={result.mal_id} data={result} />
