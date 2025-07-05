@@ -1,19 +1,24 @@
 .result-item-wrapper {
-  @apply m-auto flex w-full max-w-[300px] flex-col gap-6 rounded-xl border-4 border-[var(--color-border-dark)] p-6 shadow-sm transition-all duration-300 ease-in-out hover:scale-105 hover:border-[var(--color-primary-700)];
+  @apply flex w-full max-w-[300px] flex-col gap-6 rounded-xl border-4 border-[var(--color-border-dark)] p-6
+  shadow-sm transition-all duration-300 ease-in-out
+  hover:scale-105 hover:border-[var(--color-primary-700)];
 }
 
 .result-item-title {
-  @apply truncate text-lg font-bold text-[var(--color-primary-600)] transition-colors duration-300 hover:text-[var(--color-secondary-600)];
+  @apply truncate text-lg font-bold text-[var(--color-primary-600)]
+  transition-colors duration-300 hover:text-[var(--color-secondary-600)];
 }
 
 .result-item-desc {
-  @apply line-clamp-3 text-sm text-[var(--color-gray-500)];
+  @apply text-sm text-[var(--color-gray-500)] line-clamp-3;
 }
 
 .result-section {
-  @apply mx-auto my-8 grid w-full max-w-6xl items-stretch justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3;
+  @apply mx-auto my-8 grid w-full max-w-6xl gap-6 justify-items-center items-stretch
+  sm:grid-cols-2 lg:grid-cols-3;
 }
 
 .result-item-img {
-  @apply h-48 w-full rounded-md object-cover transition-opacity duration-300 hover:opacity-90;
+  @apply h-48 w-full object-cover rounded-md
+  transition-opacity duration-300 hover:opacity-90;
 }
