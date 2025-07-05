@@ -58,13 +58,12 @@ export class ResultsSection extends Component<Props, State> {
     if (loading) {
       return <Loader />;
     }
+
     if (error) {
       return <ErrorFallback error={error} />;
     }
-    if (!results) {
-      return <EmptyList />;
-    }
-    if (results.length === 0) {
+
+    if (!results || results.length === 0) {
       return <EmptyList />;
     }
 
