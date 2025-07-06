@@ -6,9 +6,9 @@ const getUrl = (query?: string) => {
     : `${apiUrl}/${apiEndpoints.anime}`;
 };
 
-export const fetchRequest = async (query?: string) => {
+export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
   const url = getUrl(query);
-  const response = await fetch(url);
+  const response = await fetch(url, { signal: signal });
 
   if (!response.ok) {
     throw new Error(`Fetch error: ${response.statusText}`);

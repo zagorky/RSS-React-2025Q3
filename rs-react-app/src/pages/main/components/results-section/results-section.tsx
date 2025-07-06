@@ -25,16 +25,27 @@ export class ResultsSection extends Component<Props, State> {
     error: null,
   };
 
+  private abortController: AbortController | null = null;
+
   async fetchData(query: string) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     this.setState({ loading: true, error: null });
 
     try {
-      const data = await fetchRequest(query);
-      this.setState({
-        results: data.data ?? [],
-        loading: false,
-        error: null,
-      });
+      const data = await fetchRequest(query, signal);
+      if (!this.abortController.signal.aborted) {
+        this.setState({
+          results: data.data ?? [],
+          loading: false,
+          error: null,
+        });
+      }
     } catch (error) {
       this.setState({
         loading: false,
@@ -50,6 +61,12 @@ export class ResultsSection extends Component<Props, State> {
   componentDidUpdate(previousProps: Readonly<Props>) {
     if (previousProps.searchQuery !== this.props.searchQuery) {
       this.fetchData(this.props.searchQuery);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.abortController) {
+      this.abortController.abort();
     }
   }
 
