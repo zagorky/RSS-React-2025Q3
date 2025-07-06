@@ -1,7 +1,8 @@
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
-import { StrictMode } from 'react';
+import { assertIsNonNullable } from '~utils/utilities';
 
 import './index.css';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { ErrorBoundary } from '~/error-boundary';
@@ -10,9 +11,7 @@ import App from './App';
 
 const root = document.querySelector('#root');
 
-if (!root) {
-  throw new Error('Root must be provided');
-}
+assertIsNonNullable(root);
 
 createRoot(root).render(
   <StrictMode>
