@@ -1,4 +1,4 @@
-import { retrieveQueryFormLS } from '~utils/utilities';
+import { retrieveQueryFormLS, setQueryToLS } from '~utils/utilities';
 import { Component } from 'react';
 
 import { ErrorButton } from './components/error-section/error-button';
@@ -16,14 +16,23 @@ export class MainPage extends Component<unknown, State> {
     this.state = { searchQuery: retrievedQuery };
   }
 
-  handleSearch = (query: string) => {
+  handleSearchChange = (query: string) => {
     this.setState({ searchQuery: query });
+  };
+
+  handleSearchSubmit = (query: string) => {
+    this.setState({ searchQuery: query });
+    setQueryToLS(query);
   };
 
   render() {
     return (
       <>
-        <SearchForm onSubmit={(query) => this.handleSearch(query)} />
+        <SearchForm
+          value={this.state.searchQuery}
+          onChange={this.handleSearchChange}
+          onSubmit={this.handleSearchSubmit}
+        />
         <ResultsSection searchQuery={this.state.searchQuery} />
         <ErrorButton />
       </>
