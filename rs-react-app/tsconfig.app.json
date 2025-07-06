@@ -28,6 +28,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"],
+  "include": ["src", "vitest.setupTests.ts"],
   "exclude": ["node_modules", "dist"]
 }

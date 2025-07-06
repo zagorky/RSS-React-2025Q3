@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --fix",
     "stylelint:fix": "stylelint src/**/*.css --fix",
     "format:fix": "prettier --write .",
-    "test": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "github:testing-library/jest-dom",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.0.10",
     "@types/react": "^19.1.8",
