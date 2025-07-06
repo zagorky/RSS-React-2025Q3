@@ -35,9 +35,8 @@ export class ResultsSection extends Component<Props, State> {
     this.abortController = new AbortController();
     const { signal } = this.abortController;
 
-    this.setState({ loading: true, error: null });
-
     try {
+      this.setState({ loading: true, error: null });
       const data = await fetchRequest(query, signal);
       if (!this.abortController.signal.aborted) {
         this.setState({
@@ -80,7 +79,7 @@ export class ResultsSection extends Component<Props, State> {
       return <ErrorFallback error={error} />;
     }
 
-    if (!results || results.length === 0) {
+    if (results.length === 0) {
       return <EmptyList />;
     }
 
