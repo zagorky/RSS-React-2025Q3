@@ -15,7 +15,7 @@ export class MainPage extends Component<unknown, State> {
   };
 
   componentDidMount() {
-    const retrievedQuery = retrieveQueryFormLS() || '';
+    const retrievedQuery = retrieveQueryFormLS();
     this.setState({ searchQuery: retrievedQuery });
   }
 
