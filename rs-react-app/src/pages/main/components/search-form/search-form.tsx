@@ -15,10 +15,13 @@ type State = {
 };
 
 export class SearchForm extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+  state: State = {
+    value: '',
+  };
+
+  componentDidMount() {
     const retrievedQuery = retrieveQueryFormLS();
-    this.state = { value: retrievedQuery };
+    this.setState({ value: retrievedQuery });
   }
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {

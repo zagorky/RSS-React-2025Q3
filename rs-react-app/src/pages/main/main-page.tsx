@@ -10,10 +10,13 @@ interface State {
 }
 
 export class MainPage extends Component<unknown, State> {
-  constructor(props: unknown) {
-    super(props);
-    const retrievedQuery = retrieveQueryFormLS();
-    this.state = { searchQuery: retrievedQuery };
+  state = {
+    searchQuery: '',
+  };
+
+  componentDidMount() {
+    const retrievedQuery = retrieveQueryFormLS() || '';
+    this.setState({ searchQuery: retrievedQuery });
   }
 
   handleSearch = (query: string) => {
