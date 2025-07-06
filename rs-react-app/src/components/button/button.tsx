@@ -1,3 +1,4 @@
+import { withDataTestId } from '~utils/utilities';
 import { Component, type MouseEvent, type ReactNode } from 'react';
 
 type Props = {
@@ -6,6 +7,7 @@ type Props = {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  dataTestId?: string;
 };
 
 export class Button extends Component<Props> {
@@ -15,10 +17,18 @@ export class Button extends Component<Props> {
   };
 
   render() {
-    const { classNames = '', onClick, type, disabled, children } = this.props;
+    const {
+      classNames = '',
+      onClick,
+      type,
+      disabled,
+      children,
+      dataTestId = '',
+    } = this.props;
     const buttonClasses = `${classNames} btn`.trim();
     return (
       <button
+        {...withDataTestId(dataTestId)}
         onClick={onClick}
         className={buttonClasses}
         type={type}

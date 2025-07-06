@@ -1,5 +1,9 @@
 import { Button } from '~components/button/button';
-import { retrieveQueryFormLS, setQueryToLS } from '~utils/utilities';
+import {
+  retrieveQueryFormLS,
+  setQueryToLS,
+  withDataTestId,
+} from '~utils/utilities';
 import { type ChangeEvent, Component, type FormEvent } from 'react';
 
 type Props = {
@@ -29,10 +33,15 @@ export class SearchForm extends Component<Props, State> {
 
   render() {
     return (
-      <form className="search-form" onSubmit={this.handleSubmit}>
+      <form
+        {...withDataTestId('search-form')}
+        className="search-form"
+        onSubmit={this.handleSubmit}
+      >
         <label>
           <span className="sr-only">Search</span>
           <input
+            {...withDataTestId('search-form-input')}
             className="inpt"
             value={this.state.value}
             onChange={this.handleChange}
@@ -40,7 +49,9 @@ export class SearchForm extends Component<Props, State> {
             placeholder="Search"
           />
         </label>
-        <Button type="submit">Search</Button>
+        <Button {...withDataTestId('search-form-submit-button')} type="submit">
+          Search
+        </Button>
       </form>
     );
   }

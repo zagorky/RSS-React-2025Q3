@@ -1,4 +1,5 @@
 import { Button } from '~components/button/button';
+import { withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 
 type Props = {
@@ -8,7 +9,11 @@ type Props = {
 export class ErrorFallback extends Component<Props> {
   render() {
     return (
-      <section id="error-fallback" className="basic-content-wrapper">
+      <section
+        {...withDataTestId('error-fallback')}
+        id="error-fallback"
+        className="basic-content-wrapper"
+      >
         <h2 className="text-2xl font-bold text-[var(--color-error)]">
           Try Again
         </h2>
@@ -17,7 +22,12 @@ export class ErrorFallback extends Component<Props> {
             ? this.props.error.message
             : this.props.error}
         </p>
-        <Button onClick={() => window.location.reload()}>Refresh</Button>
+        <Button
+          dataTestId={'error-fallback-button'}
+          onClick={() => window.location.reload()}
+        >
+          Refresh
+        </Button>
       </section>
     );
   }

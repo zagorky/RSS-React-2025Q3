@@ -1,5 +1,6 @@
 import type { DataItem } from '~types/types';
 
+import { withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 
 type Props = {
@@ -13,12 +14,24 @@ export class ResultItem extends Component<Props, unknown> {
 
   render() {
     return (
-      <li className="result-item-wrapper">
-        <p className="result-item-title">{this.title}</p>
+      <li {...withDataTestId('result-item')} className="result-item-wrapper">
+        <p
+          {...withDataTestId('result-item-title')}
+          className="result-item-title"
+        >
+          {this.title}
+        </p>
         <div className="overflow-hidden rounded-md">
-          <img className="result-item-img" src={this.imgUrl} alt={this.title} />
+          <img
+            {...withDataTestId('result-item-img')}
+            className="result-item-img"
+            src={this.imgUrl}
+            alt={this.title}
+          />
         </div>
-        <p className="result-item-desc">{this.synopsis}</p>
+        <p {...withDataTestId('result-item-desc')} className="result-item-desc">
+          {this.synopsis}
+        </p>
       </li>
     );
   }

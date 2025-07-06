@@ -21,7 +21,9 @@ export class ErrorButton extends Component<unknown, State> {
 
     return (
       <section className="error-section">
-        <Button onClick={this.triggerError}>Throw Error</Button>
+        <Button dataTestId={'throw-error-button'} onClick={this.triggerError}>
+          Throw Error
+        </Button>
       </section>
     );
   }

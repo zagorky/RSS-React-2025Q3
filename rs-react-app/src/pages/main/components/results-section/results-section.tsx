@@ -2,7 +2,7 @@ import { fetchRequest } from '~api/api';
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
 import { DataItem } from '~types/types';
-import { normalizeError } from '~utils/utilities';
+import { normalizeError, withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 
 import { EmptyList } from '../empty-list/empty-list';
@@ -86,7 +86,7 @@ export class ResultsSection extends Component<Props, State> {
 
     return (
       <section className="flex items-center justify-center">
-        <ul className="result-section">
+        <ul {...withDataTestId('result-list')} className="result-section">
           {results.map((result) => (
             <ResultItem key={result.mal_id} data={result} />
           ))}
