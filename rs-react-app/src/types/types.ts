@@ -1,4 +1,4 @@
-export type ResponseType = {
+export type ApiResponseType = {
   data: DataItem[];
   pagination: PaginationType;
 };
@@ -13,7 +13,7 @@ export type DataItem = {
   genres: GenresType[];
 };
 
-type Type =
+export type Type =
   | 'tv'
   | 'movie'
   | 'ova'
@@ -24,27 +24,27 @@ type Type =
   | 'pv'
   | 'tv_special';
 
-type ImageType = {
+export type ImageType = {
   image_url: string;
   small_image_url: string;
   large_image_url: string;
 };
 
-type GenresType = {
+export type GenresType = {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 };
 
-type PaginationType = {
+export type PaginationType = {
   last_visible_page: number;
   has_next_page: boolean;
   current_page: number;
   items: PaginationItem;
 };
 
-type PaginationItem = {
+export type PaginationItem = {
   count: number;
   total: number;
   per_page: number;

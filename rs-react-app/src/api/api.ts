@@ -1,6 +1,5 @@
-import type { ResponseType } from '~types/types';
-
 import { apiEndpoints, apiUrl } from '~config/app-config';
+import { isResponseType } from '~types/type-guards';
 
 const getUrl = (query?: string) => {
   return query
@@ -17,5 +16,8 @@ export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
   }
 
   const data: unknown = await response.json();
-  return data as ResponseType;
+  if (!isResponseType(data)) {
+    throw new Error('Invalid API response structure');
+  }
+  return data;
 };
