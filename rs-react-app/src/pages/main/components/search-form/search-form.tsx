@@ -16,13 +16,8 @@ type SearchFormState = {
 
 export class SearchForm extends Component<SearchFormProps, SearchFormState> {
   state: SearchFormState = {
-    value: '',
+    value: retrieveQueryFormLS(),
   };
-
-  componentDidMount() {
-    const retrievedQuery = retrieveQueryFormLS();
-    this.setState({ value: retrievedQuery });
-  }
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ value: event.target.value });

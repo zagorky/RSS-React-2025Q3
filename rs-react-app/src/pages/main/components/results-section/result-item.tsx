@@ -7,7 +7,7 @@ type ResultItemProps = {
   data: DataItem;
 };
 
-export class ResultItem extends Component<ResultItemProps, unknown> {
+export class ResultItem extends Component<ResultItemProps> {
   title = this.props.data.title;
   synopsis = this.props.data.synopsis;
   imgUrl = this.props.data.images.webp.image_url;

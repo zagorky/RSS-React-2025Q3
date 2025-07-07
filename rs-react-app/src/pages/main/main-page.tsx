@@ -11,13 +11,8 @@ type MainPageState = {
 
 export class MainPage extends Component<unknown, MainPageState> {
   state = {
-    searchQuery: '',
+    searchQuery: retrieveQueryFormLS(),
   };
-
-  componentDidMount() {
-    const retrievedQuery = retrieveQueryFormLS();
-    this.setState({ searchQuery: retrievedQuery });
-  }
 
   handleSearch = (query: string) => {
     this.setState({ searchQuery: query });
