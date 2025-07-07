@@ -1,4 +1,5 @@
 import { apiEndpoints, apiUrl } from '~config/app-config';
+import { ResponseType } from '~types/types';
 
 const getUrl = (query?: string) => {
   return query
@@ -6,7 +7,10 @@ const getUrl = (query?: string) => {
     : `${apiUrl}/${apiEndpoints.anime}`;
 };
 
-export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
+export const fetchRequest = async (
+  query?: string,
+  signal?: AbortSignal
+): Promise<ResponseType> => {
   const url = getUrl(query);
   const response = await fetch(url, { signal: signal });
 
@@ -16,3 +20,5 @@ export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
 
   return response.json();
 };
+
+await fetchRequest('').then((d) => console.log(d));
