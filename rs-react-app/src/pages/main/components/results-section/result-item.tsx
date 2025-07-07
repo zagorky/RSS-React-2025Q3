@@ -3,11 +3,11 @@ import type { DataItem } from '~types/types';
 import { withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 
-type Props = {
+type ResultItemProps = {
   data: DataItem;
 };
 
-export class ResultItem extends Component<Props, unknown> {
+export class ResultItem extends Component<ResultItemProps, unknown> {
   title = this.props.data.title;
   synopsis = this.props.data.synopsis;
   imgUrl = this.props.data.images.webp.image_url;

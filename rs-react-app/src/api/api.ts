@@ -8,18 +8,19 @@ const getUrl = (query?: string) => {
     : `${apiUrl}/${apiEndpoints.anime}`;
 };
 
-export const fetchRequest = async (
-  query?: string,
-  signal?: AbortSignal
-): Promise<ResponseType> => {
+export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
   const url = getUrl(query);
-  const response = await fetch(url, { signal: signal });
+  try {
+    const response = await fetch(url, { signal: signal });
 
-  if (!response.ok) {
-    throw new Error(`Fetch error: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const data: unknown = await response.json();
+    return data as ResponseType;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error from fetchRequest');
   }
-
-  return response.json();
 };
-
-await fetchRequest('').then((d) => console.log(d));

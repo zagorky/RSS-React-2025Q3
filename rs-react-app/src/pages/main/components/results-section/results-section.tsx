@@ -9,18 +9,21 @@ import { Component } from 'react';
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 
-type Props = {
+type ResultSectionProps = {
   searchQuery: string;
 };
 
-type State = {
+type ResultSectionState = {
   results: DataItem[];
   loading: boolean;
   error: string | null;
 };
 
-export class ResultsSection extends Component<Props, State> {
-  state: State = {
+export class ResultsSection extends Component<
+  ResultSectionProps,
+  ResultSectionState
+> {
+  state: ResultSectionState = {
     results: [],
     loading: false,
     error: null,
@@ -58,7 +61,7 @@ export class ResultsSection extends Component<Props, State> {
     this.fetchData(this.props.searchQuery);
   }
 
-  componentDidUpdate(previousProps: Readonly<Props>) {
+  componentDidUpdate(previousProps: Readonly<ResultSectionProps>) {
     if (previousProps.searchQuery !== this.props.searchQuery) {
       this.fetchData(this.props.searchQuery);
     }

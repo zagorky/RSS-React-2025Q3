@@ -5,11 +5,11 @@ import { ErrorButton } from './components/error-section/error-button';
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
 
-type State = {
+type MainPageState = {
   searchQuery: string;
 };
 
-export class MainPage extends Component<unknown, State> {
+export class MainPage extends Component<unknown, MainPageState> {
   state = {
     searchQuery: '',
   };

@@ -2,11 +2,11 @@ import { Button } from '~components/button/button';
 import { withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 
-type Props = {
+type ErrorFallbackProps = {
   error: Error | string;
 };
 
-export class ErrorFallback extends Component<Props> {
+export class ErrorFallback extends Component<ErrorFallbackProps> {
   render() {
     return (
       <section

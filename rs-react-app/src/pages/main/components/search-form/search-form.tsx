@@ -6,16 +6,16 @@ import {
 } from '~utils/utilities';
 import { type ChangeEvent, Component, type FormEvent } from 'react';
 
-type Props = {
+type SearchFormProps = {
   onSubmit: (value: string) => void;
 };
 
-type State = {
+type SearchFormState = {
   value: string;
 };
 
-export class SearchForm extends Component<Props, State> {
-  state: State = {
+export class SearchForm extends Component<SearchFormProps, SearchFormState> {
+  state: SearchFormState = {
     value: '',
   };
 

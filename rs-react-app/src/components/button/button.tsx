@@ -1,7 +1,7 @@
 import { withDataTestId } from '~utils/utilities';
 import { Component, type MouseEvent, type ReactNode } from 'react';
 
-type Props = {
+type ButtonProps = {
   children: ReactNode;
   classNames?: string;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -10,7 +10,7 @@ type Props = {
   dataTestId?: string;
 };
 
-export class Button extends Component<Props> {
+export class Button extends Component<ButtonProps> {
   static readonly defaultProps = {
     type: 'button',
     disabled: false,

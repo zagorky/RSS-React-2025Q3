@@ -43,7 +43,7 @@ export default tseslint.config(
       import: importPlugin,
     },
     rules: {
-      //react
+      // react
       ...jsxA11y.configs.recommended.rules,
       ...reactDom.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
@@ -54,7 +54,7 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
-      //perfectionist
+      // perfectionist
       'perfectionist/sort-imports': 'error',
       // import
       'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
@@ -70,6 +70,8 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      // '@typescript-eslint/no-unsafe-return': 'error',
+      // '@typescript-eslint/no-unsafe-assignment': 'error',
       // unicorn
       'unicorn/filename-case': 'off',
       'unicorn/no-array-callback-reference': 'off',
