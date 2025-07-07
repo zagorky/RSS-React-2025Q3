@@ -10,17 +10,12 @@ const getUrl = (query?: string) => {
 
 export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
   const url = getUrl(query);
-  try {
-    const response = await fetch(url, { signal: signal });
+  const response = await fetch(url, { signal: signal });
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const data: unknown = await response.json();
-    return data as ResponseType;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Error from fetchRequest');
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
   }
+
+  const data: unknown = await response.json();
+  return data as ResponseType;
 };

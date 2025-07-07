@@ -42,7 +42,7 @@ export class ResultsSection extends Component<
     try {
       this.setState({ loading: true, error: null });
       const data = await fetchRequest(query, signal);
-      if (!this.abortController.signal.aborted) {
+      if (!signal.aborted) {
         this.setState({
           results: data.data ?? [],
           loading: false,
@@ -50,10 +50,15 @@ export class ResultsSection extends Component<
         });
       }
     } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return;
+      }
       this.setState({
         loading: false,
         error: normalizeError(error),
       });
+    } finally {
+      this.abortController = null;
     }
   }
 
@@ -70,6 +75,7 @@ export class ResultsSection extends Component<
   componentWillUnmount() {
     if (this.abortController) {
       this.abortController.abort();
+      this.abortController = null;
     }
   }
 
