@@ -1,7 +1,8 @@
+import type { DataItem } from '~types/types';
+
 import { fetchRequest } from '~api/api';
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
-import { DataItem } from '~types/types';
 import { normalizeError, withDataTestId } from '~utils/utilities';
 import { Component } from 'react';
 

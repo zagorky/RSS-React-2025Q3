@@ -66,6 +66,10 @@ export default tseslint.config(
       'prefer-const': 'error',
       'prefer-arrow-callback': 'error',
       'no-confusing-arrow': ['error', { allowParens: true }],
+      // ts
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       // unicorn
       'unicorn/filename-case': 'off',
       'unicorn/no-array-callback-reference': 'off',

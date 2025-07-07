@@ -1,5 +1,6 @@
+import type { ResponseType } from '~types/types';
+
 import { apiEndpoints, apiUrl } from '~config/app-config';
-import { ResponseType } from '~types/types';
 
 const getUrl = (query?: string) => {
   return query
