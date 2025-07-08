@@ -6,45 +6,54 @@ import type {
   PaginationType,
 } from '~types/types';
 
+const isString = (data: unknown): data is string => {
+  return typeof data === 'string';
+};
+
+const isNumber = (data: unknown): data is number => {
+  return typeof data === 'number';
+};
+
+const isBoolean = (data: unknown): data is boolean => {
+  return typeof data === 'boolean';
+};
+
+const isObject = (data: unknown): data is object => {
+  return typeof data === 'object' && data !== null;
+};
+
+const isArray = <T>(
+  data: unknown,
+  itemGuard?: (item: unknown) => item is T
+): data is T[] => {
+  return Array.isArray(data) && (itemGuard ? data.every(itemGuard) : true);
+};
+
 const isImageType = (data: unknown): data is ImageType =>
-  typeof data === 'object' &&
-  data !== null &&
-  'image_url' in data &&
-  typeof data.image_url === 'string';
+  isObject(data) && 'image_url' in data && isString(data.image_url);
 
 const isGenresType = (data: unknown): data is GenresType =>
-  typeof data === 'object' &&
-  data !== null &&
-  'name' in data &&
-  typeof data.name === 'string';
+  isObject(data) && 'name' in data && isString(data.name);
 
 const isDataItem = (data: unknown): data is DataItem =>
-  typeof data === 'object' &&
-  data !== null &&
+  isObject(data) &&
   'mal_id' in data &&
-  typeof data.mal_id === 'number' &&
+  isNumber(data.mal_id) &&
   'title' in data &&
-  typeof data.title === 'string' &&
+  isString(data.title) &&
   'images' in data &&
-  typeof data.images === 'object' &&
-  data.images !== null &&
+  isObject(data.images) &&
   'jpg' in data.images &&
   isImageType(data.images.jpg) &&
   'genres' in data &&
-  Array.isArray(data.genres) &&
-  data.genres.every(isGenresType);
+  isArray(data.genres, isGenresType);
 
 const isPaginationType = (data: unknown): data is PaginationType =>
-  typeof data === 'object' &&
-  data !== null &&
-  'has_next_page' in data &&
-  typeof data.has_next_page === 'boolean';
+  isObject(data) && 'has_next_page' in data && isBoolean(data.has_next_page);
 
 export const isResponseType = (data: unknown): data is ApiResponseType =>
-  typeof data === 'object' &&
-  data !== null &&
+  isObject(data) &&
   'data' in data &&
-  Array.isArray(data.data) &&
-  data.data.every(isDataItem) &&
+  isArray(data.data, isDataItem) &&
   'pagination' in data &&
   isPaginationType(data.pagination);
