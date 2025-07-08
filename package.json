@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --open --force",
     "build": "tsc -b && vite build",
-    "lint": "eslint rs-react-app",
+    "lint": "eslint .",
     "stylelint": "stylelint src/**/*.css",
     "format": "prettier .",
     "type-check": "tsc -b --noEmit",
