@@ -1,5 +1,5 @@
 .loader-overlay {
-  @apply fixed inset-0 z-50 flex bg-[var(--color-bg-dark)] opacity-90;
+  @apply fixed inset-0 z-50 flex bg-[var(--color-bg-dark)] opacity-40;
 }
 
 .loader-container {
