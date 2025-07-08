@@ -1,21 +1,15 @@
 import { withDataTestId } from '~utils/utilities';
-import { Component, type MouseEvent, type ReactNode } from 'react';
+import { Component } from 'react';
+import { JSX } from 'react/jsx-runtime';
 
-type ButtonProps = {
-  children: ReactNode;
-  classNames?: string;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  type?: 'button' | 'submit' | 'reset';
-  disabled?: boolean;
+import IntrinsicElements = JSX.IntrinsicElements;
+
+type ButtonProps = IntrinsicElements['button'] & {
   dataTestId?: string;
+  classNames?: string;
 };
 
 export class Button extends Component<ButtonProps> {
-  static readonly defaultProps = {
-    type: 'button',
-    disabled: false,
-  };
-
   render() {
     const {
       classNames = '',
@@ -24,10 +18,12 @@ export class Button extends Component<ButtonProps> {
       disabled,
       children,
       dataTestId = '',
+      ...restProps
     } = this.props;
     const buttonClasses = `${classNames} btn`.trim();
     return (
       <button
+        {...restProps}
         {...withDataTestId(dataTestId)}
         onClick={onClick}
         className={buttonClasses}
