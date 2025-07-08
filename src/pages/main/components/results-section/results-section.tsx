@@ -96,8 +96,8 @@ export class ResultsSection extends Component<
     return (
       <section className="flex items-center justify-center">
         <ul {...withDataTestId('result-list')} className="result-section">
-          {results.map((result) => (
-            <ResultItem key={result.mal_id} data={result} />
+          {results.map((result, i) => (
+            <ResultItem key={result.mal_id + i} data={result} />
           ))}
         </ul>
       </section>
