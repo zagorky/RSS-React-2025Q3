@@ -70,8 +70,8 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      // '@typescript-eslint/no-unsafe-return': 'error',
-      // '@typescript-eslint/no-unsafe-assignment': 'error',
+      '@typescript-eslint/no-unsafe-return': 'error',
+      '@typescript-eslint/no-unsafe-assignment': 'error',
       // unicorn
       'unicorn/filename-case': 'off',
       'unicorn/no-array-callback-reference': 'off',
