@@ -2,11 +2,11 @@ export const apiUrl = 'https://api.jikan.moe/v4';
 
 export const apiEndpoints = {
   anime: 'anime',
+  badRequest: 'bad-request',
 };
 
 export const endpointParameters = {
   search: 'q',
-  badRequest: 'bad-request',
 };
 
 export const queryVariants = {

@@ -42,7 +42,7 @@ describe('Api Integration', () => {
   });
 
   test('should handle bad request', async () => {
-    const response = await fetch(`${apiUrl}/${endpointParameters.badRequest}`);
+    const response = await fetch(`${apiUrl}/${apiEndpoints.badRequest}`);
     expect(response.status).toBe(400);
   });
 });

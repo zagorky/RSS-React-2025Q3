@@ -1,5 +1,10 @@
 import { getSearchEndpoint } from '~api/api';
-import { apiUrl, endpointParameters, queryVariants } from '~config/app-config';
+import {
+  apiEndpoints,
+  apiUrl,
+  endpointParameters,
+  queryVariants,
+} from '~config/app-config';
 import { http, HttpResponse } from 'msw';
 
 import {
@@ -29,7 +34,7 @@ export const handlers = [
     return HttpResponse.json({ data: getEmptyQueryResponse() });
   }),
 
-  http.get(`${apiUrl}/${endpointParameters.badRequest}`, () => {
+  http.get(`${apiUrl}/${apiEndpoints.badRequest}`, () => {
     return new HttpResponse(null, { status: 400 });
   }),
 ];
