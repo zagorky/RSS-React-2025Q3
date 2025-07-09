@@ -15,6 +15,7 @@
     "lint:fix": "eslint . --fix",
     "stylelint:fix": "stylelint src/**/*.css --fix",
     "format:fix": "prettier --write .",
+    "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
