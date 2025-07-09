@@ -1,14 +1,14 @@
-import { apiEndpoints, apiUrl } from '~config/app-config';
+import { apiEndpoints, apiUrl, endpointParameters } from '~config/app-config';
 import { isResponseType } from '~types/type-guards';
 
-const getUrl = (query?: string) => {
+export const getSearchEndpoint = (query?: string) => {
   return query
-    ? `${apiUrl}/${apiEndpoints.anime}?q=${query.trim()}`
+    ? `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${query.trim()}`
     : `${apiUrl}/${apiEndpoints.anime}`;
 };
 
 export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
-  const url = getUrl(query);
+  const url = getSearchEndpoint(query);
   const response = await fetch(url, { signal: signal });
 
   if (!response.ok) {

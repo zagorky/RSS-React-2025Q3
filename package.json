@@ -50,6 +50,7 @@
     "globals": "^16.2.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "msw": "^2.10.3",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.13",
     "stylelint": "^16.21.1",

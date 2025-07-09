@@ -15,7 +15,9 @@
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
       "~styles/*": ["styles/*"],
-      "~components/*": ["components/*"]
+      "~components/*": ["components/*"],
+      "~mocks": ["mocks/*"],
+      "~tests": ["tests/*"]
     }
   }
 }
