@@ -73,6 +73,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-return': 'error',
       '@typescript-eslint/no-unsafe-assignment': 'error',
       // unicorn
+      'unicorn/prefer-top-level-await': 'off',
       'unicorn/filename-case': 'off',
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/prefer-at': 'off',

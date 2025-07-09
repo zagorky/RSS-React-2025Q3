@@ -23,3 +23,7 @@
 .main {
   @apply mx-auto flex w-full max-w-7xl flex-grow flex-col items-center p-8;
 }
+
+.h2{
+  @apply text-2xl font-bold
+}
