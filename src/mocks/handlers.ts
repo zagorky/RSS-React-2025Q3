@@ -1,5 +1,5 @@
 import { getSearchEndpoint } from '~api/api';
-import { endpointParameters, queryVariants } from '~config/app-config';
+import { apiUrl, endpointParameters, queryVariants } from '~config/app-config';
 import { http, HttpResponse } from 'msw';
 
 import {
@@ -14,16 +14,22 @@ export const handlers = [
       endpointParameters.search
     );
 
-    if (query === queryVariants.notFound) {
-      return HttpResponse.json({ data: getEmptyResponse() });
+    if (!query) {
+      return HttpResponse.json({ data: getEmptyQueryResponse() });
     }
 
-    if (query === queryVariants.empty) {
-      return HttpResponse.json({ data: getEmptyQueryResponse() });
+    if (query === queryVariants.notFound) {
+      return HttpResponse.json({ data: getEmptyResponse() });
     }
 
     if (query === queryVariants.specific) {
       return HttpResponse.json({ data: getSpecificQueryResponse() });
     }
+
+    return HttpResponse.json({ data: getEmptyQueryResponse() });
+  }),
+
+  http.get(`${apiUrl}/${endpointParameters.badRequest}`, () => {
+    return new HttpResponse(null, { status: 400 });
   }),
 ];

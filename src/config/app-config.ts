@@ -6,6 +6,7 @@ export const apiEndpoints = {
 
 export const endpointParameters = {
   search: 'q',
+  badRequest: 'bad-request',
 };
 
 export const queryVariants = {
