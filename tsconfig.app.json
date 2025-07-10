@@ -30,7 +30,6 @@
     "noUncheckedSideEffectImports": true,
 
     "types": ["vitest/globals", "@testing-library/jest-dom"]
-
   },
   "include": ["src", "./vitest.setupTests.ts"],
   "exclude": ["node_modules", "dist"]
