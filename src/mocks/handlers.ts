@@ -15,19 +15,19 @@ import {
 
 export const handlers = [
   http.get(getSearchEndpoint(), ({ request }) => {
-    const query = new URL(request.url).searchParams.get(
+    const search = new URL(request.url).searchParams.get(
       endpointParameters.search
     );
 
-    if (!query) {
+    if (!search) {
       return HttpResponse.json({ data: getEmptyQueryResponse() });
     }
 
-    if (query === queryVariants.notFound) {
+    if (search === queryVariants.notFound) {
       return HttpResponse.json({ data: getEmptyResponse() });
     }
 
-    if (query === queryVariants.specific) {
+    if (search === queryVariants.specific) {
       return HttpResponse.json({ data: getSpecificQueryResponse() });
     }
 
