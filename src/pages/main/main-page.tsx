@@ -21,7 +21,10 @@ export class MainPage extends Component<unknown, MainPageState> {
   render() {
     return (
       <>
-        <SearchForm onSubmit={this.handleSearch} />
+        <SearchForm
+          searchQuery={this.state.searchQuery}
+          onSubmit={this.handleSearch}
+        />
         <ResultsSection searchQuery={this.state.searchQuery} />
         <ErrorButton />
       </>

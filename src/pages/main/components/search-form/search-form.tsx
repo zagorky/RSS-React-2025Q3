@@ -1,32 +1,22 @@
 import { Button } from '~components/button/button';
-import {
-  retrieveQueryFormLS,
-  setQueryToLS,
-  withDataTestId,
-} from '~utils/utilities';
-import { type ChangeEvent, Component, type FormEvent } from 'react';
+import { isString } from '~types/type-guards';
+import { setQueryToLS, withDataTestId } from '~utils/utilities';
+import { Component, type FormEvent } from 'react';
 
 type SearchFormProps = {
   onSubmit: (value: string) => void;
+  searchQuery: string;
 };
 
-type SearchFormState = {
-  value: string;
-};
-
-export class SearchForm extends Component<SearchFormProps, SearchFormState> {
-  state: SearchFormState = {
-    value: retrieveQueryFormLS(),
-  };
-
-  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: event.target.value });
-  };
-
-  handleSubmit = (event: FormEvent) => {
+export class SearchForm extends Component<SearchFormProps> {
+  handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.value);
-    setQueryToLS(this.state.value);
+    const inputFormData = new FormData(event.currentTarget);
+    const formValue = inputFormData.get('search-input');
+    if (isString(formValue)) {
+      this.props.onSubmit(formValue);
+      setQueryToLS(formValue);
+    }
   };
 
   render() {
@@ -40,9 +30,9 @@ export class SearchForm extends Component<SearchFormProps, SearchFormState> {
           <span className="sr-only">Search</span>
           <input
             {...withDataTestId('search-form-input')}
+            name="search-input"
+            defaultValue={this.props.searchQuery}
             className="inpt"
-            value={this.state.value}
-            onChange={this.handleChange}
             type="text"
             placeholder="Search"
           />
