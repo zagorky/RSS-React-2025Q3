@@ -16,7 +16,7 @@ describe('Search Component', () => {
   });
 
   test('should render search input and search button', () => {
-    render(<SearchForm onSubmit={() => {}} />);
+    render(<SearchForm searchQuery={''} onSubmit={() => {}} />);
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
     expect(screen.getByTestId('search-form-input')).toBeInTheDocument();
@@ -24,24 +24,18 @@ describe('Search Component', () => {
   });
 
   test('should displays previously saved search term from localStorage', () => {
-    getItemSpy.mockReturnValue('test1');
-    render(<SearchForm onSubmit={() => {}} />);
-
-    expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
+    render(<SearchForm searchQuery="test1" onSubmit={() => {}} />);
     expect(input().value).toBe('test1');
   });
 
   test('should shows empty input when no saved term exists', () => {
-    getItemSpy.mockReturnValue(null);
-    render(<SearchForm onSubmit={() => {}} />);
-
-    expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
+    render(<SearchForm searchQuery="" onSubmit={() => {}} />);
     expect(input().value).toBe('');
   });
 
   test('should saves search term to localStorage when search button is clicked', () => {
     const onSubmit = vi.fn();
-    render(<SearchForm onSubmit={onSubmit} />);
+    render(<SearchForm searchQuery="" onSubmit={onSubmit} />);
 
     fireEvent.change(input(), { target: { value: 'naruto' } });
     fireEvent.click(button());
@@ -51,17 +45,14 @@ describe('Search Component', () => {
   });
 
   test('should retrieves saved search term', () => {
-    getItemSpy.mockReturnValue('test1');
-    render(<SearchForm onSubmit={() => {}} />);
+    render(<SearchForm searchQuery="test1" onSubmit={() => {}} />);
 
-    expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
     expect(input().value).toBe('test1');
   });
 
   test('should overwrites existing localStorage value when new search is performed', () => {
-    getItemSpy.mockReturnValue('oldQuery');
     const onSubmit = vi.fn();
-    render(<SearchForm onSubmit={onSubmit} />);
+    render(<SearchForm searchQuery="oldQuery" onSubmit={onSubmit} />);
 
     expect(input().value).toBe('oldQuery');
 
