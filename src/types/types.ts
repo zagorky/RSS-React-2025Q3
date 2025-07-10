@@ -4,7 +4,7 @@ export type ApiResponseType = {
 };
 
 export type DataItem = {
-  mal_id: 0;
+  mal_id: number;
   url: string;
   images: { jpg: ImageType; webp: ImageType };
   title: string;

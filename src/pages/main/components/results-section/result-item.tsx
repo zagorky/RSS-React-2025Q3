@@ -8,29 +8,29 @@ type ResultItemProps = {
 };
 
 export class ResultItem extends Component<ResultItemProps> {
-  title = this.props.data.title;
-  synopsis = this.props.data.synopsis;
-  imgUrl = this.props.data.images.webp.image_url;
-
   render() {
+    const title = this.props.data.title;
+    const synopsis = this.props.data.synopsis;
+    const imgUrl = this.props.data.images.webp.image_url;
+
     return (
       <li {...withDataTestId('result-item')} className="result-item-wrapper">
         <p
           {...withDataTestId('result-item-title')}
           className="result-item-title"
         >
-          {this.title}
+          {title}
         </p>
         <div className="overflow-hidden rounded-md">
           <img
             {...withDataTestId('result-item-img')}
             className="result-item-img"
-            src={this.imgUrl}
-            alt={this.title}
+            src={imgUrl}
+            alt={title}
           />
         </div>
         <p {...withDataTestId('result-item-desc')} className="result-item-desc">
-          {this.synopsis}
+          {synopsis}
         </p>
       </li>
     );

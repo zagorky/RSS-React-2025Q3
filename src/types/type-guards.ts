@@ -35,17 +35,26 @@ const isImageType = (data: unknown): data is ImageType =>
 const isGenresType = (data: unknown): data is GenresType =>
   isObject(data) && 'name' in data && isString(data.name);
 
+const hasProperty = <K extends string>(
+  property: K,
+  source: unknown
+): source is {
+  [key in K]: unknown;
+} => {
+  return typeof source === 'object' && source !== null && property in source;
+};
+
 const isDataItem = (data: unknown): data is DataItem =>
   isObject(data) &&
-  'mal_id' in data &&
+  hasProperty('mal_id', data) &&
   isNumber(data.mal_id) &&
-  'title' in data &&
+  hasProperty('title', data) &&
   isString(data.title) &&
-  'images' in data &&
+  hasProperty('images', data) &&
   isObject(data.images) &&
-  'jpg' in data.images &&
+  hasProperty('jpg', data.images) &&
   isImageType(data.images.jpg) &&
-  'genres' in data &&
+  hasProperty('genres', data) &&
   isArray(data.genres, isGenresType);
 
 const isPaginationType = (data: unknown): data is PaginationType =>
@@ -53,7 +62,7 @@ const isPaginationType = (data: unknown): data is PaginationType =>
 
 export const isResponseType = (data: unknown): data is ApiResponseType =>
   isObject(data) &&
-  'data' in data &&
+  hasProperty('data', data) &&
   isArray(data.data, isDataItem) &&
-  'pagination' in data &&
+  hasProperty('pagination', data) &&
   isPaginationType(data.pagination);

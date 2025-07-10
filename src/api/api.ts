@@ -1,5 +1,5 @@
 import { apiEndpoints, apiUrl, endpointParameters } from '~config/app-config';
-import { isResponseType } from '~types/type-guards';
+import { assertIsResponseOk, assertIsResponseType } from '~utils/utilities';
 
 export const getSearchEndpoint = (query?: string) => {
   return query
@@ -11,13 +11,11 @@ export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
   const url = getSearchEndpoint(query);
   const response = await fetch(url, { signal: signal });
 
-  if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
-  }
+  assertIsResponseOk(response);
 
   const data: unknown = await response.json();
-  if (!isResponseType(data)) {
-    throw new Error('Invalid API response structure');
-  }
+
+  assertIsResponseType(data);
+
   return data;
 };
