@@ -38,7 +38,7 @@ describe('Results Component', () => {
     expect(numberOfNumber).toHaveLength(getSpecificQueryResponse().data.length);
   });
 
-  test('should displays "no results" message when data array is empty', async () => {
+  test('should display empty list component when there is no matches', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.notFound), () =>
         HttpResponse.json(getEmptyResponse())
@@ -50,7 +50,7 @@ describe('Results Component', () => {
     expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
   });
 
-  test('should shows loading state while fetching data', async () => {
+  test('should show loading state while fetching data', async () => {
     server.use(
       http.get(getSearchEndpoint(), () =>
         HttpResponse.json(getEmptyQueryResponse())

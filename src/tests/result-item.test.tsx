@@ -9,7 +9,7 @@ import { getSpecificQueryResponse } from '~/mocks/data';
 const item = getSpecificQueryResponse().data[0] as DataItem;
 
 describe('Result Item', () => {
-  test('should displays item', () => {
+  test('should display result item', () => {
     render(<ResultItem data={item} />);
 
     expect(screen.getByTestId('result-item')).toBeInTheDocument();
