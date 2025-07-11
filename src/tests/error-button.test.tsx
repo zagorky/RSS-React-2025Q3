@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { ErrorButton } from '~pages/main/components/error-section/error-button';
 import { setupUserEvent } from '~utils/utilities';
 import { expect } from 'vitest';
 
 import { ErrorBoundary } from '~/error-boundary';
+import { fallbackMock } from '~/mocks/mocked-functions';
 
 describe('Error Button', () => {
   test('should render error button', () => {
@@ -15,9 +15,7 @@ describe('Error Button', () => {
 
   test('should triggers error boundary fallback UI on click', async () => {
     const { user } = setupUserEvent(
-      <ErrorBoundary
-        fallback={(error: Error) => <ErrorFallback error={error} />}
-      >
+      <ErrorBoundary fallback={fallbackMock}>
         <ErrorButton />
       </ErrorBoundary>
     );

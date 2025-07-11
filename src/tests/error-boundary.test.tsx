@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { ErrorBoundary } from '~/error-boundary';
-
-const fallbackMock = vi.fn((error: Error) => (
-  <div data-testid="error-fallback">{error.message}</div>
-));
+import { fallbackMock } from '~/mocks/mocked-functions';
 
 const Child = () => {
   throw new Error('Child error');
