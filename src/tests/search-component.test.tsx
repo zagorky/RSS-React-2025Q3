@@ -4,7 +4,7 @@ import { SearchForm } from '~pages/main/components/search-form/search-form';
 import { setupUserEvent } from '~utils/utilities';
 import { expect } from 'vitest';
 
-import { getItemSpy, setItemSpy } from '~/mocks/locale-storage';
+import { getItemSpy, setItemSpy } from '~/mocks/mocked-functions';
 
 const input = () => screen.getByTestId('search-form-input') as HTMLInputElement;
 const button = () => screen.getByTestId('search-form-submit-button');
