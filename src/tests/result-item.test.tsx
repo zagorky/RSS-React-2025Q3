@@ -1,13 +1,49 @@
-import { render } from '@testing-library/react';
-import { queryVariants } from '~config/app-config';
-import { ResultsSection } from '~pages/main/components/results-section/results-section';
+import type { DataItem } from '~types/types';
+
+import { render, screen } from '@testing-library/react';
+import { ResultItem } from '~pages/main/components/results-section/result-item';
+import { expect } from 'vitest';
+
+import { getSpecificQueryResponse } from '~/mocks/data';
 
 describe('Result Item', () => {
   test('should displays item name and description correctly', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
+    const item = getSpecificQueryResponse().data[0] as DataItem;
+    render(<ResultItem data={item} />);
+
+    expect(screen.getByTestId('result-item')).toBeInTheDocument();
   });
 
-  test('should handles missing props gracefully', () => {
-    render(<ResultsSection searchQuery={queryVariants.notFound} />);
+  test('should have item name', () => {
+    const item = getSpecificQueryResponse().data[0] as DataItem;
+    render(<ResultItem data={item} />);
+
+    const title = screen.getByTestId('result-item-title');
+    const itemTitle = item.title;
+
+    expect(title).toBeInTheDocument();
+    expect(title).toHaveTextContent(itemTitle);
+  });
+
+  test('should have item decscription', () => {
+    const item = getSpecificQueryResponse().data[0] as DataItem;
+    render(<ResultItem data={item} />);
+
+    const synopsis = screen.getByTestId('result-item-desc');
+    const itemSynopsis = item.synopsis;
+
+    expect(synopsis).toBeInTheDocument();
+    expect(synopsis).toHaveTextContent(itemSynopsis);
+  });
+
+  test('should have imgage', () => {
+    const item = getSpecificQueryResponse().data[0] as DataItem;
+    render(<ResultItem data={item} />);
+
+    const img = screen.getByTestId('result-item-img');
+    const itemImgUrl = item.images.webp.image_url;
+
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', itemImgUrl);
   });
 });
