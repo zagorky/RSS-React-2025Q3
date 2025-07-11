@@ -20,8 +20,8 @@ describe('Search Component', () => {
     render(<SearchForm searchQuery="" onSubmit={() => {}} />);
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
-    expect(screen.getByTestId('search-form-input')).toBeInTheDocument();
-    expect(screen.getByTestId('search-form-submit-button')).toBeInTheDocument();
+    expect(input()).toBeInTheDocument();
+    expect(button()).toBeInTheDocument();
   });
 
   test('should shows empty input when no saved term exists', () => {

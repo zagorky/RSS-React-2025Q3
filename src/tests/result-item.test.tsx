@@ -25,7 +25,7 @@ describe('Result Item', () => {
     expect(title).toHaveTextContent(itemTitle);
   });
 
-  test('should have item decscription', () => {
+  test('should have item description', () => {
     render(<ResultItem data={item} />);
 
     const synopsis = screen.getByTestId('result-item-desc');
