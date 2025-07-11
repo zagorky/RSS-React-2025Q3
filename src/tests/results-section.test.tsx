@@ -62,9 +62,21 @@ describe('Results Component', () => {
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  test('should displays error message when API call fails', async () => {
+  test('should not render cards when input data format is invalid', async () => {
     server.use(
       http.get(getSearchEndpoint(), () => HttpResponse.json({ data: [] }))
+    );
+
+    render(<ResultsSection searchQuery={queryVariants.empty} />);
+
+    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
+  });
+
+  test('should handle API error', async () => {
+    server.use(
+      http.get(getSearchEndpoint(), () =>
+        HttpResponse.json(null, { status: 400 })
+      )
     );
 
     render(<ResultsSection searchQuery={queryVariants.empty} />);
