@@ -1,18 +1,28 @@
 import { render, screen } from '@testing-library/react';
+import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { ErrorButton } from '~pages/main/components/error-section/error-button';
+import { setupUserEvent } from '~utils/utilities';
 import { expect } from 'vitest';
+
+import { ErrorBoundary } from '~/error-boundary';
 
 describe('Error Button', () => {
   test('should render error button', () => {
     render(<ErrorButton />);
+
     expect(screen.getByTestId('throw-error-button')).toBeInTheDocument();
   });
 
-  test('should throws error when test button is clicked', async () => {});
+  test('should triggers error boundary fallback UI on click', async () => {
+    const { user } = setupUserEvent(
+      <ErrorBoundary
+        fallback={(error: Error) => <ErrorFallback error={error} />}
+      >
+        <ErrorButton />
+      </ErrorBoundary>
+    );
 
-  test('should triggers error boundary fallback UI', async () => {
-    // const { user } = setupUserEvent(<ErrorButton />);
-    // await user.click(screen.getByTestId('throw-error-button'));
-    // expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
+    await user.click(screen.getByTestId('throw-error-button'));
+    expect(screen.getByTestId('error-fallback')).toBeInTheDocument();
   });
 });
