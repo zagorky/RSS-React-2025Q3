@@ -1,33 +1,64 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { getSearchEndpoint } from '~api/api';
 import { queryVariants } from '~config/app-config';
 import { ResultsSection } from '~pages/main/components/results-section/results-section';
+import { http, HttpResponse } from 'msw';
+
+import {
+  getEmptyQueryResponse,
+  getEmptyResponse,
+  getSpecificQueryResponse,
+} from '~/mocks/data';
+
+import { server } from '../../vitest.setupTests';
 
 describe('Results Component', () => {
-  test('should renders correct number of items when data is provided', () => {
+  test('should render list of data', async () => {
+    server.use(
+      http.get(getSearchEndpoint(queryVariants.specific), () =>
+        HttpResponse.json(getSpecificQueryResponse())
+      )
+    );
+
     render(<ResultsSection searchQuery={queryVariants.specific} />);
+    const resultList = await screen.findByTestId('result-list');
+
+    expect(resultList).toBeInTheDocument();
   });
 
-  test('should displays "no results" message when data array is empty', () => {
+  test('should displays "no results" message when data array is empty', async () => {
+    server.use(
+      http.get(getSearchEndpoint(queryVariants.notFound), () =>
+        HttpResponse.json(getEmptyResponse())
+      )
+    );
+
     render(<ResultsSection searchQuery={queryVariants.notFound} />);
+    const emptyList = await screen.findByTestId('empty-list');
+
+    expect(emptyList).toBeInTheDocument();
   });
 
-  test('should shows loading state while fetching data', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
+  test('should shows loading state while fetching data', async () => {
+    server.use(
+      http.get(getSearchEndpoint(), () =>
+        HttpResponse.json(getEmptyQueryResponse())
+      )
+    );
+
+    render(<ResultsSection searchQuery={queryVariants.empty} />);
+
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  test('should correctly displays item names and descriptions', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
-  });
+  test('should displays error message when API call fails', async () => {
+    server.use(
+      http.get(getSearchEndpoint(), () => HttpResponse.json({ data: [] }))
+    );
 
-  test('should handles missing or undefined data gracefully', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
-  });
+    render(<ResultsSection searchQuery={queryVariants.empty} />);
+    const error = await screen.findByTestId('error-fallback');
 
-  test('should displays error message when API call fails', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
-  });
-
-  test('should shows appropriate error for different HTTP status codes (4xx, 5xx)', () => {
-    render(<ResultsSection searchQuery={queryVariants.specific} />);
+    expect(error).toBeInTheDocument();
   });
 });

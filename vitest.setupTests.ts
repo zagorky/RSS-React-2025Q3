@@ -1,8 +1,24 @@
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { getSearchEndpoint } from '~api/api';
+import { apiEndpoints, apiUrl } from '~config/app-config';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
-import { server } from '~/mocks/node';
+import { getEmptyQueryResponse } from '~/mocks/data';
+
+export const handlers = [
+  http.get(getSearchEndpoint(), () => {
+    return HttpResponse.json({ data: getEmptyQueryResponse() });
+  }),
+
+  http.get(`${apiUrl}/${apiEndpoints.badRequest}`, () => {
+    return new HttpResponse(null, { status: 400 });
+  }),
+];
+
+export const server = setupServer(...handlers);
 
 beforeAll(() => {
   server.listen();
