@@ -25,6 +25,19 @@ describe('Results Component', () => {
     expect(await screen.findByTestId('result-list')).toBeInTheDocument();
   });
 
+  test('should renders correct number of items when data is provided', async () => {
+    server.use(
+      http.get(getSearchEndpoint(queryVariants.specific), () =>
+        HttpResponse.json(getSpecificQueryResponse())
+      )
+    );
+
+    render(<ResultsSection searchQuery={queryVariants.specific} />);
+
+    const numberOfNumber = await screen.findAllByTestId('result-item');
+    expect(numberOfNumber).toHaveLength(getSpecificQueryResponse().data.length);
+  });
+
   test('should displays "no results" message when data array is empty', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.notFound), () =>

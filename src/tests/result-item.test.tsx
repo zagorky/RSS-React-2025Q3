@@ -35,7 +35,7 @@ describe('Result Item', () => {
     expect(synopsis).toHaveTextContent(itemSynopsis);
   });
 
-  test('should have imgage', () => {
+  test('should have image', () => {
     render(<ResultItem data={item} />);
 
     const img = screen.getByTestId('result-item-img');
