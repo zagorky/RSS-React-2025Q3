@@ -7,7 +7,7 @@ export const getSearchEndpoint = (query?: string) => {
     : `${apiUrl}/${apiEndpoints.anime}`;
 };
 
-export const fetchRequest = async (query?: string, signal?: AbortSignal) => {
+export const fetchRequest = async (query: string, signal?: AbortSignal) => {
   const url = getSearchEndpoint(query);
   const response = await fetch(url, { signal: signal });
 

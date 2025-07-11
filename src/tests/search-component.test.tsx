@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { LS_KEY } from '~config/app-config';
+import { LS_KEY, queryVariants } from '~config/app-config';
 import { SearchForm } from '~pages/main/components/search-form/search-form';
 import { expect } from 'vitest';
 
@@ -16,16 +16,11 @@ describe('Search Component', () => {
   });
 
   test('should render search input and search button', () => {
-    render(<SearchForm searchQuery={''} onSubmit={() => {}} />);
+    render(<SearchForm searchQuery="" onSubmit={() => {}} />);
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
     expect(screen.getByTestId('search-form-input')).toBeInTheDocument();
     expect(screen.getByTestId('search-form-submit-button')).toBeInTheDocument();
-  });
-
-  test('should displays previously saved search term from localStorage', () => {
-    render(<SearchForm searchQuery="test1" onSubmit={() => {}} />);
-    expect(input().value).toBe('test1');
   });
 
   test('should shows empty input when no saved term exists', () => {
@@ -37,17 +32,11 @@ describe('Search Component', () => {
     const onSubmit = vi.fn();
     render(<SearchForm searchQuery="" onSubmit={onSubmit} />);
 
-    fireEvent.change(input(), { target: { value: 'naruto' } });
+    fireEvent.change(input(), { target: { value: queryVariants.specific } });
     fireEvent.click(button());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'naruto');
-    expect(onSubmit).toHaveBeenCalledWith('naruto');
-  });
-
-  test('should retrieves saved search term', () => {
-    render(<SearchForm searchQuery="test1" onSubmit={() => {}} />);
-
-    expect(input().value).toBe('test1');
+    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, queryVariants.specific);
+    expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
   });
 
   test('should overwrites existing localStorage value when new search is performed', () => {

@@ -1,9 +1,5 @@
-import {
-  apiEndpoints,
-  apiUrl,
-  endpointParameters,
-  queryVariants,
-} from '~config/app-config';
+import { getSearchEndpoint } from '~api/api';
+import { apiEndpoints, apiUrl, queryVariants } from '~config/app-config';
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -14,7 +10,7 @@ import {
 
 describe('Api Integration', () => {
   test('should handle request without query', async () => {
-    const response = await fetch(`${apiUrl}/${apiEndpoints.anime}`);
+    const response = await fetch(getSearchEndpoint());
     const data = getEmptyQueryResponse();
     await expect(response.json()).resolves.toEqual({
       data,
@@ -22,9 +18,7 @@ describe('Api Integration', () => {
   });
 
   test('should handle request with query', async () => {
-    const response = await fetch(
-      `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${queryVariants.specific}`
-    );
+    const response = await fetch(getSearchEndpoint(queryVariants.specific));
     const data = getSpecificQueryResponse();
     await expect(response.json()).resolves.toEqual({
       data,
@@ -32,9 +26,7 @@ describe('Api Integration', () => {
   });
 
   test('should handle request with no result', async () => {
-    const response = await fetch(
-      `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${queryVariants.notFound}`
-    );
+    const response = await fetch(getSearchEndpoint(queryVariants.notFound));
     const data = getEmptyResponse();
     await expect(response.json()).resolves.toEqual({
       data,
