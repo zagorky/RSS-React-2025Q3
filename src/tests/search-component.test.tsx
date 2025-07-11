@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { LS_KEY, queryVariants } from '~config/app-config';
 import { SearchForm } from '~pages/main/components/search-form/search-form';
+import { setupUserEvent } from '~utils/utilities';
 import { expect } from 'vitest';
 
 import { getItemSpy, setItemSpy } from '~/mocks/locale-storage';
@@ -28,25 +29,30 @@ describe('Search Component', () => {
     expect(input().value).toBe('');
   });
 
-  test('should saves search term to localStorage when search button is clicked', () => {
+  test('should saves search term to localStorage when search button is clicked', async () => {
     const onSubmit = vi.fn();
-    render(<SearchForm searchQuery="" onSubmit={onSubmit} />);
+    const { user } = setupUserEvent(
+      <SearchForm searchQuery="" onSubmit={onSubmit} />
+    );
 
-    fireEvent.change(input(), { target: { value: queryVariants.specific } });
-    fireEvent.click(button());
+    await user.type(input(), queryVariants.specific);
+    await user.click(button());
 
     expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, queryVariants.specific);
     expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
   });
 
-  test('should overwrites existing localStorage value when new search is performed', () => {
+  test('should overwrites existing localStorage value when new search is performed', async () => {
     const onSubmit = vi.fn();
-    render(<SearchForm searchQuery="oldQuery" onSubmit={onSubmit} />);
+    const { user } = setupUserEvent(
+      <SearchForm searchQuery="oldQuery" onSubmit={onSubmit} />
+    );
 
     expect(input().value).toBe('oldQuery');
 
-    fireEvent.change(input(), { target: { value: 'newQuery' } });
-    fireEvent.click(button());
+    await user.clear(input());
+    await user.type(input(), 'newQuery');
+    await user.click(button());
 
     expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'newQuery');
     expect(onSubmit).toHaveBeenCalledWith('newQuery');

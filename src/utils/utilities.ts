@@ -1,5 +1,10 @@
+import type { RenderResult } from '@testing-library/react';
+import type { UserEvent } from '@testing-library/user-event';
 import type { ApiResponseType } from '~types/types';
+import type { ReactNode } from 'react';
 
+import { render } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import { LS_KEY } from '~config/app-config';
 import { isResponseType } from '~types/type-guards';
 
@@ -51,3 +56,12 @@ export function assertIsResponseType(
     );
   }
 }
+
+export const setupUserEvent = (
+  jsx: ReactNode
+): { user: UserEvent } & RenderResult => {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx),
+  };
+};
