@@ -7,7 +7,7 @@ import { expect } from 'vitest';
 import { getItemSpy, setItemSpy } from '~/mocks/mocked-functions';
 
 const input = () => screen.getByTestId('search-form-input') as HTMLInputElement;
-const button = () => screen.getByTestId('search-form-submit-button');
+const button = () => screen.getByRole('button', { name: 'Search' });
 
 describe('Search Component', () => {
   afterEach(() => {

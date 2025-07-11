@@ -6,16 +6,16 @@ import { expect } from 'vitest';
 
 import { getSpecificQueryResponse } from '~/mocks/data';
 
+const item = getSpecificQueryResponse().data[0] as DataItem;
+
 describe('Result Item', () => {
   test('should displays item name and description correctly', () => {
-    const item = getSpecificQueryResponse().data[0] as DataItem;
     render(<ResultItem data={item} />);
 
     expect(screen.getByTestId('result-item')).toBeInTheDocument();
   });
 
   test('should have item name', () => {
-    const item = getSpecificQueryResponse().data[0] as DataItem;
     render(<ResultItem data={item} />);
 
     const title = screen.getByTestId('result-item-title');
@@ -26,7 +26,6 @@ describe('Result Item', () => {
   });
 
   test('should have item decscription', () => {
-    const item = getSpecificQueryResponse().data[0] as DataItem;
     render(<ResultItem data={item} />);
 
     const synopsis = screen.getByTestId('result-item-desc');
@@ -37,7 +36,6 @@ describe('Result Item', () => {
   });
 
   test('should have imgage', () => {
-    const item = getSpecificQueryResponse().data[0] as DataItem;
     render(<ResultItem data={item} />);
 
     const img = screen.getByTestId('result-item-img');

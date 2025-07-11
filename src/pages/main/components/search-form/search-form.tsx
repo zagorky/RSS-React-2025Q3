@@ -37,7 +37,7 @@ export class SearchForm extends Component<SearchFormProps> {
             placeholder="Search"
           />
         </label>
-        <Button dataTestId="search-form-submit-button" type="submit">
+        <Button {...withDataTestId('search-form-submit-button')} type="submit">
           Search
         </Button>
       </form>
