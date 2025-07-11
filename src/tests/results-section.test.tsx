@@ -21,9 +21,8 @@ describe('Results Component', () => {
     );
 
     render(<ResultsSection searchQuery={queryVariants.specific} />);
-    const resultList = await screen.findByTestId('result-list');
 
-    expect(resultList).toBeInTheDocument();
+    expect(await screen.findByTestId('result-list')).toBeInTheDocument();
   });
 
   test('should displays "no results" message when data array is empty', async () => {
@@ -34,9 +33,8 @@ describe('Results Component', () => {
     );
 
     render(<ResultsSection searchQuery={queryVariants.notFound} />);
-    const emptyList = await screen.findByTestId('empty-list');
 
-    expect(emptyList).toBeInTheDocument();
+    expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
   });
 
   test('should shows loading state while fetching data', async () => {
@@ -57,8 +55,7 @@ describe('Results Component', () => {
     );
 
     render(<ResultsSection searchQuery={queryVariants.empty} />);
-    const error = await screen.findByTestId('error-fallback');
 
-    expect(error).toBeInTheDocument();
+    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
   });
 });
