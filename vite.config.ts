@@ -28,6 +28,8 @@ export default defineConfig({
       reportsDirectory: './coverage',
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       exclude: [
+        'src/main.tsx',
+        'src/App.tsx',
         'src/**/*.test.{js,jsx,ts,tsx}',
         'src/**/*.spec.{js,jsx,ts,tsx}',
         'src/index.{js,jsx,ts,tsx}',

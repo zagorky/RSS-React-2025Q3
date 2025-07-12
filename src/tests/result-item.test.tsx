@@ -38,8 +38,9 @@ describe('Result Item', () => {
   test('should display item image with correct URL', () => {
     render(<ResultItem data={item} />);
 
-    const img = screen.getByTestId('result-item-img');
+    const itemTitle = item.title;
     const itemImgUrl = item.images.webp.image_url;
+    const img = screen.getByAltText(itemTitle);
 
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', itemImgUrl);
