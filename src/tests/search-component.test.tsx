@@ -25,12 +25,12 @@ describe('Search Component', () => {
     expect(button()).toBeInTheDocument();
   });
 
-  test('should shows empty input when no saved term exists', () => {
+  test('should display empty input when no saved query exists', () => {
     render(<SearchForm searchQuery="" onSubmit={() => {}} />);
     expect(input().value).toBe('');
   });
 
-  test('should saves search term to localStorage when search button is clicked', async () => {
+  test('should save search term to localStorage when search button is clicked', async () => {
     const onSubmit = vi.fn();
     const { user } = setupUserEvent(
       <SearchForm searchQuery="" onSubmit={onSubmit} />

@@ -40,7 +40,7 @@ describe('Main page', () => {
     expect(screen.getByTestId('throw-error-button')).toBeInTheDocument();
   });
 
-  test('should error button error boundary component should works', async () => {
+  test('should display error boundary fallback when error button is clicked', async () => {
     const { user } = setupUserEvent(
       <ErrorBoundary fallback={fallbackMock}>
         <MainPage>

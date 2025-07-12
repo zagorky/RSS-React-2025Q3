@@ -25,7 +25,7 @@ describe('Results Component', () => {
     expect(await screen.findByTestId('result-list')).toBeInTheDocument();
   });
 
-  test('should renders correct number of items when data is provided', async () => {
+  test('should render correct number of items when data is provided', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.specific), () =>
         HttpResponse.json(getSpecificQueryResponse())
@@ -62,7 +62,7 @@ describe('Results Component', () => {
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  test('should not render cards when input data format is invalid', async () => {
+  test('should show error fallback on invalid API response', async () => {
     server.use(
       http.get(getSearchEndpoint(), () => HttpResponse.json({ data: [] }))
     );
@@ -72,7 +72,7 @@ describe('Results Component', () => {
     expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
   });
 
-  test('should handle API error', async () => {
+  test('should show error fallback on API 400 error', async () => {
     server.use(
       http.get(getSearchEndpoint(), () =>
         HttpResponse.json(null, { status: 400 })

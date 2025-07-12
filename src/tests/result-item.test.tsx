@@ -15,7 +15,7 @@ describe('Result Item', () => {
     expect(screen.getByTestId('result-item')).toBeInTheDocument();
   });
 
-  test('should have item name', () => {
+  test('should display item title', () => {
     render(<ResultItem data={item} />);
 
     const title = screen.getByTestId('result-item-title');
@@ -35,7 +35,7 @@ describe('Result Item', () => {
     expect(synopsis).toHaveTextContent(itemSynopsis);
   });
 
-  test('should have image', () => {
+  test('should display item image with correct URL', () => {
     render(<ResultItem data={item} />);
 
     const img = screen.getByTestId('result-item-img');
