@@ -1,6 +1,6 @@
 import { Button } from '~components/button/button';
 import { isString } from '~types/type-guards';
-import { setQueryToLS, withDataTestId } from '~utils/utilities';
+import { withDataTestId } from '~utils/utilities';
 import { Component, type FormEvent } from 'react';
 
 type SearchFormProps = {
@@ -15,7 +15,6 @@ export class SearchForm extends Component<SearchFormProps> {
     const formValue = inputFormData.get('search-input');
     if (isString(formValue)) {
       this.props.onSubmit(formValue);
-      setQueryToLS(formValue);
     }
   };
 
@@ -37,9 +36,7 @@ export class SearchForm extends Component<SearchFormProps> {
             placeholder="Search"
           />
         </label>
-        <Button {...withDataTestId('search-form-submit-button')} type="submit">
-          Search
-        </Button>
+        <Button type="submit">Search</Button>
       </form>
     );
   }
