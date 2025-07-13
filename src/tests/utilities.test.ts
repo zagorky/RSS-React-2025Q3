@@ -1,6 +1,12 @@
 import type { ApiResponseType } from '~types/types';
 
-import { LS_KEY } from '~config/app-config';
+import { getSearchEndpoint } from '~api/api';
+import {
+  apiEndpoints,
+  apiUrl,
+  endpointParameters,
+  LS_KEY,
+} from '~config/app-config';
 import {
   assertIsNonNullable,
   assertIsResponseOk,
@@ -132,5 +138,26 @@ describe('normalizeError', () => {
   });
   test('should throw if data is null', () => {
     expect(normalizeError('Some string')).toBe('Fetching data error');
+  });
+});
+
+describe('getSearchEndpoint', () => {
+  test('should return base URL when no query provided', () => {
+    const result = getSearchEndpoint();
+    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
+  });
+
+  test('should return search URL with trimmed query', () => {
+    const notTrimmedQuery = '  demon slayer  ';
+    const trimmedQuery = 'demon slayer';
+    const result = getSearchEndpoint(notTrimmedQuery);
+    expect(result).toBe(
+      `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${trimmedQuery}`
+    );
+  });
+
+  test('should handle undefined query', () => {
+    const result = getSearchEndpoint();
+    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
   });
 });

@@ -22,7 +22,8 @@ describe('Search Component', () => {
     render(
       <SearchForm searchQuery={queryVariants.specific} onSubmit={() => {}} />
     );
-    expect(searchInput().value).toBe(queryVariants.specific);
+
+    expect(searchInput()).toHaveValue(queryVariants.specific);
   });
 
   test('should call onSubmit with input value', async () => {
