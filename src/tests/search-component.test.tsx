@@ -1,61 +1,54 @@
 import { render, screen } from '@testing-library/react';
-import { LS_KEY, queryVariants } from '~config/app-config';
+import { queryVariants } from '~config/app-config';
 import { SearchForm } from '~pages/main/components/search-form/search-form';
-import { setupUserEvent } from '~utils/utilities';
 import { expect } from 'vitest';
 
-import { getItemSpy, setItemSpy } from '~/mocks/mocked-functions';
-
-const input = () =>
-  screen.getByRole('textbox', { name: 'Search' }) as HTMLInputElement;
-const button = () => screen.getByRole('button', { name: 'Search' });
+import {
+  searchButton,
+  searchInput,
+  setupUserEvent,
+} from '~/tests/test-utilties';
 
 describe('Search Component', () => {
-  afterEach(() => {
-    getItemSpy.mockClear();
-    setItemSpy.mockClear();
-    localStorage.clear();
-  });
-
   test('should render search input and search button', () => {
     render(<SearchForm searchQuery="" onSubmit={() => {}} />);
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
-    expect(input()).toBeInTheDocument();
-    expect(button()).toBeInTheDocument();
+    expect(searchInput()).toBeInTheDocument();
+    expect(searchButton()).toBeInTheDocument();
   });
 
-  test('should display empty input when no saved query exists', () => {
-    render(<SearchForm searchQuery="" onSubmit={() => {}} />);
-    expect(input().value).toBe('');
+  test('should display passed query', () => {
+    render(
+      <SearchForm searchQuery={queryVariants.specific} onSubmit={() => {}} />
+    );
+    expect(searchInput().value).toBe(queryVariants.specific);
   });
 
-  test('should save search term to localStorage when search button is clicked', async () => {
+  test('should call onSubmit with input value', async () => {
     const onSubmit = vi.fn();
     const { user } = setupUserEvent(
-      <SearchForm searchQuery="" onSubmit={onSubmit} />
+      <SearchForm searchQuery={queryVariants.empty} onSubmit={onSubmit} />
     );
 
-    await user.type(input(), queryVariants.specific);
-    await user.click(button());
+    await user.type(searchInput(), queryVariants.specific);
+    await user.click(searchButton());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, queryVariants.specific);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
   });
 
-  test('should overwrites existing localStorage value when new search is performed', async () => {
+  test('should restore previous value after call onSubmit with new input value', async () => {
     const onSubmit = vi.fn();
     const { user } = setupUserEvent(
-      <SearchForm searchQuery="oldQuery" onSubmit={onSubmit} />
+      <SearchForm searchQuery={queryVariants.notFound} onSubmit={onSubmit} />
     );
 
-    expect(input().value).toBe('oldQuery');
+    await user.clear(searchInput());
+    await user.type(searchInput(), queryVariants.specific);
+    await user.click(searchButton());
 
-    await user.clear(input());
-    await user.type(input(), 'newQuery');
-    await user.click(button());
-
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'newQuery');
-    expect(onSubmit).toHaveBeenCalledWith('newQuery');
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
   });
 });
