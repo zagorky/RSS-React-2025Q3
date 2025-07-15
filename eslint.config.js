@@ -98,6 +98,7 @@ export default tseslint.config(
           },
         },
       ],
+      'prettier/prettier': 'off',
     },
     settings: {
       react: {
