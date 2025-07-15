@@ -1,5 +1,3 @@
-import type { ApiResponseType } from '~types/types';
-
 import { getSearchEndpoint } from '~api/api';
 import {
   apiEndpoints,
@@ -17,8 +15,8 @@ import {
 } from '~utils/utilities';
 import { describe, expect, test } from 'vitest';
 
-import { getSpecificQueryResponse } from '~/mocks/data';
-import { getItemSpy, setItemSpy } from '~/mocks/mocked-functions';
+import { specificQueryResponse } from '~/tests/mocks/data';
+import { getItemSpy, setItemSpy } from '~/tests/mocks/mocked-functions';
 
 const validValue = 'sasarik the best mentor';
 const unicodeValue = '🥸';
@@ -33,7 +31,7 @@ const invalidResponse = {
   ok: false,
   status: 400,
 } as Response;
-const validApiResponse = getSpecificQueryResponse() as ApiResponseType;
+const validApiResponse = specificQueryResponse;
 
 describe('Local Storage utilities', () => {
   beforeEach(() => {

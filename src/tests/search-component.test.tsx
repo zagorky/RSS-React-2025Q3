@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { queryVariants } from '~config/app-config';
 import { SearchForm } from '~pages/main/components/search-form/search-form';
 import { expect } from 'vitest';
 
+import { queryVariants } from '~/tests/mocks/query-variants';
 import {
   searchButton,
   searchInput,

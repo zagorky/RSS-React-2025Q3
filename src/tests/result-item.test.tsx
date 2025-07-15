@@ -1,12 +1,10 @@
-import type { DataItem } from '~types/types';
-
 import { render, screen } from '@testing-library/react';
 import { ResultItem } from '~pages/main/components/results-section/result-item';
 import { expect } from 'vitest';
 
-import { getSpecificQueryResponse } from '~/mocks/data';
+import { specificQueryResponse } from '~/tests/mocks/data';
 
-const item = getSpecificQueryResponse().data[0] as DataItem;
+const item = specificQueryResponse.data[0];
 
 describe('Result Item', () => {
   test('should display result item', () => {

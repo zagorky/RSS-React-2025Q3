@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { getSearchEndpoint } from '~api/api';
-import { queryVariants } from '~config/app-config';
 import { ResultsSection } from '~pages/main/components/results-section/results-section';
 import { http, HttpResponse } from 'msw';
 
 import {
-  getEmptyQueryResponse,
-  getEmptyResponse,
-  getSpecificQueryResponse,
-} from '~/mocks/data';
+  emptyQueryResponse,
+  emptyResponse,
+  specificQueryResponse,
+} from '~/tests/mocks/data';
+import { queryVariants } from '~/tests/mocks/query-variants';
 
 import { server } from '../../vitest.setupTests';
 
@@ -16,7 +16,7 @@ describe('Results Component', () => {
   test('should render list of data', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.specific), () =>
-        HttpResponse.json(getSpecificQueryResponse())
+        HttpResponse.json(specificQueryResponse)
       )
     );
 
@@ -28,20 +28,20 @@ describe('Results Component', () => {
   test('should render correct number of items when data is provided', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.specific), () =>
-        HttpResponse.json(getSpecificQueryResponse())
+        HttpResponse.json(specificQueryResponse)
       )
     );
 
     render(<ResultsSection searchQuery={queryVariants.specific} />);
 
     const numberOfNumber = await screen.findAllByTestId('result-item');
-    expect(numberOfNumber).toHaveLength(getSpecificQueryResponse().data.length);
+    expect(numberOfNumber).toHaveLength(specificQueryResponse.data.length);
   });
 
   test('should display empty list component when there is no matches', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.notFound), () =>
-        HttpResponse.json(getEmptyResponse())
+        HttpResponse.json(emptyResponse)
       )
     );
 
@@ -52,9 +52,7 @@ describe('Results Component', () => {
 
   test('should show loading state while fetching data', async () => {
     server.use(
-      http.get(getSearchEndpoint(), () =>
-        HttpResponse.json(getEmptyQueryResponse())
-      )
+      http.get(getSearchEndpoint(), () => HttpResponse.json(emptyQueryResponse))
     );
 
     render(<ResultsSection searchQuery={queryVariants.empty} />);

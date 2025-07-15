@@ -5,11 +5,11 @@ import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
-import { getEmptyQueryResponse } from '~/mocks/data';
+import { emptyQueryResponse } from '~/tests/mocks/data';
 
 export const handlers = [
   http.get(getSearchEndpoint(), () => {
-    return HttpResponse.json({ data: getEmptyQueryResponse() });
+    return HttpResponse.json({ data: emptyQueryResponse });
   }),
 ];
 

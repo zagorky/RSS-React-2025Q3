@@ -1,13 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { getSearchEndpoint } from '~api/api';
-import { LS_KEY, queryVariants } from '~config/app-config';
+import { Layout } from '~components/layout/layout';
+import { LS_KEY } from '~config/app-config';
 import { MainPage } from '~pages/main/main-page';
 import { http, HttpResponse } from 'msw';
 import { expect } from 'vitest';
 
 import { ErrorBoundary } from '~/error-boundary';
-import { getSpecificQueryResponse } from '~/mocks/data';
-import { fallbackMock, setItemSpy } from '~/mocks/mocked-functions';
+import { specificQueryResponse } from '~/tests/mocks/data';
+import { fallbackMock, setItemSpy } from '~/tests/mocks/mocked-functions';
+import { queryVariants } from '~/tests/mocks/query-variants';
 import {
   searchButton,
   searchInput,
@@ -16,15 +18,18 @@ import {
 
 import { server } from '../../vitest.setupTests';
 
+vi.spyOn(console, 'error').mockImplementation(() => {});
+
 describe('Main page', () => {
-  afterEach(() => {
+  beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
   });
+
   test('should render search form, results section and error button', async () => {
     server.use(
       http.get(getSearchEndpoint(queryVariants.specific), () =>
-        HttpResponse.json(getSpecificQueryResponse())
+        HttpResponse.json(specificQueryResponse)
       )
     );
     render(<MainPage />);
@@ -37,7 +42,9 @@ describe('Main page', () => {
   test('should display error boundary fallback when error button is clicked', async () => {
     const { user } = setupUserEvent(
       <ErrorBoundary fallback={fallbackMock}>
-        <MainPage />
+        <Layout>
+          <MainPage />
+        </Layout>
       </ErrorBoundary>
     );
 
