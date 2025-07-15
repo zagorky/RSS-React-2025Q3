@@ -18,5 +18,3 @@ export const setupUserEvent = (
     ...render(jsx),
   };
 };
-
-export const noop = () => {};

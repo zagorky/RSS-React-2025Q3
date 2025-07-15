@@ -12,8 +12,10 @@ const specificQuery = 'friren';
 const emptyQuery = '';
 
 describe('Search Component', () => {
+  const onSubmit = vi.fn();
+
   test('should render search input and search button', () => {
-    render(<SearchForm searchQuery="" onSubmit={() => {}} />);
+    render(<SearchForm searchQuery="" onSubmit={onSubmit} />);
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
     expect(searchInput()).toBeInTheDocument();
@@ -21,7 +23,7 @@ describe('Search Component', () => {
   });
 
   test('should display passed query', () => {
-    render(<SearchForm searchQuery={specificQuery} onSubmit={() => {}} />);
+    render(<SearchForm searchQuery={specificQuery} onSubmit={onSubmit} />);
 
     expect(searchInput()).toHaveValue('friren');
   });

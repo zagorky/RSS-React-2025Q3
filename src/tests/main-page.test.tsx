@@ -21,6 +21,7 @@ vi.spyOn(console, 'error').mockImplementation(() => {});
 
 const specificQuery = 'friren';
 const queryWithoutResults = 'beeeeeeeeee';
+const LS_KEY_FOR_TESTS = 'ZAGORKY:retrievedQuery';
 
 describe('Main page', () => {
   beforeEach(() => {
@@ -60,7 +61,7 @@ describe('Main page', () => {
     await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'friren');
+    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY_FOR_TESTS, 'friren');
   });
 
   test('should load initial query from localStorage', () => {
@@ -76,6 +77,6 @@ describe('Main page', () => {
     await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'friren');
+    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY_FOR_TESTS, 'friren');
   });
 });

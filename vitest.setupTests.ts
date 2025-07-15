@@ -1,4 +1,3 @@
-import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { getSearchEndpoint } from '~api/api';
 import { http, HttpResponse } from 'msw';
@@ -20,7 +19,6 @@ beforeAll(() => {
 });
 
 afterEach(() => {
-  cleanup();
   server.resetHandlers();
 });
 

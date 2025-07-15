@@ -1,5 +1,4 @@
 import { getSearchEndpoint } from '~api/api';
-import { apiEndpoints, apiUrl, endpointParameters } from '~config/app-config';
 import {
   assertIsNonNullable,
   assertIsResponseOk,
@@ -116,6 +115,7 @@ describe('Assert utilities', () => {
     test('should not throw an error when data is valid', () => {
       expect(() => assertIsResponseType(validApiResponse)).not.toThrow();
     });
+
     test('should throw if data is null', () => {
       expect(() => assertIsResponseType(nullValue)).toThrow(
         'Invalid API response structure'
@@ -129,6 +129,7 @@ describe('normalizeError', () => {
     const error = new Error('Something went wrong');
     expect(normalizeError(error)).toBe('Something went wrong');
   });
+
   test('should throw if data is null', () => {
     expect(normalizeError('Some string')).toBe('Fetching data error');
   });
@@ -137,20 +138,19 @@ describe('normalizeError', () => {
 describe('getSearchEndpoint', () => {
   test('should return base URL when no query provided', () => {
     const result = getSearchEndpoint();
-    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
   });
 
   test('should return search URL with trimmed query', () => {
     const notTrimmedQuery = '  demon slayer  ';
-    const trimmedQuery = 'demon slayer';
     const result = getSearchEndpoint(notTrimmedQuery);
-    expect(result).toBe(
-      `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${trimmedQuery}`
-    );
+    console.log(result);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?q=demon slayer`);
   });
 
   test('should handle undefined query', () => {
-    const result = getSearchEndpoint();
-    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
+    const undefinedResult = undefined;
+    const result = getSearchEndpoint(undefinedResult);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
   });
 });
