@@ -9,7 +9,6 @@ import { expect } from 'vitest';
 import { ErrorBoundary } from '~/error-boundary';
 import { specificQueryResponse } from '~/tests/mocks/data';
 import { fallbackMock, setItemSpy } from '~/tests/mocks/mocked-functions';
-import { queryVariants } from '~/tests/mocks/query-variants';
 import {
   searchButton,
   searchInput,
@@ -20,6 +19,9 @@ import { server } from '../../vitest.setupTests';
 
 vi.spyOn(console, 'error').mockImplementation(() => {});
 
+const specificQuery = 'friren';
+const queryWithoutResults = 'beeeeeeeeee';
+
 describe('Main page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -28,7 +30,7 @@ describe('Main page', () => {
 
   test('should render search form, results section and error button', async () => {
     server.use(
-      http.get(getSearchEndpoint(queryVariants.specific), () =>
+      http.get(getSearchEndpoint(specificQuery), () =>
         HttpResponse.json(specificQueryResponse)
       )
     );
@@ -55,25 +57,25 @@ describe('Main page', () => {
   test('should save search query to localStorage when form is submitted', async () => {
     const { user } = setupUserEvent(<MainPage />);
 
-    await user.type(searchInput(), queryVariants.specific);
+    await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, queryVariants.specific);
+    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'friren');
   });
 
   test('should load initial query from localStorage', () => {
-    localStorage.setItem(LS_KEY, queryVariants.notFound);
+    localStorage.setItem(LS_KEY, queryWithoutResults);
     render(<MainPage />);
 
-    expect(searchInput().value).toBe(queryVariants.notFound);
+    expect(searchInput()).toHaveValue('beeeeeeeeee');
   });
 
   test('should save to localStorage on search', async () => {
     const { user } = setupUserEvent(<MainPage />);
 
-    await user.type(searchInput(), queryVariants.specific);
+    await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
 
-    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, queryVariants.specific);
+    expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, 'friren');
   });
 });

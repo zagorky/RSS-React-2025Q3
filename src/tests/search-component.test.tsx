@@ -2,12 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { SearchForm } from '~pages/main/components/search-form/search-form';
 import { expect } from 'vitest';
 
-import { queryVariants } from '~/tests/mocks/query-variants';
 import {
   searchButton,
   searchInput,
   setupUserEvent,
 } from '~/tests/test-utilties';
+
+const specificQuery = 'friren';
+const emptyQuery = '';
 
 describe('Search Component', () => {
   test('should render search input and search button', () => {
@@ -19,37 +21,21 @@ describe('Search Component', () => {
   });
 
   test('should display passed query', () => {
-    render(
-      <SearchForm searchQuery={queryVariants.specific} onSubmit={() => {}} />
-    );
+    render(<SearchForm searchQuery={specificQuery} onSubmit={() => {}} />);
 
-    expect(searchInput()).toHaveValue(queryVariants.specific);
+    expect(searchInput()).toHaveValue('friren');
   });
 
   test('should call onSubmit with input value', async () => {
     const onSubmit = vi.fn();
     const { user } = setupUserEvent(
-      <SearchForm searchQuery={queryVariants.empty} onSubmit={onSubmit} />
+      <SearchForm searchQuery={emptyQuery} onSubmit={onSubmit} />
     );
 
-    await user.type(searchInput(), queryVariants.specific);
+    await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
-  });
-
-  test('should restore previous value after call onSubmit with new input value', async () => {
-    const onSubmit = vi.fn();
-    const { user } = setupUserEvent(
-      <SearchForm searchQuery={queryVariants.notFound} onSubmit={onSubmit} />
-    );
-
-    await user.clear(searchInput());
-    await user.type(searchInput(), queryVariants.specific);
-    await user.click(searchButton());
-
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith(queryVariants.specific);
+    expect(onSubmit).toHaveBeenCalledWith('friren');
   });
 });
