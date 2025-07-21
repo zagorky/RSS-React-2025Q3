@@ -1,13 +1,11 @@
-import type { ReactNode } from 'react';
+import { Outlet } from 'react-router';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = () => {
   return (
     <div className="main-wrapper">
-      <main className="main">{children}</main>
+      <main className="main">
+        <Outlet />
+      </main>
     </div>
   );
 };

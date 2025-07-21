@@ -5,7 +5,7 @@ import { ErrorButton } from './components/error-section/error-button';
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
 
-export const MainPage = () => {
+const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState(retrieveQueryFormLS());
 
   const handleSearch = (query: string) => {
@@ -20,3 +20,5 @@ export const MainPage = () => {
     </>
   );
 };
+
+export default MainPage;

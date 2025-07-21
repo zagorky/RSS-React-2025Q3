@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { getSearchEndpoint } from '~api/api';
-import { Layout } from '~components/layout/layout';
 import { LS_KEY } from '~config/app-config';
-import { MainPage } from '~pages/main/main-page';
+import MainPage from '~pages/main/main-page';
 import { http, HttpResponse } from 'msw';
 import { expect } from 'vitest';
 
@@ -45,9 +44,7 @@ describe('Main page', () => {
   test('should display error boundary fallback when error button is clicked', async () => {
     const { user } = setupUserEvent(
       <ErrorBoundary fallback={fallbackMock}>
-        <Layout>
-          <MainPage />
-        </Layout>
+        <MainPage />
       </ErrorBoundary>
     );
 

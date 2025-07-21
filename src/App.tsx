@@ -1,12 +1,8 @@
-import { Layout } from '~components/layout/layout';
-import { MainPage } from '~pages/main/main-page';
+import { router } from '~pages/app-router';
+import { RouterProvider } from 'react-router';
 
 const App = () => {
-  return (
-    <Layout>
-      <MainPage />
-    </Layout>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
