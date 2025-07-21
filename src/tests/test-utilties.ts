@@ -5,7 +5,7 @@ import { render, type RenderResult, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 export const searchInput = () =>
-  screen.getByRole('textbox', { name: 'Search' }) as HTMLInputElement;
+  screen.getByRole('textbox', { name: 'Search' });
 
 export const searchButton = () =>
   screen.getByRole('button', { name: 'Search' });

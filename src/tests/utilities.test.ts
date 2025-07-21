@@ -1,12 +1,4 @@
-import type { ApiResponseType } from '~types/types';
-
 import { getSearchEndpoint } from '~api/api';
-import {
-  apiEndpoints,
-  apiUrl,
-  endpointParameters,
-  LS_KEY,
-} from '~config/app-config';
 import {
   assertIsNonNullable,
   assertIsResponseOk,
@@ -17,25 +9,14 @@ import {
 } from '~utils/utilities';
 import { describe, expect, test } from 'vitest';
 
-import { getSpecificQueryResponse } from '~/mocks/data';
-import { getItemSpy, setItemSpy } from '~/mocks/mocked-functions';
-
-const validValue = 'sasarik the best mentor';
-const unicodeValue = '🥸';
-const emptyValue = '';
-const nullValue = null;
-const undefinedValue = undefined;
-const validResponse = {
-  ok: true,
-  status: 200,
-} as Response;
-const invalidResponse = {
-  ok: false,
-  status: 400,
-} as Response;
-const validApiResponse = getSpecificQueryResponse() as ApiResponseType;
+import { specificQueryResponse } from '~/tests/mocks/data';
 
 describe('Local Storage utilities', () => {
+  const validValue = 'sasarik the best mentor';
+  const unicodeValue = '🥸';
+  const emptyValue = '';
+  const LS_KEY_FOR_TESTS = 'ZAGORKY:retrievedQuery';
+
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
@@ -44,47 +25,46 @@ describe('Local Storage utilities', () => {
   describe('setQueryToLS', () => {
     test('should set correct validValue to LS', () => {
       setQueryToLS(validValue);
-      expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, validValue);
-      expect(localStorage.getItem(LS_KEY)).toBe(validValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(validValue);
     });
 
     test('should set empty string if the validValue is empty', () => {
       setQueryToLS(emptyValue);
-      expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, emptyValue);
-      expect(localStorage.getItem(LS_KEY)).toBe(emptyValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(emptyValue);
     });
 
     test('should store unicode characters correctly', () => {
       setQueryToLS(unicodeValue);
-      expect(setItemSpy).toHaveBeenCalledWith(LS_KEY, unicodeValue);
-      expect(localStorage.getItem(LS_KEY)).toBe(unicodeValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(unicodeValue);
     });
   });
 
   describe('retrieveQueryFormLS', () => {
     test('should get correct validValue from LS', () => {
-      localStorage.setItem(LS_KEY, validValue);
+      localStorage.setItem(LS_KEY_FOR_TESTS, validValue);
       const result = retrieveQueryFormLS();
-      expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
       expect(result).toBe(validValue);
     });
 
     test('should get empty string instead of null if the validValue is empty', () => {
-      localStorage.setItem(LS_KEY, emptyValue);
+      localStorage.setItem(LS_KEY_FOR_TESTS, emptyValue);
       const result = retrieveQueryFormLS();
-      expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
       expect(result).toBe(emptyValue);
     });
 
     test('should return empty string if key does not exist', () => {
       const result = retrieveQueryFormLS();
-      expect(getItemSpy).toHaveBeenCalledWith(LS_KEY);
       expect(result).toBe(emptyValue);
     });
   });
 });
 
 describe('Assert utilities', () => {
+  const validValue = 'sasarik the best mentor';
+  const unicodeValue = '🥸';
+  const nullValue = null;
+  const undefinedValue = undefined;
+
   describe('assertIsNonNullable', () => {
     test('should not throw an error when data is valid   ', () => {
       expect(() => assertIsNonNullable(validValue)).not.toThrow();
@@ -109,6 +89,16 @@ describe('Assert utilities', () => {
     });
   });
   describe('assertIsResponseOk', () => {
+    const invalidResponse = {
+      ok: false,
+      status: 400,
+    } as Response;
+
+    const validResponse = {
+      ok: true,
+      status: 200,
+    } as Response;
+
     test('should not throw an error when data is valid', () => {
       expect(() => assertIsResponseOk(validResponse)).not.toThrow();
     });
@@ -120,9 +110,12 @@ describe('Assert utilities', () => {
     });
   });
   describe('assertIsResponseType', () => {
+    const validApiResponse = specificQueryResponse;
+
     test('should not throw an error when data is valid', () => {
       expect(() => assertIsResponseType(validApiResponse)).not.toThrow();
     });
+
     test('should throw if data is null', () => {
       expect(() => assertIsResponseType(nullValue)).toThrow(
         'Invalid API response structure'
@@ -136,6 +129,7 @@ describe('normalizeError', () => {
     const error = new Error('Something went wrong');
     expect(normalizeError(error)).toBe('Something went wrong');
   });
+
   test('should throw if data is null', () => {
     expect(normalizeError('Some string')).toBe('Fetching data error');
   });
@@ -144,20 +138,19 @@ describe('normalizeError', () => {
 describe('getSearchEndpoint', () => {
   test('should return base URL when no query provided', () => {
     const result = getSearchEndpoint();
-    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
   });
 
   test('should return search URL with trimmed query', () => {
     const notTrimmedQuery = '  demon slayer  ';
-    const trimmedQuery = 'demon slayer';
     const result = getSearchEndpoint(notTrimmedQuery);
-    expect(result).toBe(
-      `${apiUrl}/${apiEndpoints.anime}?${endpointParameters.search}=${trimmedQuery}`
-    );
+    console.log(result);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?q=demon slayer`);
   });
 
   test('should handle undefined query', () => {
-    const result = getSearchEndpoint();
-    expect(result).toBe(`${apiUrl}/${apiEndpoints.anime}`);
+    const undefinedResult = undefined;
+    const result = getSearchEndpoint(undefinedResult);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
   });
 });
