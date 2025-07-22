@@ -18,7 +18,7 @@ export const Button = (props: ButtonProps) => {
     dataTestId = '',
     ...restProps
   } = props;
-  const buttonClasses = `${classNames} btn`.trim();
+  const buttonClasses = `${classNames.trim()} btn`;
   return (
     <button
       {...restProps}

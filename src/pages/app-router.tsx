@@ -1,7 +1,8 @@
 import { Layout } from '~components/layout/layout';
+import { Loader } from '~components/loader/loader';
 import { navigation } from '~config/navigation';
-import { dataLoader } from '~pages/dataLoader';
-import { DetailedPage, ErrorPage, MainPage } from '~pages/lazy';
+import { searchLoader } from '~pages/data-loader';
+import { AboutPage, ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
 
@@ -13,22 +14,29 @@ export const router = createBrowserRouter([
     children: [
       {
         path: navigation.main,
-        loader: dataLoader,
+        loader: searchLoader,
+        errorElement: <ErrorPage />,
         element: (
-          <Suspense>
+          <Suspense fallback={<Loader />}>
             <MainPage />
           </Suspense>
         ),
-        children: [
-          {
-            path: navigation.detailed,
-            element: (
-              <Suspense>
-                <DetailedPage />
-              </Suspense>
-            ),
-          },
-        ],
+      },
+      {
+        path: navigation.about,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <AboutPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: navigation.error,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ErrorPage />
+          </Suspense>
+        ),
       },
     ],
   },
