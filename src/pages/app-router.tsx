@@ -1,14 +1,19 @@
 import { Layout } from '~components/layout/layout';
-import { DetailedPage, MainPage } from '~pages/lazy';
+import { navigation } from '~config/navidation';
+import { dataLoader } from '~pages/dataLoader';
+import { DetailedPage, ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
 
 export const router = createBrowserRouter([
   {
+    path: navigation.main,
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: navigation.main,
+        loader: dataLoader,
         element: (
           <Suspense>
             <MainPage />
@@ -16,7 +21,7 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
-            path: ':slug',
+            path: navigation.detailed,
             element: (
               <Suspense>
                 <DetailedPage />

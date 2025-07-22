@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ResultItem } from '~pages/main/components/results-section/result-item';
+import { MemoryRouter } from 'react-router';
 import { expect } from 'vitest';
 
 import { specificQueryResponse } from '~/tests/mocks/data';
@@ -8,7 +9,11 @@ const item = specificQueryResponse.data[0];
 
 describe('Result Item', () => {
   test('should display item title', () => {
-    render(<ResultItem data={item} />);
+    render(
+      <MemoryRouter>
+        <ResultItem data={item} />
+      </MemoryRouter>
+    );
 
     const title = screen.getByTestId('result-item-title');
     const itemTitle = item.title;
@@ -18,7 +23,11 @@ describe('Result Item', () => {
   });
 
   test('should have item description', () => {
-    render(<ResultItem data={item} />);
+    render(
+      <MemoryRouter>
+        <ResultItem data={item} />
+      </MemoryRouter>
+    );
 
     const synopsis = screen.getByTestId('result-item-desc');
     const itemSynopsis = item.synopsis;
@@ -28,7 +37,11 @@ describe('Result Item', () => {
   });
 
   test('should display item image with correct URL', () => {
-    render(<ResultItem data={item} />);
+    render(
+      <MemoryRouter>
+        <ResultItem data={item} />
+      </MemoryRouter>
+    );
 
     const itemTitle = item.title;
     const itemImgUrl = item.images.webp.image_url;

@@ -3,6 +3,7 @@ import { getSearchEndpoint } from '~api/api';
 import { LS_KEY } from '~config/app-config';
 import MainPage from '~pages/main/main-page';
 import { http, HttpResponse } from 'msw';
+import { MemoryRouter } from 'react-router';
 import { expect } from 'vitest';
 
 import { ErrorBoundary } from '~/error-boundary';
@@ -34,7 +35,11 @@ describe('Main page', () => {
         HttpResponse.json(specificQueryResponse)
       )
     );
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(screen.getByTestId('search-form')).toBeInTheDocument();
     expect(await screen.findByTestId('result-list')).toBeInTheDocument();
@@ -43,9 +48,11 @@ describe('Main page', () => {
 
   test('should display error boundary fallback when error button is clicked', async () => {
     const { user } = setupUserEvent(
-      <ErrorBoundary fallback={fallbackMock}>
-        <MainPage />
-      </ErrorBoundary>
+      <MemoryRouter>
+        <ErrorBoundary fallback={fallbackMock}>
+          <MainPage />
+        </ErrorBoundary>
+      </MemoryRouter>
     );
 
     await user.click(screen.getByTestId('throw-error-button'));
@@ -53,7 +60,11 @@ describe('Main page', () => {
   });
 
   test('should save search query to localStorage when form is submitted', async () => {
-    const { user } = setupUserEvent(<MainPage />);
+    const { user } = setupUserEvent(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
@@ -63,13 +74,21 @@ describe('Main page', () => {
 
   test('should load initial query from localStorage', () => {
     localStorage.setItem(LS_KEY, queryWithoutResults);
-    render(<MainPage />);
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     expect(searchInput()).toHaveValue('beeeeeeeeee');
   });
 
   test('should save to localStorage on search', async () => {
-    const { user } = setupUserEvent(<MainPage />);
+    const { user } = setupUserEvent(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>
+    );
 
     await user.type(searchInput(), specificQuery);
     await user.click(searchButton());
