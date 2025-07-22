@@ -16,7 +16,6 @@ const AboutPage = () => {
         >
           RS School React course
         </a>
-        .
       </p>
 
       <a
