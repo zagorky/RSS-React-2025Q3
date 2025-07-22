@@ -1,19 +1,20 @@
-import { apiEndpoints, apiUrl, endpointParameters } from '~config/app-config';
+import {
+  apiEndpoints,
+  apiUrl,
+  endpointParameters,
+  ITEM_PER_PAGE,
+} from '~config/app-config';
 import { assertIsResponseOk, assertIsResponseType } from '~utils/utilities';
 
 export const getSearchEndpoint = (
   query?: string | number,
-  page: number = 1,
-  limit: number = 10
+  page: number = 1
 ) => {
   const queryParameters = new URLSearchParams();
+  queryParameters.append(endpointParameters.limit, ITEM_PER_PAGE.toString());
 
   if (page && page > 0) {
     queryParameters.append(endpointParameters.page, page.toString());
-  }
-
-  if (limit && limit > 0) {
-    queryParameters.append(endpointParameters.limit, limit.toString());
   }
 
   const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
@@ -30,8 +31,12 @@ export const getSearchEndpoint = (
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const fetchRequest = async (query: string, signal?: AbortSignal) => {
-  const url = getSearchEndpoint(query);
+export const fetchRequest = async (
+  query: string,
+  signal?: AbortSignal,
+  page?: number
+) => {
+  const url = getSearchEndpoint(query, page);
   const response = await fetch(url, { signal: signal });
 
   assertIsResponseOk(response);

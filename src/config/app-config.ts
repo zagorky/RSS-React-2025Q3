@@ -10,4 +10,6 @@ export const endpointParameters = {
   limit: 'limit',
 };
 
+export const ITEM_PER_PAGE = 6;
+
 export const LS_KEY = 'ZAGORKY:retrievedQuery';
