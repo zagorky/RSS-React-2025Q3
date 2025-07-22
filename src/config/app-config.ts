@@ -6,6 +6,8 @@ export const apiEndpoints = {
 
 export const endpointParameters = {
   search: 'q',
+  page: 'page',
+  limit: 'limit',
 };
 
 export const LS_KEY = 'ZAGORKY:retrievedQuery';

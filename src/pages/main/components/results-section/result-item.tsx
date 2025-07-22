@@ -1,6 +1,6 @@
 import type { DataItem } from '~types/types';
 
-import { navigation } from '~config/navidation';
+import { navigation } from '~config/navigation';
 import { withDataTestId } from '~utils/utilities';
 import { Link } from 'react-router';
 

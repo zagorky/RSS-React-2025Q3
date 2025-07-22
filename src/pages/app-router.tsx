@@ -1,5 +1,5 @@
 import { Layout } from '~components/layout/layout';
-import { navigation } from '~config/navidation';
+import { navigation } from '~config/navigation';
 import { dataLoader } from '~pages/dataLoader';
 import { DetailedPage, ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';

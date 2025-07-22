@@ -138,19 +138,21 @@ describe('normalizeError', () => {
 describe('getSearchEndpoint', () => {
   test('should return base URL when no query provided', () => {
     const result = getSearchEndpoint();
-    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?page=1&limit=10`);
   });
 
   test('should return search URL with trimmed query', () => {
     const notTrimmedQuery = '  demon slayer  ';
     const result = getSearchEndpoint(notTrimmedQuery);
     console.log(result);
-    expect(result).toBe(`https://api.jikan.moe/v4/anime?q=demon slayer`);
+    expect(result).toBe(
+      `https://api.jikan.moe/v4/anime?page=1&limit=10&q=demon+slayer`
+    );
   });
 
   test('should handle undefined query', () => {
     const undefinedResult = undefined;
     const result = getSearchEndpoint(undefinedResult);
-    expect(result).toBe(`https://api.jikan.moe/v4/anime`);
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?page=1&limit=10`);
   });
 });
