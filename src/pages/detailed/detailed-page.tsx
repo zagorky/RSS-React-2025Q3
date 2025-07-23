@@ -39,7 +39,7 @@ const DetailedPage = () => {
       <Link
         to={`..${location.search}`}
         type="button"
-        className="fixed inset-0 z-10 cursor-pointer bg-gray-900/50"
+        className="fixed inset-0 z-10 cursor-pointer bg-gray-900/50 backdrop-blur-xs backdrop-filter"
       />
       <button
         type="button"

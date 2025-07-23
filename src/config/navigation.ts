@@ -4,3 +4,14 @@ export const navigation = {
   error: '*',
   about: '/about',
 } as const;
+
+export const navBar = [
+  {
+    path: navigation.main,
+    title: 'Main page',
+  },
+  {
+    path: navigation.about,
+    title: 'About page',
+  },
+];
