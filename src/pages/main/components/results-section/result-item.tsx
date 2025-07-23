@@ -1,8 +1,8 @@
 import type { DataItem } from '~types/types';
 
-import { navigation } from '~config/navigation';
+import { ItemImg } from '~components/item-img/item-img';
 import { withDataTestId } from '~utils/utilities';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
 type ResultItemProps = {
   data: DataItem;
@@ -11,26 +11,19 @@ type ResultItemProps = {
 export const ResultItem = ({ data }: ResultItemProps) => {
   const title = data.title;
   const synopsis = data.synopsis;
-  const imgUrl = data.images.webp.image_url;
-  const id = data.title.replace(' ', '_');
+  const id = data.mal_id;
+  const location = useLocation();
 
   return (
     <li {...withDataTestId('result-item')} className="result-item-wrapper">
-      <Link className="contents" to={`${navigation.main}${id}`}>
+      <Link className="contents" to={`${id}${location.search}`}>
         <p
           {...withDataTestId('result-item-title')}
           className="result-item-title"
         >
           {title}
         </p>
-        <div className="overflow-hidden rounded-md">
-          <img
-            {...withDataTestId('result-item-img')}
-            className="result-item-img"
-            src={imgUrl}
-            alt={title}
-          />
-        </div>
+        <ItemImg data={data} />
         <p {...withDataTestId('result-item-desc')} className="result-item-desc">
           {synopsis}
         </p>
