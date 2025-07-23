@@ -9,7 +9,7 @@ import { useFetcher, useLoaderData } from 'react-router';
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
 
-type LoaderData = {
+type LoaderDataType = {
   results: DataItem[];
   query: string;
   pagination: PaginationType;
@@ -17,9 +17,9 @@ type LoaderData = {
 };
 
 const MainPage = () => {
-  const { results, query, pagination, error } = useLoaderData<LoaderData>();
+  const { results, query, pagination, error } = useLoaderData<LoaderDataType>();
   const { searchQuery, setSearchQueryToLS } = useLocalStorage(LS_KEY);
-  const fetcher = useFetcher<LoaderData>();
+  const fetcher = useFetcher<LoaderDataType>();
 
   useEffect(() => {
     if (query !== searchQuery) {
