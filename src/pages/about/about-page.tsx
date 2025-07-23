@@ -1,6 +1,11 @@
+import { withDataTestId } from '~utils/utilities';
+
 const AboutPage = () => {
   return (
-    <section className="mx-auto max-w-3xl px-4 py-10 text-center">
+    <section
+      {...withDataTestId('about-page-section')}
+      className="mx-auto max-w-3xl px-4 py-10 text-center"
+    >
       <h1 className="mb-4 text-3xl font-bold">About Me</h1>
       <p className="mb-4 text-lg">
         Hi! My name is Daria and I went crazy at Rolling Scopes School.
