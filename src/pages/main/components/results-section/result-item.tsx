@@ -15,8 +15,8 @@ export const ResultItem = ({ data }: ResultItemProps) => {
   const location = useLocation();
 
   return (
-    <li {...withDataTestId('result-item')} className="result-item-wrapper">
-      <Link className="contents" to={`${id}${location.search}`}>
+    <Link className="contents" to={`${id}${location.search}`}>
+      <li {...withDataTestId('result-item')} className="result-item-wrapper">
         <p
           {...withDataTestId('result-item-title')}
           className="result-item-title"
@@ -27,7 +27,7 @@ export const ResultItem = ({ data }: ResultItemProps) => {
         <p {...withDataTestId('result-item-desc')} className="result-item-desc">
           {synopsis}
         </p>
-      </Link>
-    </li>
+      </li>
+    </Link>
   );
 };

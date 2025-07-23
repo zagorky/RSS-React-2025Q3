@@ -1,5 +1,5 @@
 .loader-overlay {
-  @apply fixed inset-0 z-50 flex bg-bg-dark opacity-40;
+  @apply bg-bg-dark fixed inset-0 z-50 flex opacity-40;
 }
 
 .loader-container {
@@ -7,7 +7,7 @@
 }
 
 .loader-spinner {
-  @apply h-7 w-7 animate-spin rounded-full border-3 border-primary-600 border-r-secondary-600;
+  @apply border-primary-600 border-r-secondary-600 h-7 w-7 animate-spin rounded-full border-3;
 }
 
 .loader-text {

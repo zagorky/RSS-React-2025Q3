@@ -35,31 +35,47 @@ const DetailedPage = () => {
   const synopsis = data.synopsis;
 
   return (
-    <section className="w-full max-w-[350px]">
-      <div className="space-y-6 rounded-2xl border p-6 shadow-md">
+    <section className="relative z-20 w-full max-w-[350px]">
+      <Link
+        to={`..${location.search}`}
+        type="button"
+        className="fixed inset-0 z-10 cursor-pointer bg-gray-900/50"
+      />
+      <button
+        type="button"
+        className="border-border-dark hover:border-primary-700 relative z-20 space-y-6 rounded-2xl border-4 bg-white p-6 shadow-md"
+      >
         <div className="flex items-center justify-between gap-2">
-          <Link to={`..${location.search}`} relative="path">
+          <Link
+            to={`..${location.search}`}
+            type="button"
+            className="cursor-pointer"
+          >
             ❌
           </Link>
-          <h2 className="text-xl leading-tight font-bold">{title}</h2>
+          <h2 className="result-item-title">{title}</h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-4 text-base leading-relaxed sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-4 leading-relaxed sm:grid-cols-2">
           <div>
             <div className="mb-1 font-semibold">Type</div>
-            <div className="rounded-lg border px-3 py-2">
+            <div className="text-text-on-primary rounded-md bg-gray-400/80 px-2 py-1">
               {type.toUpperCase()}
             </div>
           </div>
 
           <div>
             <div className="mb-1 font-semibold">Status</div>
-            <div className="rounded-lg border px-3 py-2">{status}</div>
+            <div className="bg-accent-500/80 text-text-on-primary rounded-md px-2 py-1">
+              {status}
+            </div>
           </div>
 
           <div>
             <div className="mb-1 font-semibold">Score</div>
-            <div className="rounded-lg border px-3 py-2">{score}</div>
+            <div className="bg-warning/80 text-text-on-primary rounded-md px-2 py-1">
+              {score}
+            </div>
           </div>
 
           <div className="sm:col-span-2">
@@ -68,7 +84,7 @@ const DetailedPage = () => {
               {genres.map((genre, i) => (
                 <span
                   key={`${genre.mal_id}-${i}`}
-                  className="rounded-full border px-3 py-1 text-sm"
+                  className="bg-primary-500 text-text-on-primary rounded-md px-2 py-1 text-sm"
                 >
                   {genre.name}
                 </span>
@@ -81,7 +97,7 @@ const DetailedPage = () => {
           <ItemImg data={data} />
         </div>
         <p>{synopsis}</p>
-      </div>
+      </button>
     </section>
   );
 };

@@ -3,12 +3,12 @@
   @apply border-border-light bg-secondary-800 text-text-on-secondary;
   @apply cursor-pointer rounded-lg font-bold;
   @apply hover:bg-secondary-700;
-  @apply disabled:pointer-events-none disabled:bg-error disabled:text-gray-900 disabled:opacity-80;
+  @apply disabled:bg-error disabled:pointer-events-none disabled:text-gray-900 disabled:opacity-80;
 }
 
 .inpt {
-  @apply m-1 rounded-md border border-border-light px-2 py-1 shadow-sm;
-  @apply focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none;
+  @apply border-border-light m-1 rounded-md border px-2 py-1 shadow-sm;
+  @apply focus:border-primary-500 focus:ring-primary-500 focus:ring-2 focus:outline-none;
   @apply transition duration-200;
 }
 
