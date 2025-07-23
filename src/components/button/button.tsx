@@ -1,9 +1,9 @@
+import type { ButtonHTMLAttributes } from 'react';
+
+import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
-import { JSX } from 'react/jsx-runtime';
 
-import IntrinsicElements = JSX.IntrinsicElements;
-
-type ButtonProps = IntrinsicElements['button'] & {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   dataTestId?: string;
   classNames?: string;
 };
@@ -18,7 +18,13 @@ export const Button = (props: ButtonProps) => {
     dataTestId = '',
     ...restProps
   } = props;
-  const buttonClasses = `${classNames.trim()} btn`;
+
+  const buttonClasses = cn(
+    'btn',
+    classNames,
+    disabled && 'opacity-50 cursor-not-allowed'
+  );
+
   return (
     <button
       {...restProps}

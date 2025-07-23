@@ -3,6 +3,7 @@ import type { DataItem, PaginationType } from '~types/types';
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
 import { Pagination } from '~pages/main/components/results-section/pagination';
+import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 import { Outlet, useOutlet } from 'react-router';
 
@@ -43,11 +44,12 @@ export const ResultsSection = ({
       <div className="flex justify-center gap-4 p-4">
         <ul
           {...withDataTestId('result-list')}
-          className={`grid w-full gap-6 transition-all duration-300 ${
+          className={cn(
+            'grid w-full gap-6 transition-all duration-300 ease-in-out',
             outlet
-              ? 'max-w-[1200px] grid-cols-1 sm:grid-cols-2'
+              ? 'grid-cols-1 sm:grid-cols-2'
               : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-          }`}
+          )}
         >
           {results.map((result, i) => (
             <ResultItem key={result.mal_id + 'and' + i} data={result} />
