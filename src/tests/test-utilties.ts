@@ -11,10 +11,10 @@ export const searchButton = () =>
   screen.getByRole('button', { name: 'Search' });
 
 export const setupUserEvent = (
-  jsx: ReactNode
+  tsx: ReactNode
 ): { user: UserEvent } & RenderResult => {
   return {
     user: userEvent.setup(),
-    ...render(jsx),
+    ...render(tsx),
   };
 };

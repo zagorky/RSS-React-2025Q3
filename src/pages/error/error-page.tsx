@@ -1,5 +1,4 @@
 import { Button } from '~components/button/button';
-import { navigation } from '~config/navigation';
 import { withDataTestId } from '~utils/utilities';
 import { Link, useRouteError } from 'react-router';
 
@@ -18,8 +17,8 @@ const ErrorPage = () => {
       <h2>{errorMessage}</h2>
       <div>
         <Button classNames="m-4" dataTestId={'error-fallback-button'}>
-          <Link className="p-4" to={navigation.main}>
-            Back to main page
+          <Link className="p-4" to=".." relative="path">
+            Go back
           </Link>
         </Button>
       </div>

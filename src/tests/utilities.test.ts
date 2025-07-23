@@ -1,5 +1,6 @@
 import { getSearchEndpoint } from '~api/api';
 import {
+  assertIsDataType,
   assertIsNonNullable,
   assertIsResponseOk,
   assertIsResponseType,
@@ -122,6 +123,19 @@ describe('Assert utilities', () => {
       );
     });
   });
+  describe('assertIsDataType', () => {
+    const validApiResponse = specificQueryResponse.data[0];
+
+    test('should not throw an error when data is valid', () => {
+      expect(() => assertIsDataType(validApiResponse)).not.toThrow();
+    });
+
+    test('should throw if data is null', () => {
+      expect(() => assertIsDataType(nullValue)).toThrow(
+        'Invalid API response structure'
+      );
+    });
+  });
 });
 
 describe('normalizeError', () => {
@@ -154,5 +168,31 @@ describe('getSearchEndpoint', () => {
     const undefinedResult = undefined;
     const result = getSearchEndpoint(undefinedResult);
     expect(result).toBe('https://api.jikan.moe/v4/anime?limit=6&page=1');
+  });
+
+  test('should return URL with query and custom page', () => {
+    const result = getSearchEndpoint({ query: 'one piece', page: 3 });
+    expect(result).toBe(
+      `https://api.jikan.moe/v4/anime?limit=6&page=3&q=one+piece`
+    );
+  });
+
+  test('should return URL with page only', () => {
+    const result = getSearchEndpoint({ page: 2 });
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?limit=6&page=2`);
+  });
+
+  test('should not append query if it is empty or only spaces', () => {
+    const result = getSearchEndpoint({ query: '   ' });
+    expect(result).toBe(`https://api.jikan.moe/v4/anime?limit=6&page=1`);
+  });
+
+  test('should ignore query and page if id is provided', () => {
+    const result = getSearchEndpoint({
+      id: 456,
+      query: 'ignored query',
+      page: 5,
+    });
+    expect(result).toBe(`https://api.jikan.moe/v4/anime/456`);
   });
 });
