@@ -7,7 +7,9 @@ const AboutPage = () => {
       className="mx-auto max-w-3xl px-4 py-16 text-center sm:py-20"
     >
       <div className="p-8 sm:p-10">
-        <h1 className="text-primary-700 mb-6 text-3xl font-bold">About Me</h1>
+        <h1 className="text-primary-700 hover:text-secondary-600 mb-6 text-3xl font-bold">
+          About Me
+        </h1>
 
         <div className="space-y-5 text-lg text-gray-700">
           <p className="leading-relaxed">
@@ -37,7 +39,7 @@ const AboutPage = () => {
             href="https://github.com/zagorky"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary-500 hover:bg-primary-600 focus:ring-primary-400 inline-block rounded-lg px-5 py-2.5 text-white shadow-sm transition-all hover:shadow focus:ring-2 focus:ring-offset-2 focus:outline-none"
+            className="btn"
           >
             My GitHub
           </a>

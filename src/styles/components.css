@@ -1,9 +1,5 @@
 .btn {
-  @apply size-max min-w-24 border px-1 py-1 transition-all duration-200 ease-in-out;
-  @apply border-border-light bg-secondary-800 text-text-on-secondary;
-  @apply cursor-pointer rounded-lg font-bold;
-  @apply hover:bg-secondary-700;
-  @apply disabled:bg-error disabled:pointer-events-none disabled:text-gray-900 disabled:opacity-80;
+  @apply bg-primary-500 hover:bg-primary-600 focus:ring-primary-400 inline-block rounded-lg px-3 py-1.5 text-white shadow-sm transition-all hover:shadow focus:ring-2 focus:ring-offset-2 focus:outline-none
 }
 
 .inpt {
