@@ -4,7 +4,7 @@ import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
 import { Pagination } from '~pages/main/components/results-section/pagination';
 import { withDataTestId } from '~utils/utilities';
-import { Outlet } from 'react-router';
+import { Outlet, useOutlet } from 'react-router';
 
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
@@ -25,6 +25,7 @@ export const ResultsSection = ({
   pagination,
   loading,
 }: ResultSectionProps) => {
+  const outlet = useOutlet();
   if (loading) {
     return <Loader />;
   }
@@ -39,8 +40,15 @@ export const ResultsSection = ({
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <div className="flex items-center justify-center">
-        <ul {...withDataTestId('result-list')} className="result-section">
+      <div className="flex justify-center gap-4 p-4">
+        <ul
+          {...withDataTestId('result-list')}
+          className={`grid w-full gap-6 transition-all duration-300 ${
+            outlet
+              ? 'max-w-[1200px] grid-cols-1 sm:grid-cols-2'
+              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+          }`}
+        >
           {results.map((result, i) => (
             <ResultItem key={result.mal_id + 'and' + i} data={result} />
           ))}

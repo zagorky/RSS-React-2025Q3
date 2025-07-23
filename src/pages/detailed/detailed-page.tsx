@@ -32,17 +32,16 @@ const DetailedPage = () => {
   const genres = data.genres;
   const status = data.airing ? 'Ongoing' : 'Released';
   const score = data.score;
+  const synopsis = data.synopsis;
 
   return (
-    <section className="mx-auto max-w-3xl min-w-[350px] px-6 py-10">
+    <section className="w-full max-w-[350px]">
       <div className="space-y-6 rounded-2xl border p-6 shadow-md">
         <div className="flex items-center justify-between gap-2">
           <Link to={`..${location.search}`} relative="path">
             ❌
           </Link>
-          <h2 className="text-center text-3xl leading-tight font-bold">
-            {title}
-          </h2>
+          <h2 className="text-xl leading-tight font-bold">{title}</h2>
         </div>
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 text-base leading-relaxed sm:grid-cols-2">
@@ -81,6 +80,7 @@ const DetailedPage = () => {
         <div className="pt-4">
           <ItemImg data={data} />
         </div>
+        <p>{synopsis}</p>
       </div>
     </section>
   );
