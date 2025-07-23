@@ -2,6 +2,8 @@
 
 A modern React application built with Vite, TypeScript, and Tailwind CSS, following best practices for code quality and testing.
 
+## Deploy - [Click](https://zagorky-hooks-and-routing.netlify.app/)
+
 ## 📦 Features
 
 - ⚡ **Vite** for fast development and builds
@@ -23,7 +25,7 @@ A modern React application built with Vite, TypeScript, and Tailwind CSS, follow
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/rs-react-app.git
+   git clone https://github.com/zagorky/RSS-React-2025Q3.git
    ```
 
 2. Install dependencies:
