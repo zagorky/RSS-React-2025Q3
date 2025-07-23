@@ -47,7 +47,7 @@ export const ResultsSection = ({
           className={cn(
             'grid w-full gap-6 transition-all duration-300 ease-in-out',
             outlet
-              ? 'grid-cols-1 sm:grid-cols-2'
+              ? 'grid-cols-1 md:grid-cols-2'
               : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
           )}
         >
