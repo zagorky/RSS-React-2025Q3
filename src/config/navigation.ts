@@ -1,6 +1,6 @@
 export const navigation = {
   main: '/',
-  detailed: '/:id',
+  detailed: ':id',
   error: '*',
   about: '/about',
 } as const;

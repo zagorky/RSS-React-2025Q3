@@ -6,6 +6,8 @@ export type ApiResponseType = {
 export type DataItem = {
   mal_id: number;
   url: string;
+  score: number;
+  airing: boolean;
   images: { jpg: ImageType; webp: ImageType };
   title: string;
   type: Type;

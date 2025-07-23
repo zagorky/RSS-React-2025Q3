@@ -1,9 +1,11 @@
-import { fetchRequest } from '~api/api';
+import type { LoaderFunctionArgs } from 'react-router';
+
+import { fetchById, fetchRequest } from '~api/api';
 import { navigation } from '~config/navigation';
-import { normalizeError } from '~utils/utilities';
+import { assertIsNonNullable, normalizeError } from '~utils/utilities';
 import { redirect } from 'react-router';
 
-export const searchLoader = async ({ request }: { request: Request }) => {
+export const searchLoader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const query = url.searchParams.get('q') ?? '';
   const page = Number(url.searchParams.get('page') ?? '1');
@@ -32,4 +34,23 @@ export const searchAction = async ({ request }: { request: Request }) => {
   url.searchParams.set('page', '1');
 
   return redirect(`${navigation.main}?${url.searchParams.toString()}`);
+};
+
+export const detailedPageLoader = async ({
+  params,
+  request,
+}: LoaderFunctionArgs) => {
+  const id = params.id;
+  assertIsNonNullable(id, 'ID is missing');
+
+  try {
+    const data = await fetchById(id, request.signal);
+
+    return { data, error: null };
+  } catch (error) {
+    return {
+      data: null,
+      error: normalizeError(error),
+    };
+  }
 };

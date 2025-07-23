@@ -4,26 +4,36 @@ import {
   endpointParameters,
   ITEM_PER_PAGE,
 } from '~config/app-config';
-import { assertIsResponseOk, assertIsResponseType } from '~utils/utilities';
+import { hasProperty, isObject } from '~types/type-guards';
+import {
+  assertIsDataType,
+  assertIsResponseOk,
+  assertIsResponseType,
+} from '~utils/utilities';
 
 export const getSearchEndpoint = (
-  query?: string | number,
-  page: number = 1
+  options: {
+    query?: string;
+    id?: string | number;
+    page?: number;
+  } = {}
 ) => {
-  const queryParameters = new URLSearchParams();
-  queryParameters.append(endpointParameters.limit, ITEM_PER_PAGE.toString());
-
-  if (page && page > 0) {
-    queryParameters.append(endpointParameters.page, page.toString());
-  }
+  const { query, id, page = 1 } = options;
 
   const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
 
-  if (typeof query === 'number') {
-    return `${baseUrl}/${query}`;
+  if (id) {
+    return `${baseUrl}/${id}`;
   }
 
-  if (query && query.trim() !== '') {
+  const queryParameters = new URLSearchParams();
+  queryParameters.append(endpointParameters.limit, ITEM_PER_PAGE.toString());
+
+  if (page > 0) {
+    queryParameters.append(endpointParameters.page, page.toString());
+  }
+
+  if (query?.trim()) {
     queryParameters.append(endpointParameters.search, query.trim());
   }
 
@@ -32,11 +42,12 @@ export const getSearchEndpoint = (
 };
 
 export const fetchRequest = async (
-  query: string,
+  query?: string,
   signal?: AbortSignal,
-  page?: number
+  page?: number,
+  id?: string | number
 ) => {
-  const url = getSearchEndpoint(query, page);
+  const url = getSearchEndpoint({ query, page, id });
   const response = await fetch(url, { signal: signal });
 
   assertIsResponseOk(response);
@@ -44,6 +55,24 @@ export const fetchRequest = async (
   const data: unknown = await response.json();
 
   assertIsResponseType(data);
+
+  return data;
+};
+
+export const fetchById = async (id: string | number, signal?: AbortSignal) => {
+  const url = getSearchEndpoint({ id });
+  const response = await fetch(url, { signal });
+
+  assertIsResponseOk(response);
+
+  const responseData: unknown = await response.json();
+
+  if (!isObject(responseData) || !hasProperty('data', responseData)) {
+    throw new Error('Invalid API response: missing data property');
+  }
+
+  const data = responseData.data;
+  assertIsDataType(data);
 
   return data;
 };

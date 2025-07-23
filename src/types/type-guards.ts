@@ -18,7 +18,7 @@ const isBoolean = (data: unknown): data is boolean => {
   return typeof data === 'boolean';
 };
 
-const isObject = (data: unknown): data is object => {
+export const isObject = (data: unknown): data is object => {
   return typeof data === 'object' && data !== null;
 };
 
@@ -35,7 +35,7 @@ const isImageType = (data: unknown): data is ImageType =>
 const isGenresType = (data: unknown): data is GenresType =>
   isObject(data) && 'name' in data && isString(data.name);
 
-const hasProperty = <K extends string>(
+export const hasProperty = <K extends string>(
   property: K,
   source: unknown
 ): source is {
@@ -44,7 +44,7 @@ const hasProperty = <K extends string>(
   return typeof source === 'object' && source !== null && property in source;
 };
 
-const isDataItem = (data: unknown): data is DataItem =>
+export const isDataItem = (data: unknown): data is DataItem =>
   isObject(data) &&
   hasProperty('mal_id', data) &&
   isNumber(data.mal_id) &&

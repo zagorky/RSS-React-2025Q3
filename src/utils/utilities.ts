@@ -1,7 +1,7 @@
-import type { ApiResponseType } from '~types/types';
+import type { ApiResponseType, DataItem } from '~types/types';
 
 import { LS_KEY } from '~config/app-config';
-import { isResponseType } from '~types/type-guards';
+import { isDataItem, isResponseType } from '~types/type-guards';
 
 export const retrieveQueryFormLS = () => {
   return localStorage.getItem(LS_KEY) ?? '';
@@ -46,6 +46,17 @@ export function assertIsResponseType(
   ...infos: unknown[]
 ): asserts data is ApiResponseType {
   if (!isResponseType(data)) {
+    throw new Error(
+      `Invalid API response structure: "${String(data)}"; ${infos.join(' ')}`
+    );
+  }
+}
+
+export function assertIsDataType(
+  data: unknown,
+  ...infos: unknown[]
+): asserts data is DataItem {
+  if (!isDataItem(data)) {
     throw new Error(
       `Invalid API response structure: "${String(data)}"; ${infos.join(' ')}`
     );
