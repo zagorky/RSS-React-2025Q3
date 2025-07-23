@@ -28,6 +28,8 @@ export const emptyQueryResponse = {
   data: [
     {
       mal_id: 1,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/1/Cowboy_Bebop',
       images: {
         jpg: {
@@ -122,6 +124,8 @@ export const emptyQueryResponse = {
     },
     {
       mal_id: 6,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/6/Trigun',
       images: {
         jpg: {
@@ -185,6 +189,8 @@ export const emptyQueryResponse = {
       },
       title: 'HUH Witch Hunter Robin',
       type: 'TV',
+      score: 8.37,
+      airing: false,
       synopsis:
         "Though hidden away from the general public, Witchesu2014those with supernatural powersu2014have always existed in human societies. Neither numerous nor inherently evil, Witches are nonetheless capable of creating disorder by misusing their powers for criminal means. The task of solving supernatural crimes falls outside of the jurisdiction of normal authorities and is instead handled by the Solomon organization.nnHaving finished her training in Italy, Robin Sena transfers to Solomon's local Japanese branch, STNJ. Possessing powerful pyrokinetic abilities, she is herself a Witch, putting her at odds with STNJ's methods of dealing with rogue Witches. In particular, Robin opposes the use of an elixir called Orbo, which can weaken or even neutralize a Witch's powers. If Robin wants to find her place within the organization, she must find a way to navigate the internal politics of Solomon while also handling the threat of hostile Witchesu2014but both seem to be dangerous for very different reasons.nn[Written by MAL Rewrite]",
       genres: [
@@ -231,6 +237,8 @@ export const specificQueryResponse: ApiResponseType = {
   data: [
     {
       mal_id: 52991,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/52991/Sousou_no_Frieren',
       images: {
         jpg: {
@@ -275,6 +283,8 @@ export const specificQueryResponse: ApiResponseType = {
     },
     {
       mal_id: 59978,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/59978/Sousou_no_Frieren_2nd_Season',
       images: {
         jpg: {
@@ -319,6 +329,8 @@ export const specificQueryResponse: ApiResponseType = {
     },
     {
       mal_id: 59978,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/59978/Sousou_no_Frieren_2nd_Season',
       images: {
         jpg: {
@@ -363,6 +375,8 @@ export const specificQueryResponse: ApiResponseType = {
     },
     {
       mal_id: 56885,
+      score: 8.37,
+      airing: false,
       url: 'https://myanimelist.net/anime/56885/Sousou_no_Frieren__u25CFu25CF_no_Mahou',
       images: {
         jpg: {

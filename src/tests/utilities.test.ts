@@ -143,7 +143,7 @@ describe('getSearchEndpoint', () => {
 
   test('should return search URL with trimmed query', () => {
     const notTrimmedQuery = '  demon slayer  ';
-    const result = getSearchEndpoint(notTrimmedQuery);
+    const result = getSearchEndpoint({ query: notTrimmedQuery });
     console.log(result);
     expect(result).toBe(
       'https://api.jikan.moe/v4/anime?limit=6&page=1&q=demon+slayer'

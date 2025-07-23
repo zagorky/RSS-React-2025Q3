@@ -18,6 +18,7 @@ describe('Results Component', () => {
     pagination: {
       has_next_page: true,
       current_page: 1,
+      last_visible_page: 2,
     },
     error: null,
     loading: false,
@@ -28,7 +29,7 @@ describe('Results Component', () => {
 
   test('should render correct number of items when data is provided', async () => {
     server.use(
-      http.get(getSearchEndpoint(specificQuery), ({ request }) => {
+      http.get(getSearchEndpoint({ query: specificQuery }), ({ request }) => {
         const url = new URL(request.url);
         const query = url.searchParams.get('q');
 
@@ -58,14 +59,17 @@ describe('Results Component', () => {
 
   test('should display empty list component when there is no matches', async () => {
     server.use(
-      http.get(getSearchEndpoint(queryWithoutResults), ({ request }) => {
-        const url = new URL(request.url);
-        const query = url.searchParams.get('q');
+      http.get(
+        getSearchEndpoint({ query: queryWithoutResults }),
+        ({ request }) => {
+          const url = new URL(request.url);
+          const query = url.searchParams.get('q');
 
-        if (query === queryWithoutResults) {
-          return HttpResponse.json(emptyResponse);
+          if (query === queryWithoutResults) {
+            return HttpResponse.json(emptyResponse);
+          }
         }
-      })
+      )
     );
 
     render(
@@ -149,7 +153,7 @@ describe('API error handling', () => {
     loading: false,
     error: 'error',
     results: [],
-    pagination: { current_page: 1, has_next_page: false },
+    pagination: { current_page: 1, has_next_page: false, last_visible_page: 1 },
   };
 
   test.each(errorCases)(
