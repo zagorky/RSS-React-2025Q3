@@ -43,7 +43,7 @@ const DetailedPage = () => {
       />
       <button
         type="button"
-        className="border-border-dark hover:border-primary-700 relative z-20 space-y-6 rounded-2xl border-4 bg-white p-6 shadow-md"
+        className="border-border-dark hover:border-primary-700 relative z-20 w-full max-w-[350px] space-y-6 rounded-2xl border-4 bg-white p-6 shadow-md"
       >
         <div className="flex items-center justify-between gap-2">
           <Link

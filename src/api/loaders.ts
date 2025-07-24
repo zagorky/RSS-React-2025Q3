@@ -4,7 +4,7 @@ import type { LoaderFunctionArgs } from 'react-router';
 import { fetchById, fetchRequest } from '~api/api';
 import { assertIsNonNullable, normalizeError } from '~utils/utilities';
 
-export const searchLoader = async ({
+export const mainPageLoader = async ({
   request,
 }: LoaderFunctionArgs): Promise<LoaderDataType> => {
   const url = new URL(request.url);

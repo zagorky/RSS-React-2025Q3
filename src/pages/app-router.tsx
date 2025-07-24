@@ -1,5 +1,5 @@
 import { searchAction } from '~api/actions';
-import { detailedPageLoader, searchLoader } from '~api/loaders';
+import { detailedPageLoader, mainPageLoader } from '~api/loaders';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
 import { navigation } from '~config/navigation';
@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: navigation.main,
-        loader: searchLoader,
+        loader: mainPageLoader,
         action: searchAction,
         id: 'main-page',
         errorElement: <ErrorPage />,

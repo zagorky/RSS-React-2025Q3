@@ -1,22 +1,23 @@
 import { useCallback, useState } from 'react';
 
 export const useLocalStorage = (key: string) => {
-  const getQueryFromLS = useCallback(() => {
+  const getDataFromLS = useCallback(() => {
     return localStorage.getItem(key) ?? '';
   }, [key]);
 
-  const [searchQuery, setSearchQuery] = useState(() => getQueryFromLS());
+  const [searchQuery, setSearchQuery] = useState(() => getDataFromLS());
 
-  const setSearchQueryToLS = useCallback(
-    (value: string) => {
-      localStorage.setItem(key, value);
-      setSearchQuery(value);
+  const setDataQueryToLS = useCallback(
+    (value: { query?: string; page?: string }) => {
+      const modifiedValue = JSON.stringify(value);
+      localStorage.setItem(key, modifiedValue);
+      setSearchQuery(modifiedValue);
     },
     [key]
   );
 
   return {
     searchQuery,
-    setSearchQueryToLS,
+    setDataQueryToLS,
   };
 };
