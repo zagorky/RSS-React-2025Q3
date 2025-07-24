@@ -5,6 +5,6 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "arrowParens": "always",
-  "endOfLine": "auto",
+  "endOfLine": "lf",
   "plugins": ["prettier-plugin-tailwindcss"]
 }
