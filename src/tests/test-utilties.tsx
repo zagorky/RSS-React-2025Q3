@@ -14,6 +14,8 @@ import ErrorPage from '~pages/error/error-page';
 import MainPage from '~pages/main/main-page';
 import { createMemoryRouter } from 'react-router';
 
+import { ErrorBoundary } from '~/error-boundary';
+
 export const searchInput = () =>
   screen.getByRole('textbox', { name: 'Search' });
 
@@ -45,7 +47,11 @@ export const createMainTestRouter = (
             path: '/',
             id: 'main-page',
             loader: loaderData ? () => loaderData : mainPageLoader,
-            element: <MainPage />,
+            element: (
+              <ErrorBoundary fallback={() => 'error'}>
+                <MainPage />
+              </ErrorBoundary>
+            ),
             errorElement: <ErrorPage />,
           },
         ],
@@ -74,7 +80,11 @@ export const createDetailedTestRouter = (
             path: 'anime/:id',
             id: 'detailed-page',
             loader: loaderData ? () => loaderData : detailedPageLoader,
-            element: <DetailedPage />,
+            element: (
+              <ErrorBoundary fallback={() => 'error'}>
+                <DetailedPage />,
+              </ErrorBoundary>
+            ),
             errorElement: <ErrorPage />,
           },
         ],

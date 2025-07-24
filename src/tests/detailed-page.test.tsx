@@ -6,6 +6,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   mockDetailedPageLoader,
+  mockInvalidDetailedPageLoader,
   specificQueryResponse,
 } from '~/tests/mocks/data';
 import { createDetailedTestRouter } from '~/tests/test-utilties';
@@ -38,5 +39,15 @@ describe('Detail Page', async () => {
       data.genres.length
     );
     expect(screen.getByAltText(data.title)).toBeInTheDocument();
+  });
+
+  test('should render results when data is not provided', async () => {
+    render(
+      <RouterProvider
+        router={createDetailedTestRouter(mockInvalidDetailedPageLoader, testId)}
+      />
+    );
+
+    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
   });
 });
