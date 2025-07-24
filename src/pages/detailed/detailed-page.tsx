@@ -2,6 +2,7 @@ import type { DataItem } from '~types/types';
 
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { ItemImg } from '~components/item-img/item-img';
+import { withDataTestId } from '~utils/utilities';
 import { Link, useLoaderData, useLocation } from 'react-router';
 
 type LoaderDataType = {
@@ -49,21 +50,30 @@ const DetailedPage = () => {
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 leading-relaxed sm:grid-cols-2">
           <div>
             <div className="mb-1 font-semibold">Type</div>
-            <div className="text-text-on-primary rounded-md bg-gray-400/80 px-2 py-1">
+            <div
+              {...withDataTestId('detailed-type')}
+              className="text-text-on-primary rounded-md bg-gray-400/80 px-2 py-1"
+            >
               {type.toUpperCase()}
             </div>
           </div>
 
           <div>
             <div className="mb-1 font-semibold">Status</div>
-            <div className="bg-accent-500/80 text-text-on-primary rounded-md px-2 py-1">
+            <div
+              {...withDataTestId('detailed-status')}
+              className="bg-accent-500/80 text-text-on-primary rounded-md px-2 py-1"
+            >
               {status}
             </div>
           </div>
 
           <div>
             <div className="mb-1 font-semibold">Score</div>
-            <div className="bg-warning/80 text-text-on-primary rounded-md px-2 py-1">
+            <div
+              {...withDataTestId('detailed-score')}
+              className="bg-warning/80 text-text-on-primary rounded-md px-2 py-1"
+            >
               {score}
             </div>
           </div>
@@ -73,6 +83,7 @@ const DetailedPage = () => {
             <div className="mt-2 flex flex-wrap gap-2">
               {genres.map((genre, i) => (
                 <span
+                  {...withDataTestId('detailed-genres')}
                   key={`${genre.mal_id}-${i}`}
                   className="bg-primary-500 text-text-on-primary rounded-md px-2 py-1 text-sm"
                 >
@@ -83,10 +94,10 @@ const DetailedPage = () => {
           </div>
         </div>
 
-        <div className="pt-4">
+        <div {...withDataTestId('detailed-img')} className="pt-4">
           <ItemImg data={data} />
         </div>
-        <p>{synopsis}</p>
+        <p {...withDataTestId('detailed-synopsis')}>{synopsis}</p>
       </button>
     </section>
   );

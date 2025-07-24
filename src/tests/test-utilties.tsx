@@ -1,5 +1,8 @@
 import type { UserEvent } from '@testing-library/user-event';
-import type { LoaderDataType } from '~types/loader-types';
+import type {
+  LoaderDataType,
+  LoaderDetailedPageType,
+} from '~types/loader-types';
 import type { ReactNode } from 'react';
 
 import { render, type RenderResult, screen } from '@testing-library/react';
@@ -36,6 +39,7 @@ export const createMainTestRouter = (
         path: '/',
         element: <Layout />,
         errorElement: <ErrorPage />,
+        hydrateFallbackElement: <></>,
         children: [
           {
             path: '/',
@@ -55,8 +59,8 @@ export const createMainTestRouter = (
 };
 
 export const createDetailedTestRouter = (
-  loaderData?: LoaderDataType,
-  initialEntries: string[] = ['/']
+  loaderData?: LoaderDetailedPageType,
+  testId: string = '1'
 ) => {
   return createMemoryRouter(
     [
@@ -64,6 +68,7 @@ export const createDetailedTestRouter = (
         path: '/',
         element: <Layout />,
         errorElement: <ErrorPage />,
+        hydrateFallbackElement: <></>,
         children: [
           {
             path: 'anime/:id',
@@ -76,7 +81,7 @@ export const createDetailedTestRouter = (
       },
     ],
     {
-      initialEntries,
+      initialEntries: [`/anime/${testId}`],
       initialIndex: 0,
     }
   );

@@ -1,4 +1,7 @@
-import type { LoaderDataType } from '~types/loader-types';
+import type {
+  LoaderDataType,
+  LoaderDetailedPageType,
+} from '~types/loader-types';
 import type { ApiResponseType } from '~types/types';
 
 export const emptyResponse: ApiResponseType = {
@@ -429,9 +432,12 @@ export const mockEmptyQueryLoaderData: LoaderDataType = {
   error: null,
 };
 
-export const mockInvalidLoaderData: LoaderDataType = {
-  results: [],
-  pagination: emptyResponse.pagination,
-  query: 'beeeeeeeeeeeee',
+export const mockDetailedPageLoader: LoaderDetailedPageType = {
+  data: specificQueryResponse.data[0],
+  error: null,
+};
+
+export const mockInvalidDetailedPageLoader: LoaderDetailedPageType = {
+  data: null,
   error: 'error',
 };

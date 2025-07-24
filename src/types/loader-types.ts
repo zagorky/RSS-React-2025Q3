@@ -9,3 +9,7 @@ export type LoaderDataType = {
   >;
   error: string | null;
 };
+
+export type LoaderDetailedPageType =
+  | { data: DataItem; error: null }
+  | { data: null; error: string };
