@@ -11,17 +11,18 @@ import { SearchForm } from './components/search-form/search-form';
 
 const MainPage = () => {
   const { results, query, pagination, error } = useLoaderData<LoaderDataType>();
-  const { searchQuery, setDataQueryToLS } = useLocalStorage(LS_KEY);
   const fetcher = useFetcher<LoaderDataType>();
+
+  const { searchQuery, setDataQueryToLS } = useLocalStorage(LS_KEY);
 
   useEffect(() => {
     if (query !== searchQuery) {
-      setDataQueryToLS({ query });
+      setDataQueryToLS(query);
     }
   }, [query, searchQuery, setDataQueryToLS]);
 
   const handleSearch = (query: string) => {
-    setDataQueryToLS({ query });
+    setDataQueryToLS(query);
     void fetcher.submit(
       { 'search-input': query },
       {
@@ -35,7 +36,6 @@ const MainPage = () => {
     <>
       <SearchForm searchQuery={searchQuery} onSubmit={handleSearch} />
       <ResultsSection
-        loading={fetcher.state === 'loading'}
         results={fetcher.data?.results ?? results}
         pagination={pagination}
         error={fetcher.data?.error ?? error}

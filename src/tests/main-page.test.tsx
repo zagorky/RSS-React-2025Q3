@@ -4,11 +4,10 @@ import { LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
 import MainPage from '~pages/main/main-page';
 import { http, HttpResponse } from 'msw';
-import { createMemoryRouter, MemoryRouter, RouterProvider } from 'react-router';
+import { createMemoryRouter, RouterProvider } from 'react-router';
 import { expect } from 'vitest';
 
-import { specificQueryResponse } from '~/tests/mocks/data';
-import { setItemSpy } from '~/tests/mocks/mocked-functions';
+import { mockLoaderData, specificQueryResponse } from '~/tests/mocks/data';
 import {
   searchButton,
   searchInput,
@@ -17,16 +16,11 @@ import {
 
 import { server } from '../../vitest.setupTests';
 
-const mockLoaderData = {
-  results: specificQueryResponse.data,
-  query: '',
-  pagination: specificQueryResponse.pagination,
-  error: null,
-};
-
 const specificQuery = 'friren';
 const queryWithoutResults = 'beeeeeeeeee';
 const LS_KEY_FOR_TESTS = 'ZAGORKY:retrievedQuery';
+
+export const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
 
 vi.spyOn(console, 'error').mockImplementation(() => {});
 const mockLoader = vi.fn().mockReturnValue(mockLoaderData);
@@ -47,7 +41,7 @@ describe('Main page', () => {
     localStorage.clear();
   });
 
-  test('should render search form, results section and error button', async () => {
+  test('should render search form and results section', async () => {
     server.use(
       http.get(getSearchEndpoint({ query: specificQuery }), () =>
         HttpResponse.json(specificQueryResponse)
@@ -126,21 +120,39 @@ describe('Main page', () => {
 
   test.skip('should load initial query from localStorage', () => {
     localStorage.setItem(LS_KEY, queryWithoutResults);
-    render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
-    );
+    const routes = [
+      {
+        path: navigation.main,
+        element: <MainPage />,
+        loader: mockLoader,
+        action: mockAction,
+      },
+    ];
+
+    const router = createMemoryRouter(routes, {
+      initialEntries: [navigation.main],
+    });
+
+    render(<RouterProvider router={router} />);
 
     expect(searchInput()).toHaveValue('beeeeeeeeee');
   });
 
   test.skip('should save to localStorage on search', async () => {
-    const { user } = setupUserEvent(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>
-    );
+    const routes = [
+      {
+        path: navigation.main,
+        element: <MainPage />,
+        loader: mockLoader,
+        action: mockAction,
+      },
+    ];
+
+    const router = createMemoryRouter(routes, {
+      initialEntries: [navigation.main],
+    });
+
+    const { user } = setupUserEvent(<RouterProvider router={router} />);
 
     await user.type(searchInput(), specificQuery);
     await user.click(searchButton());

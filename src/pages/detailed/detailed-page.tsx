@@ -2,9 +2,7 @@ import type { DataItem } from '~types/types';
 
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { ItemImg } from '~components/item-img/item-img';
-import { Loader } from '~components/loader/loader';
-import { EmptyList } from '~pages/main/components/empty-list/empty-list';
-import { Link, useFetcher, useLoaderData, useLocation } from 'react-router';
+import { Link, useLoaderData, useLocation } from 'react-router';
 
 type LoaderDataType = {
   data: DataItem;
@@ -13,18 +11,10 @@ type LoaderDataType = {
 
 const DetailedPage = () => {
   const { data, error } = useLoaderData<LoaderDataType>();
-  const fetcher = useFetcher<LoaderDataType>();
   const location = useLocation();
 
   if (error) {
     return <ErrorFallback error={error} />;
-  }
-  if (fetcher.state === 'loading') {
-    return <Loader />;
-  }
-
-  if (!data) {
-    return <EmptyList />;
   }
 
   const title = data.title;

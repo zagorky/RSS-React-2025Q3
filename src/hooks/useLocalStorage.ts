@@ -8,10 +8,9 @@ export const useLocalStorage = (key: string) => {
   const [searchQuery, setSearchQuery] = useState(() => getDataFromLS());
 
   const setDataQueryToLS = useCallback(
-    (value: { query?: string; page?: string }) => {
-      const modifiedValue = JSON.stringify(value);
-      localStorage.setItem(key, modifiedValue);
-      setSearchQuery(modifiedValue);
+    (value: string) => {
+      localStorage.setItem(key, value);
+      setSearchQuery(value);
     },
     [key]
   );

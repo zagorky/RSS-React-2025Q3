@@ -1,3 +1,4 @@
+import type { LoaderDataType } from '~types/loader-types';
 import type { ApiResponseType } from '~types/types';
 
 export const emptyResponse: ApiResponseType = {
@@ -415,4 +416,25 @@ export const specificQueryResponse: ApiResponseType = {
       ],
     },
   ],
+};
+
+export const mockLoaderData: LoaderDataType = {
+  results: specificQueryResponse.data,
+  pagination: specificQueryResponse.pagination,
+  query: 'friren',
+  error: null,
+};
+
+export const mockEmptyLoaderData: LoaderDataType = {
+  results: emptyResponse.data,
+  pagination: emptyResponse.pagination,
+  query: 'beeeeeeeeeeeee',
+  error: null,
+};
+
+export const mockInvalidLoaderData: LoaderDataType = {
+  results: [],
+  pagination: emptyResponse.pagination,
+  query: 'beeeeeeeeeeeee',
+  error: 'error',
 };

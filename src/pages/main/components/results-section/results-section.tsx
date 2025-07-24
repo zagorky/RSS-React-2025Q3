@@ -10,20 +10,14 @@ import { Outlet, useOutlet } from 'react-router';
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 
-export type ResultSectionProps = Omit<LoaderDataType, 'query'> & {
-  loading: boolean;
-};
+export type ResultSectionProps = Omit<LoaderDataType, 'query'>;
 
 export const ResultsSection = ({
   results,
   error,
   pagination,
-  loading,
 }: ResultSectionProps) => {
   const outlet = useOutlet();
-  if (loading) {
-    return <Loader />;
-  }
 
   if (error) {
     return <ErrorFallback error={error} />;
@@ -35,6 +29,7 @@ export const ResultsSection = ({
 
   return (
     <section className="flex flex-col items-center justify-center">
+      <Loader />
       <div className="flex justify-center gap-4 p-4">
         <ul
           {...withDataTestId('result-list')}

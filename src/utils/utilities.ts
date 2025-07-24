@@ -1,15 +1,6 @@
 import type { ApiResponseType, DataItem } from '~types/types';
 
-import { LS_KEY } from '~config/app-config';
 import { isDataItem, isResponseType } from '~types/type-guards';
-
-export const retrieveQueryFormLS = () => {
-  return localStorage.getItem(LS_KEY) ?? '';
-};
-
-export const setQueryToLS = (value: string) => {
-  localStorage.setItem(LS_KEY, value);
-};
 
 export const normalizeError = (error: unknown) => {
   return error instanceof Error ? error.message : 'Fetching data error';

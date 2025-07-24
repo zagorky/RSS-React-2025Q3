@@ -39,13 +39,10 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage(key));
 
     act(() => {
-      result.current.setDataQueryToLS({ query: 'heh' });
+      result.current.setDataQueryToLS('heh');
     });
 
-    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
-      key,
-      '{"query":"heh"}'
-    );
-    expect(result.current.searchQuery).toBe('{"query":"heh"}');
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith(key, 'heh');
+    expect(result.current.searchQuery).toBe('heh');
   });
 });
