@@ -15,7 +15,7 @@ export const emptyResponse: ApiResponseType = {
   data: [],
 };
 
-export const emptyQueryResponse = {
+export const emptyQueryResponse: ApiResponseType = {
   pagination: {
     last_visible_page: 1154,
     has_next_page: true,
@@ -49,7 +49,7 @@ export const emptyQueryResponse = {
         },
       },
       title: 'HUH Cowboy Bebop',
-      type: 'TV',
+      type: 'tv',
       synopsis:
         "Crime is timeless. By the year 2071, humanity has expanded across the galaxy, filling the surface of other planets with settlements like those on Earth. These new societies are plagued by murder, drug use, and theft, and intergalactic outlaws are hunted by a growing number of tough bounty hunters.nnSpike Spiegel and Jet Black pursue criminals throughout space to make a humble living. Beneath his goofy and aloof demeanor, Spike is haunted by the weight of his violent past. Meanwhile, Jet manages his own troubled memories while taking care of Spike and the Bebop, their ship. The duo is joined by the beautiful con artist Faye Valentine, odd child Edward Wong Hau Pepelu Tivrusky IV, and Ein, a bioengineered Welsh corgi.nnWhile developing bonds and working to catch a colorful cast of criminals, the Bebop crew's lives are disrupted by a menace from Spike's past. As a rival's maniacal plot continues to unravel, Spike must choose between life with his newfound family or revenge for his old wounds.nn[Written by MAL Rewrite]",
       genres: [
@@ -75,6 +75,8 @@ export const emptyQueryResponse = {
     },
     {
       mal_id: 5,
+      score: 5.5,
+      airing: false,
       url: 'https://myanimelist.net/anime/5/Cowboy_Bebop__Tengoku_no_Tobira',
       images: {
         jpg: {
@@ -92,20 +94,8 @@ export const emptyQueryResponse = {
             'https://cdn.myanimelist.net/images/anime/1439/93480l.webp',
         },
       },
-      trailer: {
-        youtube_id: null,
-        url: null,
-        embed_url: null,
-        images: {
-          image_url: null,
-          small_image_url: null,
-          medium_image_url: null,
-          large_image_url: null,
-          maximum_image_url: null,
-        },
-      },
       title: 'HUH Cowboy Bebop: Tengoku no Tobira',
-      type: 'Movie',
+      type: 'movie',
       synopsis:
         'Another day, another bountyu2014such is the life of the often unlucky crew of the Bebop. However, this routine is interrupted when Faye, who is chasing a fairly worthless target on Mars, witnesses an oil tanker suddenly explode, causing mass hysteria. As casualties mount due to a strange disease spreading through the smoke from the blast, a whopping three hundred million woolong price is placed on the head of the supposed perpetrator.nnWith lives at stake and a solution to their money problems in sight, the Bebop crew springs into action. Spike, Jet, Faye, and Edward, followed closely by Ein, split up to pursue different leads across Alba City. Through their individual investigations, they discover a cover-up scheme involving a pharmaceutical company, revealing a plot that reaches much further than the ragtag team of bounty hunters could have realized.nn[Written by MAL Rewrite]',
       genres: [
@@ -146,7 +136,7 @@ export const emptyQueryResponse = {
         },
       },
       title: 'HUH Trigun',
-      type: 'TV',
+      type: 'tv',
       synopsis: `Vash the Stampede is the man with a $$60,000,000,000 bounty on his head. The reason: he's a merciless villain who lays waste to all those that oppose him and flattens entire cities for fun, garnering him the title "The Humanoid Typhoon." He leaves a trail of death and destruction wherever he goes, and anyone can count themselves dead if they so much as make eye contactu2014or so the rumors say. In actuality, Vash is a huge softie who claims to have never taken a life and avoids violence at all costs.nnWith his crazy doughnut obsession and buffoonish attitude in tow, Vash traverses the wasteland of the planet Gunsmoke, all the while followed by two insurance agents, Meryl Stryfe and Milly Thompson, who attempt to minimize his impact on the public. But soon, their misadventures evolve into life-or-death situations as a group of legendary assassins are summoned to bring about suffering to the trio. Vash's agonizing past will be unraveled and his morality and principles pushed to the breaking point.nn[Written by MAL Rewrite]`,
       genres: [
         {
@@ -189,7 +179,7 @@ export const emptyQueryResponse = {
         },
       },
       title: 'HUH Witch Hunter Robin',
-      type: 'TV',
+      type: 'tv',
       score: 8.37,
       airing: false,
       synopsis:
@@ -428,7 +418,14 @@ export const mockLoaderData: LoaderDataType = {
 export const mockEmptyLoaderData: LoaderDataType = {
   results: emptyResponse.data,
   pagination: emptyResponse.pagination,
-  query: 'beeeeeeeeeeeee',
+  query: '',
+  error: null,
+};
+
+export const mockEmptyQueryLoaderData: LoaderDataType = {
+  results: emptyQueryResponse.data,
+  pagination: emptyQueryResponse.pagination,
+  query: '',
   error: null,
 };
 

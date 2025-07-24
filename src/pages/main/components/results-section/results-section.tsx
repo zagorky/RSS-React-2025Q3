@@ -5,19 +5,20 @@ import { Loader } from '~components/loader/loader';
 import { Pagination } from '~pages/main/components/results-section/pagination';
 import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
-import { Outlet, useOutlet } from 'react-router';
+import { Outlet, useOutlet, useRouteLoaderData } from 'react-router';
 
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 
-export type ResultSectionProps = Omit<LoaderDataType, 'query'>;
-
-export const ResultsSection = ({
-  results,
-  error,
-  pagination,
-}: ResultSectionProps) => {
+export const ResultsSection = () => {
   const outlet = useOutlet();
+  const data = useRouteLoaderData<LoaderDataType>('main-page');
+
+  if (!data) {
+    return <EmptyList />;
+  }
+
+  const { error, results, pagination } = data;
 
   if (error) {
     return <ErrorFallback error={error} />;

@@ -1,4 +1,3 @@
-import { searchAction } from '~api/actions';
 import { detailedPageLoader, mainPageLoader } from '~api/loaders';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
@@ -17,7 +16,6 @@ export const router = createBrowserRouter([
       {
         path: navigation.main,
         loader: mainPageLoader,
-        action: searchAction,
         id: 'main-page',
         errorElement: <ErrorPage />,
         element: (
@@ -40,6 +38,7 @@ export const router = createBrowserRouter([
       },
       {
         path: navigation.about,
+        errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loader />}>
             <AboutPage />

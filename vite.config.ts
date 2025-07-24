@@ -38,6 +38,7 @@ export default defineConfig({
         'src/**/*.d.ts',
         'src/types/**',
         'node_modules/**',
+        'src/pages/lazy.tsx',
       ],
       all: true,
       thresholds: {

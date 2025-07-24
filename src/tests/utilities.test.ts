@@ -5,10 +5,60 @@ import {
   assertIsResponseOk,
   assertIsResponseType,
   normalizeError,
+  retrieveQueryFormLS,
+  setQueryToLS,
 } from '~utils/utilities';
 import { describe, expect, test } from 'vitest';
 
 import { specificQueryResponse } from '~/tests/mocks/data';
+
+describe('Local Storage utilities', () => {
+  const validValue = 'sasarik the best mentor';
+  const unicodeValue = '🥸';
+  const emptyValue = '';
+  const LS_KEY_FOR_TESTS = 'ZAGORKY:retrievedQuery';
+
+  beforeEach(() => {
+    localStorage.clear();
+    vi.clearAllMocks();
+  });
+
+  describe('setQueryToLS', () => {
+    test('should set correct validValue to LS', () => {
+      setQueryToLS(validValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(validValue);
+    });
+
+    test('should set empty string if the validValue is empty', () => {
+      setQueryToLS(emptyValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(emptyValue);
+    });
+
+    test('should store unicode characters correctly', () => {
+      setQueryToLS(unicodeValue);
+      expect(localStorage.getItem(LS_KEY_FOR_TESTS)).toBe(unicodeValue);
+    });
+  });
+
+  describe('retrieveQueryFormLS', () => {
+    test('should get correct validValue from LS', () => {
+      localStorage.setItem(LS_KEY_FOR_TESTS, validValue);
+      const result = retrieveQueryFormLS();
+      expect(result).toBe(validValue);
+    });
+
+    test('should get empty string instead of null if the validValue is empty', () => {
+      localStorage.setItem(LS_KEY_FOR_TESTS, emptyValue);
+      const result = retrieveQueryFormLS();
+      expect(result).toBe(emptyValue);
+    });
+
+    test('should return empty string if key does not exist', () => {
+      const result = retrieveQueryFormLS();
+      expect(result).toBe(emptyValue);
+    });
+  });
+});
 
 describe('Assert utilities', () => {
   const validValue = 'sasarik the best mentor';

@@ -2,13 +2,34 @@ import type { LoaderDataType } from '~types/loader-types';
 import type { LoaderFunctionArgs } from 'react-router';
 
 import { fetchById, fetchRequest } from '~api/api';
-import { assertIsNonNullable, normalizeError } from '~utils/utilities';
+import {
+  assertIsNonNullable,
+  normalizeError,
+  retrieveQueryFormLS,
+  setQueryToLS,
+} from '~utils/utilities';
+import { redirect } from 'react-router';
 
 export const mainPageLoader = async ({
   request,
-}: LoaderFunctionArgs): Promise<LoaderDataType> => {
+}: LoaderFunctionArgs): Promise<LoaderDataType | Response> => {
   const url = new URL(request.url);
-  const query = url.searchParams.get('q') ?? '';
+  const queryFromUrl = url.searchParams.get('q') ?? '';
+  const queryFromLS = retrieveQueryFormLS();
+  let query = queryFromLS;
+
+  if (queryFromLS === '' && queryFromUrl !== '') {
+    setQueryToLS(queryFromUrl);
+    query = queryFromUrl;
+  }
+
+  if (query !== queryFromUrl && query !== '') {
+    const searchParameters = new URLSearchParams();
+    searchParameters.set('q', query);
+    searchParameters.set('page', '1');
+    return redirect(`${url.pathname}?${searchParameters.toString()}`);
+  }
+
   const page = Number(url.searchParams.get('page') ?? '1');
 
   try {

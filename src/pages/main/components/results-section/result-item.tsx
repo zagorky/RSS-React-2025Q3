@@ -15,7 +15,7 @@ export const ResultItem = ({ data }: ResultItemProps) => {
   const location = useLocation();
 
   return (
-    <Link className="contents" to={`${id}${location.search}`}>
+    <Link className="contents" to={`anime/${id}${location.search}`}>
       <li {...withDataTestId('result-item')} className="result-item-wrapper">
         <p
           {...withDataTestId('result-item-title')}

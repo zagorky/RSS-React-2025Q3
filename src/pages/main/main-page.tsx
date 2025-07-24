@@ -1,45 +1,30 @@
-import type { LoaderDataType } from '~types/loader-types';
-
 import { LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
 import { useLocalStorage } from '~hooks/useLocalStorage';
-import { useEffect } from 'react';
-import { useFetcher, useLoaderData } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
 
 const MainPage = () => {
-  const { results, query, pagination, error } = useLoaderData<LoaderDataType>();
-  const fetcher = useFetcher<LoaderDataType>();
-
+  const navigate = useNavigate();
   const { searchQuery, setDataQueryToLS } = useLocalStorage(LS_KEY);
-
-  useEffect(() => {
-    if (query !== searchQuery) {
-      setDataQueryToLS(query);
-    }
-  }, [query, searchQuery, setDataQueryToLS]);
 
   const handleSearch = (query: string) => {
     setDataQueryToLS(query);
-    void fetcher.submit(
-      { 'search-input': query },
-      {
-        method: 'post',
-        action: navigation.main,
-      }
-    );
+    const searchParameters = new URLSearchParams();
+
+    if (query) {
+      searchParameters.set('q', query);
+      searchParameters.set('page', '1');
+    }
+    navigate(`${navigation.main}?${searchParameters.toString()}`);
   };
 
   return (
     <>
       <SearchForm searchQuery={searchQuery} onSubmit={handleSearch} />
-      <ResultsSection
-        results={fetcher.data?.results ?? results}
-        pagination={pagination}
-        error={fetcher.data?.error ?? error}
-      />
+      <ResultsSection />
     </>
   );
 };

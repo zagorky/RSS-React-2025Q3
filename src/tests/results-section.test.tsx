@@ -1,169 +1,83 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { getSearchEndpoint } from '~api/api';
-import { ResultsSection } from '~pages/main/components/results-section/results-section';
-import { delay, http, HttpResponse } from 'msw';
-import { MemoryRouter } from 'react-router';
+import { waitFor } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
+import { http, HttpResponse } from 'msw';
+import { RouterProvider } from 'react-router';
 
 import {
-  emptyQueryResponse,
   emptyResponse,
+  mockEmptyLoaderData,
   mockLoaderData,
   specificQueryResponse,
 } from '~/tests/mocks/data';
+import { createMainTestRouter } from '~/tests/test-utilties';
 
 import { server } from '../../vitest.setupTests';
 
-describe('Results Component', () => {
-  const mockProps = mockLoaderData;
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  clear: vi.fn(),
+};
+vi.stubGlobal('localStorage', localStorageMock);
 
-  const specificQuery = 'friren';
-  const queryWithoutResults = 'beeeeeeeeee';
+describe('Results Section', () => {
+  test('should render results when data is provided', async () => {
+    localStorageMock.getItem.mockReturnValueOnce('friren');
 
-  test.skip('should render correct number of items when data is provided', async () => {
     server.use(
-      http.get(getSearchEndpoint({ query: specificQuery }), ({ request }) => {
-        const url = new URL(request.url);
-        const query = url.searchParams.get('q');
-
-        if (query === specificQuery) {
-          return HttpResponse.json(specificQueryResponse);
-        }
+      http.get('https://api.jikan.moe/v4/anime', () => {
+        return HttpResponse.json(specificQueryResponse);
       })
     );
 
-    render(
-      <MemoryRouter>
-        <ResultsSection {...mockProps} />
-      </MemoryRouter>
-    );
+    const router = createMainTestRouter(mockLoaderData);
+    render(<RouterProvider router={router} />);
 
     await waitFor(() => {
-      expect(screen.queryByTestId('loader')).toBeNull();
-    });
-
-    expect(await screen.findByTestId('result-list')).toBeInTheDocument();
-    const numberOfItems = await screen.findAllByTestId('result-item');
-    expect(numberOfItems).toHaveLength(4);
-
-    expect(screen.queryByTestId('empty-list')).toBeNull();
-    expect(screen.queryByTestId('error-fallback')).toBeNull();
-  });
-
-  test('should display empty list component when there is no matches', async () => {
-    server.use(
-      http.get(
-        getSearchEndpoint({ query: queryWithoutResults }),
-        ({ request }) => {
-          const url = new URL(request.url);
-          const query = url.searchParams.get('q');
-
-          if (query === queryWithoutResults) {
-            return HttpResponse.json(emptyResponse);
-          }
-        }
-      )
-    );
-
-    render(
-      <MemoryRouter>
-        <ResultsSection {...mockProps} results={[]} />
-      </MemoryRouter>
-    );
-
-    await waitFor(() => {
-      expect(screen.queryByTestId('loader')).toBeNull();
-    });
-
-    expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
-
-    expect(screen.queryByTestId('result-list')).toBeNull();
-    expect(screen.queryByTestId('error-fallback')).toBeNull();
-  });
-
-  test.skip('should show loading state while fetching data', async () => {
-    server.use(
-      http.get(getSearchEndpoint(), async ({ request }) => {
-        const url = new URL(request.url);
-        const query = url.searchParams.get('q');
-        await delay(300);
-
-        if (query === specificQuery) {
-          return HttpResponse.json(emptyQueryResponse);
-        }
-      })
-    );
-
-    const { rerender } = render(
-      <MemoryRouter>
-        <ResultsSection {...mockProps} />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByTestId('loader')).toBeInTheDocument();
-    expect(screen.queryByTestId('empty-list')).toBeNull();
-    expect(screen.queryByTestId('result-list')).toBeNull();
-    expect(screen.queryByTestId('error-fallback')).toBeNull();
-
-    rerender(
-      <MemoryRouter>
-        <ResultsSection {...mockProps} />
-      </MemoryRouter>
-    );
-
-    await waitFor(() => {
-      expect(screen.queryByTestId('loader')).toBeNull();
       expect(screen.getByTestId('result-list')).toBeInTheDocument();
     });
+
+    const items = screen.getAllByTestId('result-item');
+    expect(items).toHaveLength(mockLoaderData.results.length);
+
+    expect(screen.queryByTestId('empty-list')).toBeNull();
+    expect(screen.queryByTestId('error-fallback')).toBeNull();
   });
-});
 
-describe('API error handling', () => {
-  const errorCases = [
-    {
-      name: 'invalid API response structure',
-      handler: () => HttpResponse.json({ data: [] }),
-    },
-    {
-      name: '400 Bad Request error',
-      handler: () => HttpResponse.json(null, { status: 400 }),
-    },
-    {
-      name: '404 Not Found error',
-      handler: () => HttpResponse.json(null, { status: 404 }),
-    },
-    {
-      name: '429 Too Many Requests error',
-      handler: () => HttpResponse.json(null, { status: 429 }),
-    },
-    {
-      name: '500 Internal Server Error',
-      handler: () => HttpResponse.json(null, { status: 500 }),
-    },
-  ];
+  test('should render emptyList when results are empty', async () => {
+    localStorageMock.getItem.mockReturnValueOnce('empty-query');
 
-  const invalidMockProps = {
-    loading: false,
-    error: 'error',
-    results: [],
-    pagination: { current_page: 1, has_next_page: false, last_visible_page: 1 },
-  };
+    server.use(
+      http.get('https://api.jikan.moe/v4/anime', () => {
+        return HttpResponse.json(emptyResponse);
+      })
+    );
 
-  test.each(errorCases)(
-    'should show error fallback on $name',
-    async ({ handler }) => {
-      server.use(http.get(getSearchEndpoint(), handler));
+    const router = createMainTestRouter(mockEmptyLoaderData);
+    render(<RouterProvider router={router} />);
 
-      render(
-        <MemoryRouter>
-          <ResultsSection {...invalidMockProps} />
-        </MemoryRouter>
-      );
+    await waitFor(() => {
+      expect(screen.getByTestId('empty-list')).toBeInTheDocument();
+    });
+  });
 
-      expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
+  test('should render error fallback when error exists', async () => {
+    const errorLoaderData = {
+      results: [],
+      pagination: {
+        current_page: 1,
+        has_next_page: false,
+        last_visible_page: 1,
+      },
+      query: '',
+      error: 'Test error',
+    };
 
-      expect(screen.queryByTestId('empty-list')).toBeNull();
-      expect(screen.queryByTestId('result-list')).toBeNull();
-      expect(screen.queryByTestId('loader')).toBeNull();
-    }
-  );
+    const router = createMainTestRouter(errorLoaderData);
+    render(<RouterProvider router={router} />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('error-fallback')).toBeInTheDocument();
+    });
+  });
 });
