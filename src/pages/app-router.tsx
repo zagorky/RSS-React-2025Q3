@@ -1,11 +1,8 @@
+import { searchAction } from '~api/actions';
+import { detailedPageLoader, searchLoader } from '~api/loaders';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
 import { navigation } from '~config/navigation';
-import {
-  detailedPageLoader,
-  searchAction,
-  searchLoader,
-} from '~pages/data-loader';
 import { AboutPage, DetailedPage, ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
@@ -21,6 +18,7 @@ export const router = createBrowserRouter([
         path: navigation.main,
         loader: searchLoader,
         action: searchAction,
+        id: 'main-page',
         errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loader />}>
@@ -31,6 +29,7 @@ export const router = createBrowserRouter([
           {
             path: navigation.detailed,
             loader: detailedPageLoader,
+            id: 'detailed-page',
             element: (
               <Suspense fallback={<Loader />}>
                 <DetailedPage />

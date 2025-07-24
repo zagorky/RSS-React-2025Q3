@@ -1,4 +1,4 @@
-import type { DataItem, PaginationType } from '~types/types';
+import type { LoaderDataType } from '~types/loader-types';
 
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
@@ -10,13 +10,7 @@ import { Outlet, useOutlet } from 'react-router';
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 
-export type ResultSectionProps = {
-  results: DataItem[];
-  pagination: Pick<
-    PaginationType,
-    'current_page' | 'has_next_page' | 'last_visible_page'
-  >;
-  error: string | null;
+export type ResultSectionProps = Omit<LoaderDataType, 'query'> & {
   loading: boolean;
 };
 

@@ -1,11 +1,12 @@
+import type { LoaderDataType } from '~types/loader-types';
 import type { LoaderFunctionArgs } from 'react-router';
 
 import { fetchById, fetchRequest } from '~api/api';
-import { navigation } from '~config/navigation';
 import { assertIsNonNullable, normalizeError } from '~utils/utilities';
-import { redirect } from 'react-router';
 
-export const searchLoader = async ({ request }: LoaderFunctionArgs) => {
+export const searchLoader = async ({
+  request,
+}: LoaderFunctionArgs): Promise<LoaderDataType> => {
   const url = new URL(request.url);
   const query = url.searchParams.get('q') ?? '';
   const page = Number(url.searchParams.get('page') ?? '1');
@@ -20,20 +21,14 @@ export const searchLoader = async ({ request }: LoaderFunctionArgs) => {
     return {
       results: [],
       query: '',
-      pagination: { current_page: '1', has_next_page: false },
+      pagination: {
+        current_page: 1,
+        has_next_page: false,
+        last_visible_page: 1,
+      },
       error: normalizeError(error),
     };
   }
-};
-
-export const searchAction = async ({ request }: { request: Request }) => {
-  const formData = await request.formData();
-  const searchQuery = formData.get('search-input')?.toString() ?? '';
-  const url = new URL(request.url);
-  url.searchParams.set('q', searchQuery);
-  url.searchParams.set('page', '1');
-
-  return redirect(`${navigation.main}?${url.searchParams.toString()}`);
 };
 
 export const detailedPageLoader = async ({

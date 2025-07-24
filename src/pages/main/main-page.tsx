@@ -1,4 +1,4 @@
-import type { DataItem, PaginationType } from '~types/types';
+import type { LoaderDataType } from '~types/loader-types';
 
 import { LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
@@ -8,13 +8,6 @@ import { useFetcher, useLoaderData } from 'react-router';
 
 import { ResultsSection } from './components/results-section/results-section';
 import { SearchForm } from './components/search-form/search-form';
-
-type LoaderDataType = {
-  results: DataItem[];
-  query: string;
-  pagination: PaginationType;
-  error: string | null;
-};
 
 const MainPage = () => {
   const { results, query, pagination, error } = useLoaderData<LoaderDataType>();
