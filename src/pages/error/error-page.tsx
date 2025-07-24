@@ -13,8 +13,16 @@ const ErrorPage = () => {
       {...withDataTestId('error-fallback')}
       className="m-auto flex h-[calc(100vh-200px)] max-w-xl flex-col items-center justify-center gap-10"
     >
-      <h1 className="text-6xl text-[var(--color-error)]">{errorName}</h1>
-      <h2>{errorMessage}</h2>
+      <div className="mb-6 flex justify-center">
+        <div className="bg-error/10 text-error flex h-16 w-16 items-center justify-center rounded-full text-4xl font-bold">
+          !
+        </div>
+      </div>
+      <h1 className="text-error text-6xl">{errorName}</h1>
+
+      <div className="mb-6 rounded-lg p-4">
+        <p className="text-text-secondary text-lg">{errorMessage}</p>
+      </div>
       <div>
         <Button classNames="m-4" dataTestId={'error-fallback-button'}>
           <Link className="p-4" to=".." relative="path">
