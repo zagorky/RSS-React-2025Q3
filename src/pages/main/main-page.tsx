@@ -8,10 +8,10 @@ import { SearchForm } from './components/search-form/search-form';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { searchQuery, setDataQueryToLS } = useLocalStorage(LS_KEY);
+  const { searchQuery, setSearchQuery } = useLocalStorage(LS_KEY);
 
   const handleSearch = (query: string) => {
-    setDataQueryToLS(query);
+    setSearchQuery(query);
     const searchParameters = new URLSearchParams();
 
     if (query) {

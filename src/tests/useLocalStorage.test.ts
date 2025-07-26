@@ -39,7 +39,7 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage(key));
 
     act(() => {
-      result.current.setDataQueryToLS('heh');
+      result.current.setSearchQuery('heh');
     });
 
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(key, 'heh');

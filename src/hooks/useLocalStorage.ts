@@ -5,18 +5,18 @@ export const useLocalStorage = (key: string) => {
     return localStorage.getItem(key) ?? '';
   }, [key]);
 
-  const [searchQuery, setSearchQuery] = useState(() => getDataFromLS());
+  const [query, setQuery] = useState(() => getDataFromLS());
 
   const setDataQueryToLS = useCallback(
     (value: string) => {
       localStorage.setItem(key, value);
-      setSearchQuery(value);
+      setQuery(value);
     },
     [key]
   );
 
   return {
-    searchQuery,
-    setDataQueryToLS,
+    searchQuery: query,
+    setSearchQuery: setDataQueryToLS,
   };
 };
