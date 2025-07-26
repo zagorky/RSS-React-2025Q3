@@ -9,11 +9,6 @@ export const emptyResponse: ApiResponseType = {
     last_visible_page: 1,
     has_next_page: false,
     current_page: 1,
-    items: {
-      count: 0,
-      total: 0,
-      per_page: 25,
-    },
   },
   data: [],
 };
@@ -23,11 +18,6 @@ export const emptyQueryResponse: ApiResponseType = {
     last_visible_page: 1154,
     has_next_page: true,
     current_page: 1,
-    items: {
-      count: 25,
-      total: 28834,
-      per_page: 25,
-    },
   },
   data: [
     {
@@ -222,11 +212,6 @@ export const specificQueryResponse: ApiResponseType = {
     last_visible_page: 1,
     has_next_page: false,
     current_page: 1,
-    items: {
-      count: 4,
-      total: 4,
-      per_page: 25,
-    },
   },
   data: [
     {

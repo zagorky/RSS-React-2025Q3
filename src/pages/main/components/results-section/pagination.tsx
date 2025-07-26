@@ -3,10 +3,7 @@ import type { PaginationType } from '~types/types';
 import { NavLink, useLocation } from 'react-router';
 
 type PaginationProps = {
-  pagination: Pick<
-    PaginationType,
-    'current_page' | 'has_next_page' | 'last_visible_page'
-  >;
+  pagination: PaginationType;
 };
 
 export const Pagination = ({ pagination }: PaginationProps) => {
