@@ -6,13 +6,12 @@ import {
   endpointParameters,
   ITEM_PER_PAGE,
 } from '~config/app-config';
+import { isDataItem, isResponseType } from '~types/type-guards';
 import {
-  hasProperty,
-  isDataItem,
-  isObject,
-  isResponseType,
-} from '~types/type-guards';
-import { assertIsDataType, assertIsResponseOk } from '~utils/utilities';
+  assertIsApiResponseWithData,
+  assertIsDataType,
+  assertIsResponseOk,
+} from '~utils/utilities';
 
 type FetchAnimeDataOption = {
   query?: string;
@@ -76,9 +75,7 @@ export const fetchAnimeDataItem = async (options: FetchAnimeDataItemOption) => {
 
   const responseData: unknown = await response.json();
 
-  if (!isObject(responseData) || !hasProperty('data', responseData)) {
-    throw new Error('Invalid API response: missing data property');
-  }
+  assertIsApiResponseWithData(responseData, 'data');
 
   const data = responseData.data;
 

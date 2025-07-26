@@ -1,7 +1,7 @@
 import type { ApiResponseType } from '~types/types';
 
 import { LS_KEY } from '~config/app-config';
-import { isResponseType } from '~types/type-guards';
+import { hasProperty, isObject, isResponseType } from '~types/type-guards';
 
 export const retrieveQueryFormLS = () => {
   return localStorage.getItem(LS_KEY) ?? '';
@@ -49,6 +49,15 @@ export function assertIsResponseType(
     throw new Error(
       `Invalid API response structure: "${String(data)}"; ${infos.join(' ')}`
     );
+  }
+}
+
+export function assertIsApiResponseWithData(
+  data: unknown,
+  property: string
+): asserts data is { data: unknown } {
+  if (!isObject(data) && hasProperty('data', data)) {
+    throw new Error(`Invalid API response: missing ${property} property`);
   }
 }
 

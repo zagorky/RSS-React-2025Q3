@@ -71,7 +71,7 @@ const DetailedPage = () => {
               {...withDataTestId('detailed-score')}
               className="bg-warning/80 text-text-on-primary rounded-md px-2 py-1"
             >
-              {score}
+              {score ?? <span>No info</span>}
             </div>
           </div>
 
