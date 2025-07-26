@@ -1,12 +1,14 @@
 import type { DataItem } from '~types/types';
+import type { PropsWithChildren } from 'react';
 
 import { withDataTestId } from '~utils/utilities';
 
 type ItemImgProps = {
   data: DataItem;
+  fallback?: PropsWithChildren;
 };
 
-export const ItemImg = ({ data }: ItemImgProps) => {
+export const ItemImg = ({ data, fallback }: ItemImgProps) => {
   const title = data.title;
   const imgUrl = data.images.webp.image_url;
 
@@ -20,7 +22,9 @@ export const ItemImg = ({ data }: ItemImgProps) => {
           alt={title}
         />
       ) : (
-        <div className="result-item-img"> There is no image :(</div>
+        !fallback && (
+          <div className="result-item-img"> There is no image :(</div>
+        )
       )}
     </div>
   );
