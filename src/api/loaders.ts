@@ -4,7 +4,7 @@ import type { LoaderFunctionArgs } from 'react-router';
 import { fetchAnimeData, fetchAnimeDataItem } from '~api/api';
 import {
   assertIsNonNullable,
-  normalizeError,
+  getErrorMessageFromUnknown,
   retrieveQueryFormLS,
   setQueryToLS,
 } from '~utils/utilities';
@@ -47,7 +47,7 @@ export const mainPageLoader = async ({
         has_next_page: false,
         last_visible_page: 1,
       },
-      error: normalizeError(error),
+      error: getErrorMessageFromUnknown(error),
     };
   }
 };
@@ -60,13 +60,13 @@ export const detailedPageLoader = async ({
   assertIsNonNullable(id, 'ID is missing');
 
   try {
-    const data = await fetchAnimeDataItem(id, request.signal);
+    const data = await fetchAnimeDataItem({ id, signal: request.signal });
 
     return { data, error: null };
   } catch (error) {
     return {
       data: null,
-      error: normalizeError(error),
+      error: getErrorMessageFromUnknown(error),
     };
   }
 };

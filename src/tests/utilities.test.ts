@@ -1,10 +1,11 @@
 import { getSearchEndpoint } from '~api/api';
+import { isDataItem } from '~types/type-guards';
 import {
   assertIsDataType,
   assertIsNonNullable,
   assertIsResponseOk,
   assertIsResponseType,
-  normalizeError,
+  getErrorMessageFromUnknown,
   retrieveQueryFormLS,
   setQueryToLS,
 } from '~utils/utilities';
@@ -127,11 +128,13 @@ describe('Assert utilities', () => {
     const validApiResponse = specificQueryResponse.data[0];
 
     test('should not throw an error when data is valid', () => {
-      expect(() => assertIsDataType(validApiResponse)).not.toThrow();
+      expect(() =>
+        assertIsDataType(validApiResponse, isDataItem)
+      ).not.toThrow();
     });
 
     test('should throw if data is null', () => {
-      expect(() => assertIsDataType(nullValue)).toThrow(
+      expect(() => assertIsDataType(nullValue, isDataItem)).toThrow(
         'Invalid API response structure'
       );
     });
@@ -141,11 +144,13 @@ describe('Assert utilities', () => {
 describe('normalizeError', () => {
   test('should not throw an error when data is valid', () => {
     const error = new Error('Something went wrong');
-    expect(normalizeError(error)).toBe('Something went wrong');
+    expect(getErrorMessageFromUnknown(error)).toBe('Something went wrong');
   });
 
   test('should throw if data is null', () => {
-    expect(normalizeError('Some string')).toBe('Fetching data error');
+    expect(getErrorMessageFromUnknown('Some string')).toBe(
+      'Fetching data error'
+    );
   });
 });
 

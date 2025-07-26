@@ -1,7 +1,7 @@
-import type { ApiResponseType, DataItem } from '~types/types';
+import type { ApiResponseType } from '~types/types';
 
 import { LS_KEY } from '~config/app-config';
-import { isDataItem, isResponseType } from '~types/type-guards';
+import { isResponseType } from '~types/type-guards';
 
 export const retrieveQueryFormLS = () => {
   return localStorage.getItem(LS_KEY) ?? '';
@@ -11,7 +11,7 @@ export const setQueryToLS = (value: string) => {
   localStorage.setItem(LS_KEY, value);
 };
 
-export const normalizeError = (error: unknown) => {
+export const getErrorMessageFromUnknown = (error: unknown) => {
   return error instanceof Error ? error.message : 'Fetching data error';
 };
 
@@ -52,11 +52,12 @@ export function assertIsResponseType(
   }
 }
 
-export function assertIsDataType(
+export function assertIsDataType<T>(
   data: unknown,
+  typeGuard: (data: unknown) => boolean,
   ...infos: unknown[]
-): asserts data is DataItem {
-  if (!isDataItem(data)) {
+): asserts data is T {
+  if (!typeGuard(data)) {
     throw new Error(
       `Invalid API response structure: "${String(data)}"; ${infos.join(' ')}`
     );

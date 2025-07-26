@@ -1,31 +1,36 @@
+import type { ApiResponseType, DataItem } from '~types/types';
+
 import {
   apiEndpoints,
   apiUrl,
   endpointParameters,
   ITEM_PER_PAGE,
 } from '~config/app-config';
-import { hasProperty, isObject } from '~types/type-guards';
 import {
-  assertIsDataType,
-  assertIsResponseOk,
-  assertIsResponseType,
-} from '~utils/utilities';
+  hasProperty,
+  isDataItem,
+  isObject,
+  isResponseType,
+} from '~types/type-guards';
+import { assertIsDataType, assertIsResponseOk } from '~utils/utilities';
 
-type fetchDataOption = {
+type FetchAnimeDataOption = {
   query?: string;
   signal?: AbortSignal;
   page?: number;
 };
 
-type getSearchEndpointOption = {
+type GetSearchEndpointOption = {
   query?: string;
   id?: string | number;
   page?: number;
 };
 
+type FetchAnimeDataItemOption = { id: string | number; signal?: AbortSignal };
+
 const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
 
-export const getSearchEndpoint = (options: getSearchEndpointOption = {}) => {
+export const getSearchEndpoint = (options: GetSearchEndpointOption = {}) => {
   const { query, id, page = 1 } = options;
 
   if (id) {
@@ -47,7 +52,7 @@ export const getSearchEndpoint = (options: getSearchEndpointOption = {}) => {
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const fetchAnimeData = async (options: fetchDataOption) => {
+export const fetchAnimeData = async (options: FetchAnimeDataOption) => {
   const { query, signal, page } = options;
   const url = getSearchEndpoint({ query, page });
   const response = await fetch(url, { signal: signal });
@@ -56,15 +61,14 @@ export const fetchAnimeData = async (options: fetchDataOption) => {
 
   const data: unknown = await response.json();
 
-  assertIsResponseType(data);
+  assertIsDataType<ApiResponseType>(data, isResponseType);
 
   return data;
 };
 
-export const fetchAnimeDataItem = async (
-  id: string | number,
-  signal?: AbortSignal
-) => {
+export const fetchAnimeDataItem = async (options: FetchAnimeDataItemOption) => {
+  const { id, signal } = options;
+
   const url = getSearchEndpoint({ id });
   const response = await fetch(url, { signal });
 
@@ -77,7 +81,8 @@ export const fetchAnimeDataItem = async (
   }
 
   const data = responseData.data;
-  assertIsDataType(data);
+
+  assertIsDataType<DataItem>(data, isDataItem);
 
   return data;
 };
