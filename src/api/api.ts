@@ -23,10 +23,10 @@ type getSearchEndpointOption = {
   page?: number;
 };
 
+const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
+
 export const getSearchEndpoint = (options: getSearchEndpointOption = {}) => {
   const { query, id, page = 1 } = options;
-
-  const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
 
   if (id) {
     return `${baseUrl}/${id}`;
