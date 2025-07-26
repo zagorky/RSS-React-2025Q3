@@ -11,13 +11,19 @@ import {
   assertIsResponseType,
 } from '~utils/utilities';
 
-export const getSearchEndpoint = (
-  options: {
-    query?: string;
-    id?: string | number;
-    page?: number;
-  } = {}
-) => {
+type fetchDataOption = {
+  query?: string;
+  signal?: AbortSignal;
+  page?: number;
+};
+
+type getSearchEndpointOption = {
+  query?: string;
+  id?: string | number;
+  page?: number;
+};
+
+export const getSearchEndpoint = (options: getSearchEndpointOption = {}) => {
   const { query, id, page = 1 } = options;
 
   const baseUrl = `${apiUrl}/${apiEndpoints.anime}`;
@@ -41,13 +47,9 @@ export const getSearchEndpoint = (
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const fetchRequest = async (
-  query?: string,
-  signal?: AbortSignal,
-  page?: number,
-  id?: string | number
-) => {
-  const url = getSearchEndpoint({ query, page, id });
+export const fetchRequest = async (options: fetchDataOption) => {
+  const { query, signal, page } = options;
+  const url = getSearchEndpoint({ query, page });
   const response = await fetch(url, { signal: signal });
 
   assertIsResponseOk(response);

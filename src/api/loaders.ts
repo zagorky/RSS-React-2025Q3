@@ -33,7 +33,7 @@ export const mainPageLoader = async ({
   const page = Number(url.searchParams.get('page') ?? '1');
 
   try {
-    const data = await fetchRequest(query, request.signal, page);
+    const data = await fetchRequest({ query, signal: request.signal, page });
     const pagination = data.pagination;
     const results = data.data ?? [];
 
