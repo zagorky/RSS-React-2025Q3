@@ -18,12 +18,9 @@ const DetailedPage = () => {
     return <ErrorFallback error={error} />;
   }
 
-  const title = data.title;
-  const type = data.type;
-  const genres = data.genres;
+  const { title, score, type, genres, synopsis } = data;
+
   const status = data.airing ? 'Ongoing' : 'Released';
-  const score = data.score;
-  const synopsis = data.synopsis;
 
   return (
     <section className="relative z-20 w-full max-w-[350px]">
