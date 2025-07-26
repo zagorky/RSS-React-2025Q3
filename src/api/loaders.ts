@@ -1,7 +1,7 @@
 import type { LoaderDataType } from '~types/loader-types';
 import type { LoaderFunctionArgs } from 'react-router';
 
-import { fetchById, fetchRequest } from '~api/api';
+import { fetchAnimeData, fetchAnimeDataItem } from '~api/api';
 import {
   assertIsNonNullable,
   normalizeError,
@@ -33,7 +33,7 @@ export const mainPageLoader = async ({
   const page = Number(url.searchParams.get('page') ?? '1');
 
   try {
-    const data = await fetchRequest({ query, signal: request.signal, page });
+    const data = await fetchAnimeData({ query, signal: request.signal, page });
     const pagination = data.pagination;
     const results = data.data ?? [];
 
@@ -60,7 +60,7 @@ export const detailedPageLoader = async ({
   assertIsNonNullable(id, 'ID is missing');
 
   try {
-    const data = await fetchById(id, request.signal);
+    const data = await fetchAnimeDataItem(id, request.signal);
 
     return { data, error: null };
   } catch (error) {

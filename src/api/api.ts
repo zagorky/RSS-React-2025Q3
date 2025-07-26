@@ -47,7 +47,7 @@ export const getSearchEndpoint = (options: getSearchEndpointOption = {}) => {
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const fetchRequest = async (options: fetchDataOption) => {
+export const fetchAnimeData = async (options: fetchDataOption) => {
   const { query, signal, page } = options;
   const url = getSearchEndpoint({ query, page });
   const response = await fetch(url, { signal: signal });
@@ -61,7 +61,10 @@ export const fetchRequest = async (options: fetchDataOption) => {
   return data;
 };
 
-export const fetchById = async (id: string | number, signal?: AbortSignal) => {
+export const fetchAnimeDataItem = async (
+  id: string | number,
+  signal?: AbortSignal
+) => {
   const url = getSearchEndpoint({ id });
   const response = await fetch(url, { signal });
 
