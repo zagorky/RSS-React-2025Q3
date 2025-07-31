@@ -1,5 +1,7 @@
 .result-item-wrapper {
-  @apply border-border-dark hover:border-primary-700 flex w-full max-w-[300px] flex-col gap-6 rounded-xl border-4 p-6 shadow-sm transition-all duration-300 ease-in-out hover:scale-105;
+  @apply border-border-dark hover:border-primary-700 flex w-full;
+  @apply max-w-[300px] flex-col gap-6 rounded-xl border-4 p-6 shadow-sm;
+  @apply transition-all duration-300 ease-in-out hover:scale-105;
 }
 
 .result-item-title {
@@ -7,7 +9,7 @@
 }
 
 .result-item-desc {
-  @apply line-clamp-3 text-sm text-gray-600;
+  @apply line-clamp-3 text-sm text-text-primary;
 }
 
 .result-item-img {

@@ -8,17 +8,15 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   classNames?: string;
 };
 
-export const Button = (props: ButtonProps) => {
-  const {
-    classNames = '',
-    onClick,
-    type,
-    disabled,
-    children,
-    dataTestId = '',
-    ...restProps
-  } = props;
-
+export const Button = ({
+  classNames = '',
+  onClick,
+  type,
+  disabled,
+  children,
+  dataTestId = '',
+  ...props
+}: ButtonProps) => {
   const buttonClasses = cn(
     'btn',
     classNames,
@@ -27,7 +25,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <button
-      {...restProps}
+      {...props}
       {...withDataTestId(dataTestId)}
       onClick={onClick}
       className={buttonClasses}

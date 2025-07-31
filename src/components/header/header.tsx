@@ -14,10 +14,10 @@ export const Header = () => {
             className={({ isActive }) =>
               cn(
                 'text-text-primary relative rounded-md px-4 py-2 font-medium transition-all duration-300 ease-in-out',
-                'hover:bg-primary-100 hover:text-primary-700',
+                'hover:text-primary-500',
                 isActive &&
-                  'bg-primary-50 text-primary-800 after:bg-primary-600 font-semibold',
-                !isActive && 'text-gray-600'
+                  'bg-primary-500 text-text-on-primary hover:text-text-secondary after:bg-primary-600 font-semibold',
+                !isActive && 'text-text-primary'
               )
             }
           >

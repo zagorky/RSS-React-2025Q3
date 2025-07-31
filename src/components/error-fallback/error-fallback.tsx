@@ -13,7 +13,7 @@ export const ErrorFallback = ({ error }: ErrorFallbackProps) => {
       id="error-fallback"
       className="basic-content-wrapper flex flex-col items-center justify-center text-center"
     >
-      <div className="max-w-md rounded-xl bg-white p-8">
+      <div className="max-w-md rounded-xl p-8">
         <div className="mb-6 flex justify-center">
           <div className="bg-error/10 text-error flex h-16 w-16 items-center justify-center rounded-full text-4xl font-bold">
             !
