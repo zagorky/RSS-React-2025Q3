@@ -12,10 +12,10 @@
 }
 
 .checkbox {
-  @apply border-primary-600 ;
+  @apply border-primary-600;
   @apply transition-all;
   @apply focus:border-primary-600;
-  @apply checked:bg-primary-600 ;
+  @apply checked:bg-primary-600;
   @apply cursor-pointer;
 }
 
