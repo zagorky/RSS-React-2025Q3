@@ -4,6 +4,8 @@ import { ItemImg } from '~components/item-img/item-img';
 import { withDataTestId } from '~utils/utilities';
 import { Link, useLocation } from 'react-router';
 
+import { Checkbox } from '~/components/checkbox/checkbox';
+
 type ResultItemProps = {
   data: DataItem;
 };
@@ -15,19 +17,26 @@ export const ResultItem = ({ data }: ResultItemProps) => {
   const location = useLocation();
 
   return (
-    <Link className="contents" to={`anime/${id}${location.search}`}>
-      <li {...withDataTestId('result-item')} className="result-item-wrapper">
-        <p
-          {...withDataTestId('result-item-title')}
-          className="result-item-title"
-        >
-          {title}
-        </p>
-        <ItemImg data={data} />
-        <p {...withDataTestId('result-item-desc')} className="result-item-desc">
-          {synopsis}
-        </p>
-      </li>
-    </Link>
+    <li className="result-item-wrapper relative">
+      <Checkbox classNames="absolute top-2 left-2" />
+
+      <Link className="contents" to={`anime/${id}${location.search}`}>
+        <div {...withDataTestId('result-item')}>
+          <p
+            {...withDataTestId('result-item-title')}
+            className="result-item-title"
+          >
+            {title}
+          </p>
+          <ItemImg data={data} />
+          <p
+            {...withDataTestId('result-item-desc')}
+            className="result-item-desc"
+          >
+            {synopsis}
+          </p>
+        </div>
+      </Link>
+    </li>
   );
 };

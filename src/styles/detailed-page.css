@@ -1,3 +1,3 @@
 .detailed-page-container {
-  @apply bg-bg border-border-dark hover:border-primary-700 relative z-20 w-full max-w-[350px] space-y-6 rounded-2xl border-4 p-6 text-text-primary shadow-md;
+  @apply bg-bg border-border-dark hover:border-primary-700 text-text-primary relative z-20 w-full max-w-[350px] space-y-6 rounded-2xl border-4 p-6 shadow-md;
 }

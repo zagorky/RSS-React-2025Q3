@@ -9,7 +9,7 @@
 }
 
 .result-item-desc {
-  @apply line-clamp-3 text-sm text-text-primary;
+  @apply text-text-primary line-clamp-3 text-sm;
 }
 
 .result-item-img {
