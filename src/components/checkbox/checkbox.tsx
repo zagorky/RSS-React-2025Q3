@@ -15,7 +15,6 @@ export const Checkbox = ({
   classNames = '',
   variant = 'md',
   label,
-  checked = false,
   type = 'checkbox',
   name,
   ...props
@@ -34,7 +33,6 @@ export const Checkbox = ({
         {...withDataTestId(dataTestId)}
         name={name}
         className={cn(`checkbox`, variants[variant], classNames)}
-        checked={checked}
         type={type}
       ></input>
     </label>

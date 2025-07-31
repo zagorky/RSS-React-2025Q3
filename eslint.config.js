@@ -54,6 +54,7 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      'jsx-a11y/anchor-is-valid': 'off',
       // perfectionist
       'perfectionist/sort-imports': 'error',
       // import

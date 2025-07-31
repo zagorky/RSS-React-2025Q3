@@ -12,11 +12,10 @@
 }
 
 .checkbox {
-  @apply border-border-primary bg-bg appearance-none rounded-lg border-3;
-  @apply transition-all duration-200 ease-in-out;
-  @apply hover:border-border-secondary;
-  @apply focus:border-primary-600 focus:ring-primary-400 focus:ring-2 focus:ring-offset-2 focus:outline-none;
-  @apply checked:border-primary-600 checked:bg-primary-500 checked:hover:bg-primary-600;
+  @apply border-primary-600 ;
+  @apply transition-all;
+  @apply focus:border-primary-600;
+  @apply checked:bg-primary-600 ;
   @apply cursor-pointer;
 }
 

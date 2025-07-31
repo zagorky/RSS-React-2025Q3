@@ -1,3 +1,4 @@
+import { Flyout } from '~components/flyout/flyout';
 import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
 import { useLocalStorage } from '~hooks/useLocalStorage';
@@ -25,6 +26,7 @@ const MainPage = () => {
     <>
       <SearchForm searchQuery={valueFromLS} onSubmit={handleSearch} />
       <ResultsSection />
+      <Flyout />
     </>
   );
 };
