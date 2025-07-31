@@ -3,6 +3,7 @@ import type { DataItem } from '~types/types';
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { ItemImg } from '~components/item-img/item-img';
 import { withDataTestId } from '~utils/utilities';
+import { XIcon } from 'lucide-react';
 import { Link, useLoaderData, useLocation } from 'react-router';
 
 type LoaderDataType = {
@@ -27,11 +28,12 @@ const DetailedPage = () => {
       <Link
         to={`..${location.search}`}
         type="button"
-        className="fixed inset-0 z-10 cursor-pointer bg-gray-900/50 backdrop-blur-xs backdrop-filter"
+        className="loader-overlay cursor-pointer"
       />
       <button
+        data-name="detailed-page"
         type="button"
-        className="border-border-dark hover:border-primary-700 relative z-20 w-full max-w-[350px] space-y-6 rounded-2xl border-4 bg-white p-6 shadow-md"
+        className="detailed-page-container"
       >
         <div className="flex items-center justify-between gap-2">
           <Link
@@ -39,7 +41,8 @@ const DetailedPage = () => {
             type="button"
             className="cursor-pointer"
           >
-            ❌
+            <XIcon className="text-error h-10 w-10" />
+            <span className="sr-only">close</span>
           </Link>
           <h2 className="result-item-title">{title}</h2>
         </div>
@@ -49,9 +52,9 @@ const DetailedPage = () => {
             <div className="mb-1 font-semibold">Type</div>
             <div
               {...withDataTestId('detailed-type')}
-              className="text-text-on-primary rounded-md bg-gray-400/80 px-2 py-1"
+              className="text-text-on-primary rounded-md bg-gray-400/80 px-2 py-1 capitalize"
             >
-              {type.toUpperCase()}
+              {type}
             </div>
           </div>
 
@@ -59,7 +62,7 @@ const DetailedPage = () => {
             <div className="mb-1 font-semibold">Status</div>
             <div
               {...withDataTestId('detailed-status')}
-              className="bg-accent-500/80 text-text-on-primary rounded-md px-2 py-1"
+              className="bg-info/80 text-text-on-primary rounded-md px-2 py-1"
             >
               {status}
             </div>

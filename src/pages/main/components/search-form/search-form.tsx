@@ -34,7 +34,9 @@ export const SearchForm = ({ onSubmit, searchQuery }: SearchFormProps) => {
           placeholder="Search"
         />
       </label>
-      <Button type="submit">Search</Button>
+      <Button classNames="cursor-pointer" type="submit">
+        Search
+      </Button>
     </form>
   );
 };

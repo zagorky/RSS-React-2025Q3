@@ -7,7 +7,7 @@
 }
 
 .result-item-desc {
-  @apply line-clamp-3 text-sm text-gray-500;
+  @apply line-clamp-3 text-sm text-gray-600;
 }
 
 .result-item-img {

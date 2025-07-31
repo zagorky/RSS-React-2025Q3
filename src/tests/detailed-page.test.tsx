@@ -24,13 +24,13 @@ describe('Detail Page', async () => {
     const data = mockDetailedPageLoader.data as DataItem;
     const status = data.airing ? 'Ongoing' : 'Released';
 
-    expect(await screen.findByRole('link', { name: '❌' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('link', { name: 'close' })
+    ).toBeInTheDocument();
     expect(
       screen.getByRole('heading', { name: data.title })
     ).toBeInTheDocument();
-    expect(screen.getByTestId('detailed-type')).toHaveTextContent(
-      data.type.toUpperCase()
-    );
+    expect(screen.getByTestId('detailed-type')).toHaveTextContent(data.type);
     expect(screen.getByTestId('detailed-status')).toHaveTextContent(status);
     expect(screen.getByTestId('detailed-score')).toHaveTextContent(
       data.score.toString()

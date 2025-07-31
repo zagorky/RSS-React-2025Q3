@@ -22,7 +22,7 @@ export const Pagination = ({ pagination }: PaginationProps) => {
   };
 
   return (
-    <div className="text-md flex justify-center gap-2">
+    <div className="text-md flex justify-center gap-2 pb-4">
       {currentPage > 1 ? (
         <NavLink
           className="btn transition-all duration-200"

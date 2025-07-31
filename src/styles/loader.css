@@ -1,5 +1,5 @@
 .loader-overlay {
-  @apply bg-bg-dark fixed inset-0 z-50 flex opacity-40;
+  @apply fixed inset-0 z-10 flex bg-gray-600/60 backdrop-blur-xs backdrop-filter;
 }
 
 .loader-container {
