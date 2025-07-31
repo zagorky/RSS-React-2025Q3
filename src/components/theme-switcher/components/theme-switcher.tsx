@@ -8,6 +8,7 @@ export const ThemeSwitcher = () => {
   return (
     <Button
       type="button"
+      classNames="cursor-pointer"
       onClick={() => {
         setTheme(isLight ? 'dark' : 'light');
       }}
