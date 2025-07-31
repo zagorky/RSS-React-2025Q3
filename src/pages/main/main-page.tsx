@@ -1,4 +1,4 @@
-import { LS_KEY } from '~config/app-config';
+import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
 import { useLocalStorage } from '~hooks/useLocalStorage';
 import { useNavigate } from 'react-router';
@@ -8,10 +8,10 @@ import { SearchForm } from './components/search-form/search-form';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { searchQuery, setSearchQuery } = useLocalStorage(LS_KEY);
+  const { valueFromLS, setValueToLS } = useLocalStorage(SEARCH_QUERY_LS_KEY);
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query);
+    setValueToLS(query);
     const searchParameters = new URLSearchParams();
 
     if (query) {
@@ -23,7 +23,7 @@ const MainPage = () => {
 
   return (
     <>
-      <SearchForm searchQuery={searchQuery} onSubmit={handleSearch} />
+      <SearchForm searchQuery={valueFromLS} onSubmit={handleSearch} />
       <ResultsSection />
     </>
   );

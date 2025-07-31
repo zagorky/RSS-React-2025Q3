@@ -12,4 +12,5 @@ export const endpointParameters = {
 
 export const ITEM_PER_PAGE = 6;
 
-export const LS_KEY = 'ZAGORKY:retrievedQuery';
+export const SEARCH_QUERY_LS_KEY = 'ZAGORKY:retrievedQuery';
+export const THEME_LS_KEY = 'ZAGORKY:theme';

@@ -1,14 +1,14 @@
 import type { ApiResponseType } from '~types/types';
 
-import { LS_KEY } from '~config/app-config';
+import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
 import { hasProperty, isObject, isResponseType } from '~types/type-guards';
 
 export const retrieveQueryFormLS = () => {
-  return localStorage.getItem(LS_KEY) ?? '';
+  return localStorage.getItem(SEARCH_QUERY_LS_KEY) ?? '';
 };
 
 export const setQueryToLS = (value: string) => {
-  localStorage.setItem(LS_KEY, value);
+  localStorage.setItem(SEARCH_QUERY_LS_KEY, value);
 };
 
 export const getErrorMessageFromUnknown = (error: unknown) => {

@@ -20,7 +20,7 @@ describe('useLocalStorage', () => {
 
     const { result } = renderHook(() => useLocalStorage(key));
 
-    expect(result.current.searchQuery).toBe('huh');
+    expect(result.current.valueFromLS).toBe('huh');
     expect(mockLocalStorage.getItem).toHaveBeenCalledWith(key);
   });
 
@@ -29,7 +29,7 @@ describe('useLocalStorage', () => {
 
     const { result } = renderHook(() => useLocalStorage(key));
 
-    expect(result.current.searchQuery).toBe('');
+    expect(result.current.valueFromLS).toBe('');
     expect(mockLocalStorage.getItem).toHaveBeenCalledWith(key);
   });
 
@@ -39,10 +39,10 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage(key));
 
     act(() => {
-      result.current.setSearchQuery('heh');
+      result.current.setValueToLS('heh');
     });
 
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith(key, 'heh');
-    expect(result.current.searchQuery).toBe('heh');
+    expect(result.current.valueFromLS).toBe('heh');
   });
 });
