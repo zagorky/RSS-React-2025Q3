@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '~components/theme-switcher/components/theme-switcher';
 import { navBar } from '~config/navigation';
 import { cn } from '~utils/cn';
 import { NavLink } from 'react-router';
@@ -23,6 +24,7 @@ export const Header = () => {
             {item.title}
           </NavLink>
         ))}
+        <ThemeSwitcher />
       </nav>
     </header>
   );
