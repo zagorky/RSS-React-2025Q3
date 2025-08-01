@@ -18,7 +18,7 @@ export const Header = () => {
                 {
                   'bg-primary-500 hover:bg-primary-600/70 text-text-on-primary after:bg-primary-600 font-semibold':
                     isActive,
-                  'text-text-primary hover:text-text-on-primary': !isActive,
+                  'text-text-secondary hover:text-text-primary': !isActive,
                 }
               )
             }
