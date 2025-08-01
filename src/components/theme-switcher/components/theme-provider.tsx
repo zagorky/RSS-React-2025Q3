@@ -42,10 +42,8 @@ export const ThemeProvider = ({
   );
 
   return (
-    <div className={cn('bg-bg', themeClass)}>
-      <ThemeProviderContext.Provider value={value}>
-        {children}
-      </ThemeProviderContext.Provider>
-    </div>
+    <ThemeProviderContext.Provider value={value}>
+      <div className={cn('bg-bg', themeClass)}>{children}</div>
+    </ThemeProviderContext.Provider>
   );
 };
