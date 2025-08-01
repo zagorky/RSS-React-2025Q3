@@ -20,11 +20,21 @@ describe('Flyout', () => {
     expect(screen.queryByTestId('flyout')).toBeNull();
   });
 
+  test('should appear when at least 1 selectedCard exist', async () => {
+    render(<Flyout />);
+    act(() => {
+      useStore.getState().addCard(card);
+    });
+
+    expect(await screen.findByTestId('flyout')).toBeInTheDocument();
+  });
+
   test('should contain 2 buttons (download and unselect all)', async () => {
     render(<Flyout />);
     act(() => {
       useStore.getState().addCard(card);
     });
+
     expect(
       await screen.findByRole('button', { name: /download/i })
     ).toBeInTheDocument();
