@@ -21,7 +21,6 @@ const createUncurried = <T>(
 export const create = (<T>(
   stateCreator: ZustandExportedTypes.StateCreator<T>
 ) => {
-  console.log('zustand create mock');
   return typeof stateCreator === 'function'
     ? createUncurried(stateCreator)
     : createUncurried;
@@ -41,7 +40,6 @@ const createStoreUncurried = <T>(
 export const createStore = (<T>(
   stateCreator: ZustandExportedTypes.StateCreator<T>
 ) => {
-  console.log('zustand createStore mock');
   return typeof stateCreator === 'function'
     ? createStoreUncurried(stateCreator)
     : createStoreUncurried;

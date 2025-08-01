@@ -50,4 +50,14 @@ describe('Result Item', () => {
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', itemImgUrl);
   });
+
+  test('should display checkbox', () => {
+    render(
+      <MemoryRouter>
+        <ResultItem data={item} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
 });
