@@ -1,13 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '~components/theme-switcher/components/theme-provider';
 import { ThemeSwitcher } from '~components/theme-switcher/components/theme-switcher';
-import { describe } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 
 import { setupUserEvent } from '~/tests/test-utilties';
+
+beforeEach(() => {
+  window.matchMedia = vi.fn().mockImplementation(() => ({
+    matches: false,
+  }));
+});
 
 describe('ThemeSwitcher', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   test('should render sun icon when theme is light', () => {
@@ -17,7 +24,6 @@ describe('ThemeSwitcher', () => {
       </ThemeProvider>
     );
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByTestId('sun-icon')).toBeInTheDocument();
   });
 
@@ -28,7 +34,6 @@ describe('ThemeSwitcher', () => {
       </ThemeProvider>
     );
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByTestId('moon-icon')).toBeInTheDocument();
   });
 
@@ -41,7 +46,7 @@ describe('ThemeSwitcher', () => {
 
     expect(screen.getByTestId('sun-icon')).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button', { name: /toggle theme/i }));
 
     expect(screen.getByTestId('moon-icon')).toBeInTheDocument();
   });

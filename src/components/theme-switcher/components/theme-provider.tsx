@@ -5,7 +5,8 @@ import { ThemeProviderContext } from '~components/theme-switcher/components/them
 import { THEME_LS_KEY } from '~config/app-config';
 import { useLocalStorage } from '~hooks/useLocalStorage';
 import { isTheme } from '~types/theme';
-import { useLayoutEffect, useMemo, useState } from 'react';
+import { cn } from '~utils/cn';
+import { useMemo, useState } from 'react';
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -23,24 +24,11 @@ export const ThemeProvider = ({
     return isTheme(valueFromLS) ? valueFromLS : defaultTheme;
   });
 
-  useLayoutEffect(() => {
-    const root = window.document.documentElement;
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
 
-    root.classList.remove('light', 'dark');
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
-
-      return;
-    }
-
-    root.classList.add(theme);
-  }, [theme]);
+  const themeClass = theme === 'system' ? systemTheme : theme;
 
   const value = useMemo(
     () => ({
@@ -53,5 +41,11 @@ export const ThemeProvider = ({
     [theme, setValueToLS]
   );
 
-  return <ThemeProviderContext value={value}>{children}</ThemeProviderContext>;
+  return (
+    <div className={cn('bg-bg', themeClass)}>
+      <ThemeProviderContext.Provider value={value}>
+        {children}
+      </ThemeProviderContext.Provider>
+    </div>
+  );
 };
