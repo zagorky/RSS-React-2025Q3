@@ -12,7 +12,7 @@ import {
 } from '~utils/utilities';
 import { describe, expect, test } from 'vitest';
 
-import { specificQueryResponse } from '~/tests/mocks/data';
+import { specificQueryResponse } from '~/mocks/data';
 
 describe('Local Storage utilities', () => {
   const validValue = 'sasarik the best mentor';
@@ -142,7 +142,7 @@ describe('Assert utilities', () => {
   });
 });
 
-describe('normalizeError', () => {
+describe('getErrorMessageFromUnknown', () => {
   test('should not throw an error when data is valid', () => {
     const error = new Error('Something went wrong');
     expect(getErrorMessageFromUnknown(error)).toBe('Something went wrong');

@@ -9,7 +9,7 @@ import {
   mockEmptyQueryLoaderData,
   mockLoaderData,
   specificQueryResponse,
-} from '~/tests/mocks/data';
+} from '~/mocks/data';
 import { createMainTestRouter } from '~/tests/test-utilties';
 
 import { server } from '../../vitest.setupTests';

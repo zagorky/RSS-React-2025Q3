@@ -8,7 +8,7 @@ import {
   mockDetailedPageLoader,
   mockInvalidDetailedPageLoader,
   specificQueryResponse,
-} from '~/tests/mocks/data';
+} from '~/mocks/data';
 import { createDetailedTestRouter } from '~/tests/test-utilties';
 
 describe('Detail Page', async () => {

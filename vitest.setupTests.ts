@@ -4,7 +4,9 @@ import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
-import { emptyQueryResponse } from '~/tests/mocks/data';
+import { emptyQueryResponse } from '~/mocks/data';
+
+vi.mock('zustand');
 
 export const handlers = [
   http.get(getSearchEndpoint(), () => {

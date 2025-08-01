@@ -3,7 +3,7 @@ import { ResultItem } from '~pages/main/components/results-section/result-item';
 import { MemoryRouter } from 'react-router';
 import { expect } from 'vitest';
 
-import { specificQueryResponse } from '~/tests/mocks/data';
+import { specificQueryResponse } from '~/mocks/data';
 
 const item = specificQueryResponse.data[0];
 
