@@ -12,7 +12,7 @@ type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const Checkbox = ({
   dataTestId = 'card-checkbox',
-  classNames = '',
+  classNames,
   sizeVariant = 'md',
   label,
   type = 'checkbox',
