@@ -56,7 +56,7 @@ export function assertIsApiResponseWithData(
   data: unknown,
   property: string
 ): asserts data is { data: unknown } {
-  if (!isObject(data) && hasProperty('data', data)) {
+  if (!isObject(data) && !hasProperty('data', data)) {
     throw new Error(`Invalid API response: missing ${property} property`);
   }
 }

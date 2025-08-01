@@ -1,5 +1,6 @@
 import { Button } from '~components/button/button';
 import { useTheme } from '~components/theme-switcher/hooks/useTheme';
+import { withDataTestId } from '~utils/utilities';
 import { Moon, Sun } from 'lucide-react';
 
 export const ThemeSwitcher = () => {
@@ -13,7 +14,11 @@ export const ThemeSwitcher = () => {
         setTheme(isLight ? 'dark' : 'light');
       }}
     >
-      {isLight ? <Sun className="h-4.5" /> : <Moon className="h-4.5" />}
+      {isLight ? (
+        <Sun {...withDataTestId('sun-icon')} className="h-4.5" />
+      ) : (
+        <Moon {...withDataTestId('moon-icon')} className="h-4.5" />
+      )}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

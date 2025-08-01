@@ -2,6 +2,7 @@ import { getSearchEndpoint } from '~api/api';
 import { isDataItem } from '~types/type-guards';
 import { downloadCSV, generateCSV } from '~utils/csv-helpers';
 import {
+  assertIsApiResponseWithData,
   assertIsDataType,
   assertIsNonNullable,
   assertIsResponseOk,
@@ -137,6 +138,21 @@ describe('Assert utilities', () => {
     test('should throw if data is null', () => {
       expect(() => assertIsDataType(nullValue, isDataItem)).toThrow(
         'Invalid API response structure'
+      );
+    });
+  });
+  describe('assertIsApiResponseWithData', () => {
+    const validApiResponse = specificQueryResponse.data[0];
+
+    test('should not throw an error when data is valid', () => {
+      expect(() =>
+        assertIsApiResponseWithData(validApiResponse, 'score')
+      ).not.toThrow();
+    });
+
+    test('should throw an error when data is invalid', () => {
+      expect(() => assertIsApiResponseWithData('', 'data')).toThrow(
+        'Invalid API response: missing data property'
       );
     });
   });
