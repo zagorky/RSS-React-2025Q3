@@ -3,8 +3,6 @@ import type { DataItem } from '~types/types';
 import { devtools } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
-import { specificQueryResponse } from '~/tests/mocks/data';
-
 type StateType = {
   selectedCards: DataItem[];
   addCard: (card: DataItem) => void;
@@ -15,7 +13,7 @@ type StateType = {
 
 export const useStore = create<StateType>()(
   devtools((set) => ({
-    selectedCards: [...specificQueryResponse.data],
+    selectedCards: [],
 
     addCard: (card) =>
       set((state) => ({
@@ -31,12 +29,6 @@ export const useStore = create<StateType>()(
         ),
       })),
 
-    // cleanSelectedCards: () =>
-    //   set((state) => ({
-    //     ...state,
-    //     selectedCards: state.selectedCards.map((card) =>
-    //       state.removeCard(card)
-    //     ),
-    //   })),
+    cleanSelectedCards: () => set(() => ({ selectedCards: [] })),
   }))
 );

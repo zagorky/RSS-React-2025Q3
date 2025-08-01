@@ -13,7 +13,7 @@ export const ThemeSwitcher = () => {
         setTheme(isLight ? 'dark' : 'light');
       }}
     >
-      {isLight ? <Sun /> : <Moon />}
+      {isLight ? <Sun className="h-4.5" /> : <Moon className="h-4.5" />}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

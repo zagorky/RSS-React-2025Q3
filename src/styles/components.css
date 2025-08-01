@@ -1,19 +1,19 @@
 .btn {
-  @apply bg-primary-500 border-3 border-primary-500 hover:bg-primary-600/70 focus:ring-primary-400;
-  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5  transition-all;
-  @apply  focus:ring-2 focus:ring-offset-2 focus:outline-none;
+  @apply bg-primary-500 border-primary-500 hover:bg-primary-600/70 focus:ring-primary-400 border-3;
+  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5 transition-all;
+  @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
 }
 
 .btn-outline {
-  @apply bg-transparent border-3 border-primary-600 hover:bg-primary-900/10 focus:ring-primary-400;
+  @apply border-primary-600 hover:bg-primary-900/10 focus:ring-primary-400 border-3 bg-transparent;
   @apply text-primary-500 hover:text-primary-600 inline-block rounded-lg px-3 py-1.5 transition-all;
   @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
 }
 
 .btn-secondary {
-  @apply bg-secondary-600 border-3 border-secondary-600 hover:bg-secondary-800 focus:ring-secondary-400;
-  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5  transition-all;
-  @apply  focus:ring-2 focus:ring-offset-2 focus:outline-none;
+  @apply bg-secondary-600 border-secondary-600 hover:bg-secondary-800 focus:ring-secondary-400 border-3;
+  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5 transition-all;
+  @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
 }
 
 .inpt {

@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useStore } from '~/store/store';
 
 export const Flyout = () => {
-  const selectedCards = useStore((state) => state.selectedCards);
+  const { selectedCards, cleanSelectedCards } = useStore();
   const linkReference = useRef<HTMLAnchorElement>(null);
 
   const handleDownloadCsv = () => {
@@ -29,7 +29,11 @@ export const Flyout = () => {
             </a>
             Download
           </Button>
-          <Button variant="outline" classNames="cursor-pointer">
+          <Button
+            onClick={cleanSelectedCards}
+            variant="outline"
+            classNames="cursor-pointer"
+          >
             Unselect all
           </Button>
         </div>

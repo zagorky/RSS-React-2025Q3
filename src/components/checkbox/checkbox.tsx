@@ -17,6 +17,8 @@ export const Checkbox = ({
   label,
   type = 'checkbox',
   name,
+  checked,
+  onChange,
   ...props
 }: CheckboxProps) => {
   const size = {
@@ -32,6 +34,8 @@ export const Checkbox = ({
         {...props}
         {...withDataTestId(dataTestId)}
         name={name}
+        checked={checked}
+        onChange={onChange}
         className={cn(`checkbox`, size[sizeVariant], classNames)}
         type={type}
       ></input>
