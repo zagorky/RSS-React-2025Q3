@@ -6,6 +6,7 @@ import { withDataTestId } from '~utils/utilities';
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   dataTestId?: string;
   classNames?: string;
+  variant?: 'default' | 'secondary' | 'outline';
 };
 
 export const Button = ({
@@ -14,21 +15,26 @@ export const Button = ({
   type,
   disabled,
   children,
+  variant = 'default',
   dataTestId = '',
   ...props
 }: ButtonProps) => {
-  const buttonClasses = cn(
-    'btn',
-    classNames,
-    disabled && 'opacity-50 cursor-not-allowed'
-  );
+  const variants = {
+    default: 'btn',
+    outline: 'btn-outline',
+    secondary: 'btn-secondary',
+  };
 
   return (
     <button
       {...props}
       {...withDataTestId(dataTestId)}
       onClick={onClick}
-      className={buttonClasses}
+      className={cn(
+        variants[variant],
+        classNames,
+        disabled && 'cursor-not-allowed opacity-50'
+      )}
       type={type}
       disabled={disabled}
     >
