@@ -1,5 +1,5 @@
 import { Button } from '~components/button/button';
-import { downloadCsv } from '~utils/csv-helpers';
+import { downloadCSV } from '~utils/csv-helpers';
 import { useRef } from 'react';
 
 import { useStore } from '~/store/store';
@@ -9,7 +9,7 @@ export const Flyout = () => {
   const linkReference = useRef<HTMLAnchorElement>(null);
 
   const handleDownloadCsv = () => {
-    downloadCsv(selectedCards, linkReference.current);
+    downloadCSV(selectedCards, linkReference.current);
   };
 
   return (

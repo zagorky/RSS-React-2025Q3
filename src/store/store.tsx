@@ -8,7 +8,6 @@ type StateType = {
   addCard: (card: DataItem) => void;
   removeCard: (card: DataItem) => void;
   cleanSelectedCards: () => void;
-  downloadSelectedCards: () => void;
 };
 
 export const useStore = create<StateType>()(
