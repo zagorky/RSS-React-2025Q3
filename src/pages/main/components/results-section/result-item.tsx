@@ -14,10 +14,8 @@ type ResultItemProps = {
 
 export const ResultItem = ({ data }: ResultItemProps) => {
   const { addCard, removeCard, selectedCards } = useStore();
-  const title = data.title;
-  const synopsis = data.synopsis;
-  const id = data.mal_id;
   const location = useLocation();
+  const { title, synopsis, mal_id: id } = data;
 
   const isChecked = selectedCards.some((card) => card.mal_id === id);
 
