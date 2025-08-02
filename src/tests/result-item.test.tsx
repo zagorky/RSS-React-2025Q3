@@ -11,7 +11,7 @@ describe('Result Item', () => {
   test('should display item title', () => {
     render(
       <MemoryRouter>
-        <ResultItem data={item} />
+        <ResultItem onCheck={() => {}} isChecked={false} data={item} />
       </MemoryRouter>
     );
 
@@ -25,7 +25,7 @@ describe('Result Item', () => {
   test('should have item description', () => {
     render(
       <MemoryRouter>
-        <ResultItem data={item} />
+        <ResultItem onCheck={() => {}} isChecked={false} data={item} />
       </MemoryRouter>
     );
 
@@ -39,7 +39,7 @@ describe('Result Item', () => {
   test('should display item image with correct URL', () => {
     render(
       <MemoryRouter>
-        <ResultItem data={item} />
+        <ResultItem onCheck={() => {}} isChecked={false} data={item} />
       </MemoryRouter>
     );
 
@@ -54,7 +54,7 @@ describe('Result Item', () => {
   test('should display checkbox', () => {
     render(
       <MemoryRouter>
-        <ResultItem data={item} />
+        <ResultItem onCheck={() => {}} isChecked={false} data={item} />
       </MemoryRouter>
     );
 

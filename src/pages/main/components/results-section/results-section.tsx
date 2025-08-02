@@ -1,4 +1,5 @@
 import type { LoaderDataType } from '~types/loader-types';
+import type { DataItem } from '~types/types';
 
 import { ErrorFallback } from '~components/error-fallback/error-fallback';
 import { Loader } from '~components/loader/loader';
@@ -7,12 +8,26 @@ import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 import { Outlet, useOutlet, useRouteLoaderData } from 'react-router';
 
+import { useStore } from '~/store/store';
+
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
 
 export const ResultsSection = () => {
   const outlet = useOutlet();
   const data = useRouteLoaderData<LoaderDataType>('main-page');
+  const { addCard, removeCard, selectedCards } = useStore();
+
+  const handleCheck = (data: DataItem, isChecked: boolean) => {
+    if (isChecked) {
+      addCard(data);
+    } else {
+      removeCard(data);
+    }
+  };
+
+  const isItemChecked = (id: number) =>
+    selectedCards.some((card) => card.mal_id === id);
 
   if (!data) {
     return <EmptyList />;
@@ -42,7 +57,12 @@ export const ResultsSection = () => {
           )}
         >
           {results.map((result, i) => (
-            <ResultItem key={result.mal_id + 'and' + i} data={result} />
+            <ResultItem
+              onCheck={handleCheck}
+              isChecked={isItemChecked(result.mal_id)}
+              key={result.mal_id + 'and' + i}
+              data={result}
+            />
           ))}
         </ul>
         <Outlet />

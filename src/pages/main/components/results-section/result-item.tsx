@@ -6,25 +6,19 @@ import React from 'react';
 import { Link, useLocation } from 'react-router';
 
 import { Checkbox } from '~/components/checkbox/checkbox';
-import { useStore } from '~/store/store';
 
 type ResultItemProps = {
   data: DataItem;
+  isChecked: boolean;
+  onCheck: (data: DataItem, isChecked: boolean) => void;
 };
 
-export const ResultItem = ({ data }: ResultItemProps) => {
-  const { addCard, removeCard, selectedCards } = useStore();
+export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
   const location = useLocation();
   const { title, synopsis, mal_id: id } = data;
 
-  const isChecked = selectedCards.some((card) => card.mal_id === id);
-
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.currentTarget.checked) {
-      addCard(data);
-    } else {
-      removeCard(data);
-    }
+    onCheck(data, event.currentTarget.checked);
   };
 
   return (
