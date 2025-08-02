@@ -1,17 +1,12 @@
 import { Button } from '~components/button/button';
-import { downloadCSV } from '~utils/csv-helpers';
+import { useCSV } from '~hooks/useCSV';
 import { withDataTestId } from '~utils/utilities';
-import { useRef } from 'react';
 
 import { useStore } from '~/store/store';
 
 export const Flyout = () => {
   const { selectedCards, cleanSelectedCards } = useStore();
-  const linkReference = useRef<HTMLAnchorElement>(null);
-
-  const handleDownloadCsv = () => {
-    downloadCSV(selectedCards, linkReference.current);
-  };
+  const { linkReference, downloadCSV } = useCSV(selectedCards);
 
   return (
     selectedCards.length > 0 && (
@@ -25,7 +20,7 @@ export const Flyout = () => {
         <div className="flex gap-4">
           <Button
             variant="secondary"
-            onClick={handleDownloadCsv}
+            onClick={downloadCSV}
             classNames="cursor-pointer"
           >
             <a ref={linkReference} className="hidden">

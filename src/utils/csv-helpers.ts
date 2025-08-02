@@ -7,20 +7,3 @@ export const generateCSV = (data: DataItem[]) => {
   );
   return [headers, ...rows].join('\n');
 };
-
-export const downloadCSV = (
-  data: DataItem[],
-  linkReference: HTMLAnchorElement | null
-) => {
-  if (!linkReference) {
-    return;
-  }
-
-  const csvData = generateCSV(data);
-  const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  linkReference.href = url;
-  linkReference.download = `${data.length}-items.csv`;
-  linkReference.click();
-  setTimeout(() => URL.revokeObjectURL(url), 100);
-};

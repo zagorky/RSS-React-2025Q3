@@ -1,4 +1,4 @@
-import { ThemeProvider } from '~components/theme-switcher/components/theme-provider';
+import { ThemeProvider } from '~components/theme-switcher/theme-provider';
 import { router } from '~pages/app-router';
 import { RouterProvider } from 'react-router';
 

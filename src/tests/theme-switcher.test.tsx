@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { ThemeProvider } from '~components/theme-switcher/components/theme-provider';
-import { ThemeSwitcher } from '~components/theme-switcher/components/theme-switcher';
+import { ThemeProvider } from '~components/theme-switcher/theme-provider';
+import { ThemeSwitcher } from '~components/theme-switcher/theme-switcher';
 import { beforeEach, describe, test, vi } from 'vitest';
 
 import { setupUserEvent } from '~/tests/test-utilties';

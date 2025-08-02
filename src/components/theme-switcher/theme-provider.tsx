@@ -1,7 +1,7 @@
 import type { Theme } from '~types/theme';
 import type { ReactNode } from 'react';
 
-import { ThemeProviderContext } from '~components/theme-switcher/components/theme-provider-context';
+import { ThemeProviderContext } from '~components/theme-switcher/theme-provider-context';
 import { THEME_LS_KEY } from '~config/app-config';
 import { useLocalStorage } from '~hooks/useLocalStorage';
 import { isTheme } from '~types/theme';

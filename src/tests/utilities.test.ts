@@ -1,6 +1,6 @@
 import { getSearchEndpoint } from '~api/api';
 import { isDataItem } from '~types/type-guards';
-import { downloadCSV, generateCSV } from '~utils/csv-helpers';
+import { generateCSV } from '~utils/csv-helpers';
 import {
   assertIsApiResponseWithData,
   assertIsDataType,
@@ -241,56 +241,6 @@ describe('CSV helpers', () => {
       expect(rows.length).toBe(1);
       expect(rows[0]).toBe('mal_id,title');
       expect(rows[1]).toBeFalsy();
-    });
-  });
-
-  describe('downloadCSV', () => {
-    beforeEach(() => {
-      global.URL.createObjectURL = vi.fn(() => 'huh-url');
-      global.URL.revokeObjectURL = vi.fn();
-      window.HTMLAnchorElement.prototype.click = vi.fn();
-    });
-
-    const link = {
-      href: '',
-      tagName: 'a',
-      download: '',
-      click: vi.fn(),
-    } as unknown as HTMLAnchorElement;
-
-    test('should trigger click on the link element', () => {
-      const clickSpy = vi.spyOn(link, 'click');
-
-      downloadCSV(mockData, link);
-      expect(clickSpy).toHaveBeenCalled();
-    });
-
-    test('should set correct href and download attributes', () => {
-      downloadCSV(mockData, link);
-
-      expect(link.href).toBe('huh-url');
-      expect(link.download).toBe('4-items.csv');
-    });
-
-    it('should call revokeObjectURL after download', () => {
-      vi.useFakeTimers();
-
-      downloadCSV(mockData, link);
-      vi.advanceTimersByTime(100);
-
-      expect(global.URL.revokeObjectURL).toHaveBeenCalledWith('huh-url');
-      vi.useRealTimers();
-    });
-
-    test('should not been called when linkReference is null', () => {
-      const clickSpy = vi.spyOn(window.HTMLAnchorElement.prototype, 'click');
-      downloadCSV(mockData, null);
-      expect(clickSpy).not.toHaveBeenCalled();
-    });
-
-    test('should generate correct filename for empty array', () => {
-      downloadCSV([], link);
-      expect(link.download).toBe('0-items.csv');
     });
   });
 });

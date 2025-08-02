@@ -1,5 +1,5 @@
 import { Button } from '~components/button/button';
-import { useTheme } from '~components/theme-switcher/hooks/useTheme';
+import { useTheme } from '~hooks/useTheme';
 import { withDataTestId } from '~utils/utilities';
 import { Moon, Sun } from 'lucide-react';
 

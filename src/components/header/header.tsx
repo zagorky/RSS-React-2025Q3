@@ -1,4 +1,4 @@
-import { ThemeSwitcher } from '~components/theme-switcher/components/theme-switcher';
+import { ThemeSwitcher } from '~components/theme-switcher/theme-switcher';
 import { navBar } from '~config/navigation';
 import { cn } from '~utils/cn';
 import { NavLink } from 'react-router';
