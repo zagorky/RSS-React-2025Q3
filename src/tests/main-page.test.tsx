@@ -1,7 +1,7 @@
-import { waitFor } from '@testing-library/dom';
 import { render, screen } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { RouterProvider } from 'react-router';
+import { test } from 'vitest';
 
 import {
   emptyResponse,
@@ -22,6 +22,7 @@ const localStorageMock = {
 vi.stubGlobal('localStorage', localStorageMock);
 
 const mockNavigate = vi.fn();
+
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
@@ -61,9 +62,7 @@ describe('Main Page', () => {
       <RouterProvider router={createMainTestRouter(mockEmptyQueryLoaderData)} />
     );
 
-    await waitFor(() => {
-      expect(screen.getByRole('textbox')).toHaveValue('');
-    });
+    expect(await screen.findByRole('textbox')).toHaveValue('');
   });
 
   test('should show empty state when no results', async () => {
