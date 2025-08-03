@@ -1,9 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { queryClient } from '~api/query-client';
 import { ThemeProvider } from '~components/theme-switcher/theme-provider';
 import { router } from '~pages/app-router';
 import { RouterProvider } from 'react-router';
-
-const queryClient = new QueryClient();
 
 const App = () => {
   return (
@@ -11,6 +11,7 @@ const App = () => {
       <ThemeProvider>
         <RouterProvider router={router} />
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
