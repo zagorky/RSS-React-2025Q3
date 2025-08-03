@@ -14,29 +14,29 @@ describe('useStore', () => {
 
   test('should add card to selectedCards', () => {
     act(() => {
-      useStore.getState().addCard(card);
+      useStore.getState().actions.addCard(card);
     });
     expect(useStore.getState().selectedCards).toEqual([card]);
   });
 
   test('should remove a card from selectedCards', () => {
     act(() => {
-      useStore.getState().addCard(card);
-      useStore.getState().addCard(card2);
+      useStore.getState().actions.addCard(card);
+      useStore.getState().actions.addCard(card2);
     });
     act(() => {
-      useStore.getState().removeCard(card);
+      useStore.getState().actions.removeCard(card);
     });
     expect(useStore.getState().selectedCards).toEqual([card2]);
   });
 
   test('should remove all cards from selectedcards', () => {
     act(() => {
-      useStore.getState().addCard(card);
-      useStore.getState().addCard(card2);
+      useStore.getState().actions.addCard(card);
+      useStore.getState().actions.addCard(card2);
     });
     act(() => {
-      useStore.getState().cleanSelectedCards();
+      useStore.getState().actions.cleanSelectedCards();
     });
     expect(useStore.getState().selectedCards).toEqual([]);
   });

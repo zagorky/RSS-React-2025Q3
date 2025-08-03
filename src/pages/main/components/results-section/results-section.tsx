@@ -8,7 +8,7 @@ import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 import { Outlet, useOutlet, useRouteLoaderData } from 'react-router';
 
-import { useStore } from '~/store/store';
+import { useSelectedCards, useStoreActions } from '~/store/store';
 
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
@@ -16,7 +16,8 @@ import { ResultItem } from './result-item';
 export const ResultsSection = () => {
   const outlet = useOutlet();
   const data = useRouteLoaderData<LoaderDataType>('main-page');
-  const { addCard, removeCard, selectedCards } = useStore();
+  const { addCard, removeCard } = useStoreActions();
+  const selectedCards = useSelectedCards();
 
   const handleCheck = (data: DataItem, isChecked: boolean) => {
     if (isChecked) {

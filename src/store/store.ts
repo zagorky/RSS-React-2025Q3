@@ -4,27 +4,33 @@ import { create } from 'zustand/react';
 
 export type StateType = {
   selectedCards: DataItem[];
-  addCard: (card: DataItem) => void;
-  removeCard: (card: DataItem) => void;
-  cleanSelectedCards: () => void;
+  actions: {
+    addCard: (card: DataItem) => void;
+    removeCard: (card: DataItem) => void;
+    cleanSelectedCards: () => void;
+  };
 };
 
 export const useStore = create<StateType>()((set) => ({
   selectedCards: [],
+  actions: {
+    addCard: (card) =>
+      set((state) => ({
+        ...state,
+        selectedCards: [...state.selectedCards, card],
+      })),
 
-  addCard: (card) =>
-    set((state) => ({
-      ...state,
-      selectedCards: [...state.selectedCards, card],
-    })),
+    removeCard: (card) =>
+      set((state) => ({
+        ...state,
+        selectedCards: state.selectedCards.filter(
+          (selectedCard) => card.mal_id !== selectedCard.mal_id
+        ),
+      })),
 
-  removeCard: (card) =>
-    set((state) => ({
-      ...state,
-      selectedCards: state.selectedCards.filter(
-        (selectedCard) => card.mal_id !== selectedCard.mal_id
-      ),
-    })),
-
-  cleanSelectedCards: () => set(() => ({ selectedCards: [] })),
+    cleanSelectedCards: () => set(() => ({ selectedCards: [] })),
+  },
 }));
+
+export const useSelectedCards = () => useStore((state) => state.selectedCards);
+export const useStoreActions = () => useStore((state) => state.actions);

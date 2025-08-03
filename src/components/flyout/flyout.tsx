@@ -5,7 +5,8 @@ import { withDataTestId } from '~utils/utilities';
 import { useStore } from '~/store/store';
 
 export const Flyout = () => {
-  const { selectedCards, cleanSelectedCards } = useStore();
+  const selectedCards = useStore((state) => state.selectedCards);
+  const { cleanSelectedCards } = useStore((state) => state.actions);
   const { linkReference, downloadCSV } = useCSV(selectedCards);
 
   return (

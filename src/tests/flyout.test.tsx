@@ -12,7 +12,7 @@ vi.mock('~utils/csv-helpers', () => ({
 describe('Flyout', () => {
   const card = specificQueryResponse.data[0];
   beforeEach(() => {
-    useStore.getState().cleanSelectedCards();
+    useStore.getState().actions.cleanSelectedCards();
   });
 
   test('should not appear when selectedCards is empty', () => {
@@ -23,7 +23,7 @@ describe('Flyout', () => {
   test('should appear when at least 1 selectedCard exist', async () => {
     render(<Flyout />);
     act(() => {
-      useStore.getState().addCard(card);
+      useStore.getState().actions.addCard(card);
     });
 
     expect(await screen.findByTestId('flyout')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Flyout', () => {
   test('should contain 2 buttons (download and unselect all)', async () => {
     render(<Flyout />);
     act(() => {
-      useStore.getState().addCard(card);
+      useStore.getState().actions.addCard(card);
     });
 
     expect(

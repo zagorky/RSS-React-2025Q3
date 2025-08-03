@@ -14,7 +14,7 @@ export const useCSV = (data: DataItem[]) => {
         objectUrlReference.current = null;
       }
     };
-  });
+  }, []);
 
   const downloadCSV = useCallback(() => {
     if (!linkReference.current) {
