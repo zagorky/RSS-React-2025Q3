@@ -1,11 +1,9 @@
 import { withDataTestId } from '~utils/utilities';
 import { useNavigation } from 'react-router';
 
-export const Loader = ({ isLoading }: { isLoading?: boolean }) => {
-  const isVisible = useNavigation().state === 'loading' || isLoading;
-
+export const Loader = () => {
   return (
-    isVisible && (
+    useNavigation().state === 'loading' && (
       <div className="loader-overlay">
         <div {...withDataTestId('loader')} className="loader-container">
           <div className="loader-spinner"></div>

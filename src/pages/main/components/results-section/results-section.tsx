@@ -1,8 +1,7 @@
 import type { LoaderDataType } from '~types/loader-types';
 import type { DataItem } from '~types/types';
 
-import { ErrorFallback } from '~components/error-fallback/error-fallback';
-import { Loader } from '~components/loader/loader';
+import { QueryBoundary } from '~components/query-boundary/query-boundary';
 import { Pagination } from '~pages/main/components/results-section/pagination';
 import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
@@ -34,11 +33,7 @@ export const ResultsSection = () => {
     return <EmptyList />;
   }
 
-  const { error, results, pagination } = data;
-
-  if (error) {
-    return <ErrorFallback error={error} />;
-  }
+  const { results, pagination } = data;
 
   if (results.length === 0) {
     return <EmptyList />;
@@ -46,29 +41,30 @@ export const ResultsSection = () => {
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <Loader />
-      <div className="flex justify-center gap-4 p-4">
-        <ul
-          {...withDataTestId('result-list')}
-          className={cn(
-            'grid w-full gap-6 transition-all duration-300 ease-in-out',
-            outlet
-              ? 'grid-cols-1 md:grid-cols-2'
-              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-          )}
-        >
-          {results.map((result, i) => (
-            <ResultItem
-              onCheck={handleCheck}
-              isChecked={isItemChecked(result.mal_id)}
-              key={result.mal_id + 'and' + i}
-              data={result}
-            />
-          ))}
-        </ul>
-        <Outlet />
-      </div>
-      <Pagination pagination={pagination} />
+      <QueryBoundary>
+        <div className="flex justify-center gap-4 p-4">
+          <ul
+            {...withDataTestId('result-list')}
+            className={cn(
+              'grid w-full gap-6 transition-all duration-300 ease-in-out',
+              outlet
+                ? 'grid-cols-1 md:grid-cols-2'
+                : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            )}
+          >
+            {results.map((result, i) => (
+              <ResultItem
+                onCheck={handleCheck}
+                isChecked={isItemChecked(result.mal_id)}
+                key={result.mal_id + 'and' + i}
+                data={result}
+              />
+            ))}
+          </ul>
+          <Outlet />
+        </div>
+        <Pagination pagination={pagination} />
+      </QueryBoundary>
     </section>
   );
 };

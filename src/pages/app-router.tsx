@@ -1,4 +1,4 @@
-import { mainPageLoader } from '~api/loaders';
+import { detailedPageLoader, mainPageLoader } from '~api/loaders';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
 import { navigation } from '~config/navigation';
@@ -26,6 +26,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: navigation.detailed,
+            loader: detailedPageLoader,
             element: (
               <Suspense fallback={<Loader />}>
                 <DetailedPage />

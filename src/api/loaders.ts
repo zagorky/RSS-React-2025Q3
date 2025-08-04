@@ -2,12 +2,8 @@ import type { LoaderDataType } from '~types/loader-types';
 import type { LoaderFunctionArgs } from 'react-router';
 
 import { fetchAnimeData, fetchAnimeDataItem } from '~api/api';
-import {
-  assertIsNonNullable,
-  getErrorMessageFromUnknown,
-  retrieveQueryFormLS,
-  setQueryToLS,
-} from '~utils/utilities';
+import { queryClient } from '~api/query-client';
+import { assertIsNonNullable, retrieveQueryFormLS } from '~utils/utilities';
 import { redirect } from 'react-router';
 
 export const mainPageLoader = async ({
@@ -16,12 +12,7 @@ export const mainPageLoader = async ({
   const url = new URL(request.url);
   const queryFromUrl = url.searchParams.get('q') ?? '';
   const queryFromLS = retrieveQueryFormLS();
-  let query = queryFromLS;
-
-  if (queryFromLS === '' && queryFromUrl !== '') {
-    setQueryToLS(queryFromUrl);
-    query = queryFromUrl;
-  }
+  const query = queryFromLS || queryFromUrl;
 
   if (query !== queryFromUrl && query !== '') {
     const searchParameters = new URLSearchParams();
@@ -32,24 +23,21 @@ export const mainPageLoader = async ({
 
   const page = Number(url.searchParams.get('page') ?? '1');
 
-  try {
-    const data = await fetchAnimeData({ query, signal: request.signal, page });
-    const pagination = data.pagination;
-    const results = data.data ?? [];
-
-    return { results, query, pagination, error: null };
-  } catch (error) {
-    return {
-      results: [],
-      query: '',
-      pagination: {
-        current_page: 1,
-        has_next_page: false,
-        last_visible_page: 1,
-      },
-      error: getErrorMessageFromUnknown(error),
-    };
-  }
+  return queryClient.ensureQueryData({
+    queryKey: ['main-page', query, page],
+    queryFn: async () => {
+      const data = await fetchAnimeData({
+        query,
+        signal: request.signal,
+        page,
+      });
+      return {
+        results: data.data ?? [],
+        query,
+        pagination: data.pagination,
+      };
+    },
+  });
 };
 
 export const detailedPageLoader = async ({
@@ -59,14 +47,12 @@ export const detailedPageLoader = async ({
   const id = params.id;
   assertIsNonNullable(id, 'ID is missing');
 
-  try {
-    const data = await fetchAnimeDataItem({ id, signal: request.signal });
-
-    return { data, error: null };
-  } catch (error) {
-    return {
-      data: null,
-      error: getErrorMessageFromUnknown(error),
-    };
-  }
+  return queryClient.ensureQueryData({
+    queryKey: ['detailed-page', id],
+    queryFn: async () =>
+      await fetchAnimeDataItem({
+        id: String(id),
+        signal: request.signal,
+      }),
+  });
 };

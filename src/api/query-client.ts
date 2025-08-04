@@ -9,6 +9,3 @@ export const queryClient = new QueryClient({
     },
   },
 });
-
-// TODO: использовать placeholderData: keepPreviousData
-// TODO: использовать initialData?

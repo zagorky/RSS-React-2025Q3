@@ -9,7 +9,7 @@ import { Link, useLocation, useParams } from 'react-router';
 const DetailedPage = () => {
   const location = useLocation();
   const { id } = useParams();
-  const { data, isLoading, error } = useDetailedPageQuery(id);
+  const { data, error, isLoading } = useDetailedPageQuery(id);
 
   return (
     <QueryBoundary isLoading={isLoading} error={error}>
