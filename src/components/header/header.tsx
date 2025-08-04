@@ -1,3 +1,5 @@
+import { queryClient } from '~api/query-client';
+import { Button } from '~components/button/button';
 import { ThemeSwitcher } from '~components/theme-switcher/theme-switcher';
 import { navBar } from '~config/navigation';
 import { cn } from '~utils/cn';
@@ -27,6 +29,13 @@ export const Header = () => {
           </NavLink>
         ))}
         <ThemeSwitcher />
+        <Button
+          variant="secondary"
+          classNames="cursor-pointer"
+          onClick={() => queryClient.clear()}
+        >
+          Clean cache
+        </Button>
       </nav>
     </header>
   );
