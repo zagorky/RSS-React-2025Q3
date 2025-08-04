@@ -3,7 +3,7 @@ import { Flyout } from '~components/flyout/flyout';
 import { describe, expect } from 'vitest';
 
 import { specificQueryResponse } from '~/mocks/data';
-import { useStore } from '~/store/store';
+import { useSelectedCardsStore } from '~/store/selected-cards-store';
 
 vi.mock('~utils/csv-helpers', () => ({
   downloadCSV: vi.fn(),
@@ -12,7 +12,7 @@ vi.mock('~utils/csv-helpers', () => ({
 describe('Flyout', () => {
   const card = specificQueryResponse.data[0];
   beforeEach(() => {
-    useStore.getState().actions.cleanSelectedCards();
+    useSelectedCardsStore.getState().actions.cleanSelectedCards();
   });
 
   test('should not appear when selectedCards is empty', () => {
@@ -23,7 +23,7 @@ describe('Flyout', () => {
   test('should appear when at least 1 selectedCard exist', async () => {
     render(<Flyout />);
     act(() => {
-      useStore.getState().actions.addCard(card);
+      useSelectedCardsStore.getState().actions.addCard(card);
     });
 
     expect(await screen.findByTestId('flyout')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Flyout', () => {
   test('should contain 2 buttons (download and unselect all)', async () => {
     render(<Flyout />);
     act(() => {
-      useStore.getState().actions.addCard(card);
+      useSelectedCardsStore.getState().actions.addCard(card);
     });
 
     expect(

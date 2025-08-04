@@ -11,7 +11,7 @@ export type StateType = {
   };
 };
 
-export const useStore = create<StateType>()((set) => ({
+export const useSelectedCardsStore = create<StateType>()((set) => ({
   selectedCards: [],
   actions: {
     addCard: (card) =>
@@ -32,5 +32,7 @@ export const useStore = create<StateType>()((set) => ({
   },
 }));
 
-export const useSelectedCards = () => useStore((state) => state.selectedCards);
-export const useStoreActions = () => useStore((state) => state.actions);
+export const useSelectedCards = () =>
+  useSelectedCardsStore((state) => state.selectedCards);
+export const useStoreActions = () =>
+  useSelectedCardsStore((state) => state.actions);

@@ -7,7 +7,10 @@ import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 import { Outlet, useOutlet, useRouteLoaderData } from 'react-router';
 
-import { useSelectedCards, useStoreActions } from '~/store/store';
+import {
+  useSelectedCards,
+  useStoreActions,
+} from '~/store/selected-cards-store';
 
 import { EmptyList } from '../empty-list/empty-list';
 import { ResultItem } from './result-item';
