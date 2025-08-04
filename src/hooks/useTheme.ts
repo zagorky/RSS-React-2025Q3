@@ -2,5 +2,9 @@ import { ThemeProviderContext } from '~components/theme-switcher/theme-provider-
 import { use } from 'react';
 
 export const useTheme = () => {
-  return use(ThemeProviderContext);
+  const context = use(ThemeProviderContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a different context');
+  }
+  return context;
 };
