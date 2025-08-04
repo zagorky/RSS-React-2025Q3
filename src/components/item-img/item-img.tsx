@@ -1,30 +1,41 @@
 import type { DataItem } from '~types/types';
-import type { PropsWithChildren } from 'react';
 
+import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
+import React, { useState } from 'react';
 
 type ItemImgProps = {
   data: DataItem;
-  fallback?: PropsWithChildren;
+  fallback?: React.ReactNode;
 };
 
 export const ItemImg = ({ data, fallback }: ItemImgProps) => {
   const title = data.title;
   const imgUrl = data.images.webp.image_url;
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
     <div className="overflow-hidden rounded-md">
       {imgUrl ? (
-        <img
-          {...withDataTestId('result-item-img')}
-          className="result-item-img"
-          src={imgUrl}
-          alt={title}
-        />
+        <>
+          {!isImageLoaded && (
+            <div
+              {...withDataTestId('result-item-img-placeholder')}
+              className="result-item-img bg-primary-600/60 animate-pulse"
+            />
+          )}
+          <img
+            {...withDataTestId('result-item-img')}
+            className={cn('result-item-img', {
+              hidden: !isImageLoaded,
+            })}
+            src={imgUrl}
+            alt={title}
+            onLoad={() => setIsImageLoaded(true)}
+          />
+        </>
       ) : (
-        !fallback && (
-          <div className="result-item-img"> There is no image :(</div>
-        )
+        fallback || <div className="result-item-img">There is no image :(</div>
       )}
     </div>
   );
