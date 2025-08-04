@@ -2,10 +2,10 @@ import { Button } from '~components/button/button';
 import { useCSV } from '~hooks/useCSV';
 import { withDataTestId } from '~utils/utilities';
 
-import { useStore } from '~/store/store';
+import { useSelectedCards, useStore } from '~/store/store';
 
 export const Flyout = () => {
-  const selectedCards = useStore((state) => state.selectedCards);
+  const selectedCards = useSelectedCards();
   const { cleanSelectedCards } = useStore((state) => state.actions);
   const { linkReference, downloadCSV } = useCSV(selectedCards);
 

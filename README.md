@@ -2,7 +2,7 @@
 
 A modern React application built with Vite, TypeScript, and Tailwind CSS, following best practices for code quality and testing.
 
-## Deploy - [Click](https://zagorky-hooks-and-routing.netlify.app/)
+## Deploy - [Click](https://zagorky-react2025q3.netlify.app)
 
 ## 📦 Features
 
