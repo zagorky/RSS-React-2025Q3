@@ -74,7 +74,7 @@ const DetailedPage = () => {
             </div>
 
             <div {...withDataTestId('detailed-img')} className="pt-4">
-              <ItemImg data={data} />
+              <ItemImg url={data.images.webp.image_url} alt={data.title} />
             </div>
             <p {...withDataTestId('detailed-synopsis')}>{data.synopsis}</p>
           </button>

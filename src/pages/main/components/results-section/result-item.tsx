@@ -15,7 +15,14 @@ type ResultItemProps = {
 
 export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
   const location = useLocation();
-  const { title, synopsis, mal_id: id } = data;
+  const {
+    title,
+    synopsis,
+    mal_id: id,
+    images: {
+      webp: { image_url: urlImg },
+    },
+  } = data;
 
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     onCheck(data, event.currentTarget.checked);
@@ -37,7 +44,7 @@ export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
           >
             {title}
           </p>
-          <ItemImg data={data} />
+          <ItemImg url={urlImg} alt={title} />
           <p
             {...withDataTestId('result-item-desc')}
             className="result-item-desc"
