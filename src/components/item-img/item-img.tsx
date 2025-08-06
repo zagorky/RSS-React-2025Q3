@@ -1,22 +1,19 @@
-import type { DataItem } from '~types/types';
-
 import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 import React, { useState } from 'react';
 
 type ItemImgProps = {
-  data: DataItem;
+  url: string;
+  alt: string;
   fallback?: React.ReactNode;
 };
 
-export const ItemImg = ({ data, fallback }: ItemImgProps) => {
-  const title = data.title;
-  const imgUrl = data.images.webp.image_url;
+export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
     <div className="overflow-hidden rounded-md">
-      {imgUrl ? (
+      {url ? (
         <>
           {!isImageLoaded && (
             <div
@@ -29,8 +26,8 @@ export const ItemImg = ({ data, fallback }: ItemImgProps) => {
             className={cn('result-item-img', {
               hidden: !isImageLoaded,
             })}
-            src={imgUrl}
-            alt={title}
+            src={url}
+            alt={alt}
             onLoad={() => setIsImageLoaded(true)}
           />
         </>

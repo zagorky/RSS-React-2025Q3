@@ -9,33 +9,29 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'default' | 'secondary' | 'outline';
 };
 
+const variants = {
+  default: 'btn',
+  outline: 'btn-outline',
+  secondary: 'btn-secondary',
+};
+
 export const Button = ({
   classNames = '',
-  onClick,
-  type,
   disabled,
   children,
   variant = 'default',
   dataTestId = '',
   ...props
 }: ButtonProps) => {
-  const variants = {
-    default: 'btn',
-    outline: 'btn-outline',
-    secondary: 'btn-secondary',
-  };
-
   return (
     <button
       {...props}
       {...withDataTestId(dataTestId)}
-      onClick={onClick}
       className={cn(
         variants[variant],
         classNames,
         disabled && 'cursor-not-allowed opacity-50'
       )}
-      type={type}
       disabled={disabled}
     >
       {children}

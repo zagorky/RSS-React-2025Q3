@@ -1,22 +1,14 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useLocalStorage = (key: string) => {
-  const getDataFromLS = useCallback(() => {
-    return localStorage.getItem(key) ?? '';
-  }, [key]);
+  const [value, setValue] = useState(() => localStorage.getItem(key) ?? '');
 
-  const [value, setValue] = useState(() => getDataFromLS());
-
-  const setDataQueryToLS = useCallback(
-    (value: string) => {
-      localStorage.setItem(key, value);
-      setValue(value);
-    },
-    [key]
-  );
+  useEffect(() => {
+    localStorage.setItem(key, value);
+  }, [key, value]);
 
   return {
     valueFromLS: value,
-    setValueToLS: setDataQueryToLS,
+    setValueToLS: setValue,
   };
 };

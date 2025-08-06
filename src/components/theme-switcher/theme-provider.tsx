@@ -5,7 +5,7 @@ import { ThemeProviderContext } from '~components/theme-switcher/theme-provider-
 import { THEME_LS_KEY } from '~config/app-config';
 import { useLocalStorage } from '~hooks/useLocalStorage';
 import { isTheme } from '~types/theme';
-import { useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -24,6 +24,17 @@ export const ThemeProvider = ({
   });
 
   useLayoutEffect(() => {
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
+
+      setValueToLS(systemTheme);
+    }
+  }, [setValueToLS, theme]);
+
+  useLayoutEffect(() => {
     const root = window.document.documentElement;
 
     root.classList.remove('light', 'dark');
@@ -35,22 +46,21 @@ export const ThemeProvider = ({
         : 'light';
 
       root.classList.add(systemTheme);
-
-      return;
     }
 
     root.classList.add(theme);
-  }, [theme]);
+  }, [setValueToLS, theme]);
+
+  useEffect(() => {
+    setValueToLS(theme);
+  }, [setValueToLS, theme]);
 
   const value = useMemo(
     () => ({
       theme,
-      setTheme: (theme: Theme) => {
-        setValueToLS(theme);
-        setTheme(theme);
-      },
+      setTheme,
     }),
-    [theme, setValueToLS]
+    [theme]
   );
 
   return (

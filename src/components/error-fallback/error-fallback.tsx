@@ -1,5 +1,5 @@
 import { Button } from '~components/button/button';
-import { withDataTestId } from '~utils/utilities';
+import { getErrorMessageFromUnknown, withDataTestId } from '~utils/utilities';
 import { Link } from 'react-router';
 
 type ErrorFallbackProps = {
@@ -26,7 +26,7 @@ export const ErrorFallback = ({ error }: ErrorFallbackProps) => {
 
         <div className="mb-6 rounded-lg p-4">
           <p className="text-text-secondary text-lg">
-            {error instanceof Error ? error.message : error}
+            {getErrorMessageFromUnknown(error)}
           </p>
         </div>
 
