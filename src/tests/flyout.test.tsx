@@ -23,7 +23,7 @@ describe('Flyout', () => {
   test('should appear when at least 1 selectedCard exist', async () => {
     render(<Flyout />);
     act(() => {
-      useSelectedCardsStore.getState().actions.addCard(card);
+      useSelectedCardsStore.getState().actions.toggleSelectedCard(card);
     });
 
     expect(await screen.findByTestId('flyout')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Flyout', () => {
   test('should contain 2 buttons (download and unselect all)', async () => {
     render(<Flyout />);
     act(() => {
-      useSelectedCardsStore.getState().actions.addCard(card);
+      useSelectedCardsStore.getState().actions.toggleSelectedCard(card);
     });
 
     expect(

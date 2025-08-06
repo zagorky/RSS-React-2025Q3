@@ -21,6 +21,7 @@ export const Button = ({
   children,
   variant = 'default',
   dataTestId = '',
+  type,
   ...props
 }: ButtonProps) => {
   return (
@@ -32,6 +33,7 @@ export const Button = ({
         classNames,
         disabled && 'cursor-not-allowed opacity-50'
       )}
+      type={type}
       disabled={disabled}
     >
       {children}

@@ -1,5 +1,4 @@
 import type { LoaderDataType } from '~types/loader-types';
-import type { DataItem } from '~types/types';
 
 import { QueryBoundary } from '~components/query-boundary/query-boundary';
 import { Pagination } from '~pages/main/components/results-section/pagination';
@@ -18,16 +17,8 @@ import { ResultItem } from './result-item';
 export const ResultsSection = () => {
   const outlet = useOutlet();
   const data = useRouteLoaderData<LoaderDataType>('main-page');
-  const { addCard, removeCard } = useStoreActions();
+  const { toggleSelectedCard } = useStoreActions();
   const selectedCards = useSelectedCards();
-
-  const handleCheck = (data: DataItem, isChecked: boolean) => {
-    if (isChecked) {
-      addCard(data);
-    } else {
-      removeCard(data);
-    }
-  };
 
   const isItemChecked = (id: number) =>
     selectedCards.some((card) => card.mal_id === id);
@@ -57,8 +48,8 @@ export const ResultsSection = () => {
           >
             {results.map((result, i) => (
               <ResultItem
-                onCheck={handleCheck}
                 isChecked={isItemChecked(result.mal_id)}
+                onCheck={toggleSelectedCard}
                 key={result.mal_id + 'and' + i}
                 data={result}
               />

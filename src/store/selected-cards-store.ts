@@ -4,29 +4,32 @@ import { create } from 'zustand/react';
 
 export type StateType = {
   selectedCards: DataItem[];
+
   actions: {
-    addCard: (card: DataItem) => void;
-    removeCard: (card: DataItem) => void;
+    isSelected: (id: number) => boolean;
+    toggleSelectedCard: (card: DataItem) => void;
     cleanSelectedCards: () => void;
   };
 };
 
-export const useSelectedCardsStore = create<StateType>()((set) => ({
+export const useSelectedCardsStore = create<StateType>()((set, get) => ({
   selectedCards: [],
-  actions: {
-    addCard: (card) =>
-      set((state) => ({
-        ...state,
-        selectedCards: [...state.selectedCards, card],
-      })),
 
-    removeCard: (card) =>
+  actions: {
+    isSelected: (id) => get().selectedCards.some((item) => item.mal_id === id),
+
+    toggleSelectedCard: (card) => {
+      const selectedCards = get().selectedCards;
+      const isSelected = get().actions.isSelected(card.mal_id);
+      const newSelectedCards = isSelected
+        ? selectedCards.filter((item) => item.mal_id !== card.mal_id)
+        : [...selectedCards, card];
+
       set((state) => ({
         ...state,
-        selectedCards: state.selectedCards.filter(
-          (selectedCard) => card.mal_id !== selectedCard.mal_id
-        ),
-      })),
+        selectedCards: newSelectedCards,
+      }));
+    },
 
     cleanSelectedCards: () => set(() => ({ selectedCards: [] })),
   },
@@ -34,5 +37,6 @@ export const useSelectedCardsStore = create<StateType>()((set) => ({
 
 export const useSelectedCards = () =>
   useSelectedCardsStore((state) => state.selectedCards);
+
 export const useStoreActions = () =>
   useSelectedCardsStore((state) => state.actions);

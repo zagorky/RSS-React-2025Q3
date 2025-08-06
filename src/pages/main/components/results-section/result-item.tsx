@@ -2,7 +2,6 @@ import type { DataItem } from '~types/types';
 
 import { ItemImg } from '~components/item-img/item-img';
 import { withDataTestId } from '~utils/utilities';
-import React from 'react';
 import { Link, useLocation } from 'react-router';
 
 import { Checkbox } from '~/components/checkbox/checkbox';
@@ -10,7 +9,7 @@ import { Checkbox } from '~/components/checkbox/checkbox';
 type ResultItemProps = {
   data: DataItem;
   isChecked: boolean;
-  onCheck: (data: DataItem, isChecked: boolean) => void;
+  onCheck: (data: DataItem) => void;
 };
 
 export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
@@ -24,15 +23,11 @@ export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
     },
   } = data;
 
-  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onCheck(data, event.currentTarget.checked);
-  };
-
   return (
     <li className="result-item-wrapper relative">
       <Checkbox
         checked={isChecked}
-        onChange={handleCheck}
+        onChange={() => onCheck(data)}
         classNames="absolute top-2 left-2"
       />
 
