@@ -73,7 +73,13 @@ export const mainPageLoader2 =
     const data = await queryClient.ensureQueryData(
       fetchAnimeQuery(query, page, request.signal)
     );
-    return { results: data.data, query, page, pagination: data.pagination };
+
+    return {
+      results: data.data,
+      query,
+      page,
+      pagination: data.pagination,
+    };
   };
 
 export const detailedPageLoader2 =

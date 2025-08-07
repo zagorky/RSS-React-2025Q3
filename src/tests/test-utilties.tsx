@@ -73,7 +73,6 @@ export const createDetailedTestRouter = (
         children: [
           {
             path: 'anime/:id',
-            id: 'detailed-page',
             loader: loaderData
               ? () => loaderData
               : detailedPageLoader2(queryClient),

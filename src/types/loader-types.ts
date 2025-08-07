@@ -4,7 +4,7 @@ export type LoaderDataType = {
   results: DataItem[];
   query: string;
   pagination: PaginationType;
-  error: string | null;
+  error?: string | null;
 };
 
 export type LoaderDetailedPageType =

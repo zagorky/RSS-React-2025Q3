@@ -1,6 +1,8 @@
 import type { Navigation } from 'react-router';
 
+import { QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
+import { queryClient } from '~api/query-client';
 import { Loader } from '~components/loader/loader';
 import { useNavigation } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
@@ -17,7 +19,11 @@ describe('Loader', () => {
   it('should not render when navigation state is "idle"', () => {
     vi.mocked(useNavigation).mockReturnValue({ state: 'idle' } as Navigation);
 
-    render(<Loader />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Loader />
+      </QueryClientProvider>
+    );
 
     expect(screen.queryByTestId('loader')).toBeNull();
   });
@@ -27,8 +33,11 @@ describe('Loader', () => {
       state: 'submitting',
     } as Navigation);
 
-    render(<Loader />);
-
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Loader />
+      </QueryClientProvider>
+    );
     expect(screen.queryByTestId('loader')).toBeNull();
   });
 
@@ -37,8 +46,11 @@ describe('Loader', () => {
       state: 'loading',
     } as Navigation);
 
-    render(<Loader />);
-
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Loader />
+      </QueryClientProvider>
+    );
     const loader = screen.getByTestId('loader');
     expect(loader).toBeInTheDocument();
 

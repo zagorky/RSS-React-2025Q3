@@ -13,10 +13,10 @@ import {
 } from '~/mocks/data';
 import { createDetailedTestRouter } from '~/tests/test-utilties';
 
-describe.skip('Detail Page', async () => {
+describe('Detail Page', async () => {
   const testId = specificQueryResponse.data[0].mal_id.toString();
 
-  test('should render results when data is provided', async () => {
+  test.skip('should render results when data is provided', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <RouterProvider
