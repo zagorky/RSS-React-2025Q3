@@ -33,9 +33,9 @@ export const ResultsSection = () => {
         <ul
           {...withDataTestId('result-list')}
           className={cn(
-            'grid w-full gap-6 transition-all duration-300 ease-in-out',
+            'grid w-full gap-6 transition-all duration-100 ease-in-out',
             outlet
-              ? 'grid-cols-1 md:grid-cols-2'
+              ? 'hidden grid-cols-1 sm:grid lg:grid-cols-2'
               : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
           )}
         >
@@ -48,7 +48,14 @@ export const ResultsSection = () => {
             />
           ))}
         </ul>
-        <Outlet />
+        <div
+          className={cn(
+            'min-w-0 overflow-hidden transition-all duration-300',
+            outlet ? 'w-full max-w-[350px]' : 'min-w-0'
+          )}
+        >
+          <Outlet />
+        </div>{' '}
       </div>
       <Pagination pagination={pagination} />
     </section>

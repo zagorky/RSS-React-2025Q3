@@ -12,7 +12,7 @@ const DetailedPage = () => {
   const data = useDetailedPageQuery();
 
   return (
-    <section className="relative z-20 w-full max-w-[350px]">
+    <section className="relative z-20">
       <Link
         to={`..${location.search}`}
         type="button"
