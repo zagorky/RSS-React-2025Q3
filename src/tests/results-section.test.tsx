@@ -1,5 +1,7 @@
+import { QueryClientProvider } from '@tanstack/react-query';
 import { waitFor } from '@testing-library/dom';
 import { render, screen } from '@testing-library/react';
+import { queryClient } from '~api/query-client';
 import { http, HttpResponse } from 'msw';
 import { RouterProvider } from 'react-router';
 
@@ -31,7 +33,11 @@ describe('Results Section', () => {
     );
 
     const router = createMainTestRouter(mockLoaderData);
-    render(<RouterProvider router={router} />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('result-list')).toBeInTheDocument();
@@ -54,11 +60,13 @@ describe('Results Section', () => {
     );
 
     const router = createMainTestRouter(mockEmptyLoaderData);
-    render(<RouterProvider router={router} />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('empty-list')).toBeInTheDocument();
-    });
+    expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
   });
 
   test.skip('should render error fallback when error exists', async () => {
@@ -74,10 +82,12 @@ describe('Results Section', () => {
     };
 
     const router = createMainTestRouter(errorLoaderData);
-    render(<RouterProvider router={router} />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('error-fallback')).toBeInTheDocument();
-    });
+    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
   });
 });
