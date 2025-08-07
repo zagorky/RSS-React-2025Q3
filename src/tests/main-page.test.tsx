@@ -8,7 +8,6 @@ import { test } from 'vitest';
 import {
   emptyResponse,
   mockEmptyLoaderData,
-  mockEmptyQueryLoaderData,
   mockLoaderData,
   specificQueryResponse,
 } from '~/mocks/data';
@@ -62,19 +61,6 @@ describe('Main Page', () => {
     );
   });
 
-  test.skip('should initialize with query from localStorage', async () => {
-    localStorageMock.getItem.mockReturnValueOnce('');
-    render(
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider
-          router={createMainTestRouter(mockEmptyQueryLoaderData)}
-        />
-      </QueryClientProvider>
-    );
-
-    expect(await screen.findByRole('textbox')).toHaveValue('');
-  });
-
   test('should show empty state when no results', async () => {
     localStorageMock.getItem.mockReturnValueOnce('beeeeeeeeeeeee');
     server.use(
@@ -89,17 +75,5 @@ describe('Main Page', () => {
       </QueryClientProvider>
     );
     expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
-  });
-
-  test.skip('should show error state when API fails', async () => {
-    localStorageMock.getItem.mockReturnValueOnce('error-query');
-    server.use(
-      http.get('https://api.jikan.moe/v4/anime', () => {
-        return new HttpResponse(null, { status: 500 });
-      })
-    );
-
-    render(<RouterProvider router={createMainTestRouter()} />);
-    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
   });
 });
