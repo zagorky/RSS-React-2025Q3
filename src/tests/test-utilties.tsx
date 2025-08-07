@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 
 import { render, type RenderResult, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { detailedPageLoader2, mainPageLoader } from '~api/loaders';
+import { detailedPageLoader2, mainPageLoader2 } from '~api/loaders';
 import { queryClient } from '~api/query-client';
 import { Layout } from '~components/layout/layout';
 import DetailedPage from '~pages/detailed/detailed-page';
@@ -45,7 +45,9 @@ export const createMainTestRouter = (
           {
             path: '/',
             id: 'main-page',
-            loader: loaderData ? () => loaderData : mainPageLoader,
+            loader: loaderData
+              ? () => loaderData
+              : mainPageLoader2(queryClient),
             element: <MainPage />,
             errorElement: <ErrorPage />,
           },
