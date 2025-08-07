@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router';
 describe('ErrorFallback', () => {
   const mockError = new Error('Test error message');
 
-  test('should renders correctly wtesth Error object', () => {
+  test('should renders correctly with Error object', () => {
     render(<ErrorFallback error={mockError} />, { wrapper: BrowserRouter });
 
     expect(screen.getByTestId('error-fallback')).toBeInTheDocument();

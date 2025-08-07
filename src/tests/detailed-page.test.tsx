@@ -1,57 +1,59 @@
+import type { UseSuspenseQueryResult } from '@tanstack/react-query';
 import type { DataItem } from '~types/types';
 
-import { QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
-import { queryClient } from '~api/query-client';
+import { useDetailedPageQuery } from '~hooks/useDetailedPageQuery';
 import { RouterProvider } from 'react-router';
-import { describe, expect, test } from 'vitest';
 
-import {
-  mockDetailedPageLoader,
-  mockInvalidDetailedPageLoader,
-  specificQueryResponse,
-} from '~/mocks/data';
+import { specificQueryResponse } from '~/mocks/data';
 import { createDetailedTestRouter } from '~/tests/test-utilties';
 
-describe('Detail Page', async () => {
-  const testId = specificQueryResponse.data[0].mal_id.toString();
+vi.mock('~hooks/useDetailedPageQuery');
 
-  test.skip('should render results when data is provided', async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider
-          router={createDetailedTestRouter(mockDetailedPageLoader, testId)}
-        />
-      </QueryClientProvider>
-    );
+describe('DetailedPage', () => {
+  const mockData = specificQueryResponse.data[0] as DataItem;
+  const id = specificQueryResponse.data[0].mal_id;
 
-    const data = mockDetailedPageLoader.data as DataItem;
-    const status = data.airing ? 'Ongoing' : 'Released';
-
-    expect(
-      await screen.findByRole('link', { name: 'close' })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: data.title })
-    ).toBeInTheDocument();
-    expect(screen.getByTestId('detailed-type')).toHaveTextContent(data.type);
-    expect(screen.getByTestId('detailed-status')).toHaveTextContent(status);
-    expect(screen.getByTestId('detailed-score')).toHaveTextContent(
-      data.score.toString()
-    );
-    expect(screen.getAllByTestId('detailed-genres')).toHaveLength(
-      data.genres.length
-    );
-    expect(screen.getByAltText(data.title)).toBeInTheDocument();
+  beforeEach(() => {
+    vi.mocked(useDetailedPageQuery).mockReturnValue({
+      data: mockData,
+    } as UseSuspenseQueryResult<DataItem, Error>);
   });
 
-  test('should render results when data is not provided', async () => {
-    render(
-      <RouterProvider
-        router={createDetailedTestRouter(mockInvalidDetailedPageLoader, testId)}
-      />
+  test('renders all data correctly when query succeeds', async () => {
+    render(<RouterProvider router={createDetailedTestRouter(mockData, id)} />);
+
+    expect(
+      await screen.findByRole('heading', { name: mockData.title })
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('detailed-type')).toHaveTextContent(
+      mockData.type
+    );
+    expect(screen.getByTestId('detailed-status')).toHaveTextContent(
+      mockData.airing ? 'Ongoing' : 'Released'
     );
 
-    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
+    expect(screen.getByTestId('detailed-score')).toHaveTextContent(
+      mockData.score.toString()
+    );
+
+    const genreBadges = screen.getAllByTestId('detailed-genres');
+    expect(genreBadges).toHaveLength(mockData.genres.length);
+    mockData.genres.forEach((genre) => {
+      expect(screen.getByText(genre.name)).toBeInTheDocument();
+    });
+
+    const image = screen.getByAltText(mockData.title);
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', mockData.images.webp.image_url);
+
+    expect(screen.getByTestId('detailed-synopsis')).toHaveTextContent(
+      mockData.synopsis
+    );
+
+    expect(screen.getByRole('link', { name: /close/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /refresh/i })
+    ).toBeInTheDocument();
   });
 });

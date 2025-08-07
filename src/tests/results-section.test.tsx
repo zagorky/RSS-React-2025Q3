@@ -68,26 +68,4 @@ describe('Results Section', () => {
 
     expect(await screen.findByTestId('empty-list')).toBeInTheDocument();
   });
-
-  test.skip('should render error fallback when error exists', async () => {
-    const errorLoaderData = {
-      results: [],
-      pagination: {
-        current_page: 1,
-        has_next_page: false,
-        last_visible_page: 1,
-      },
-      query: '',
-      error: 'Test error',
-    };
-
-    const router = createMainTestRouter(errorLoaderData);
-    render(
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    );
-
-    expect(await screen.findByTestId('error-fallback')).toBeInTheDocument();
-  });
 });

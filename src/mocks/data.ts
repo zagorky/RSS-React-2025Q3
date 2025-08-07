@@ -410,13 +410,6 @@ export const mockEmptyLoaderData: LoaderDataType = {
   error: null,
 };
 
-export const mockEmptyQueryLoaderData: LoaderDataType = {
-  results: emptyQueryResponse.data,
-  pagination: emptyQueryResponse.pagination,
-  query: '',
-  error: null,
-};
-
 export const mockDetailedPageLoader: LoaderDetailedPageType = {
   data: specificQueryResponse.data[0],
   error: null,

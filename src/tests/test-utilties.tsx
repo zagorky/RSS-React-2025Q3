@@ -1,13 +1,12 @@
 import type { UserEvent } from '@testing-library/user-event';
-import type {
-  LoaderDataType,
-  LoaderDetailedPageType,
-} from '~types/loader-types';
+import type { LoaderDataType } from '~types/loader-types';
+import type { DataItem } from '~types/types';
 import type { ReactNode } from 'react';
 
+import { QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderResult, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { detailedPageLoader2, mainPageLoader2 } from '~api/loaders';
+import { mainPageLoader2 } from '~api/loaders';
 import { queryClient } from '~api/query-client';
 import { Layout } from '~components/layout/layout';
 import DetailedPage from '~pages/detailed/detailed-page';
@@ -62,26 +61,21 @@ export const createMainTestRouter = (
 };
 
 export const createDetailedTestRouter = (
-  loaderData?: LoaderDetailedPageType,
-  testId: string = '1'
+  loaderData?: DataItem,
+  testId: string | number = '1'
 ) => {
   return createMemoryRouter(
     [
       {
-        path: '/',
-        element: <Layout />,
-        errorElement: <ErrorPage />,
+        path: 'anime/:id',
         hydrateFallbackElement: <></>,
-        children: [
-          {
-            path: 'anime/:id',
-            loader: loaderData
-              ? () => loaderData
-              : detailedPageLoader2(queryClient),
-            element: <DetailedPage />,
-            errorElement: <ErrorPage />,
-          },
-        ],
+        loader: () => loaderData,
+        element: (
+          <QueryClientProvider client={queryClient}>
+            <DetailedPage />
+          </QueryClientProvider>
+        ),
+        errorElement: <ErrorPage />,
       },
     ],
     {
