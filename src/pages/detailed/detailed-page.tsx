@@ -12,7 +12,7 @@ const DetailedPage = () => {
   const { data } = useDetailedPageQuery();
 
   return (
-    <section className="relative z-20">
+    <section className="relative z-20 justify-items-center">
       <Link
         to={`..${location.search}`}
         type="button"
