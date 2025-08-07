@@ -2,7 +2,9 @@ import type { LoaderFunctionArgs } from 'react-router';
 
 import { type QueryClient, queryOptions } from '@tanstack/react-query';
 import { fetchAnimeData, fetchAnimeDataItem } from '~api/api';
-import { assertIsNonNullable, retrieveQueryFormLS } from '~utils/utilities';
+import { assertIsNonNullable } from '~utils/utilities';
+
+import { useQueryStore } from '~/store/search-query-store';
 
 export const fetchAnimeQuery = (
   query: string,
@@ -30,15 +32,13 @@ export const fetchAnimeByIdQuery = (
 export const mainPageLoader2 =
   (queryClient: QueryClient) =>
   async ({ request }: LoaderFunctionArgs) => {
-    const url = new URL(request.url);
-    const queryFromUrl = url.searchParams.get('q') ?? '';
-    const queryFromLS = retrieveQueryFormLS();
-    const query = queryFromLS || queryFromUrl;
-
-    const page = Number(url.searchParams.get('page') ?? '1');
+    const { actions } = useQueryStore.getState();
+    actions.syncWithUrl(request.url);
+    const { query, page } = useQueryStore.getState();
+    const pageNumber = Number(page);
 
     const data = await queryClient.ensureQueryData(
-      fetchAnimeQuery(query, page, request.signal)
+      fetchAnimeQuery(query, pageNumber, request.signal)
     );
 
     return {

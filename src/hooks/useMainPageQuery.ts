@@ -10,11 +10,9 @@ export const useMainPageQuery = () => {
 
   const {
     data: { data: results, pagination },
-  } = useSuspenseQuery(fetchAnimeQuery(query, page));
+  } = useSuspenseQuery(fetchAnimeQuery(query, Number(page)));
 
   return {
-    query,
-    page,
     results,
     pagination,
   };
