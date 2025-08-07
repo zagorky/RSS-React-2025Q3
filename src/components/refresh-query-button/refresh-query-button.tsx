@@ -1,8 +1,9 @@
-import { queryClient } from '~api/query-client';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '~components/button/button';
 import { RefreshCw } from 'lucide-react';
 
 export const RefreshQueryButton = () => {
+  const queryClient = useQueryClient();
   return (
     <Button
       variant="secondary"
