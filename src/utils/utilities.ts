@@ -1,15 +1,6 @@
 import type { ApiResponseType } from '~types/types';
 
-import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
 import { hasProperty, isObject, isResponseType } from '~types/type-guards';
-
-export const retrieveQueryFormLS = () => {
-  return localStorage.getItem(SEARCH_QUERY_LS_KEY) ?? '';
-};
-
-export const setQueryToLS = (value: string) => {
-  localStorage.setItem(SEARCH_QUERY_LS_KEY, value);
-};
 
 export const getErrorMessageFromUnknown = (error: unknown) => {
   return error instanceof Error ? error.message : 'Fetching data error';
