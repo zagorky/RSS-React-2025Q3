@@ -33,12 +33,12 @@ export const ResultItem = ({ isChecked, onCheck, data }: ResultItemProps) => {
 
       <Link className="contents" to={`anime/${id}${location.search}`}>
         <div {...withDataTestId('result-item')}>
-          <p
+          <h4
             {...withDataTestId('result-item-title')}
-            className="result-item-title"
+            className="result-item-title truncate"
           >
             {title}
-          </p>
+          </h4>
           <ItemImg url={urlImg} alt={title} />
           <p
             {...withDataTestId('result-item-desc')}

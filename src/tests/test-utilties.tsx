@@ -7,7 +7,8 @@ import type { ReactNode } from 'react';
 
 import { render, type RenderResult, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { detailedPageLoader, mainPageLoader } from '~api/loaders';
+import { detailedPageLoader2, mainPageLoader } from '~api/loaders';
+import { queryClient } from '~api/query-client';
 import { Layout } from '~components/layout/layout';
 import DetailedPage from '~pages/detailed/detailed-page';
 import ErrorPage from '~pages/error/error-page';
@@ -73,7 +74,9 @@ export const createDetailedTestRouter = (
           {
             path: 'anime/:id',
             id: 'detailed-page',
-            loader: loaderData ? () => loaderData : detailedPageLoader,
+            loader: loaderData
+              ? () => loaderData
+              : detailedPageLoader2(queryClient),
             element: <DetailedPage />,
             errorElement: <ErrorPage />,
           },

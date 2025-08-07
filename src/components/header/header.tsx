@@ -1,5 +1,4 @@
-import { queryClient } from '~api/query-client';
-import { Button } from '~components/button/button';
+import { RefreshQueryButton } from '~components/refresh-query-button/refresh-query-button';
 import { ThemeSwitcher } from '~components/theme-switcher/theme-switcher';
 import { navBar } from '~config/navigation';
 import { cn } from '~utils/cn';
@@ -9,6 +8,8 @@ export const Header = () => {
   return (
     <header className="border-primary-600 w-full border-b-3 px-4 py-6 text-center text-sm shadow-sm">
       <nav className="flex flex-col items-center gap-2 md:flex-row md:justify-center md:gap-6">
+        <RefreshQueryButton />
+
         {navBar.map((item) => (
           <NavLink
             key={item.path}
@@ -29,13 +30,6 @@ export const Header = () => {
           </NavLink>
         ))}
         <ThemeSwitcher />
-        <Button
-          variant="secondary"
-          classNames="cursor-pointer"
-          onClick={() => queryClient.clear()}
-        >
-          Clean cache
-        </Button>
       </nav>
     </header>
   );
