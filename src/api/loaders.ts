@@ -22,7 +22,7 @@ export const fetchAnimeByIdQuery = (
   signal?: AbortSignal
 ) =>
   queryOptions({
-    queryKey: ['detailed-page', id],
+    queryKey: ['detailed-page', String(id)],
     queryFn: async () =>
       await fetchAnimeDataItem({
         id: String(id),
