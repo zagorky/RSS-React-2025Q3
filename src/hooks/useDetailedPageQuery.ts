@@ -10,7 +10,5 @@ export const useDetailedPageQuery = () => {
       Awaited<ReturnType<ReturnType<typeof detailedPageLoader2>>>
     >();
 
-  const { data } = useSuspenseQuery(fetchAnimeByIdQuery(id));
-
-  return data;
+  return useSuspenseQuery(fetchAnimeByIdQuery(id));
 };

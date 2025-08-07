@@ -9,7 +9,7 @@ import { Link, useLocation } from 'react-router';
 
 const DetailedPage = () => {
   const location = useLocation();
-  const data = useDetailedPageQuery();
+  const { data } = useDetailedPageQuery();
 
   return (
     <section className="relative z-20">
