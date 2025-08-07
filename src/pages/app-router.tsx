@@ -1,4 +1,5 @@
-import { detailedPageLoader, mainPageLoader } from '~api/loaders';
+import { detailedPageLoader2, mainPageLoader2 } from '~api/loaders';
+import { queryClient } from '~api/query-client';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
 import { navigation } from '~config/navigation';
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: navigation.main,
-        loader: mainPageLoader,
+        loader: mainPageLoader2(queryClient),
         id: 'main-page',
         errorElement: <ErrorPage />,
         element: (
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: navigation.detailed,
-            loader: detailedPageLoader,
+            loader: detailedPageLoader2(queryClient),
             element: (
               <Suspense fallback={<Loader />}>
                 <DetailedPage />

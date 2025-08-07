@@ -1,12 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchAnimeDataItem } from '~api/api';
+import type { detailedPageLoader2 } from '~api/loaders';
 
-export const useDetailedPageQuery = (id: string | undefined) => {
-  return useQuery({
-    queryKey: ['detailed-page', id],
-    queryFn: async ({ signal }) =>
-      await fetchAnimeDataItem({ id: String(id), signal }),
-    enabled: !!id,
-    throwOnError: true,
-  });
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { fetchAnimeByIdQuery } from '~api/loaders';
+import { useLoaderData } from 'react-router';
+
+export const useDetailedPageQuery = () => {
+  const { mal_id: id } =
+    useLoaderData<
+      Awaited<ReturnType<ReturnType<typeof detailedPageLoader2>>>
+    >();
+
+  const { data } = useSuspenseQuery(fetchAnimeByIdQuery(id));
+
+  return data;
 };
