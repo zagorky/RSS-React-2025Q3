@@ -2,6 +2,7 @@ import { Flyout } from '~components/flyout/flyout';
 import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
 import { navigation } from '~config/navigation';
 import { useLocalStorage } from '~hooks/useLocalStorage';
+import { useMainPageQuery } from '~hooks/useMainPageQuery';
 import { useNavigate } from 'react-router';
 
 import { ResultsSection } from './components/results-section/results-section';
@@ -9,7 +10,8 @@ import { SearchForm } from './components/search-form/search-form';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { valueFromLS, setValueToLS } = useLocalStorage(SEARCH_QUERY_LS_KEY);
+  const { setValueToLS } = useLocalStorage(SEARCH_QUERY_LS_KEY);
+  const { query } = useMainPageQuery();
 
   const handleSearch = (query: string) => {
     setValueToLS(query);
@@ -24,7 +26,7 @@ const MainPage = () => {
 
   return (
     <>
-      <SearchForm searchQuery={valueFromLS} onSubmit={handleSearch} />
+      <SearchForm searchQuery={query} onSubmit={handleSearch} />
       <ResultsSection />
       <Flyout />
     </>
