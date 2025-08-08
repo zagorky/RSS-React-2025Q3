@@ -11,6 +11,18 @@ const DetailedPage = () => {
   const location = useLocation();
   const { data } = useDetailedPageQuery();
 
+  const {
+    title,
+    type,
+    airing,
+    synopsis,
+    score,
+    genres,
+    images: {
+      webp: { image_url: url },
+    },
+  } = data;
+
   return (
     <section className="relative z-20 justify-items-center">
       <Link
@@ -34,25 +46,23 @@ const DetailedPage = () => {
           </Link>
           <RefreshQueryButton />
         </div>
-        <h2 className={cn('result-item-title', 'line-clamp-3')}>
-          {data.title}
-        </h2>
+        <h2 className={cn('result-item-title', 'line-clamp-3')}>{title}</h2>
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 leading-relaxed sm:grid-cols-2">
           <InfoBadge
             name={'Type'}
-            data={data.type}
+            data={type}
             color={'bg-gray-400/80'}
             testId={'detailed-type'}
           />
           <InfoBadge
-            data={data.airing ? 'Ongoing' : 'Released'}
+            data={airing ? 'Ongoing' : 'Released'}
             name={'Status'}
             testId={'detailed-status'}
             color={'bg-info/80'}
           />
 
           <InfoBadge
-            data={data.score ?? <span>No info</span>}
+            data={score ?? <span>N/A</span>}
             name={'Score'}
             testId={'detailed-score'}
             color={'bg-warning/80'}
@@ -61,7 +71,7 @@ const DetailedPage = () => {
           <div className="sm:col-span-2">
             <div className="mb-1 font-semibold">Genres</div>
             <div className="mt-2 flex flex-wrap gap-2">
-              {data.genres.map((genre, i) => (
+              {genres.map((genre, i) => (
                 <InfoBadge
                   key={`${genre.mal_id}-${i}`}
                   data={genre.name}
@@ -74,10 +84,10 @@ const DetailedPage = () => {
         </div>
 
         <div {...withDataTestId('detailed-img')} className="pt-4">
-          <ItemImg url={data.images.webp.image_url} alt={data.title} />
+          <ItemImg url={url} alt={title} />
         </div>
 
-        <p {...withDataTestId('detailed-synopsis')}>{data.synopsis}</p>
+        <p {...withDataTestId('detailed-synopsis')}>{synopsis}</p>
       </button>
     </section>
   );
