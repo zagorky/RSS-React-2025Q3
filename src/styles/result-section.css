@@ -5,7 +5,7 @@
 }
 
 .result-item-title {
-  @apply text-primary-600 hover:text-secondary-600 text-lg font-bold transition-colors duration-300;
+  @apply text-primary-800 hover:text-secondary-600 text-lg font-bold transition-colors duration-300;
 }
 
 .result-item-desc {

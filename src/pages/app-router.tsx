@@ -18,6 +18,8 @@ export const router = createBrowserRouter([
         path: navigation.main,
         loader: mainPageLoader2(queryClient),
         id: 'main-page',
+        hydrateFallbackElement: <Loader />,
+
         errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loader />}>
@@ -27,6 +29,8 @@ export const router = createBrowserRouter([
         children: [
           {
             path: navigation.detailed,
+            hydrateFallbackElement: <Loader />,
+
             loader: detailedPageLoader2(queryClient),
             element: (
               <Suspense fallback={<Loader />}>
