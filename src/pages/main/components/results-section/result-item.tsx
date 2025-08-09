@@ -1,11 +1,11 @@
-import type {DataItem} from '~types/types';
+import type { DataItem } from '~types/types';
 
-import {ItemImg} from '~components/item-img/item-img';
-import {withDataTestId} from '~utils/utilities';
-import {memo} from 'react';
-import {Link, useLocation} from 'react-router';
+import { ItemImg } from '~components/item-img/item-img';
+import { withDataTestId } from '~utils/utilities';
+import { memo } from 'react';
+import { Link, useLocation } from 'react-router';
 
-import {Checkbox} from '~/components/checkbox/checkbox';
+import { Checkbox } from '~/components/checkbox/checkbox';
 
 type ResultItemProps = {
   data: DataItem;

@@ -5,7 +5,7 @@ import { act } from '@testing-library/react';
 const { create: actualCreate, createStore: actualCreateStore } =
   await vi.importActual<typeof ZustandExportedTypes>('zustand');
 
-export const storeResetFns = new Set<() => void>();
+export const storeResetFns = new Set<VoidFunction>();
 
 const createUncurried = <T>(
   stateCreator: ZustandExportedTypes.StateCreator<T>

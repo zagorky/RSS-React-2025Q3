@@ -8,7 +8,7 @@ export type StateType = {
   actions: {
     isSelected: (id: number) => boolean;
     toggleSelectedCard: (card: DataItem) => void;
-    cleanSelectedCards: () => void;
+    cleanSelectedCards: VoidFunction;
   };
 };
 
