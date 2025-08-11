@@ -1,23 +1,82 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["*"],
-      "~api/*": ["api/*"],
-      "~pages/*": ["pages/*"],
-      "~hooks/*": ["hooks/*"],
-      "~utils/*": ["utils/*"],
-      "~config/*": ["config/*"],
-      "~types/*": ["types/*"],
-      "~styles/*": ["styles/*"],
-      "~components/*": ["components/*"],
-      "~mocks": ["mocks/*"],
-      "~tests": ["tests/*"]
-    }
-  }
+      "~/*": [
+        "*"
+      ],
+      "~api/*": [
+        "api/*"
+      ],
+      "~pages/*": [
+        "pages/*"
+      ],
+      "~hooks/*": [
+        "hooks/*"
+      ],
+      "~utils/*": [
+        "utils/*"
+      ],
+      "~config/*": [
+        "config/*"
+      ],
+      "~types/*": [
+        "types/*"
+      ],
+      "~styles/*": [
+        "styles/*"
+      ],
+      "~components/*": [
+        "components/*"
+      ],
+      "~mocks": [
+        "mocks/*"
+      ],
+      "~tests": [
+        "tests/*"
+      ]
+    },
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "./dist/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
