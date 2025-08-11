@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,
@@ -30,44 +26,19 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "~/*": [
-        "*"
-      ],
-      "~api/*": [
-        "api/*"
-      ],
-      "~pages/*": [
-        "pages/*"
-      ],
-      "~hooks/*": [
-        "hooks/*"
-      ],
-      "~utils/*": [
-        "utils/*"
-      ],
-      "~config/*": [
-        "config/*"
-      ],
-      "~types/*": [
-        "types/*"
-      ],
-      "~styles/*": [
-        "styles/*"
-      ],
-      "~components/*": [
-        "components/*"
-      ],
-      "~mocks": [
-        "mocks/*"
-      ],
-      "~tests": [
-        "tests/*"
-      ]
+      "~/*": ["*"],
+      "~api/*": ["api/*"],
+      "~pages/*": ["pages/*"],
+      "~hooks/*": ["hooks/*"],
+      "~utils/*": ["utils/*"],
+      "~config/*": ["config/*"],
+      "~types/*": ["types/*"],
+      "~styles/*": ["styles/*"],
+      "~components/*": ["components/*"],
+      "~mocks": ["mocks/*"],
+      "~tests": ["tests/*"]
     },
-    "types": [
-      "vitest/globals",
-      "@testing-library/jest-dom"
-    ]
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": [
     "**/*.ts",
@@ -76,7 +47,5 @@
     "next-env.d.ts",
     "./dist/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
