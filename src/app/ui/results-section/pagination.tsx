@@ -1,15 +1,12 @@
+'use client';
 import type { PaginationType } from '~types/types';
 
+import { assertIsNonNullable } from '~lib/utilities';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 type PaginationProps = {
   pagination: PaginationType;
-};
-
-const getPageLink = (page: number) => {
-  const searchParameter = new URLSearchParams(location.search);
-  searchParameter.set('page', page.toString());
-  return `${location.pathname}?${searchParameter.toString()}`;
 };
 
 export const Pagination = ({ pagination }: PaginationProps) => {
@@ -18,6 +15,16 @@ export const Pagination = ({ pagination }: PaginationProps) => {
     last_visible_page: lastPage,
     has_next_page: hasNextPage,
   } = pagination;
+
+  const searchParams = useSearchParams();
+  assertIsNonNullable(searchParams);
+  const pathname = usePathname();
+
+  const getPageLink = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', page.toString());
+    return `${pathname}?${params.toString()}`;
+  };
 
   return (
     <div className="text-md flex justify-center gap-2 pb-4">

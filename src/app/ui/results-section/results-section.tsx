@@ -1,30 +1,25 @@
-'use client';
-import type { DataItem } from '~types/types';
+import {fetchAnimeData} from '~lib/api/api';
+import {cn} from '~lib/cn';
+import {withDataTestId} from '~lib/utilities';
+import {EmptyList} from '~ui/empty-list/empty-list';
+import {Loader} from '~ui/loader/loader';
+import {Pagination} from '~ui/results-section/pagination';
 
-import { fetchAnimeData } from '~lib/api/api';
-import { cn } from '~lib/cn';
-import { withDataTestId } from '~lib/utilities';
-import { EmptyList } from '~ui/empty-list/empty-list';
-import { Loader } from '~ui/loader/loader';
-import { Pagination } from '~ui/results-section/pagination';
-
-import { ResultItem } from './result-item';
+import {ResultItem} from './result-item';
 
 type ResultsSectionProps = {
   query: string;
   page: number;
 };
-const toggleSelectedCard = () => {};
 
 export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
   const { data: results, pagination } = await fetchAnimeData({ query, page });
 
   // const { toggleSelectedCard } = useStoreActions();
   // const selectedCards = useSelectedCards();
-  const selectedCards: DataItem[] = [];
 
-  const isItemChecked = (id: number) =>
-    selectedCards.some((card) => card.mal_id === id);
+  // const isItemChecked = (id: number) =>
+  //   selectedCards.some((card) => card.mal_id === id);
 
   if (results.length === 0) {
     return <EmptyList />;
@@ -45,8 +40,8 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
         >
           {results.map((result, i) => (
             <ResultItem
-              isChecked={isItemChecked(result.mal_id)}
-              onCheck={toggleSelectedCard}
+              // isChecked={isItemChecked(result.mal_id)}
+              // onCheck={toggleSelectedCard}
               key={result.mal_id + 'and' + i}
               data={result}
             />

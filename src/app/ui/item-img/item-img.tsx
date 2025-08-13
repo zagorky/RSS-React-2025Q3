@@ -20,6 +20,7 @@ export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
           height={350}
           src={url}
           alt={alt}
+          unoptimized={true}
         />
       ) : (
         fallback || <div className="result-item-img">There is no image :(</div>
