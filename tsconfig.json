@@ -28,7 +28,6 @@
     "paths": {
       "~app/*": ["app/*"],
       "~api/*": ["api/*"],
-      "~pages/*": ["pages/*"],
       "~hooks/*": ["hooks/*"],
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],

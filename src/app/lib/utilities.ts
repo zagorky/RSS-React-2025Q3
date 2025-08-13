@@ -2,6 +2,18 @@ import type { ApiResponseType } from '~types/types';
 
 import { hasProperty, isObject, isResponseType } from '~types/type-guards';
 
+export const generateHref = ({
+  query,
+  page,
+}: {
+  query: string;
+  page: string;
+}) => {
+  const q = query ? `?query=${query}` : '';
+  const p = page ? `page=${page}` : '';
+  return `?query=${q}&page=${p}`;
+};
+
 export const getErrorMessageFromUnknown = (error: unknown) => {
   return error instanceof Error ? error.message : 'Fetching data error';
 };
