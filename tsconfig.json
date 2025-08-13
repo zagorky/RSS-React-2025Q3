@@ -26,19 +26,18 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["*"],
+      "~app/*": ["app/*"],
       "~api/*": ["api/*"],
       "~pages/*": ["pages/*"],
       "~hooks/*": ["hooks/*"],
-      "~utils/*": ["utils/*"],
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
       "~styles/*": ["styles/*"],
-      "~components/*": ["components/*"],
       "~mocks": ["mocks/*"],
-      "~tests": ["tests/*"]
-    },
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+      "~tests": ["tests/*"],
+      "~ui/*": ["app/ui/*"],
+      "~lib/*": ["app/lib/*"]
+    }
   },
   "include": [
     "**/*.ts",
