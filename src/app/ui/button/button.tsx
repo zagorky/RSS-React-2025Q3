@@ -1,0 +1,42 @@
+import type { ButtonHTMLAttributes } from 'react';
+
+import { cn } from '~lib/cn';
+import { withDataTestId } from '~lib/utilities';
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  dataTestId?: string;
+  classNames?: string;
+  variant?: 'default' | 'secondary' | 'outline';
+};
+
+const variants = {
+  default: 'btn',
+  outline: 'btn-outline',
+  secondary: 'btn-secondary',
+};
+
+export const Button = ({
+  classNames = '',
+  disabled,
+  children,
+  variant = 'default',
+  dataTestId = '',
+  type,
+  ...props
+}: ButtonProps) => {
+  return (
+    <button
+      {...props}
+      {...withDataTestId(dataTestId)}
+      className={cn(
+        variants[variant],
+        classNames,
+        disabled && 'cursor-not-allowed opacity-50'
+      )}
+      type={type}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};

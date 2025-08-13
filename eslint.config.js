@@ -58,7 +58,10 @@ export default tseslint.config(
       // perfectionist
       'perfectionist/sort-imports': 'error',
       // import
-      'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
+      'import/extensions': [
+        'error',
+        { ts: 'never', tsx: 'never', css: 'always' },
+      ],
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       'import/no-cycle': ['error', { maxDepth: Infinity }],
       'import/first': 'error',

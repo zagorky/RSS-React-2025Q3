@@ -32,9 +32,6 @@
       "~hooks/*": ["hooks/*"],
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
-      "~styles/*": ["styles/*"],
-      "~mocks": ["mocks/*"],
-      "~tests": ["tests/*"],
       "~ui/*": ["app/ui/*"],
       "~lib/*": ["app/lib/*"]
     }

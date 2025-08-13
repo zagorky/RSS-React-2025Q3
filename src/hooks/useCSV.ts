@@ -1,6 +1,6 @@
 import type { DataItem } from '~types/types';
 
-import { generateCSV } from '~utils/csv-helpers';
+import { generateCSV } from '~lib/csv-helpers';
 import { useCallback, useEffect, useRef } from 'react';
 
 export const useCSV = (data: DataItem[]) => {

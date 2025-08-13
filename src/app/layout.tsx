@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
-import { type ReactNode } from 'react';
+import { Header } from '~ui/header/header';
 
 import './globals.css';
+import { type ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'HUH App',
@@ -25,7 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="main-wrapper">
+          <Header />
+          <main className="main">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }
