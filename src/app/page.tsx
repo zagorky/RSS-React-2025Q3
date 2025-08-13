@@ -1,5 +1,5 @@
-import {Flyout} from '~ui/flyout/flyout';
-import {SearchForm} from '~ui/search-form/search-form';
+import { Flyout } from '~ui/flyout/flyout';
+import { SearchForm } from '~ui/search-form/search-form';
 
 const MainPage = (
   props: Readonly<{
