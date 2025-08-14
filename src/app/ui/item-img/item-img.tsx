@@ -23,7 +23,7 @@ export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
           unoptimized={true}
         />
       ) : (
-        fallback || <div className="result-item-img">There is no image :(</div>
+        fallback
       )}
     </div>
   );

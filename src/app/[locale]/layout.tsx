@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 
-import { Header } from '~ui/header/header';
+import { routing } from '~i18n/routing';
 
 import './globals.css';
+import { Header } from '~ui/header/header';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 import { type ReactNode } from 'react';
 
 export const metadata: Metadata = {
@@ -19,18 +22,26 @@ export const metadata: Metadata = {
     'Search for anime like Sousou no Frieren, Cowboy Bebop, and more. Discover details, genres, and synopses.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
-        <div className="main-wrapper">
-          <Header />
-          <main className="main">{children}</main>
-        </div>
+        <NextIntlClientProvider>
+          <div className="main-wrapper">
+            <Header />
+            <main className="main">{children}</main>
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,16 +1,18 @@
 'use client';
+import { Link } from '~i18n/navigation';
 import { cn } from '~lib/cn';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
 type NavElementProps = {
   path: string;
-  title: string;
+  translationKey: string;
 };
 
-function NavElement({ path, title }: Readonly<NavElementProps>) {
+function NavElement({ path, translationKey }: Readonly<NavElementProps>) {
   const pathname = usePathname();
+  const t = useTranslations('Navigation');
 
   return (
     <Link
@@ -26,7 +28,7 @@ function NavElement({ path, title }: Readonly<NavElementProps>) {
         }
       )}
     >
-      {title}
+      {t(translationKey)}
     </Link>
   );
 }

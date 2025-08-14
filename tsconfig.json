@@ -32,7 +32,8 @@
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
       "~ui/*": ["app/ui/*"],
-      "~lib/*": ["app/lib/*"]
+      "~lib/*": ["app/lib/*"],
+      "~i18n/*": ["i18n/*"]
     }
   },
   "include": [

@@ -8,10 +8,10 @@ export const navigation = {
 export const navBar = [
   {
     path: navigation.main,
-    title: 'Main page',
+    title: 'main',
   },
   {
     path: navigation.about,
-    title: 'About page',
+    title: 'about',
   },
 ];

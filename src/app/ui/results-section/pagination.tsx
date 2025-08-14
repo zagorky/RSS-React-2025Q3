@@ -2,6 +2,8 @@
 import type { PaginationType } from '~types/types';
 
 import { assertIsNonNullable } from '~lib/utilities';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
@@ -19,6 +21,7 @@ export const Pagination = ({ pagination }: PaginationProps) => {
   const searchParams = useSearchParams();
   assertIsNonNullable(searchParams);
   const pathname = usePathname();
+  const t = useTranslations('Pagination');
 
   const getPageLink = (page: number) => {
     const params = new URLSearchParams(searchParams);
@@ -33,23 +36,27 @@ export const Pagination = ({ pagination }: PaginationProps) => {
           className="btn transition-all duration-200"
           href={getPageLink(currentPage - 1)}
         >
-          Prev
+          <ChevronLeft />
         </Link>
       ) : (
-        <span className="btn cursor-not-allowed opacity-50">Prev</span>
+        <span className="btn cursor-not-allowed opacity-50">
+          <ChevronLeft />
+        </span>
       )}
       <span className="btn">
-        {currentPage} of {lastPage}
+        {t('pageIndicator', { currentPage, lastPage })}
       </span>
       {hasNextPage ? (
         <Link
           className="btn transition-all duration-200"
           href={getPageLink(currentPage + 1)}
         >
-          Next
+          <ChevronRight />
         </Link>
       ) : (
-        <span className="btn cursor-not-allowed opacity-50">Next</span>
+        <span className="btn cursor-not-allowed opacity-50">
+          <ChevronRight />
+        </span>
       )}
     </div>
   );

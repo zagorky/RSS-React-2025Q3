@@ -2,7 +2,7 @@
 
 import type { DataItem } from '~types/types';
 
-import { assertIsNonNullable, withDataTestId } from '~lib/utilities';
+import { withDataTestId } from '~lib/utilities';
 import { Checkbox } from '~ui/checkbox/checkbox';
 import { ItemImg } from '~ui/item-img/item-img';
 import Link from 'next/link';
@@ -26,7 +26,6 @@ export const ResultItem = memo(({ isChecked, data }: ResultItemProps) => {
   } = data;
 
   const searchParams = useSearchParams();
-  assertIsNonNullable(searchParams);
 
   return (
     <li className="result-item-wrapper relative">

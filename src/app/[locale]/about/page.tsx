@@ -1,4 +1,5 @@
 import { withDataTestId } from '~lib/utilities';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export function generateStaticParams() {
@@ -6,6 +7,8 @@ export function generateStaticParams() {
 }
 
 export default function Page() {
+  const t = useTranslations('AboutPage');
+
   return (
     <section
       {...withDataTestId('about-page-section')}
@@ -13,28 +16,21 @@ export default function Page() {
     >
       <div className="p-8 sm:p-10">
         <h1 className="text-primary-700 hover:text-secondary-600 mb-6 text-3xl font-bold">
-          About Me
+          {t('title')}
         </h1>
 
         <div className="space-y-5 text-lg text-gray-700">
-          <p className="leading-relaxed">
-            Hi! My name is{' '}
-            <span className="text-primary-600 font-semibold">Daria</span> and I
-            went crazy at{' '}
-            <span className="text-primary-600 font-medium">
-              Rolling Scopes School
-            </span>
-          </p>
+          <p className="leading-relaxed">{t('content.introduction')}</p>
 
           <p>
-            This project is part of the{' '}
+            {t('content.projectDescription')}{' '}
             <Link
               href="https://rs.school/courses/reactjs"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-600 hover:text-primary-700 font-medium underline-offset-4 transition-colors hover:underline"
             >
-              RS School React course
+              {t('content.projectDescriptionLink')}
             </Link>
           </p>
         </div>
@@ -46,7 +42,7 @@ export default function Page() {
             rel="noopener noreferrer"
             className="btn"
           >
-            My GitHub
+            {t('content.githubButton')}
           </Link>
         </div>
       </div>

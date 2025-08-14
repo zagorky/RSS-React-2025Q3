@@ -1,0 +1,56 @@
+{
+  "Navigation": {
+    "main": "Main page",
+    "about": "About page"
+  },
+  "SearchForm": {
+    "placeholder": "Search",
+    "submit": "Search"
+  },
+  "ResultsSection": {
+    "emptyList": {
+      "title": "No matching results",
+      "description": "Try another search query"
+    }
+  },
+  "Pagination": {
+    "prev": "Prev",
+    "next": "Next",
+    "pageIndicator": "{currentPage} of {lastPage}"
+  },
+  "AboutPage": {
+    "title": "About Me",
+    "content": {
+      "introduction": "Hi! My name is <1>Daria</1> and I fell in love with development while studying at <3>Rolling Scopes School</3>",
+      "projectDescription": "This project is part of the <1>RS School React course</1>",
+      "githubButton": "My GitHub"
+    },
+    "links": {
+      "rssCourse": "https://rs.school/courses/reactjs",
+      "github": "https://github.com/zagorky"
+    }
+  },
+  "ErrorPages": {
+    "error": {
+      "title": "Что-то пошло не так!",
+      "heading": "{errorName}",
+      "message": "{errorMessage}",
+      "tryAgain": "Попробовать снова"
+    },
+    "notFound": {
+      "title": "404 - Страница не найдена",
+      "message": "Запрашиваемая страница не существует",
+      "goHome": "На главную"
+    }
+  },
+  "Flyout": {
+    "selectedCards": "Selected cards: {count}",
+    "download": "Download",
+    "unselectAll": "Unselect all"
+  },
+  "ThemeSwitcher": {
+    "toggleTheme": "Toggle theme",
+    "lightTheme": "Switch to dark theme",
+    "darkTheme": "Switch to light theme"
+  }
+}

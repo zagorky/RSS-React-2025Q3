@@ -1,6 +1,7 @@
 'use client';
 import { withDataTestId } from '~lib/utilities';
 import { Button } from '~ui/button/button';
+import { useTranslations } from 'next-intl';
 
 export default function ErrorPage({
   error,
@@ -9,9 +10,11 @@ export default function ErrorPage({
   error: Error & { digest?: string };
   reset: () => void;
 }>) {
+  const t = useTranslations('ErrorPages.error');
+
   return (
     <main className="flex h-full flex-col items-center justify-center">
-      <h2 className="text-center">Something went wrong!</h2>
+      <h2 className="text-center">{t('title')}</h2>
 
       <div
         {...withDataTestId('error-fallback')}
@@ -22,10 +25,14 @@ export default function ErrorPage({
             !
           </div>
         </div>
-        <h1 className="text-error text-6xl">{error.name}</h1>
+        <h1 className="text-error text-6xl">
+          {t('heading', { errorName: error.name })}
+        </h1>
 
         <div className="mb-6 rounded-lg p-4">
-          <p className="text-text-secondary text-lg">{error.message}</p>
+          <p className="text-text-secondary text-lg">
+            {t('message', { errorMessage: error.message })}
+          </p>
         </div>
         <div>
           <Button
@@ -33,7 +40,7 @@ export default function ErrorPage({
             classNames="m-4"
             dataTestId={'error-fallback-button'}
           >
-            Try again
+            {t('tryAgain')}
           </Button>
         </div>
       </div>

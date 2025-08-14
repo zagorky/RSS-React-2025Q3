@@ -1,9 +1,10 @@
 'use client';
 import type { FormEvent } from 'react';
 
-import { assertIsNonNullable, withDataTestId } from '~lib/utilities';
+import { withDataTestId } from '~lib/utilities';
 import { isString } from '~types/type-guards';
 import { Button } from '~ui/button/button';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type SearchFormProps = {
@@ -12,9 +13,9 @@ type SearchFormProps = {
 
 export const SearchForm = ({ searchQuery }: SearchFormProps) => {
   const searchParams = useSearchParams();
-  assertIsNonNullable(searchParams);
   const pathname = usePathname();
   const { replace } = useRouter();
+  const t = useTranslations('SearchForm');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,18 +38,18 @@ export const SearchForm = ({ searchQuery }: SearchFormProps) => {
       onSubmit={handleSubmit}
     >
       <label>
-        <span className="sr-only">Search</span>
+        <span className="sr-only">{t('placeholder')}</span>
         <input
           {...withDataTestId('search-form-input')}
           name="search-input"
           defaultValue={searchQuery}
           className="inpt"
           type="text"
-          placeholder={searchQuery ?? 'Search'}
+          placeholder={searchQuery}
         />
       </label>
       <Button classNames="cursor-pointer" type="submit">
-        Search
+        {t('submit')}
       </Button>
     </form>
   );

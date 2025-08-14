@@ -2,6 +2,7 @@
 import { useCSV } from '~hooks/useCSV';
 import { withDataTestId } from '~lib/utilities';
 import { Button } from '~ui/button/button';
+import { useTranslations } from 'next-intl';
 
 import {
   useSelectedCards,
@@ -12,6 +13,7 @@ export const Flyout = () => {
   const selectedCards = useSelectedCards();
   const { cleanSelectedCards } = useStoreActions();
   const { linkReference, downloadCSV } = useCSV(selectedCards);
+  const t = useTranslations('Flyout');
 
   return (
     selectedCards.length > 0 && (
@@ -20,7 +22,7 @@ export const Flyout = () => {
         className="bg-bg border-border-primary text-text-primary mt-2rounded-xl fixed bottom-6 left-6 rounded-xl border-3 p-2"
       >
         <h3 className="result-item-title text-center">
-          Selected cards: {selectedCards.length}
+          {t('selectedCards', { count: selectedCards.length })}
         </h3>
         <div className="flex gap-4">
           <Button
@@ -29,16 +31,16 @@ export const Flyout = () => {
             classNames="cursor-pointer"
           >
             <a ref={linkReference} className="hidden">
-              Download link
+              {t('download')}
             </a>
-            Download
+            {t('download')}
           </Button>
           <Button
             onClick={cleanSelectedCards}
             variant="outline"
             classNames="cursor-pointer"
           >
-            Unselect all
+            {t('unselectAll')}
           </Button>
         </div>
       </div>

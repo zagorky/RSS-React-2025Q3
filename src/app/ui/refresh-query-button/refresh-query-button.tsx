@@ -10,7 +10,7 @@ export const RefreshQueryButton = () => {
       variant="secondary"
       classNames="cursor-pointer"
       onClick={() => queryClient.resetQueries()}
-      aria-label="refresh api cåall button"
+      aria-label="refresh api call button"
     >
       <RefreshCw className="h-4.5" />
     </Button>

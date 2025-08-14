@@ -1,0 +1,57 @@
+{
+  "Navigation": {
+    "main": "Главная страница",
+    "about": "О проекте"
+  },
+  "SearchForm": {
+    "placeholder": "Поиск",
+    "submit": "Найти"
+  },
+  "ResultsSection": {
+    "emptyList": {
+      "title": "Ничего не найдено",
+      "description": "Попробуйте другой запрос"
+    }
+  },
+  "Pagination": {
+    "prev": "Назад",
+    "next": "Вперед",
+    "pageIndicator": "{currentPage} из {lastPage}"
+  },
+  "AboutPage": {
+    "title": "Обо мне",
+    "content": {
+      "introduction": "Привет! Меня зовут Дарья и я сошла с ума во время обучения в Rolling Scopes School",
+      "projectDescription": "Этот проект является частью",
+      "projectDescriptionLink": "курса React от RS School",
+      "githubButton": "Мой GitHub"
+    },
+    "links": {
+      "rssCourse": "https://rs.school/courses/reactjs",
+      "github": "https://github.com/zagorky"
+    }
+  },
+  "ErrorPages": {
+    "error": {
+      "title": "Something went wrong!",
+      "heading": "{errorName}",
+      "message": "{errorMessage}",
+      "tryAgain": "Try again"
+    },
+    "notFound": {
+      "title": "404 - Page Not Found",
+      "message": "The page you're looking for doesn't exist",
+      "goHome": "Go to Main Page"
+    }
+  },
+  "Flyout": {
+    "selectedCards": "Выбрано карточек: {count}",
+    "download": "Скачать",
+    "unselectAll": "Сбросить все"
+  },
+  "ThemeSwitcher": {
+    "toggleTheme": "Переключить тему",
+    "lightTheme": "Переключить на тёмную тему",
+    "darkTheme": "Переключить на светлую тему"
+  }
+}

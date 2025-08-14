@@ -20,7 +20,7 @@ export default function NotFoundPage() {
           <p className="text-text-secondary text-lg">Something went wrong</p>
         </div>
         <div>
-          <Link href={'/'} className="btn m-4">
+          <Link href={'/public'} className="btn m-4">
             Go to Main
           </Link>
         </div>

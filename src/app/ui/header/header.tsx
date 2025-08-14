@@ -9,7 +9,11 @@ export const Header = () => {
         {/*<RefreshQueryButton />*/}
 
         {navBar.map((item) => (
-          <NavElement key={item.title} path={item.path} title={item.title} />
+          <NavElement
+            key={item.title}
+            path={item.path}
+            translationKey={item.title}
+          />
         ))}
         <ThemeSwitcher />
       </nav>
