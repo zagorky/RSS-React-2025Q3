@@ -51,13 +51,9 @@ export const getSearchEndpoint = (options: GetSearchEndpointOption = {}) => {
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const fetchAnimeData = async ({
-  query,
-  signal,
-  page,
-}: FetchAnimeDataOption) => {
+export const fetchAnimeData = async ({ query, page }: FetchAnimeDataOption) => {
   const url = getSearchEndpoint({ query, page });
-  const response = await fetch(url, { signal: signal });
+  const response = await fetch(url, { next: { revalidate: 60 } });
 
   assertIsResponseOk(response);
 

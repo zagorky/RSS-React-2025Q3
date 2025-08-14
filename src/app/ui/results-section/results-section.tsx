@@ -2,7 +2,6 @@ import { fetchAnimeData } from '~lib/api/api';
 import { cn } from '~lib/cn';
 import { withDataTestId } from '~lib/utilities';
 import { EmptyList } from '~ui/empty-list/empty-list';
-import { Loader } from '~ui/loader/loader';
 import { Pagination } from '~ui/pagination/pagination';
 
 import { ResultItem } from './result-item';
@@ -27,7 +26,6 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <Loader />
       <div className="flex justify-center gap-4 p-4">
         <ul
           {...withDataTestId('result-list')}
@@ -47,6 +45,7 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
             />
           ))}
         </ul>
+        {/*<Suspense fallback={<Loader />}>*/}
         {/*<div*/}
         {/*  className={cn(*/}
         {/*    'justify-items-center overflow-hidden transition-all duration-300',*/}
@@ -55,6 +54,7 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
         {/*>*/}
         {/*  <Outlet />*/}
         {/*</div>*/}
+        {/*</Suspense>*/}
       </div>
       <Pagination pagination={pagination} />
     </section>

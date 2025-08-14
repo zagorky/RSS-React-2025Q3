@@ -2,11 +2,9 @@
 
 import type { DataItem } from '~types/types';
 
-import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import { Checkbox } from '~ui/checkbox/checkbox';
 import { ItemImg } from '~ui/item-img/item-img';
-import { useSearchParams } from 'next/navigation';
 import { memo } from 'react';
 
 type ResultItemProps = {
@@ -19,13 +17,11 @@ export const ResultItem = memo(({ isChecked, data }: ResultItemProps) => {
   const {
     title,
     synopsis,
-    mal_id: id,
+    // mal_id: id,
     images: {
       webp: { image_url: urlImg },
     },
   } = data;
-
-  const searchParams = useSearchParams();
 
   return (
     <li className="result-item-wrapper relative">
@@ -35,23 +31,20 @@ export const ResultItem = memo(({ isChecked, data }: ResultItemProps) => {
         classNames="absolute top-2 left-2"
       />
 
-      <Link className="contents" href={`anime/${id}${searchParams.toString()}`}>
-        <div {...withDataTestId('result-item')}>
-          <h4
-            {...withDataTestId('result-item-title')}
-            className="result-item-title truncate"
-          >
-            {title}
-          </h4>
-          <ItemImg url={urlImg} alt={title} />
-          <p
-            {...withDataTestId('result-item-desc')}
-            className="result-item-desc"
-          >
-            {synopsis}
-          </p>
-        </div>
-      </Link>
+      {/*<Link className="contents" href={`anime/${id}${searchParams.toString()}`}>*/}
+      <div {...withDataTestId('result-item')}>
+        <h4
+          {...withDataTestId('result-item-title')}
+          className="result-item-title truncate"
+        >
+          {title}
+        </h4>
+        <ItemImg url={urlImg} alt={title} />
+        <p {...withDataTestId('result-item-desc')} className="result-item-desc">
+          {synopsis}
+        </p>
+      </div>
+      {/*</Link>*/}
     </li>
   );
 });
