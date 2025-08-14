@@ -33,15 +33,15 @@
   },
   "ErrorPages": {
     "error": {
-      "title": "Something went wrong!",
+      "title": "Что-то пошло не так!",
       "heading": "{errorName}",
       "message": "{errorMessage}",
-      "tryAgain": "Try again"
+      "tryAgain": "Попробовать снова"
     },
     "notFound": {
-      "title": "404 - Page Not Found",
-      "message": "The page you're looking for doesn't exist",
-      "goHome": "Go to Main Page"
+      "title": "404 - Страница не найдена",
+      "message": "Запрашиваемая страница не существует",
+      "goHome": "На главную"
     }
   },
   "Flyout": {

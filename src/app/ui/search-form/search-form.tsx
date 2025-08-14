@@ -1,11 +1,12 @@
 'use client';
 import type { FormEvent } from 'react';
 
+import { usePathname, useRouter } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import { isString } from '~types/type-guards';
 import { Button } from '~ui/button/button';
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 type SearchFormProps = {
   searchQuery: string;
@@ -31,6 +32,7 @@ export const SearchForm = ({ searchQuery }: SearchFormProps) => {
     }
     replace(`${pathname}?${params.toString()}`);
   };
+
   return (
     <form
       {...withDataTestId('search-form')}

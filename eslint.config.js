@@ -15,7 +15,7 @@ import importPlugin from 'eslint-plugin-import';
 export default tseslint.config(
   unicornPlugin.configs.recommended,
 
-  { ignores: ['dist', '**/*.js', '**/*.config.js', '**/*.config.ts'] },
+  { ignores: ['dist', '.next', '**/*.js', '**/*.config.js', '**/*.config.ts'] },
   {
     extends: [
       js.configs.recommended,

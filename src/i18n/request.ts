@@ -1,7 +1,7 @@
-import {type AbstractIntlMessages, hasLocale} from 'next-intl';
-import {getRequestConfig} from 'next-intl/server';
+import { type AbstractIntlMessages, hasLocale } from 'next-intl';
+import { getRequestConfig } from 'next-intl/server';
 
-import {routing} from './routing';
+import { routing } from './routing';
 
 type Messages = {
   default: AbstractIntlMessages;
