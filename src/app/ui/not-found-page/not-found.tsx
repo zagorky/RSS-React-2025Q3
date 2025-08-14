@@ -1,7 +1,7 @@
 'use client';
+import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 export default function NotFoundPage() {
   const t = useTranslations('ErrorPages.notFound');
@@ -17,13 +17,13 @@ export default function NotFoundPage() {
             !
           </div>
         </div>
-        <h1 className="text-error text-6xl">{t('title')}</h1>
+        <h1 className="text-error text-center text-6xl">{t('title')}</h1>
 
         <div className="mb-6 rounded-lg p-4">
           <p className="text-text-secondary text-lg">{t('message')}</p>
         </div>
         <div>
-          <Link href={'/public'} className="btn m-4">
+          <Link href={'/'} className="btn m-4">
             {t('goHome')}
           </Link>
         </div>

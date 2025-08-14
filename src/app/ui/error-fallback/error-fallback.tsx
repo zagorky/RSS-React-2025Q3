@@ -1,6 +1,6 @@
+import { Link } from '~i18n/navigation';
 import { getErrorMessageFromUnknown, withDataTestId } from '~lib/utilities';
 import { Button } from '~ui/button/button';
-import Link from 'next/link';
 
 type ErrorFallbackProps = {
   error: Error | string;

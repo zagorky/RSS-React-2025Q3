@@ -14,8 +14,6 @@ export default function ErrorPage({
 
   return (
     <main className="flex h-full flex-col items-center justify-center">
-      <h2 className="text-center">{t('title')}</h2>
-
       <div
         {...withDataTestId('error-fallback')}
         className="m-auto flex h-[calc(100vh-200px)] max-w-xl flex-col items-center justify-center gap-10"

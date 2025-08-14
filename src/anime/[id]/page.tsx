@@ -4,7 +4,6 @@
 // import { InfoBadge } from '~ui/info-badge/info-badge';
 // import { ItemImg } from '~ui/item-img/item-img';
 // import { XIcon } from 'lucide-react';
-// import Link from 'next/link';
 //
 // const DetailedPage = async (props: {
 //   params: { id: string };
@@ -97,6 +96,5 @@
 // };
 //
 // export default DetailedPage;
-import * as console from 'node:console';
 
 console.log('');

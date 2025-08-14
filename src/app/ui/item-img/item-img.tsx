@@ -13,15 +13,19 @@ export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
   return (
     <div className="overflow-hidden rounded-md">
       {url ? (
-        <Image
-          {...withDataTestId('result-item-img')}
-          className={cn('result-item-img')}
-          width={225}
-          height={350}
-          src={url}
-          alt={alt}
-          unoptimized={true}
-        />
+        <div
+          className={cn('relative aspect-square overflow-hidden rounded-md')}
+        >
+          <Image
+            className="object-cover"
+            {...withDataTestId('result-item-img')}
+            src={url}
+            alt={alt}
+            priority={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            fill
+          />
+        </div>
       ) : (
         fallback
       )}

@@ -1,6 +1,6 @@
+import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 export function generateStaticParams() {
   return [{ slug: ['about'] }];

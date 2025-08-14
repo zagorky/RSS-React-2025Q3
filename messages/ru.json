@@ -1,6 +1,6 @@
 {
   "Navigation": {
-    "main": "Главная страница",
+    "main": "Главная",
     "about": "О проекте"
   },
   "SearchForm": {
@@ -14,8 +14,6 @@
     }
   },
   "Pagination": {
-    "prev": "Назад",
-    "next": "Вперед",
     "pageIndicator": "{currentPage} из {lastPage}"
   },
   "AboutPage": {
@@ -53,5 +51,9 @@
     "toggleTheme": "Переключить тему",
     "lightTheme": "Переключить на тёмную тему",
     "darkTheme": "Переключить на светлую тему"
+  },
+  "LocaleSwitcher": {
+    "label": "Переключить язык",
+    "locale": "{locale, select, ru {🇷🇺} en {🇺🇸} other {Unknown}}"
   }
 }

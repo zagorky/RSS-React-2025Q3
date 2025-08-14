@@ -2,10 +2,10 @@
 
 import type { DataItem } from '~types/types';
 
+import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import { Checkbox } from '~ui/checkbox/checkbox';
 import { ItemImg } from '~ui/item-img/item-img';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { memo } from 'react';
 

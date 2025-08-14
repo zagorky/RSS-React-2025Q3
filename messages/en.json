@@ -14,15 +14,14 @@
     }
   },
   "Pagination": {
-    "prev": "Prev",
-    "next": "Next",
     "pageIndicator": "{currentPage} of {lastPage}"
   },
   "AboutPage": {
     "title": "About Me",
     "content": {
-      "introduction": "Hi! My name is <1>Daria</1> and I fell in love with development while studying at <3>Rolling Scopes School</3>",
-      "projectDescription": "This project is part of the <1>RS School React course</1>",
+      "introduction": "Hi! My name is Daria and I went crazy at Rolling Scopes School",
+      "projectDescription": "This project is part of the",
+      "projectDescriptionLink": "RS School React course",
       "githubButton": "My GitHub"
     },
     "links": {
@@ -52,5 +51,9 @@
     "toggleTheme": "Toggle theme",
     "lightTheme": "Switch to dark theme",
     "darkTheme": "Switch to light theme"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {🇷🇺} en {🇺🇸} other {Unknown}}"
   }
 }

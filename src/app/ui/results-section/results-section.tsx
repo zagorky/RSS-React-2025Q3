@@ -3,7 +3,7 @@ import { cn } from '~lib/cn';
 import { withDataTestId } from '~lib/utilities';
 import { EmptyList } from '~ui/empty-list/empty-list';
 import { Loader } from '~ui/loader/loader';
-import { Pagination } from '~ui/results-section/pagination';
+import { Pagination } from '~ui/pagination/pagination';
 
 import { ResultItem } from './result-item';
 
