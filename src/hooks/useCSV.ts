@@ -1,6 +1,6 @@
-import type {DataItem} from '~types/types';
+import type { DataItem } from '~types/types';
 
-import {useCallback, useEffect, useRef} from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export const useCSV = (data: DataItem[]) => {
   const linkReference = useRef<HTMLAnchorElement>(null);

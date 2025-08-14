@@ -1,17 +1,15 @@
 # RSS-React-2025Q3
 
-A modern React application built with Vite, TypeScript, and Tailwind CSS, following best practices for code quality and testing.
+A modern React application built with Next.js, TypeScript, and Tailwind CSS, following best practices for state management and code quality.
 
-## Deploy - [Click](https://zagorky-react2025q3.netlify.app)
+## Deploy - [Click](https://zagorky-nextjs-ssr.vercel.app/)
 
 ## 📦 Features
 
-- ⚡ **Vite** for fast development and builds
+- ⚡ **Next.js** for SSR, SSG, and fast builds
 - 🏗️ **React 19** with TypeScript support
 - 🎨 **Tailwind CSS** for utility-first styling
-- ✅ **Vitest** for unit testing with coverage
-- 🧹 **ESLint** + **Prettier** + **Stylelint** for code quality
-- � **Husky** for Git hooks
+- 🧠 **Zustand** for state management
 - 📚 **Jikan API** integration for anime data
 
 ## 🚀 Getting Started
@@ -27,48 +25,42 @@ A modern React application built with Vite, TypeScript, and Tailwind CSS, follow
    ```bash
    git clone https://github.com/zagorky/RSS-React-2025Q3.git
    ```
-
+   
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-## 🛠️ Scripts
+3. Run development server:
+    ```bash 
+    npm run dev
+    ```
+### 🛠️ Scripts
 
-| Command            | Description                                  |
-|--------------------|----------------------------------------------|
-| `npm run dev`      | Start development server                     |
-| `npm run build`    | Build for production                         |
-| `npm run preview`  | Preview production build locally             |
-| `npm run lint`     | Run ESLint                                   |
-| `npm run stylelint`| Run Stylelint                                |
-| `npm run format`   | Run Prettier                                 |
-| `npm run type-check` | Check TypeScript types                     |
-| `npm test:coverage` | Run tests with coverage report             |
-| `npm run lint:fix` | Fix ESLint issues                            |
-| `npm run stylelint:fix` | Fix Stylelint issues                  |
-| `npm run format:fix` | Fix formatting issues                     |
+| Command              | Description              |
+| -------------------- | ------------------------ |
+| `npm run dev`        | Start development server |
+| `npm run build`      | Build for production     |
+| `npm run start`      | Start production server  |
+| `npm run lint`       | Run ESLint               |
+| `npm run format`     | Run Prettier             |
+| `npm run type-check` | Check TypeScript types   |
 
-## 🌐 API Integration
+### 🌐 API Integration
 
-This project uses the [Jikan API](https://docs.api.jikan.moe) for anime data. See the [API documentation](https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch) for available endpoints.
+This project uses the Jikan API for anime data. See the API documentation for available endpoints.
 
-## 🧪 Testing
-
-Tests are written using Vitest and Testing Library. To run tests:
-
-```bash
-npm test:coverage
-```
-
-## 🤝 Contributing
+### 🤝 Contributing
 
 1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
----
+2. Create your feature branch (git checkout -b feature/AmazingFeature)
+
+3. Commit your changes (git commit -m 'Add some AmazingFeature')
+
+4. Push to the branch (git push origin feature/AmazingFeature)
+
+5. Open a Pull Request
+___
 
 Made with ❤️ for RSS React 2025Q3 course
