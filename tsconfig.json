@@ -31,6 +31,7 @@
       "~ui/*": ["app/ui/*"],
       "~lib/*": ["app/lib/*"],
       "~hooks/*": ["hooks/*"],
+      "~store/*": ["store/*"],
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
       "~i18n/*": ["i18n/*"]

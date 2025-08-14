@@ -1,13 +1,9 @@
 'use client';
 import { useCSV } from '~hooks/useCSV';
 import { withDataTestId } from '~lib/utilities';
+import { useSelectedCards, useStoreActions } from '~store/selected-cards-store';
 import { Button } from '~ui/button/button';
 import { useTranslations } from 'next-intl';
-
-import {
-  useSelectedCards,
-  useStoreActions,
-} from '../../../store/selected-cards-store';
 
 export const Flyout = () => {
   const selectedCards = useSelectedCards();

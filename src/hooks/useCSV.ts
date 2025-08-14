@@ -1,7 +1,6 @@
-import type { DataItem } from '~types/types';
+import type {DataItem} from '~types/types';
 
-import { generateCSV } from '~lib/csv-helpers';
-import { useCallback, useEffect, useRef } from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 
 export const useCSV = (data: DataItem[]) => {
   const linkReference = useRef<HTMLAnchorElement>(null);
@@ -11,29 +10,37 @@ export const useCSV = (data: DataItem[]) => {
     return () => {
       if (objectUrlReference.current) {
         URL.revokeObjectURL(objectUrlReference.current);
-        objectUrlReference.current = null;
       }
     };
   }, []);
 
-  const downloadCSV = useCallback(() => {
-    if (!linkReference.current) {
+  const downloadCSV = useCallback(async () => {
+    if (data.length === 0 || !linkReference.current) {
       return;
     }
 
-    const csvData = generateCSV(data);
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    try {
+      if (!objectUrlReference.current) {
+        const response = await fetch('/api/download-csv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
 
-    if (objectUrlReference.current) {
-      URL.revokeObjectURL(objectUrlReference.current);
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
+        }
+
+        const blob = await response.blob();
+        objectUrlReference.current = URL.createObjectURL(blob);
+      }
+
+      linkReference.current.href = objectUrlReference.current;
+      linkReference.current.download = `${data.length}-items.csv`;
+      linkReference.current.click();
+    } catch (error) {
+      console.error('Error while download CSV:', error);
     }
-
-    const url = URL.createObjectURL(blob);
-    objectUrlReference.current = url;
-
-    linkReference.current.href = url;
-    linkReference.current.download = `${data.length}-items.csv`;
-    linkReference.current.click();
   }, [data]);
 
   return {

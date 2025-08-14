@@ -3,31 +3,39 @@
 import type { DataItem } from '~types/types';
 
 import { withDataTestId } from '~lib/utilities';
+import {
+  useSelectedCardsStore,
+  useStoreActions,
+} from '~store/selected-cards-store';
 import { Checkbox } from '~ui/checkbox/checkbox';
 import { ItemImg } from '~ui/item-img/item-img';
 import { memo } from 'react';
 
 type ResultItemProps = {
   data: DataItem;
-  isChecked?: boolean;
-  onCheck?: (data: DataItem) => void;
 };
 
-export const ResultItem = memo(({ isChecked, data }: ResultItemProps) => {
+export const ResultItem = memo(({ data }: ResultItemProps) => {
   const {
     title,
     synopsis,
-    // mal_id: id,
+    mal_id: id,
     images: {
       webp: { image_url: urlImg },
     },
   } = data;
 
+  const { toggleSelectedCard } = useStoreActions();
+
+  const isChecked = useSelectedCardsStore((state) =>
+    state.selectedCards.some((card) => card.mal_id === id)
+  );
+
   return (
     <li className="result-item-wrapper relative">
       <Checkbox
         checked={isChecked}
-        // onChange={() => onCheck(data)}
+        onChange={() => toggleSelectedCard(data)}
         classNames="absolute top-2 left-2"
       />
 

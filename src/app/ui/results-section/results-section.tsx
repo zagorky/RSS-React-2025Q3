@@ -14,12 +14,6 @@ type ResultsSectionProps = {
 export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
   const { data: results, pagination } = await fetchAnimeData({ query, page });
 
-  // const { toggleSelectedCard } = useStoreActions();
-  // const selectedCards = useSelectedCards();
-
-  // const isItemChecked = (id: number) =>
-  //   selectedCards.some((card) => card.mal_id === id);
-
   if (results.length === 0) {
     return <EmptyList />;
   }
@@ -37,12 +31,7 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
           )}
         >
           {results.map((result, i) => (
-            <ResultItem
-              // isChecked={isItemChecked(result.mal_id)}
-              // onCheck={toggleSelectedCard}
-              key={result.mal_id + 'and' + i}
-              data={result}
-            />
+            <ResultItem key={result.mal_id + 'and' + i} data={result} />
           ))}
         </ul>
         {/*<Suspense fallback={<Loader />}>*/}
