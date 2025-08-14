@@ -89,6 +89,7 @@ export default tseslint.config(
       'unicorn/number-literal-case': 'off',
       'unicorn/numeric-separators-style': 'off',
       'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-string-raw': 'off',
       'unicorn/prevent-abbreviations': [
         'error',
         {

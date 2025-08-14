@@ -27,12 +27,12 @@
     "baseUrl": "./src",
     "paths": {
       "~app/*": ["app/*"],
-      "~api/*": ["api/*"],
+      "~styles/*": ["app/styles/*"],
+      "~ui/*": ["app/ui/*"],
+      "~lib/*": ["app/lib/*"],
       "~hooks/*": ["hooks/*"],
       "~config/*": ["config/*"],
       "~types/*": ["types/*"],
-      "~ui/*": ["app/ui/*"],
-      "~lib/*": ["app/lib/*"],
       "~i18n/*": ["i18n/*"]
     }
   },

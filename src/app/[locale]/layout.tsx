@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 
 import { routing } from '~i18n/routing';
-
-import './globals.css';
 import { Header } from '~ui/header/header';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import './[locale]/globals.css';
+import '~styles/index.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return children;
