@@ -1,11 +1,12 @@
 'use client';
 import type { PaginationType } from '~types/types';
 
-import { assertIsNonNullable } from '~lib/utilities';
+import { usePathname, useRouter } from '~i18n/navigation';
+import { Button } from '~ui/button/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useTransition } from 'react';
 
 type PaginationProps = {
   pagination: PaginationType;
@@ -18,46 +19,42 @@ export const Pagination = ({ pagination }: PaginationProps) => {
     has_next_page: hasNextPage,
   } = pagination;
 
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
-  assertIsNonNullable(searchParams);
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
   const t = useTranslations('Pagination');
 
-  const getPageLink = (page: number) => {
+  function handleChangePage(page: number) {
     const params = new URLSearchParams(searchParams);
     params.set('page', page.toString());
-    return `${pathname}?${params.toString()}`;
-  };
+    const queryParams = Object.fromEntries(params.entries());
+    startTransition(() => {
+      replace({ pathname, query: queryParams }, { scroll: false });
+    });
+  }
 
   return (
     <div className="text-md flex justify-center gap-2 pb-4">
-      {currentPage > 1 ? (
-        <Link
-          className="btn transition-all duration-200"
-          href={getPageLink(currentPage - 1)}
-        >
-          <ChevronLeft />
-        </Link>
-      ) : (
-        <span className="btn cursor-not-allowed opacity-50">
-          <ChevronLeft />
-        </span>
-      )}
+      <Button
+        className="btn transition-all duration-200"
+        onClick={() => handleChangePage(currentPage - 1)}
+        disabled={isPending || currentPage === 1}
+      >
+        <ChevronLeft />
+      </Button>
+
       <span className="btn">
         {t('pageIndicator', { currentPage, lastPage })}
       </span>
-      {hasNextPage ? (
-        <Link
-          className="btn transition-all duration-200"
-          href={getPageLink(currentPage + 1)}
-        >
-          <ChevronRight />
-        </Link>
-      ) : (
-        <span className="btn cursor-not-allowed opacity-50">
-          <ChevronRight />
-        </span>
-      )}
+
+      <Button
+        className="btn transition-all duration-200"
+        onClick={() => handleChangePage(currentPage + 1)}
+        disabled={isPending || !hasNextPage}
+      >
+        <ChevronRight />
+      </Button>
     </div>
   );
 };
