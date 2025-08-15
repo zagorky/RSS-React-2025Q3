@@ -1,15 +1,13 @@
 'use client';
-import { useQueryClient } from '@tanstack/react-query';
-import { Button } from '~ui/button/button';
-import { RefreshCw } from 'lucide-react';
+import {Button} from '~ui/button/button';
+import {RefreshCw} from 'lucide-react';
 
 export const RefreshQueryButton = () => {
-  const queryClient = useQueryClient();
   return (
     <Button
       variant="secondary"
       classNames="cursor-pointer"
-      onClick={() => queryClient.resetQueries()}
+      onClick={() => {}}
       aria-label="refresh api call button"
     >
       <RefreshCw className="h-4.5" />

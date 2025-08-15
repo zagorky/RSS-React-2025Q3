@@ -11,7 +11,6 @@
     "stylelint": "stylelint src/**/*.css",
     "format": "prettier --check .",
     "type-check": "tsc -b --noEmit",
-    "preview": "tsc -b && vite build && vite preview",
     "prepare": "husky",
     "lint:fix": "eslint . --fix",
     "stylelint:fix": "stylelint src/**/*.css --fix",
@@ -27,9 +26,6 @@
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "@tailwindcss/postcss": "^4.1.11",
-    "@tanstack/eslint-plugin-query": "^5.83.1",
-    "@tanstack/react-query": "^5.84.1",
-    "@tanstack/react-query-devtools": "^5.84.1",
     "@types/node": "^24.0.10",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
