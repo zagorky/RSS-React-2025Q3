@@ -1,12 +1,14 @@
 'use client';
-import { useTheme } from '~hooks/useTheme';
+
 import { withDataTestId } from '~lib/utilities';
+import { useTheme, useThemeActions } from '~store/theme-store';
 import { Button } from '~ui/button/button';
 import { Moon, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
+  const theme = useTheme();
+  const { setTheme } = useThemeActions();
   const t = useTranslations('ThemeSwitcher');
 
   const isLight = theme === 'light';

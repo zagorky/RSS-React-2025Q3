@@ -1,71 +1,27 @@
-import type { Theme } from '~types/theme';
-import type { ReactNode } from 'react';
-
-import { THEME_LS_KEY } from '~config/app-config';
-import { useLocalStorage } from '~hooks/useLocalStorage';
-import { isTheme } from '~types/theme';
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+'use client';
+import { useThemeStore } from '~store/theme-store';
+import { type ThemeProviderProps } from '~types/theme';
+import { useLayoutEffect } from 'react';
 
 import { ThemeProviderContext } from './theme-provider-context';
 
-type ThemeProviderProps = {
-  children: ReactNode;
-  defaultTheme?: Theme;
-  storageKey?: string;
-};
-
-export const ThemeProvider = ({
-  children,
-  defaultTheme = 'system',
-  storageKey = THEME_LS_KEY,
-}: ThemeProviderProps) => {
-  const { valueFromLS, setValueToLS } = useLocalStorage(storageKey);
-  const [theme, setTheme] = useState<Theme>(() => {
-    return isTheme(valueFromLS) ? valueFromLS : defaultTheme;
-  });
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const { theme, actions } = useThemeStore();
 
   useLayoutEffect(() => {
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
+    actions.updateSystemTheme();
 
-      setValueToLS(systemTheme);
-    }
-  }, [setValueToLS, theme]);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = () => actions.updateSystemTheme();
+    mediaQuery.addEventListener('change', handler);
 
-  useLayoutEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove('light', 'dark');
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
-    }
-
-    root.classList.add(theme);
-  }, [setValueToLS, theme]);
-
-  useEffect(() => {
-    setValueToLS(theme);
-  }, [setValueToLS, theme]);
-
-  const value = useMemo(
-    () => ({
-      theme,
-      setTheme,
-    }),
-    [theme]
-  );
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, [actions]);
 
   return (
-    <ThemeProviderContext.Provider value={value}>
+    <ThemeProviderContext.Provider
+      value={{ theme, setTheme: actions.setTheme }}
+    >
       {children}
     </ThemeProviderContext.Provider>
   );

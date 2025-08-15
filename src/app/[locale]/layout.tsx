@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { routing } from '~i18n/routing';
 import { Header } from '~ui/header/header';
+import { ThemeProvider } from '~ui/theme-switcher/theme-provider';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { type ReactNode } from 'react';
@@ -32,15 +33,17 @@ export default async function RootLayout({
     notFound();
   }
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>
-          <div className="main-wrapper">
-            <Header />
-            <main className="main">{children}</main>
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang={locale}>
+        <body>
+          <NextIntlClientProvider>
+            <div className="main-wrapper">
+              <Header />
+              <main className="main">{children}</main>
+            </div>
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }
