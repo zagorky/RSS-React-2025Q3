@@ -1,6 +1,6 @@
-import type {DataItem} from '~types/types';
+import type { DataItem } from '~types/types';
 
-import {DetailedPage} from '~ui/detail-page/detailed-page';
+import { DetailedPage } from '~ui/detail-page/detailed-page';
 
 const Modal = ({ data }: { data: DataItem }) => {
   return (

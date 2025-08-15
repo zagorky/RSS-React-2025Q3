@@ -1,12 +1,13 @@
-import type { DataItem } from '~types/types';
+import type {DataItem} from '~types/types';
 
-import { cn } from '~lib/cn';
-import { withDataTestId } from '~lib/utilities';
-import { CloseButton } from '~ui/close-button/close-button';
-import { InfoBadge } from '~ui/info-badge/info-badge';
-import { ItemImg } from '~ui/item-img/item-img';
-import { XIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import {cn} from '~lib/cn';
+import {withDataTestId} from '~lib/utilities';
+import {CloseButton} from '~ui/close-button/close-button';
+import {InfoBadge} from '~ui/info-badge/info-badge';
+import {ItemImg} from '~ui/item-img/item-img';
+import {RefreshQueryButton} from '~ui/refresh-query-button/refresh-query-button';
+import {XIcon} from 'lucide-react';
+import {useTranslations} from 'next-intl';
 
 export const DetailedPage = ({ data }: { data: DataItem }) => {
   const {
@@ -33,7 +34,7 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
           <CloseButton variant="outline">
             <XIcon className="text-error h-4.5" />
           </CloseButton>
-          {/*<RefreshQueryButton />*/}
+          <RefreshQueryButton />
         </div>
         <h2 className={cn('result-item-title', 'line-clamp-3')}>{title}</h2>
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 leading-relaxed sm:grid-cols-2">
