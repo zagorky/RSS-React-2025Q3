@@ -1,6 +1,6 @@
-import {Link} from '~i18n/navigation';
-import {withDataTestId} from '~lib/utilities';
-import {useTranslations} from 'next-intl';
+import { Link } from '~i18n/navigation';
+import { withDataTestId } from '~lib/utilities';
+import { useTranslations } from 'next-intl';
 
 export default function Page() {
   const t = useTranslations('AboutPage');
