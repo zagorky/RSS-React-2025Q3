@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 
 import { routing } from '~i18n/routing';
-import { cn } from '~lib/cn';
 import { Header } from '~ui/header/header';
-import { Loader } from '~ui/loader/loader';
 import { ThemeProvider } from '~ui/theme-switcher/theme-provider';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { type ReactNode, Suspense } from 'react';
+import { type ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'HUH App',
@@ -44,13 +42,9 @@ export default async function RootLayout({
           <body>
             <div className="main-wrapper">
               <Header />
-              <main className="flex w-full">
-                <div className={cn('w-full')}>{children}</div>
-                {modal && (
-                  <Suspense fallback={<Loader />}>
-                    <div className="overflow-hidden">{modal}</div>
-                  </Suspense>
-                )}
+              <main className="relative w-full">
+                {children}
+                {modal}
               </main>
             </div>
           </body>

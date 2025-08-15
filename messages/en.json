@@ -55,5 +55,14 @@
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {🇷🇺} en {🇺🇸} other {Unknown}}"
+  },
+  "DetailPage": {
+    "type": "Type",
+    "status": "Status",
+    "statusOngoing": "Ongoing",
+    "statusReleased": "Released",
+    "score": "Score",
+    "genres": "Genres",
+    "notAvailable": "N/A"
   }
 }

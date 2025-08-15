@@ -55,5 +55,14 @@
   "LocaleSwitcher": {
     "label": "Переключить язык",
     "locale": "{locale, select, ru {🇷🇺} en {🇺🇸} other {Unknown}}"
+  },
+  "DetailPage": {
+    "type": "Тип",
+    "status": "Статус",
+    "statusOngoing": "Выходит",
+    "statusReleased": "Вышел",
+    "score": "Оценка",
+    "genres": "Жанры",
+    "notAvailable": "Нет данных"
   }
 }

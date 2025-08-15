@@ -6,6 +6,7 @@ import { CloseButton } from '~ui/close-button/close-button';
 import { InfoBadge } from '~ui/info-badge/info-badge';
 import { ItemImg } from '~ui/item-img/item-img';
 import { XIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const DetailedPage = ({ data }: { data: DataItem }) => {
   const {
@@ -19,9 +20,10 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
       webp: { image_url: url },
     },
   } = data;
+  const t = useTranslations('DetailPage');
 
   return (
-    <section className="w-[600px]">
+    <>
       <CloseButton
         variant="custom"
         classNames="loader-overlay cursor-pointer"
@@ -36,27 +38,27 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
         <h2 className={cn('result-item-title', 'line-clamp-3')}>{title}</h2>
         <div className="grid grid-cols-1 gap-x-8 gap-y-4 leading-relaxed sm:grid-cols-2">
           <InfoBadge
-            name={'Type'}
+            name={t('type')}
             data={type}
             color={'bg-gray-400/80'}
             testId={'detailed-type'}
           />
           <InfoBadge
-            data={airing ? 'Ongoing' : 'Released'}
-            name={'Status'}
+            data={airing ? t('statusOngoing') : t('statusReleased')}
+            name={t('status')}
             testId={'detailed-status'}
             color={'bg-info/80'}
           />
 
           <InfoBadge
-            data={score ?? <span>N/A</span>}
-            name={'Score'}
+            data={score ?? <span>{t('notAvailable')}</span>}
+            name={t('score')}
             testId={'detailed-score'}
             color={'bg-warning/80'}
           />
 
           <div className="sm:col-span-2">
-            <div className="mb-1 font-semibold">Genres</div>
+            <div className="mb-1 font-semibold">{t('genres')}</div>
             <div className="mt-2 flex flex-wrap gap-2">
               {genres.map((genre, i) => (
                 <InfoBadge
@@ -76,6 +78,6 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
 
         <p {...withDataTestId('detailed-synopsis')}>{synopsis}</p>
       </div>
-    </section>
+    </>
   );
 };
