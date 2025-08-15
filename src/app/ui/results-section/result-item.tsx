@@ -1,11 +1,14 @@
 'use client';
 
-import type {DataItem} from '~types/types';
+import type { DataItem } from '~types/types';
 
-import {withDataTestId} from '~lib/utilities';
-import {useSelectedCardsStore, useStoreActions,} from '~store/selected-cards-store';
-import {Checkbox} from '~ui/checkbox/checkbox';
-import {ItemImg} from '~ui/item-img/item-img';
+import { withDataTestId } from '~lib/utilities';
+import {
+  useSelectedCardsStore,
+  useStoreActions,
+} from '~store/selected-cards-store';
+import { Checkbox } from '~ui/checkbox/checkbox';
+import { ItemImg } from '~ui/item-img/item-img';
 
 type ResultItemProps = {
   data: DataItem;

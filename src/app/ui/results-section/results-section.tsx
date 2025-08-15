@@ -1,4 +1,4 @@
-import { fetchAnimeData } from '~lib/api/api';
+import { fetchAnimeData } from '~lib/api';
 import { cn } from '~lib/cn';
 import { withDataTestId } from '~lib/utilities';
 import { EmptyList } from '~ui/empty-list/empty-list';
