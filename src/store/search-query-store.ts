@@ -1,6 +1,6 @@
-import {SEARCH_QUERY_LS_KEY} from '~config/app-config';
-import {persist} from 'zustand/middleware';
-import {create} from 'zustand/react';
+import { SEARCH_QUERY_LS_KEY } from '~config/app-config';
+import { persist } from 'zustand/middleware';
+import { create } from 'zustand/react';
 
 export type SearchQueryStateType = {
   query: string;

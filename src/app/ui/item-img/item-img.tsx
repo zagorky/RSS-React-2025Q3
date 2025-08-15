@@ -21,7 +21,7 @@ export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
             {...withDataTestId('result-item-img')}
             src={url}
             alt={alt}
-            priority={true}
+            priority={false}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
           />
