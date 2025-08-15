@@ -1,6 +1,6 @@
 'use client';
-import {Button} from '~ui/button/button';
-import {RefreshCw} from 'lucide-react';
+import { Button } from '~ui/button/button';
+import { RefreshCw } from 'lucide-react';
 
 export const RefreshQueryButton = () => {
   return (

@@ -2,6 +2,7 @@
 
 import type { DataItem } from '~types/types';
 
+import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
 import {
   useSelectedCardsStore,
@@ -38,20 +39,23 @@ export const ResultItem = ({ data }: ResultItemProps) => {
         classNames="absolute top-2 left-2"
       />
 
-      {/*<Link className="contents" href={`anime/${id}${searchParams.toString()}`}>*/}
-      <div {...withDataTestId('result-item')}>
-        <h4
-          {...withDataTestId('result-item-title')}
-          className="result-item-title truncate"
-        >
-          {title}
-        </h4>
-        <ItemImg url={urlImg} alt={title} />
-        <p {...withDataTestId('result-item-desc')} className="result-item-desc">
-          {synopsis}
-        </p>
-      </div>
-      {/*</Link>*/}
+      <Link className="contents" href={`anime/${id}`} prefetch>
+        <div {...withDataTestId('result-item')}>
+          <h4
+            {...withDataTestId('result-item-title')}
+            className="result-item-title truncate"
+          >
+            {title}
+          </h4>
+          <ItemImg url={urlImg} alt={title} />
+          <p
+            {...withDataTestId('result-item-desc')}
+            className="result-item-desc"
+          >
+            {synopsis}
+          </p>
+        </div>
+      </Link>
     </li>
   );
 };

@@ -25,23 +25,13 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
           {...withDataTestId('result-list')}
           className={cn(
             'grid w-full justify-items-center gap-6 transition-all duration-300 ease-in-out',
-            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
           )}
         >
           {results.map((result, i) => (
             <ResultItem key={result.mal_id + 'and' + i} data={result} />
           ))}
         </ul>
-        {/*<Suspense fallback={<Loader />}>*/}
-        {/*<div*/}
-        {/*  className={cn(*/}
-        {/*    'justify-items-center overflow-hidden transition-all duration-300',*/}
-        {/*    outlet ? 'w-[500px] opacity-100' : 'w-0 opacity-0'*/}
-        {/*  )}*/}
-        {/*>*/}
-        {/*  <Outlet />*/}
-        {/*</div>*/}
-        {/*</Suspense>*/}
       </div>
       <Pagination pagination={pagination} />
     </section>

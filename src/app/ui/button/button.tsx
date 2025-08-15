@@ -6,13 +6,14 @@ import { withDataTestId } from '~lib/utilities';
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   dataTestId?: string;
   classNames?: string;
-  variant?: 'default' | 'secondary' | 'outline';
+  variant?: 'default' | 'secondary' | 'outline' | 'custom';
 };
 
 const variants = {
   default: 'btn',
   outline: 'btn-outline',
   secondary: 'btn-secondary',
+  custom: '',
 };
 
 export const Button = ({
