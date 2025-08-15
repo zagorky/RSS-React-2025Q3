@@ -24,7 +24,7 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
   const t = useTranslations('DetailPage');
 
   return (
-    <>
+    <div className="m-auto max-w-2xl">
       <CloseButton
         variant="custom"
         classNames="loader-overlay cursor-pointer"
@@ -79,6 +79,6 @@ export const DetailedPage = ({ data }: { data: DataItem }) => {
 
         <p {...withDataTestId('detailed-synopsis')}>{synopsis}</p>
       </div>
-    </>
+    </div>
   );
 };
