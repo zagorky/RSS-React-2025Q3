@@ -18,6 +18,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     return () => mediaQuery.removeEventListener('change', handler);
   }, [actions]);
 
+  useLayoutEffect(() => {
+    actions.applyCurrentTheme();
+  }, [actions]);
+
   return (
     <ThemeProviderContext.Provider
       value={{ theme, setTheme: actions.setTheme }}

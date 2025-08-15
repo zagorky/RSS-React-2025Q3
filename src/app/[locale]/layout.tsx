@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
 
-import { routing } from '~i18n/routing';
-import { Header } from '~ui/header/header';
-import { ThemeProvider } from '~ui/theme-switcher/theme-provider';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
-import { type ReactNode } from 'react';
+import {routing} from '~i18n/routing';
+import {Header} from '~ui/header/header';
+import {ThemeProvider} from '~ui/theme-switcher/theme-provider';
+import {hasLocale, NextIntlClientProvider} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {type ReactNode} from 'react';
 
 export const metadata: Metadata = {
   title: 'HUH App',
@@ -33,17 +33,17 @@ export default async function RootLayout({
     notFound();
   }
   return (
-    <ThemeProvider>
-      <html lang={locale}>
-        <body>
-          <NextIntlClientProvider>
+    <NextIntlClientProvider>
+      <ThemeProvider>
+        <html lang={locale}>
+          <body>
             <div className="main-wrapper">
               <Header />
               <main className="main">{children}</main>
             </div>
-          </NextIntlClientProvider>
-        </body>
-      </html>
-    </ThemeProvider>
+          </body>
+        </html>
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 }
