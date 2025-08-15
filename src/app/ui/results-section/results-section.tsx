@@ -25,9 +25,7 @@ export const ResultsSection = async ({ query, page }: ResultsSectionProps) => {
           {...withDataTestId('result-list')}
           className={cn(
             'grid w-full justify-items-center gap-6 transition-all duration-300 ease-in-out',
-            // outlet
-            'hidden grid-cols-1 sm:grid lg:grid-cols-2'
-            //   : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
           )}
         >
           {results.map((result, i) => (

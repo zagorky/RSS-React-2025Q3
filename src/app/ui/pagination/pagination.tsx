@@ -30,7 +30,7 @@ export const Pagination = ({ pagination }: PaginationProps) => {
     params.set('page', page.toString());
     const queryParams = Object.fromEntries(params.entries());
     startTransition(() => {
-      replace({ pathname, query: queryParams }, { scroll: false });
+      replace({ pathname, query: queryParams }, { scroll: true });
     });
   }
 

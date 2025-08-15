@@ -1,21 +1,17 @@
 'use client';
 
-import type { DataItem } from '~types/types';
+import type {DataItem} from '~types/types';
 
-import { withDataTestId } from '~lib/utilities';
-import {
-  useSelectedCardsStore,
-  useStoreActions,
-} from '~store/selected-cards-store';
-import { Checkbox } from '~ui/checkbox/checkbox';
-import { ItemImg } from '~ui/item-img/item-img';
-import { memo } from 'react';
+import {withDataTestId} from '~lib/utilities';
+import {useSelectedCardsStore, useStoreActions,} from '~store/selected-cards-store';
+import {Checkbox} from '~ui/checkbox/checkbox';
+import {ItemImg} from '~ui/item-img/item-img';
 
 type ResultItemProps = {
   data: DataItem;
 };
 
-export const ResultItem = memo(({ data }: ResultItemProps) => {
+export const ResultItem = ({ data }: ResultItemProps) => {
   const {
     title,
     synopsis,
@@ -55,6 +51,4 @@ export const ResultItem = memo(({ data }: ResultItemProps) => {
       {/*</Link>*/}
     </li>
   );
-});
-
-ResultItem.displayName = 'ResultItem';
+};
