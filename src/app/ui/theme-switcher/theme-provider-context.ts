@@ -1,7 +1,7 @@
 'use client';
-import type {ThemeProviderState} from '~types/theme';
+import type { ThemeProviderState } from '~types/theme';
 
-import {createContext} from 'react';
+import { createContext } from 'react';
 
 const initialState: ThemeProviderState = {
   theme: 'system',
