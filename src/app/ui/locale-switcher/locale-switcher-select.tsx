@@ -1,9 +1,9 @@
 'use client';
 
-import {usePathname, useRouter} from '~i18n/navigation';
-import {cn} from '~lib/cn';
-import {useSearchParams} from 'next/navigation';
-import {type ChangeEvent, type ReactNode, useTransition} from 'react';
+import { usePathname, useRouter } from '~i18n/navigation';
+import { cn } from '~lib/cn';
+import { useSearchParams } from 'next/navigation';
+import { type ChangeEvent, type ReactNode, useTransition } from 'react';
 
 type LocaleSwitcherSelectProps = {
   children: ReactNode;

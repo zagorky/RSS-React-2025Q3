@@ -64,5 +64,8 @@
     "score": "Score",
     "genres": "Genres",
     "notAvailable": "N/A"
+  },
+  "Loader": {
+    "loading": "Loading..."
   }
 }

@@ -64,5 +64,8 @@
     "score": "Оценка",
     "genres": "Жанры",
     "notAvailable": "Нет данных"
+  },
+  "Loader": {
+    "loading": "Загрузка..."
   }
 }

@@ -54,7 +54,7 @@ export const getSearchEndpoint = (options: GetSearchEndpointOption = {}) => {
 export const fetchAnimeData = async ({ query, page }: FetchAnimeDataOption) => {
   const url = getSearchEndpoint({ query, page });
   const response = await fetch(url, {
-    // next: { revalidate: 60 },
+    next: { revalidate: 60, tags: ['main-page'] },
     cache: 'force-cache',
   });
 
@@ -72,7 +72,11 @@ export const fetchAnimeDataItem = async ({
   signal,
 }: FetchAnimeDataItemOption) => {
   const url = getSearchEndpoint({ id });
-  const response = await fetch(url, { signal });
+  const response = await fetch(url, {
+    signal,
+    cache: 'force-cache',
+    next: { revalidate: 60, tags: ['detail-page'] },
+  });
 
   assertIsResponseOk(response);
 
