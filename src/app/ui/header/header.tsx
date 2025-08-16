@@ -6,11 +6,8 @@ import { ThemeSwitcher } from '~ui/theme-switcher/theme-switcher';
 
 export const Header = () => {
   return (
-    <header className="border-primary-600 w-full border-b-3 px-4 py-6 text-center text-sm shadow-sm">
+    <header className="border-primary-600 te xt-sm flex w-full justify-between border-b-3 p-4 text-center shadow-sm">
       <nav className="flex flex-wrap items-center justify-center gap-2">
-        <RefreshQueryButton />
-        <LocaleSwitcher />
-
         {navBar.map((item) => (
           <NavElement
             key={item.title}
@@ -18,8 +15,12 @@ export const Header = () => {
             translationKey={item.title}
           />
         ))}
-        <ThemeSwitcher />
       </nav>
+      <div className="flex flex-wrap gap-4">
+        <RefreshQueryButton />
+        <LocaleSwitcher />
+        <ThemeSwitcher />
+      </div>
     </header>
   );
 };

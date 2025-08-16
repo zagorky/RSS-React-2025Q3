@@ -1,17 +1,10 @@
-export const navigation = {
-  main: '/',
-  detailed: '(.)anime/:id',
-  error: '*',
-  about: '/about',
-} as const;
-
 export const navBar = [
   {
-    path: navigation.main,
+    path: '/',
     title: 'main',
   },
   {
-    path: navigation.about,
+    path: '/about',
     title: 'about',
   },
 ];

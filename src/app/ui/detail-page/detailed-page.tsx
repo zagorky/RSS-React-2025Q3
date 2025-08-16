@@ -1,13 +1,13 @@
-import type {DataItem} from '~types/types';
+import type { DataItem } from '~types/types';
 
-import {cn} from '~lib/cn';
-import {withDataTestId} from '~lib/utilities';
-import {CloseButton} from '~ui/close-button/close-button';
-import {InfoBadge} from '~ui/info-badge/info-badge';
-import {ItemImg} from '~ui/item-img/item-img';
-import {RefreshQueryButton} from '~ui/refresh-query-button/refresh-query-button';
-import {XIcon} from 'lucide-react';
-import {useTranslations} from 'next-intl';
+import { cn } from '~lib/cn';
+import { withDataTestId } from '~lib/utilities';
+import { CloseButton } from '~ui/close-button/close-button';
+import { InfoBadge } from '~ui/info-badge/info-badge';
+import { ItemImg } from '~ui/item-img/item-img';
+import { RefreshQueryButton } from '~ui/refresh-query-button/refresh-query-button';
+import { XIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const DetailedPage = ({ data }: { data: DataItem }) => {
   const {

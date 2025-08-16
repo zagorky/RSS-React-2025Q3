@@ -3,17 +3,19 @@ import type { ButtonHTMLAttributes } from 'react';
 import { cn } from '~lib/cn';
 import { withDataTestId } from '~lib/utilities';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  dataTestId?: string;
-  classNames?: string;
-  variant?: 'default' | 'secondary' | 'outline' | 'custom';
-};
-
 const variants = {
   default: 'btn',
   outline: 'btn-outline',
   secondary: 'btn-secondary',
   custom: '',
+} as const;
+
+export type ButtonVariants = keyof typeof variants;
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  dataTestId?: string;
+  classNames?: string;
+  variant?: ButtonVariants;
 };
 
 export const Button = ({

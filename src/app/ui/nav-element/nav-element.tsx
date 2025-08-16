@@ -1,7 +1,7 @@
 'use client';
 import { Link } from '~i18n/navigation';
 import { cn } from '~lib/cn';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
@@ -13,6 +13,9 @@ type NavElementProps = {
 function NavElement({ path, translationKey }: Readonly<NavElementProps>) {
   const pathname = usePathname();
   const t = useTranslations('Navigation');
+  const locale = useLocale();
+  const normalizedPath = path === '/' ? '' : path;
+  const isActive = `/${locale}${normalizedPath}` === pathname;
 
   return (
     <Link
@@ -23,8 +26,8 @@ function NavElement({ path, translationKey }: Readonly<NavElementProps>) {
         'hover:text-text-primary-500',
         {
           'bg-primary-500 hover:bg-primary-600/70 text-text-on-primary after:bg-primary-600 font-semibold':
-            pathname === path,
-          'text-text-secondary hover:text-text-primary': pathname !== path,
+            isActive,
+          'text-text-secondary hover:text-text-primary': !isActive,
         }
       )}
     >
