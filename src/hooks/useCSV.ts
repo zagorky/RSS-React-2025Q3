@@ -28,7 +28,7 @@ export const useCSV = (data: DataItem[]) => {
         });
 
         if (!response.ok) {
-          throw new Error(`Server error: ${response.status}`);
+          return new Error(`Server error: ${response.status}`);
         }
 
         const blob = await response.blob();
