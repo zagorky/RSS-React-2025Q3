@@ -17,7 +17,7 @@ export const Header = () => {
         ))}
       </nav>
       <div className="flex flex-wrap gap-4">
-        <RefreshQueryButton />
+        <RefreshQueryButton tag="main-page" />
         <LocaleSwitcher />
         <ThemeSwitcher />
       </div>
