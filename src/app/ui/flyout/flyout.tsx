@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 export const Flyout = () => {
   const selectedCards = useSelectedCards();
   const { cleanSelectedCards } = useStoreActions();
-  const { linkReference, downloadCSV } = useCSV(selectedCards);
+  const { downloadCSV } = useCSV(selectedCards);
   const t = useTranslations('Flyout');
 
   return (
@@ -26,9 +26,6 @@ export const Flyout = () => {
             onClick={downloadCSV}
             classNames="cursor-pointer"
           >
-            <a ref={linkReference} className="hidden">
-              {t('download')}
-            </a>
             {t('download')}
           </Button>
           <Button
