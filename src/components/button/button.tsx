@@ -3,34 +3,35 @@ import type { ButtonHTMLAttributes } from 'react';
 import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 
+const variants = {
+  default: 'btn',
+  outline: 'btn-outline',
+  secondary: 'btn-secondary',
+  custom: '',
+} as const;
+
+export type ButtonVariants = keyof typeof variants;
+
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   dataTestId?: string;
   classNames?: string;
+  variant?: ButtonVariants;
 };
 
-export const Button = (props: ButtonProps) => {
-  const {
-    classNames = '',
-    onClick,
-    type,
-    disabled,
-    children,
-    dataTestId = '',
-    ...restProps
-  } = props;
-
-  const buttonClasses = cn(
-    'btn',
-    classNames,
-    disabled && 'opacity-50 cursor-not-allowed'
-  );
-
+export const Button = ({
+  classNames = '',
+  disabled,
+  children,
+  variant = 'default',
+  dataTestId = '',
+  type,
+  ...props
+}: ButtonProps) => {
   return (
     <button
-      {...restProps}
+      {...props}
       {...withDataTestId(dataTestId)}
-      onClick={onClick}
-      className={buttonClasses}
+      className={cn(variants[variant], classNames, disabled && 'cursor-not-allowed opacity-50')}
       type={type}
       disabled={disabled}
     >

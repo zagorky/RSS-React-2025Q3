@@ -11,17 +11,14 @@ import reactDom from 'eslint-plugin-react-dom';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import importPlugin from 'eslint-plugin-import';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default tseslint.config(
   unicornPlugin.configs.recommended,
 
   { ignores: ['dist', '**/*.js', '**/*.config.js', '**/*.config.ts'] },
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.strict,
-      eslintPluginPrettier,
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.strict, eslintPluginPrettier],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -41,21 +38,21 @@ export default tseslint.config(
       'react-dom': reactDom,
       perfectionist: perfectionistPlugin,
       import: importPlugin,
+      '@stylistic': stylistic,
     },
     rules: {
       // react
       ...jsxA11y.configs.recommended.rules,
       ...reactDom.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       // perfectionist
       'perfectionist/sort-imports': 'error',
+      // prettier
+      'prettier/prettier': 'off',
       // import
       'import/extensions': ['error', { ts: 'never', tsx: 'never' }],
       'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
@@ -66,13 +63,26 @@ export default tseslint.config(
       'prefer-const': 'error',
       'prefer-arrow-callback': 'error',
       'no-confusing-arrow': ['error', { allowParens: true }],
+      // stylistic
+      '@stylistic/padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: '*', next: 'return' },
+        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+        {
+          blankLine: 'any',
+          prev: ['const', 'let', 'var'],
+          next: ['const', 'let', 'var'],
+        },
+        { blankLine: 'always', prev: ['case', 'default'], next: '*' },
+        { blankLine: 'always', prev: 'import', next: '*' },
+        { blankLine: 'any', prev: 'import', next: 'import' },
+      ],
       // ts
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/no-unsafe-return': 'error',
       '@typescript-eslint/no-unsafe-assignment': 'error',
-      'prettier/prettier': 'error',
       // unicorn
       'unicorn/prefer-top-level-await': 'off',
       'unicorn/filename-case': 'off',

@@ -1,52 +1,27 @@
-import { detailedPageLoader, mainPageLoader } from '~api/loaders';
 import { Layout } from '~components/layout/layout';
 import { Loader } from '~components/loader/loader';
-import { navigation } from '~config/navigation';
-import { AboutPage, DetailedPage, ErrorPage, MainPage } from '~pages/lazy';
+import { ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
 
 export const router = createBrowserRouter([
   {
-    path: navigation.main,
+    path: '/',
     element: <Layout />,
     hydrateFallbackElement: <Loader />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: navigation.main,
-        loader: mainPageLoader,
-        id: 'main-page',
+        path: '/',
         errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loader />}>
             <MainPage />
           </Suspense>
         ),
-        children: [
-          {
-            path: navigation.detailed,
-            loader: detailedPageLoader,
-            id: 'detailed-page',
-            element: (
-              <Suspense fallback={<Loader />}>
-                <DetailedPage />
-              </Suspense>
-            ),
-          },
-        ],
       },
       {
-        path: navigation.about,
-        errorElement: <ErrorPage />,
-        element: (
-          <Suspense fallback={<Loader />}>
-            <AboutPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: navigation.error,
+        path: '*',
         element: (
           <Suspense fallback={<Loader />}>
             <ErrorPage />

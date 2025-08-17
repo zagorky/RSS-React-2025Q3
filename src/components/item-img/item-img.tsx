@@ -1,30 +1,23 @@
-import type { DataItem } from '~types/types';
-import type { PropsWithChildren } from 'react';
+import type { ReactNode } from 'react';
 
+import { cn } from '~utils/cn';
 import { withDataTestId } from '~utils/utilities';
 
 type ItemImgProps = {
-  data: DataItem;
-  fallback?: PropsWithChildren;
+  url: string;
+  alt: string;
+  fallback?: ReactNode;
 };
 
-export const ItemImg = ({ data, fallback }: ItemImgProps) => {
-  const title = data.title;
-  const imgUrl = data.images.webp.image_url;
-
+export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
   return (
     <div className="overflow-hidden rounded-md">
-      {imgUrl ? (
-        <img
-          {...withDataTestId('result-item-img')}
-          className="result-item-img"
-          src={imgUrl}
-          alt={title}
-        />
+      {url ? (
+        <div className={cn('relative aspect-square overflow-hidden rounded-md')}>
+          <img alt={alt} src={url} className="object-cover" {...withDataTestId('result-item-img')} />
+        </div>
       ) : (
-        !fallback && (
-          <div className="result-item-img"> There is no image :(</div>
-        )
+        fallback
       )}
     </div>
   );

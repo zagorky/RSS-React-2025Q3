@@ -1,15 +1,38 @@
 .btn {
-  @apply bg-primary-500 hover:bg-primary-600 focus:ring-primary-400 inline-block rounded-lg px-3 py-1.5 text-white shadow-sm transition-all hover:shadow focus:ring-2 focus:ring-offset-2 focus:outline-none;
+  @apply bg-primary-500 border-primary-500 hover:bg-primary-600/70 focus:ring-primary-400 border-3;
+  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5 transition-all;
+  @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
+}
+
+.btn-outline {
+  @apply border-primary-600 hover:bg-primary-900/10 focus:ring-primary-400 border-3 bg-transparent;
+  @apply text-primary-500 hover:text-primary-600 inline-block rounded-lg px-3 py-1.5 transition-all;
+  @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
+}
+
+.btn-secondary {
+  @apply bg-secondary-600 border-secondary-600 hover:bg-secondary-700 focus:ring-secondary-400 border-3;
+  @apply text-text-on-primary inline-block rounded-lg px-3 py-1.5 transition-all;
+  @apply focus:ring-2 focus:ring-offset-2 focus:outline-none;
 }
 
 .inpt {
-  @apply border-border-light m-1 rounded-md border px-2 py-1 shadow-sm;
+  @apply border-border-light text-text-primary rounded-md border-3 px-3 py-1.5;
   @apply focus:border-primary-500 focus:ring-primary-500 focus:ring-2 focus:outline-none;
   @apply transition duration-200;
+  @apply text-text-primary;
+}
+
+.checkbox {
+  @apply border-primary-600;
+  @apply transition-all;
+  @apply focus:border-primary-600;
+  @apply checked:bg-primary-600;
+  @apply cursor-pointer;
 }
 
 .basic-content-wrapper {
-  @apply m-auto flex flex-col items-center justify-center gap-8;
+  @apply text-text-primary m-auto flex flex-col items-center justify-center gap-8;
 }
 
 .main-wrapper {
@@ -22,4 +45,20 @@
 
 .h2 {
   @apply text-2xl font-bold;
+}
+
+.loader-overlay {
+  @apply fixed inset-0 z-10 flex bg-gray-600/60 backdrop-blur-xs backdrop-filter;
+}
+
+.loader-container {
+  @apply m-auto flex flex-col items-center gap-3;
+}
+
+.loader-spinner {
+  @apply border-primary-600 border-r-secondary-600 h-7 w-7 animate-spin rounded-full border-3;
+}
+
+.loader-text {
+  @apply text-text-on-primary;
 }

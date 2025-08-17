@@ -5,8 +5,7 @@ import { Link, useRouteError } from 'react-router';
 const ErrorPage = () => {
   const error = useRouteError();
   const errorName = error instanceof Error ? error.name : '404: Page Not Found';
-  const errorMessage =
-    error instanceof Error ? error.message : 'Something went wrong';
+  const errorMessage = error instanceof Error ? error.message : 'Something went wrong';
 
   return (
     <div
@@ -25,7 +24,7 @@ const ErrorPage = () => {
       </div>
       <div>
         <Button classNames="m-4" dataTestId={'error-fallback-button'}>
-          <Link className="p-4" to=".." relative="path">
+          <Link className="p-4" to="" relative="path">
             Go back
           </Link>
         </Button>
