@@ -1,5 +1,5 @@
-import {withDataTestId} from '~lib/utilities';
-import {getTranslations} from 'next-intl/server';
+import { withDataTestId } from '~lib/utilities';
+import { getTranslations } from 'next-intl/server';
 
 export const EmptyList = async () => {
   const t = await getTranslations('ResultsSection.emptyList');

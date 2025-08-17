@@ -1,8 +1,8 @@
-import {fetchAnimeDataItem} from '~lib/api';
-import {CloseButton} from '~ui/close-button/close-button';
-import {DetailPageContent} from '~ui/detail-page/detail-page-content';
-import {RefreshQueryButton} from '~ui/refresh-query-button/refresh-query-button';
-import {XIcon} from 'lucide-react';
+import { fetchAnimeDataItem } from '~lib/api';
+import { CloseButton } from '~ui/close-button/close-button';
+import { DetailPageContent } from '~ui/detail-page/detail-page-content';
+import { RefreshQueryButton } from '~ui/refresh-query-button/refresh-query-button';
+import { XIcon } from 'lucide-react';
 
 const DetailPage = async (
   props: Readonly<{
