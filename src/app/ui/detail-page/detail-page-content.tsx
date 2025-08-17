@@ -6,7 +6,11 @@ import { InfoBadge } from '~ui/info-badge/info-badge';
 import { ItemImg } from '~ui/item-img/item-img';
 import { getTranslations } from 'next-intl/server';
 
-export const DetailPageContent = async ({ data }: { data: DataItem }) => {
+export const DetailPageContent = async ({
+  data,
+}: {
+  data: Promise<DataItem>;
+}) => {
   const {
     title,
     type,
@@ -17,7 +21,7 @@ export const DetailPageContent = async ({ data }: { data: DataItem }) => {
     images: {
       webp: { image_url: url },
     },
-  } = data;
+  } = await data;
 
   const t = await getTranslations('DetailPage');
 

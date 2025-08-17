@@ -1,8 +1,10 @@
 import { fetchAnimeDataItem } from '~lib/api';
 import { CloseButton } from '~ui/close-button/close-button';
 import { DetailPageContent } from '~ui/detail-page/detail-page-content';
+import { Loader } from '~ui/loader/loader';
 import { RefreshQueryButton } from '~ui/refresh-query-button/refresh-query-button';
 import { XIcon } from 'lucide-react';
+import { Suspense } from 'react';
 
 const DetailPage = async (
   props: Readonly<{
@@ -11,7 +13,7 @@ const DetailPage = async (
   }>
 ) => {
   const { id } = await props.params;
-  const data = await fetchAnimeDataItem({ id });
+  const data = fetchAnimeDataItem({ id });
 
   return (
     <div className="fixed top-0 right-0 m-5 overflow-hidden">
@@ -27,7 +29,9 @@ const DetailPage = async (
           <RefreshQueryButton />
         </div>
         <div>
-          <DetailPageContent data={data} />
+          <Suspense fallback={<Loader />}>
+            <DetailPageContent data={data} />
+          </Suspense>
         </div>
       </section>
     </div>
