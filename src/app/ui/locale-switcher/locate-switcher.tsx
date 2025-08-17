@@ -1,11 +1,11 @@
 import { routing } from '~i18n/routing';
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import LocaleSwitcherSelect from './locale-switcher-select';
 
-export default function LocaleSwitcher() {
-  const t = useTranslations('LocaleSwitcher');
-  const locale = useLocale();
+const LocaleSwitcher = async () => {
+  const t = await getTranslations('LocaleSwitcher');
+  const locale = await getLocale();
 
   return (
     <LocaleSwitcherSelect defaultValue={locale} label={t('label')}>
@@ -16,4 +16,5 @@ export default function LocaleSwitcher() {
       ))}
     </LocaleSwitcherSelect>
   );
-}
+};
+export default LocaleSwitcher;

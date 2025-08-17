@@ -1,8 +1,8 @@
-import { withDataTestId } from '~lib/utilities';
-import { useTranslations } from 'next-intl';
+import {withDataTestId} from '~lib/utilities';
+import {getTranslations} from 'next-intl/server';
 
-export const EmptyList = () => {
-  const t = useTranslations('ResultsSection.emptyList');
+export const EmptyList = async () => {
+  const t = await getTranslations('ResultsSection.emptyList');
 
   return (
     <div {...withDataTestId('empty-list')} className="basic-content-wrapper">

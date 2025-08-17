@@ -1,8 +1,8 @@
 import { withDataTestId } from '~lib/utilities';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export const Loader = () => {
-  const t = useTranslations('Loader');
+export const Loader = async () => {
+  const t = await getTranslations('Loader');
   return (
     <div className="loader-overlay">
       <div {...withDataTestId('loader')} className="loader-container">

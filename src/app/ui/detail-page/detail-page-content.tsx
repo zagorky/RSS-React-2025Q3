@@ -4,9 +4,9 @@ import { cn } from '~lib/cn';
 import { withDataTestId } from '~lib/utilities';
 import { InfoBadge } from '~ui/info-badge/info-badge';
 import { ItemImg } from '~ui/item-img/item-img';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export const DetailPageContent = ({ data }: { data: DataItem }) => {
+export const DetailPageContent = async ({ data }: { data: DataItem }) => {
   const {
     title,
     type,
@@ -19,7 +19,7 @@ export const DetailPageContent = ({ data }: { data: DataItem }) => {
     },
   } = data;
 
-  const t = useTranslations('DetailPage');
+  const t = await getTranslations('DetailPage');
 
   return (
     <>

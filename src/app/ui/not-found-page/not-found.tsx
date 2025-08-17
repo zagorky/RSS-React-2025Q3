@@ -1,10 +1,9 @@
-'use client';
 import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export default function NotFoundPage() {
-  const t = useTranslations('ErrorPages.notFound');
+const NotFoundPage = async () => {
+  const t = await getTranslations('ErrorPages.notFound');
 
   return (
     <main className="flex h-full flex-col items-center justify-center">
@@ -30,4 +29,5 @@ export default function NotFoundPage() {
       </div>
     </main>
   );
-}
+};
+export default NotFoundPage;

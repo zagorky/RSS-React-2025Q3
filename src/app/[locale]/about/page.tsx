@@ -1,13 +1,13 @@
 import { Link } from '~i18n/navigation';
 import { withDataTestId } from '~lib/utilities';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ru' }];
 }
 
-export default function Page() {
-  const t = useTranslations('AboutPage');
+const AboutPage = async () => {
+  const t = await getTranslations('AboutPage');
 
   return (
     <section
@@ -48,4 +48,6 @@ export default function Page() {
       </div>
     </section>
   );
-}
+};
+
+export default AboutPage;

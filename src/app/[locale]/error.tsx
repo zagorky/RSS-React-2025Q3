@@ -3,13 +3,13 @@ import { withDataTestId } from '~lib/utilities';
 import { Button } from '~ui/button/button';
 import { useTranslations } from 'next-intl';
 
-export default function ErrorPage({
+const ErrorPage = ({
   error,
   reset,
 }: Readonly<{
   error: Error & { digest?: string };
   reset: () => void;
-}>) {
+}>) => {
   const t = useTranslations('ErrorPages.error');
 
   return (
@@ -44,4 +44,5 @@ export default function ErrorPage({
       </div>
     </main>
   );
-}
+};
+export default ErrorPage;
