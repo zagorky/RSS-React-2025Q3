@@ -1,1 +1,1 @@
-npm run test:coverage --if-presents
+npm run test:coverage
