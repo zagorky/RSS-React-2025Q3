@@ -1,4 +1,4 @@
-import { Button } from '~components/button/button';
+import { Button } from '~components/button';
 import { withDataTestId } from '~utils/utilities';
 import { Link, useRouteError } from 'react-router';
 

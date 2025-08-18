@@ -1,5 +1,7 @@
+import {Modal} from '~components/modal';
+
 const MainPage = () => {
-  return <></>;
+  return <Modal>s</Modal>;
 };
 
 export default MainPage;

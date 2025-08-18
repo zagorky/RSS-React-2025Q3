@@ -1,5 +1,5 @@
-import { Layout } from '~components/layout/layout';
-import { Loader } from '~components/loader/loader';
+import { Layout } from '~components/layout';
+import { Loader } from '~components/loader';
 import { ErrorPage, MainPage } from '~pages/lazy';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router';
