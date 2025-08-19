@@ -1,7 +1,13 @@
-import {Modal} from '~components/modal';
+import { CollectedForms } from '~components/collected-forms';
+import { UncontrolledForm } from '~components/uncontrolled-form';
 
 const MainPage = () => {
-  return <Modal>s</Modal>;
+  return (
+    <>
+      <UncontrolledForm />
+      <CollectedForms />
+    </>
+  );
 };
 
 export default MainPage;
