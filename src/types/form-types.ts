@@ -16,9 +16,13 @@ const nameSchema = z
 
 const ageShema = z.number().int().min(1, { message: 'Age must not be negative' });
 
-const emailSchema = z
-  .email({ pattern: z.regexes.html5Email, message: 'Email must be properly formatted (e.g., user@example.com)' })
-  .min(1, 'Email cannot be empty');
+export const emailSchema = z
+  .string()
+  .min(1, 'Email cannot be empty')
+  .regex(/^\S+$/, 'Email must not contain any whitespace')
+  .regex(/(?=.*@)/, "Email must contain an '@' symbol separating local part and domain name")
+  .regex(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain a domain name (e.g., example.com)')
+  .email('Email must be properly formatted (e.g., user@example.com)');
 
 const passwordSchema = z
   .string()
