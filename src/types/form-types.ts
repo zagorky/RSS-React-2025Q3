@@ -46,10 +46,16 @@ export const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
   message: 'Please select a gender',
 });
 
+// const imageSchema = z
+//   .file()
+//   .max(5 * 1024 * 1024, { message: 'Max image size is 5MB' })
+//   .mime(['image/jpeg', 'image/png'], { message: 'Only png and jpeg types are allowed' });
+
 const imageSchema = z
-  .file()
-  .max(5 * 1024 * 1024, { message: 'Max image size is 5MB' })
-  .mime(['image/jpeg', 'image/png'], { message: 'Only png and jpeg types are allowed' });
+  .custom<FileList>()
+  .transform((files) => files?.[0])
+  .refine((file) => file?.size <= 2 * 1024 * 1024, 'Max image size is 2MB')
+  .refine((file) => ['image/jpeg', 'image/png'].includes(file?.type), 'Only png and jpeg types are allowed');
 
 const termsSchema = z
   .boolean()
