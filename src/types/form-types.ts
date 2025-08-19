@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 20;
@@ -10,21 +10,15 @@ const nameSchema = z
   .string()
   .min(MIN_LENGTH, 'This field cannot be empty')
   .max(MAX_LENGTH)
-  .refine((value) => /^[A-Za-z]*$/.test(value), {
-    message: 'Please use only letters from the Latin alphabet.',
-  })
-  .refine((value) => value.startsWith(value.charAt(0).toUpperCase()), {
-    message: 'Name must start with a capital letter',
+  .refine((value) => /^[A-Z][a-zA-Z]*$/.test(value), {
+    message: 'Name must start with a capital letter and contain only Latin letters',
   });
 
 const ageShema = z.number().int().min(0, { message: 'Age must not be negative' });
 
 const emailSchema = z
-  .email('Email must be properly formatted (e.g., user@example.com)')
-  .min(1, 'Email cannot be empty')
-  .regex(/^\S+$/, 'Email must not contain any whitespace')
-  .regex(/(?=.*@)/, "Email must contain an '@' symbol separating local part and domain name")
-  .regex(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain a domain name (e.g., example.com)');
+  .email({ pattern: z.regexes.html5Email, message: 'Email must be properly formatted (e.g., user@example.com)' })
+  .min(1, 'Email cannot be empty');
 
 const passwordSchema = z
   .string()
@@ -49,9 +43,9 @@ const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
 });
 
 const imageSchema = z
-  .instanceof(File)
-  .refine((file) => ['image/jpeg', 'image/png'].includes(file.type), { message: 'Only png and jpeg types are allowed' })
-  .refine((file) => file.size <= 5 * 1024 * 1024, { message: 'Max image size is 5MB' });
+  .file()
+  .max(5 * 1024 * 1024, { message: 'Max image size is 5MB' })
+  .mime(['image/jpeg', 'image/png'], { message: 'Only png and jpeg types are allowed' });
 
 const termsSchema = z
   .boolean()
@@ -59,16 +53,24 @@ const termsSchema = z
 
 const countrySchema = z.string().min(1, 'Please select a country');
 
-export const formSchema = z.object({
-  name: nameSchema,
-  age: ageShema,
-  email: emailSchema,
-  password: passwordSchema,
-  confirmPassword: z.string(),
-  gender: genderSchema,
-  image: imageSchema,
-  terms: termsSchema,
-  country: countrySchema,
-});
+export const formSchema = z
+  .object({
+    name: nameSchema,
+    age: ageShema,
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: z.string(),
+    gender: genderSchema,
+    image: imageSchema,
+    terms: termsSchema,
+    country: countrySchema,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
-export type FormType = z.infer<typeof formSchema>;
+export type FormType = z.infer<typeof formSchema> & {
+  id: string;
+  createAt: Date | string;
+};
