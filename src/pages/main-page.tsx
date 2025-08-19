@@ -1,10 +1,11 @@
 import { CollectedForms } from '~components/collected-forms';
-import { UncontrolledForm } from '~components/uncontrolled-form';
+import { ControlledForm } from '~components/controlled-form';
 
 const MainPage = () => {
   return (
     <>
-      <UncontrolledForm />
+      {/*<UncontrolledForm />*/}
+      <ControlledForm />
       <CollectedForms />
     </>
   );

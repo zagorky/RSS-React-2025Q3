@@ -1,11 +1,13 @@
 import type { InputHTMLAttributes, SelectHTMLAttributes } from 'react';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
 import { cn } from '~utils/cn';
 
 type BaseProps = {
   label?: string;
   error?: string;
-  containerClassName?: string;
+  customclass?: string;
+  register?: UseFormRegisterReturn;
 };
 
 type InputProps = BaseProps &
@@ -33,15 +35,17 @@ type SelectProps = BaseProps &
 type FormFieldProps = InputProps | CheckboxProps | RadioProps | SelectProps;
 
 export const FormField = (props: FormFieldProps) => {
-  const { label, error, containerClassName, type } = props;
+  const { label, error, customclass, type } = props;
 
   const renderField = () => {
     switch (type) {
       case 'select': {
+        const { register, ...rest } = props;
+
         return (
           <label className="w-full">
             {label}
-            <select className={cn('inpt w-full')} {...props}>
+            <select {...register} {...rest} className={cn('inpt w-full')}>
               {props.options.map((opt) => (
                 <option key={opt} value={opt}>
                   {opt}
@@ -53,13 +57,16 @@ export const FormField = (props: FormFieldProps) => {
       }
 
       case 'radio': {
+        const { register, ...rest } = props;
+
         return (
           <div className="flex w-full flex-col">
             {props.options.map((opt) => (
               <label key={opt} className="flex items-center space-x-2">
                 <input
+                  {...rest}
+                  {...register}
                   type="radio"
-                  name={props.name}
                   value={opt}
                   defaultChecked={props.value === opt}
                   className="m-2"
@@ -72,19 +79,23 @@ export const FormField = (props: FormFieldProps) => {
       }
 
       case 'checkbox': {
+        const { register, ...rest } = props;
+
         return (
           <label className="flex items-center space-x-2">
-            <input {...props} className="m-2" />
+            <input {...rest} {...register} className="m-2" />
             {label}
           </label>
         );
       }
 
       default: {
+        const { register, ...rest } = props;
+
         return (
           <label className="w-full">
             {label}
-            <input className={cn('inpt w-full')} {...props} />
+            <input {...rest} {...register} className={cn('inpt w-full')} />
           </label>
         );
       }
@@ -92,7 +103,7 @@ export const FormField = (props: FormFieldProps) => {
   };
 
   return (
-    <div className={cn('flex min-h-[80px] w-full flex-wrap items-center', containerClassName)}>
+    <div className={cn('flex min-h-[80px] w-full flex-wrap items-center', customclass)}>
       {renderField()}
       {error && <div className="text-error h-10 w-full text-center text-xs">{error}</div>}
       {!error && <div className="h-10 w-full"></div>}

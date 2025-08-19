@@ -1,19 +1,11 @@
-import type { FormType } from '~types/form-types';
-import type { FormEvent } from 'react';
+import {Button} from '~components/button';
+import {FormField} from '~components/form-field';
+import {formSchema, type FormType, genderSchema} from '~types/form-types';
+import {type FormEvent, useState} from 'react';
+import {z} from 'zod';
 
-import { Button } from '~components/button';
-import { FormField } from '~components/form-field';
-import { formSchema, genderSchema } from '~types/form-types';
-import { useState } from 'react';
-import { z } from 'zod';
-
-import { useCountryStore } from '~/store/use-country-store';
-import { useFormStoreActions } from '~/store/use-form-store';
-
-// Implement validation according to the inputs description +
-// Show errors either above each component, or below +
-// Good UX assumes that there are no "jumps" when showing errors. +
-// Uncontrolled components should implement validation on submit +
+import {useCountryStore} from '~/store/use-country-store';
+import {useFormStoreActions} from '~/store/use-form-store';
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();
@@ -48,6 +40,7 @@ export const UncontrolledForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex max-w-xl flex-col flex-wrap rounded-lg p-4">
+      <header className="h2">Uncontrolled form</header>
       <div className="flex w-full justify-between gap-2">
         <FormField label="Name" name="name" type="text" placeholder="Name" error={errors?.fieldErrors?.name?.[0]} />
         <FormField label="Age" name="age" type="number" placeholder="Age" error={errors?.fieldErrors?.age?.[0]} />
@@ -90,7 +83,7 @@ export const UncontrolledForm = () => {
         />
       </div>
       <FormField
-        containerClassName="flex text-center"
+        customclass="flex text-center"
         label="By checking this box I accept the Terms and Conditions"
         name="terms"
         type="checkbox"
