@@ -7,16 +7,17 @@ import { formSchema, genderSchema } from '~types/form-types';
 import { useState } from 'react';
 import { z } from 'zod';
 
+import { useCountryStore } from '~/store/use-country-store';
 import { useFormStoreActions } from '~/store/use-form-store';
 
 // Implement validation according to the inputs description +
 // Show errors either above each component, or below +
-// Block submitting the form before all the errors are fixed -
 // Good UX assumes that there are no "jumps" when showing errors. +
 // Uncontrolled components should implement validation on submit +
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();
+  const countries = useCountryStore((state) => state.countries);
 
   const [errors, setErrors] = useState<{
     fieldErrors?: Partial<Record<keyof FormType, string[]>>;
@@ -83,12 +84,11 @@ export const UncontrolledForm = () => {
         <FormField
           label="Country"
           name="country"
-          type="text"
-          placeholder="Country"
+          type="select"
+          options={countries}
           error={errors?.fieldErrors?.country?.[0]}
         />
       </div>
-      {/*<div className="flex w-full justify-between gap-2">*/}
       <FormField
         containerClassName="flex text-center"
         label="By checking this box I accept the Terms and Conditions"
@@ -99,7 +99,6 @@ export const UncontrolledForm = () => {
       <Button variant="secondary" classNames="w-full" type="submit">
         Submit
       </Button>
-      {/*</div>*/}
     </form>
   );
 };
