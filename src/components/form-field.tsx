@@ -5,20 +5,31 @@ import { cn } from '~utils/cn';
 type FormFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   error?: string;
-  labelClassName?: string;
+  containerClassName?: string;
+  options?: string[];
 };
 
-export const FormField = ({ error, label, labelClassName, ...props }: FormFieldProps) => {
+export const FormField = ({ error, label, containerClassName, options, ...props }: FormFieldProps) => {
   const { value, type, name } = props;
 
   return (
-    <div className={cn('w-full', labelClassName)}>
-      <label>
-        {label}
-        <input className={cn('inpt', 'w-full')} {...props} name={name} value={value} type={type} />
-      </label>
-      {error && <p className="mt-1 h-5 text-sm text-red-500">{error}</p>}
-      {!error && <div className="h-5"></div>}
+    <div className={cn('flex min-h-[80px] w-full flex-wrap items-center', containerClassName)}>
+      {options ? (
+        options.map((opt) => (
+          <label className="w-full" key={opt}>
+            <input className="m-2" type="radio" name={name} value={opt} defaultChecked={value === opt} />
+            {opt}
+          </label>
+        ))
+      ) : (
+        <label className="w-full">
+          {label}
+          <input className={cn('inpt', 'w-full')} {...props} name={name} value={value} type={type} />
+        </label>
+      )}
+
+      {error && <div className="text-error h-10 w-full text-center text-xs">{error}</div>}
+      {!error && <div className="h-10 w-full"></div>}
     </div>
   );
 };

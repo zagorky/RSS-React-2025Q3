@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 20;
@@ -14,7 +14,7 @@ const nameSchema = z
     message: 'Name must start with a capital letter and contain only Latin letters',
   });
 
-const ageShema = z.number().int().min(0, { message: 'Age must not be negative' });
+const ageShema = z.number().int().min(1, { message: 'Age must not be negative' });
 
 const emailSchema = z
   .email({ pattern: z.regexes.html5Email, message: 'Email must be properly formatted (e.g., user@example.com)' })
@@ -38,7 +38,7 @@ const passwordSchema = z
     message: 'Password must not contain any whitespace characters',
   });
 
-const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
+export const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
   message: 'Please select a gender',
 });
 
