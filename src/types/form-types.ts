@@ -1,6 +1,8 @@
 import { assertIsNonNullable, isString } from '~utils/utilities';
 import { z } from 'zod';
 
+import { useCountryStore } from '~/store/use-country-store';
+
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 20;
 export const SPEC_CHARACTERS = '!@#$%^&?*';
@@ -15,9 +17,9 @@ const nameSchema = z
     message: 'Name must start with a capital letter and contain only Latin letters',
   });
 
-const ageShema = z.number().int().min(1, { message: 'Age must not be negative' });
+const ageShema = z.number().int().min(0, { message: 'Age must not be negative' });
 
-export const emailSchema = z
+const emailSchema = z
   .string()
   .min(1, 'Email cannot be empty')
   .regex(/^\S+$/, 'Email must not contain any whitespace')
@@ -25,7 +27,7 @@ export const emailSchema = z
   .regex(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain a domain name (e.g., example.com)')
   .email('Email must be properly formatted (e.g., user@example.com)');
 
-const passwordSchema = z
+export const passwordSchema = z
   .string()
   .min(MIN_PASSWORD_LENGTH, { message: `Password must be at least ${MIN_PASSWORD_LENGTH.toString()} characters long` })
   .max(MAX_PASSWORD_LENGTH, { message: `Password  must be no more than ${MAX_PASSWORD_LENGTH.toString()} characters` })
@@ -47,7 +49,7 @@ export const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
   message: 'Please select a gender',
 });
 
-export const imageSchema = z
+const imageSchema = z
   .custom<FileList | File>()
   .transform((value) => {
     if (value instanceof FileList) {
@@ -88,7 +90,12 @@ const termsSchema = z
   .boolean()
   .refine((value) => value === true, { message: 'You must accept Terms and Conditions agreement' });
 
-const countrySchema = z.string().min(1, 'Please select a country');
+const countrySchema = z
+  .string()
+  .min(1, 'Please select a country')
+  .refine((value) => useCountryStore.getState().countries.includes(value), {
+    message: 'Please select a valid country',
+  });
 
 export const formSchema = z
   .object({
@@ -96,7 +103,7 @@ export const formSchema = z
     age: ageShema,
     email: emailSchema,
     password: passwordSchema,
-    confirmPassword: z.string(),
+    confirmPassword: passwordSchema,
     gender: genderSchema,
     image: imageSchema,
     terms: termsSchema,

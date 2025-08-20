@@ -6,6 +6,7 @@ import { Autocomplete } from '~components/form-field/autocomplete';
 import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
+import { PasswordStrength } from '~components/password-strength';
 import { formSchema, genderSchema } from '~types/form-types';
 import { useForm } from 'react-hook-form';
 
@@ -18,8 +19,9 @@ export const ControlledForm = () => {
     handleSubmit,
     register,
     formState: { errors, isSubmitting, isValid },
+    watch,
   } = useForm({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,22 +49,37 @@ export const ControlledForm = () => {
           <Input register={register('name')} type="text" name="name" placeholder="Name" label="Name" />
         </FormField>
         <FormField errorMessage={errors.age?.message}>
-          <Input register={register('age')} label="Age" name="age" type="number" placeholder="Age" />
-        </FormField>
-      </div>
-      <div className="flex w-full justify-between gap-2">
-        <FormField errorMessage={errors.password?.message}>
-          <Input register={register('password')} label="Password" name="password" type="text" placeholder="Password" />
-        </FormField>
-        <FormField errorMessage={errors.confirmPassword?.message}>
           <Input
-            register={register('confirmPassword')}
-            label="Confirm password"
-            name="confirmPassword"
-            type="text"
-            placeholder="Confirm password"
+            register={register('age', { valueAsNumber: true })}
+            label="Age"
+            name="age"
+            type="number"
+            placeholder="Age"
           />
         </FormField>
+      </div>
+      <div>
+        <div className="flex w-full justify-between gap-2">
+          <FormField errorMessage={errors.password?.message}>
+            <Input
+              register={register('password')}
+              label="Password"
+              name="password"
+              type="text"
+              placeholder="Password"
+            />
+          </FormField>
+          <FormField errorMessage={errors.confirmPassword?.message}>
+            <Input
+              register={register('confirmPassword')}
+              label="Confirm password"
+              name="confirmPassword"
+              type="text"
+              placeholder="Confirm password"
+            />
+          </FormField>
+        </div>
+        <PasswordStrength password={watch('password')} />
       </div>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors.email?.message}>
@@ -97,7 +114,7 @@ export const ControlledForm = () => {
       <FormField errorMessage={errors.terms?.message}>
         <Input
           register={register('terms')}
-          className="flex items-center space-x-2"
+          className="space-x-2 text-center"
           label="By checking this box I accept the Terms and Conditions"
           name="terms"
           type="checkbox"

@@ -50,13 +50,16 @@ export const UncontrolledForm = () => {
           <Input label="Age" name="age" type="number" placeholder="Age" />
         </FormField>
       </div>
-      <div className="flex w-full justify-between gap-2">
-        <FormField errorMessage={errors?.fieldErrors?.password?.[0]}>
-          <Input label="Password" name="password" type="text" placeholder="Password" />
-        </FormField>
-        <FormField errorMessage={errors?.fieldErrors?.confirmPassword?.[0]}>
-          <Input label="Confirm password" name="confirmPassword" type="text" placeholder="Confirm password" />
-        </FormField>
+      <div>
+        <div className="flex w-full justify-between gap-2">
+          <FormField errorMessage={errors?.fieldErrors?.password?.[0]}>
+            <Input label="Password" name="password" type="text" placeholder="Password" />
+          </FormField>
+          <FormField errorMessage={errors?.fieldErrors?.confirmPassword?.[0]}>
+            <Input label="Confirm password" name="confirmPassword" type="text" placeholder="Confirm password" />
+          </FormField>
+        </div>
+        {/*<PasswordStrength password={} />*/}
       </div>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors?.fieldErrors?.email?.[0]}>
@@ -77,7 +80,7 @@ export const UncontrolledForm = () => {
       </div>
       <FormField errorMessage={errors?.fieldErrors?.terms?.[0]}>
         <Input
-          className="flex items-center space-x-2"
+          className="space-x-2 text-center"
           label="By checking this box I accept the Terms and Conditions"
           name="terms"
           type="checkbox"
