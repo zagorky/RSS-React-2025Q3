@@ -1,3 +1,4 @@
+import { assertIsNonNullable, isString } from '~utils/utilities';
 import { z } from 'zod';
 
 export const MIN_PASSWORD_LENGTH = 8;
@@ -46,16 +47,42 @@ export const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
   message: 'Please select a gender',
 });
 
-// const imageSchema = z
-//   .file()
-//   .max(5 * 1024 * 1024, { message: 'Max image size is 5MB' })
-//   .mime(['image/jpeg', 'image/png'], { message: 'Only png and jpeg types are allowed' });
+export const imageSchema = z
+  .custom<FileList | File>()
+  .transform((value) => {
+    if (value instanceof FileList) {
+      return value.item(0);
+    }
+    if (value instanceof File) {
+      return value;
+    }
 
-const imageSchema = z
-  .custom<FileList>()
-  .transform((files) => files?.[0])
-  .refine((file) => file?.size <= 2 * 1024 * 1024, 'Max image size is 2MB')
-  .refine((file) => ['image/jpeg', 'image/png'].includes(file?.type), 'Only png and jpeg types are allowed');
+    return null;
+  })
+  .refine((file) => file instanceof File, { message: 'Image is required' })
+  .refine((file) => file && file.size <= 5 * 1024 * 1024, {
+    message: 'Max image size is 5MB',
+  })
+  .refine((file) => file && ['image/jpeg', 'image/png'].includes(file.type), {
+    message: 'Only png and jpeg types are allowed',
+  })
+  .transform(async (file) => {
+    assertIsNonNullable(file);
+
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        if (isString(reader.result)) {
+          resolve(reader.result);
+        }
+      });
+      reader.addEventListener('error', () => {
+        reject(new Error('Failed to read file'));
+      });
+      reader.readAsDataURL(file);
+    });
+  });
 
 const termsSchema = z
   .boolean()

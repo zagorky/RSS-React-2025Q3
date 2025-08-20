@@ -1,24 +1,27 @@
-import type {z} from 'zod';
+import type { z } from 'zod';
 
-import {type formSchema} from '~types/form-types';
-import {create} from 'zustand';
+import { type formSchema } from '~types/form-types';
+import { create } from 'zustand';
 
-type FormType = z.infer<typeof formSchema> & {
-  id: string;
-  createAt: Date | string;
-};
+type FormType = z.infer<typeof formSchema> & { id: string; createAt: string };
 
 type FormStoreType = {
   forms: FormType[];
   actions: {
-    addForm: (form: FormType) => void;
+    addForm: (form: Omit<FormType, 'id' | 'createAt'>) => void;
   };
 };
 
 const useFormStore = create<FormStoreType>()((set) => ({
   forms: [],
   actions: {
-    addForm: (form: FormType) => set((state) => ({ forms: [...state.forms, form] })),
+    addForm: (form) => {
+      const newForm = { ...form, id: crypto.randomUUID(), createAt: new Date().toISOString() };
+
+      set((state) => ({
+        forms: [...state.forms, newForm],
+      }));
+    },
   },
 }));
 

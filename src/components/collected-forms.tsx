@@ -10,8 +10,8 @@ export const CollectedForms = () => {
 
   return (
     <section className="flex w-full flex-wrap items-center justify-center">
-      {forms.map((form, i) => (
-        <FormCard key={i} form={form} />
+      {forms.map((form) => (
+        <FormCard key={form.id} form={form} />
       ))}
     </section>
   );

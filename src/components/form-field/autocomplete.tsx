@@ -21,7 +21,7 @@ export const Autocomplete = ({ register, ...props }: AutocompleteProps) => {
 
   const handleSelect = (country: string) => {
     setValue(country);
-    setIsOpen((state) => !state);
+    setIsOpen(false);
   };
 
   return (

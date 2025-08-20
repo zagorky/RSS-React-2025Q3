@@ -17,7 +17,7 @@ export const UncontrolledForm = () => {
     formErrors?: string[];
   } | null>(null);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const rawData = Object.fromEntries(form.entries());
@@ -28,9 +28,9 @@ export const UncontrolledForm = () => {
     };
 
     try {
-      const validatedData = formSchema.parse(processedData);
+      const validatedData = await formSchema.parseAsync(processedData);
 
-      addForm({ ...validatedData, id: crypto.randomUUID(), createAt: new Date().toISOString() });
+      addForm({ ...validatedData });
       setErrors(null);
     } catch (error) {
       if (error instanceof z.ZodError) {

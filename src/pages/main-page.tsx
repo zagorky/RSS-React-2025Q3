@@ -1,6 +1,6 @@
 import { CollectedForms } from '~components/collected-forms';
-import { ControlledForm } from '~components/controlled-form';
-import { UncontrolledForm } from '~components/uncontrolled-form';
+import { ControlledForm } from '~components/forms/controlled-form';
+import { UncontrolledForm } from '~components/forms/uncontrolled-form';
 
 const MainPage = () => {
   return (

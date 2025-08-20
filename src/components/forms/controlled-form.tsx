@@ -1,3 +1,5 @@
+import type { FormType } from '~types/form-types';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '~components/button';
 import { Autocomplete } from '~components/form-field/autocomplete';
@@ -7,12 +9,15 @@ import { RadioButton } from '~components/form-field/radio-button';
 import { formSchema, genderSchema } from '~types/form-types';
 import { useForm } from 'react-hook-form';
 
+import { useFormStoreActions } from '~/store/use-form-store';
+
 export const ControlledForm = () => {
+  const { addForm } = useFormStoreActions();
+
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting, isValid },
-    watch,
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -30,8 +35,8 @@ export const ControlledForm = () => {
     },
   });
 
-  const onSubmit = () => {
-    console.log(watch);
+  const onSubmit = (data: Omit<FormType, 'id' | 'createAt'>) => {
+    addForm({ ...data });
   };
 
   return (
@@ -76,7 +81,14 @@ export const ControlledForm = () => {
       </div>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors.image?.message}>
-          <Input register={register('image')} label="Image" name="image" type="file" placeholder="Image" />
+          <Input
+            register={register('image')}
+            label="Image"
+            name="image"
+            type="file"
+            onChange={(event) => event.target.files?.[0]}
+            placeholder="Image"
+          />
         </FormField>
         <FormField errorMessage={errors.country?.message}>
           <Autocomplete register={register('country')} label="Counrty" name="country" type="text" />
