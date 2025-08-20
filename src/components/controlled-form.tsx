@@ -1,19 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '~components/button';
+import { Autocomplete } from '~components/form-field/autocomplete';
 import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
 import { formSchema, genderSchema } from '~types/form-types';
 import { useForm } from 'react-hook-form';
 
-// Implement validation according to the inputs description -
-// Show errors either above each component, or below +
-// Block submitting the form before all the errors are fixed +
-// Good UX assumes that there are no "jumps" when showing errors. +
-// Approach with React Hook Form should implement live validation +
-
 export const ControlledForm = () => {
-  // const countries = useCountryStore((state) => state.countries);
   const {
     handleSubmit,
     register,
@@ -32,7 +26,7 @@ export const ControlledForm = () => {
       gender: 'prefer not to say',
       image: undefined,
       terms: false,
-      country: 'Serbia',
+      country: '',
     },
   });
 
@@ -84,7 +78,9 @@ export const ControlledForm = () => {
         <FormField errorMessage={errors.image?.message}>
           <Input register={register('image')} label="Image" name="image" type="file" placeholder="Image" />
         </FormField>
-        {/*<FormField register={register('country')} label="Country" name="country" type="select" options={countries} />*/}
+        <FormField errorMessage={errors.country?.message}>
+          <Autocomplete register={register('country')} label="Counrty" name="country" type="text" />
+        </FormField>
       </div>
       <FormField errorMessage={errors.terms?.message}>
         <Input

@@ -1,7 +1,7 @@
-import type {InputHTMLAttributes} from 'react';
-import type {UseFormRegisterReturn} from 'react-hook-form';
+import type { InputHTMLAttributes } from 'react';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
-import {cn} from '~utils/cn';
+import { cn } from '~utils/cn';
 
 type RadioButtonProps = InputHTMLAttributes<HTMLInputElement> & {
   options: string[];
