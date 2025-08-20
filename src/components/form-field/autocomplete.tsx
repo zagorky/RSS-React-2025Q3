@@ -34,6 +34,7 @@ export const Autocomplete = ({ register, ...props }: AutocompleteProps) => {
           setValue(event.target.value);
           setIsOpen(true);
         }}
+        onBlur={() => setIsOpen(false)}
       />
       {isOpen && filteredCountries.length > 0 && (
         <div className="bg-bg absolute z-10 mt-1 max-h-60 overflow-y-auto rounded-md border-3 border-gray-400 shadow-md">
@@ -41,7 +42,10 @@ export const Autocomplete = ({ register, ...props }: AutocompleteProps) => {
             <button
               key={country}
               type="button"
-              onClick={() => handleSelect(country)}
+              onMouseDown={(event) => {
+                event.preventDefault();
+                handleSelect(country);
+              }}
               className="focus:bg-primary-500/50 hover:bg-primary-500/50 w-full cursor-pointer px-3 py-2 text-left"
             >
               {country}
