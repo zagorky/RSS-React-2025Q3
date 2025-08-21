@@ -1,18 +1,19 @@
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { formSchema, type FormType, genderSchema } from '~types/form-types';
-import { assertIsNonNullable, convertToBase64 } from '~utils/utilities';
-import { type FormEvent, useState } from 'react';
-import { z } from 'zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {PasswordStrength} from '~components/password-strength';
+import {formSchema, type FormType, genderSchema} from '~types/form-types';
+import {assertIsNonNullable, convertToBase64, getFormEntries, isString} from '~utils/utilities';
+import {type FormEvent, useState} from 'react';
+import {z} from 'zod';
 
-import { useFormStoreActions } from '~/store/use-form-store';
+import {useFormStoreActions} from '~/store/use-form-store';
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();
-
+  const [passwordStraight, setPasswordStraight] = useState('');
   const [errors, setErrors] = useState<{
     fieldErrors?: Partial<Record<keyof FormType, string[]>>;
     formErrors?: string[];
@@ -21,12 +22,15 @@ export const UncontrolledForm = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const rawData = Object.fromEntries(form.entries());
+    const rawData = getFormEntries<FormType>(form);
     const processedData = {
       ...rawData,
+      password: isString(rawData.password) ? rawData.password : '',
       age: Number(rawData.age),
       terms: rawData.terms === 'on',
     };
+
+    setPasswordStraight(processedData.password);
 
     try {
       const validatedData = await formSchema.parseAsync(processedData);
@@ -63,7 +67,7 @@ export const UncontrolledForm = () => {
             <Input label="Confirm password" name="confirmPassword" type="text" placeholder="Confirm password" />
           </FormField>
         </div>
-        {/*<PasswordStrength password={} />*/}
+        <PasswordStrength password={passwordStraight} />
       </div>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors?.fieldErrors?.email?.[0]}>
