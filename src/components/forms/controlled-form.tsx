@@ -1,20 +1,20 @@
-import type { FormType } from '~types/form-types';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {PasswordStrength} from '~components/password-strength';
+import {formSchema, type FormType} from '~types/form-types';
+import {assertIsNonNullable, convertToBase64} from '~utils/utilities';
+import {useForm} from 'react-hook-form';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { PasswordStrength } from '~components/password-strength';
-import { formSchema, genderSchema } from '~types/form-types';
-import { useForm } from 'react-hook-form';
-
-import { useFormStoreActions } from '~/store/use-form-store';
+import {useFormStoreActions} from '~/store/use-form-store';
+import {useGenders} from '~/store/use-validation-data-store';
 
 export const ControlledForm = () => {
   const { addForm } = useFormStoreActions();
-
+  const genders = useGenders();
   const {
     handleSubmit,
     register,
@@ -37,8 +37,11 @@ export const ControlledForm = () => {
     },
   });
 
-  const onSubmit = (data: Omit<FormType, 'id' | 'createAt'>) => {
-    addForm({ ...data });
+  const onSubmit = async (data: Omit<FormType, 'id' | 'createAt'>) => {
+    assertIsNonNullable(data.image);
+    const image = await convertToBase64(data.image);
+
+    addForm({ ...data, image });
   };
 
   return (
@@ -87,13 +90,7 @@ export const ControlledForm = () => {
         </FormField>
 
         <FormField errorMessage={errors.gender?.message}>
-          <RadioButton
-            register={register('gender')}
-            label="Gender"
-            name="gender"
-            type="radio"
-            options={genderSchema.options}
-          />
+          <RadioButton register={register('gender')} label="Gender" name="gender" type="radio" options={genders} />
         </FormField>
       </div>
       <div className="flex w-full justify-between gap-2">

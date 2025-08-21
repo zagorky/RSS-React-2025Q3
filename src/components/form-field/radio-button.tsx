@@ -17,12 +17,12 @@ export const RadioButton = ({ options, register, className, label, ...props }: R
       {options.map((option) => (
         <label key={option} className={cn('flex items-center space-x-2')}>
           <input
-            {...props}
-            {...register}
             type="radio"
             value={option}
             defaultChecked={props.value === option}
             className="m-2"
+            {...props}
+            {...register}
           />
           <span>{option}</span>
         </label>

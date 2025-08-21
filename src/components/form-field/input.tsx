@@ -9,11 +9,11 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-export const Input = ({ label, register, className, ...props }: InputProps) => {
+export const Input = ({ register, label, className, ...props }: InputProps) => {
   return (
     <label className={cn('w-full', className)}>
       {label}
-      <input {...props} {...register} className={cn('inpt w-full')} />
+      <input className={cn('inpt w-full')} {...props} {...register} />
     </label>
   );
 };

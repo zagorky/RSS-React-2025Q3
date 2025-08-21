@@ -1,7 +1,6 @@
-import { assertIsNonNullable, isString } from '~utils/utilities';
 import { z } from 'zod';
 
-import { useCountryStore } from '~/store/use-country-store';
+import { useValidationDataStore } from '~/store/use-validation-data-store';
 
 export const MIN_PASSWORD_LENGTH = 8;
 export const MAX_PASSWORD_LENGTH = 20;
@@ -45,7 +44,7 @@ export const passwordSchema = z
     message: 'Password must not contain any whitespace characters',
   });
 
-export const genderSchema = z.enum(['male', 'female', 'prefer not to say'], {
+export const genderSchema = z.enum([...useValidationDataStore.getState().genders], {
   message: 'Please select a gender',
 });
 
@@ -67,23 +66,6 @@ const imageSchema = z
   })
   .refine((file) => file && ['image/jpeg', 'image/png'].includes(file.type), {
     message: 'Only png and jpeg types are allowed',
-  })
-  .transform(async (file) => {
-    assertIsNonNullable(file);
-
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.addEventListener('load', () => {
-        if (isString(reader.result)) {
-          resolve(reader.result);
-        }
-      });
-      reader.addEventListener('error', () => {
-        reject(new Error('Failed to read file'));
-      });
-      reader.readAsDataURL(file);
-    });
   });
 
 const termsSchema = z
@@ -93,7 +75,7 @@ const termsSchema = z
 const countrySchema = z
   .string()
   .min(1, 'Please select a country')
-  .refine((value) => useCountryStore.getState().countries.includes(value), {
+  .refine((value) => useValidationDataStore.getState().countries.includes(value), {
     message: 'Please select a valid country',
   });
 
@@ -103,7 +85,7 @@ export const formSchema = z
     age: ageShema,
     email: emailSchema,
     password: passwordSchema,
-    confirmPassword: passwordSchema,
+    confirmPassword: z.string(),
     gender: genderSchema,
     image: imageSchema,
     terms: termsSchema,

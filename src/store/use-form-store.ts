@@ -3,12 +3,18 @@ import type { z } from 'zod';
 import { type formSchema } from '~types/form-types';
 import { create } from 'zustand';
 
-type FormType = z.infer<typeof formSchema> & { id: string; createAt: string };
+export type Base64String = string & { _base64: true };
+
+export type StoreFormType = Omit<z.infer<typeof formSchema>, 'image'> & {
+  id: string;
+  createAt: string;
+  image: Base64String;
+};
 
 type FormStoreType = {
-  forms: FormType[];
+  forms: StoreFormType[];
   actions: {
-    addForm: (form: Omit<FormType, 'id' | 'createAt'>) => void;
+    addForm: (form: Omit<StoreFormType, 'id' | 'createAt'>) => void;
   };
 };
 

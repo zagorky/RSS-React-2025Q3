@@ -2,9 +2,12 @@ import { create } from 'zustand';
 
 type CountryStoreType = {
   countries: string[];
+  genders: string[];
 };
 
-export const useCountryStore = create<CountryStoreType>()(() => ({
+export const useValidationDataStore = create<CountryStoreType>()(() => ({
+  genders: ['male', 'female', 'prefer not to say'],
+
   countries: [
     'Afghanistan',
     'Albania',
@@ -203,3 +206,6 @@ export const useCountryStore = create<CountryStoreType>()(() => ({
     'Zimbabwe',
   ],
 }));
+
+export const useGenders = () => useValidationDataStore((state) => state.genders);
+export const useCountries = () => useValidationDataStore((state) => state.countries);

@@ -1,10 +1,10 @@
-import type { FormType } from '~types/form-types';
-
 import { ItemImg } from '~components/img-item';
 import { InfoBadge } from '~components/info-badge';
 import { cn } from '~utils/cn';
 
-export const FormCard = ({ form }: { form: FormType }) => {
+import type { StoreFormType } from '~/store/use-form-store';
+
+export const FormCard = ({ form }: { form: StoreFormType }) => {
   const { name, age, gender, email, password, country, image } = form;
 
   return (

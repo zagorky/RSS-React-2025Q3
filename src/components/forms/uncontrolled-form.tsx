@@ -4,6 +4,7 @@ import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
 import { formSchema, type FormType, genderSchema } from '~types/form-types';
+import { assertIsNonNullable, convertToBase64 } from '~utils/utilities';
 import { type FormEvent, useState } from 'react';
 import { z } from 'zod';
 
@@ -30,7 +31,10 @@ export const UncontrolledForm = () => {
     try {
       const validatedData = await formSchema.parseAsync(processedData);
 
-      addForm({ ...validatedData });
+      assertIsNonNullable(validatedData.image);
+      const image = await convertToBase64(validatedData.image);
+
+      addForm({ ...validatedData, image });
       setErrors(null);
     } catch (error) {
       if (error instanceof z.ZodError) {

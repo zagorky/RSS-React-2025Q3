@@ -1,9 +1,9 @@
-import type {UseFormRegisterReturn} from 'react-hook-form';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
-import {Input} from '~components/form-field/input';
-import {type InputHTMLAttributes, useDeferredValue, useState} from 'react';
+import { Input } from '~components/form-field/input';
+import { type InputHTMLAttributes, useDeferredValue, useState } from 'react';
 
-import {useCountryStore} from '~/store/use-country-store';
+import { useCountries } from '~/store/use-validation-data-store';
 
 type AutocompleteProps = InputHTMLAttributes<HTMLInputElement> & {
   register?: UseFormRegisterReturn;
@@ -12,7 +12,7 @@ type AutocompleteProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const Autocomplete = ({ register, ...props }: AutocompleteProps) => {
-  const countries = useCountryStore((state) => state.countries);
+  const countries = useCountries();
   const [value, setValue] = useState('');
   const deferredValue = useDeferredValue(value);
   const [isOpen, setIsOpen] = useState(false);
