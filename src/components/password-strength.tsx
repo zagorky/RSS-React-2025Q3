@@ -1,13 +1,38 @@
-import { passwordSchema } from '~types/form-types';
-import { useMemo } from 'react';
+import type { RefObject } from 'react';
 
-type PasswordStrengthProps = {
-  password: string;
+import { passwordSchema } from '~types/form-types';
+import { useEffect, useMemo, useState } from 'react';
+
+export type PasswordStrengthProps = {
+  password?: string;
+  api?: RefObject<{ setPassword: (password: string) => void } | null>;
 };
 
-export const PasswordStrength = ({ password }: PasswordStrengthProps) => {
+export const PasswordStrength = ({ api, password }: PasswordStrengthProps) => {
+  const [localPassword, setLocalPassword] = useState(password);
+
+  //TODO useImperativeRef попробовать переписать
+  useEffect(() => {
+    if (api) {
+      api.current = {
+        setPassword: (value: string) => {
+          if (value !== localPassword) {
+            setLocalPassword(value);
+          }
+        },
+      };
+    }
+  }, [api, localPassword]);
+
+  useEffect(() => {
+    setLocalPassword(password);
+  }, [password]);
+
   const strength = useMemo(() => {
-    const result = passwordSchema.safeParse(password);
+    if (!localPassword) {
+      return { label: 'Weak', color: 'bg-error' };
+    }
+    const result = passwordSchema.safeParse(localPassword);
     const totalChecks = 6;
     const passedChecks = result.success ? totalChecks : totalChecks - result.error.issues.length;
 
@@ -23,7 +48,7 @@ export const PasswordStrength = ({ password }: PasswordStrengthProps) => {
     }
 
     return { label: 'Weak', color: 'bg-error' };
-  }, [password]);
+  }, [localPassword]);
 
   return (
     <div className="mt-1">

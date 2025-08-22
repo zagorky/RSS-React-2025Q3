@@ -4,6 +4,7 @@ import { Autocomplete } from '~components/form-field/autocomplete';
 import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
+import { defaultFormConfig } from '~components/forms/default-form-config';
 import { PasswordStrength } from '~components/password-strength';
 import { formSchema, type FormType } from '~types/form-types';
 import { assertIsNonNullable, convertToBase64 } from '~utils/utilities';
@@ -24,17 +25,7 @@ export const ControlledForm = () => {
     mode: 'all',
     reValidateMode: 'onChange',
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      age: 1,
-      email: '',
-      password: '',
-      confirmPassword: '',
-      gender: 'prefer not to say',
-      image: undefined,
-      terms: false,
-      country: '',
-    },
+    defaultValues: defaultFormConfig,
   });
 
   const onSubmit = async (data: Omit<FormType, 'id' | 'createAt'>) => {
@@ -105,7 +96,7 @@ export const ControlledForm = () => {
           />
         </FormField>
         <FormField errorMessage={errors.country?.message}>
-          <Autocomplete register={register('country')} label="Counrty" name="country" type="text" />
+          <Autocomplete id="controlled" register={register('country')} label="Counrty" name="country" type="text" />
         </FormField>
       </div>
       <FormField errorMessage={errors.terms?.message}>

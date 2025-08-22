@@ -9,50 +9,33 @@ type AutocompleteProps = InputHTMLAttributes<HTMLInputElement> & {
   register?: UseFormRegisterReturn;
   label?: string;
   className?: string;
+  id: string;
 };
 
-export const Autocomplete = ({ register, ...props }: AutocompleteProps) => {
+export const Autocomplete = ({ id, register, ...props }: AutocompleteProps) => {
   const countries = useCountries();
   const [value, setValue] = useState('');
   const deferredValue = useDeferredValue(value);
-  const [isOpen, setIsOpen] = useState(false);
 
   const filteredCountries = countries.filter((c) => c.toLowerCase().includes(deferredValue.toLowerCase()));
-
-  const handleSelect = (country: string) => {
-    setValue(country);
-    setIsOpen(false);
-  };
 
   return (
     <div className="relative w-full">
       <Input
         {...props}
         {...register}
-        value={value}
+        list={`${id}-countries`}
+        value={props.value}
         onChange={(event) => {
           setValue(event.target.value);
-          setIsOpen(true);
         }}
-        onBlur={() => setIsOpen(false)}
       />
-      {isOpen && filteredCountries.length > 0 && (
-        <div className="bg-bg absolute z-10 mt-1 max-h-60 overflow-y-auto rounded-md border-3 border-gray-400 shadow-md">
-          {filteredCountries.map((country) => (
-            <button
-              key={country}
-              type="button"
-              onMouseDown={(event) => {
-                event.preventDefault();
-                handleSelect(country);
-              }}
-              className="focus:bg-primary-500/50 hover:bg-primary-500/50 w-full cursor-pointer px-3 py-2 text-left"
-            >
-              {country}
-            </button>
-          ))}
-        </div>
-      )}
+
+      <datalist id={`${id}-countries`}>
+        {filteredCountries.map((country) => (
+          <option value={country} key={country} />
+        ))}
+      </datalist>
     </div>
   );
 };

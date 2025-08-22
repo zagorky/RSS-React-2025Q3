@@ -1,3 +1,4 @@
+import { assertIsNonNullable } from '~utils/utilities';
 import { z } from 'zod';
 
 import { useValidationDataStore } from '~/store/use-validation-data-store';
@@ -50,15 +51,22 @@ export const genderSchema = z.enum([...useValidationDataStore.getState().genders
 
 const imageSchema = z
   .custom<FileList | File>()
+  .refine((value) => value !== null, {
+    message: 'Image is required',
+  })
   .transform((value) => {
     if (value instanceof FileList) {
-      return value.item(0);
+      const value_ = value.item(0);
+
+      assertIsNonNullable(value_);
+
+      return value_;
     }
     if (value instanceof File) {
       return value;
     }
 
-    return null;
+    throw new Error('expected file type');
   })
   .refine((file) => file instanceof File, { message: 'Image is required' })
   .refine((file) => file && file.size <= 5 * 1024 * 1024, {
