@@ -1,5 +1,5 @@
-import {passwordSchema} from '~types/form-types';
-import {type RefObject, useEffect, useMemo, useState} from 'react';
+import { passwordSchema } from '~types/form-types';
+import { type RefObject, useEffect, useMemo, useState } from 'react';
 
 export type PasswordStrengthProps = {
   password?: string;

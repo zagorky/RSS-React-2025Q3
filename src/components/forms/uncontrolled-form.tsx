@@ -26,7 +26,6 @@ export const UncontrolledForm = () => {
     const rawData = getFormEntries<FormType>(form);
     const processedData = {
       ...rawData,
-      password: isString(rawData.password) ? rawData.password : '',
       age: Number(rawData.age),
       terms: rawData.terms === 'on',
     };

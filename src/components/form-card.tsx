@@ -1,14 +1,32 @@
 import { ItemImg } from '~components/img-item';
 import { InfoBadge } from '~components/info-badge';
 import { cn } from '~utils/cn';
+import { useEffect, useState } from 'react';
 
 import type { StoreFormType } from '~/store/use-form-store';
 
 export const FormCard = ({ form }: { form: StoreFormType }) => {
-  const { name, age, gender, email, password, country, image } = form;
+  const { name, age, gender, email, password, country, image, createAt } = form;
+
+  const [isNew, setIsNew] = useState(false);
+
+  useEffect(() => {
+    const created = new Date(createAt).getTime();
+
+    if (Date.now() - created < 2000) {
+      setIsNew(true);
+      const timer = setTimeout(() => setIsNew(false), 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [createAt]);
 
   return (
-    <div className={cn('border-warning m-2 w-full max-w-[350px] columns-sm rounded-lg border-3 p-4')}>
+    <div
+      className={cn('m-2 w-full max-w-[350px] columns-sm rounded-lg border-3 p-4 transition-colors duration-500', {
+        'border-warning': isNew,
+      })}
+    >
       <div className="flex w-full flex-wrap items-center justify-between gap-4">
         <div className="flex w-full items-center justify-between gap-6">
           <div className="w-full max-w-20 overflow-hidden rounded-full">
