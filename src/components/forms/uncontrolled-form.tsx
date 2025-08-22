@@ -4,6 +4,7 @@ import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
 import { defaultFormConfig } from '~components/forms/default-form-config';
+import { useModal } from '~components/modal/hooks/use-modal';
 import { PasswordStrength } from '~components/password-strength';
 import { formSchema, type FormType, genderSchema } from '~types/form-types';
 import { convertToBase64, getFormEntries, isString } from '~utils/utilities';
@@ -14,6 +15,8 @@ import { useFormStoreActions } from '~/store/use-form-store';
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();
+  const { close } = useModal();
+
   const passwordApi = useRef<{ setPassword: (password: string) => void }>(null);
   const [errors, setErrors] = useState<{
     fieldErrors?: Partial<Record<keyof FormType, string[]>>;
@@ -36,6 +39,7 @@ export const UncontrolledForm = () => {
 
       addForm({ ...validatedData, image });
       setErrors(null);
+      close();
     } catch (error) {
       if (error instanceof z.ZodError) {
         setErrors(z.flattenError(error));
@@ -53,15 +57,11 @@ export const UncontrolledForm = () => {
   };
 
   return (
-    <form
-      onChange={handleFormChange}
-      onSubmit={handleSubmit}
-      className="flex max-w-xl flex-col flex-wrap rounded-lg p-4"
-    >
+    <form onChange={handleFormChange} onSubmit={handleSubmit} className="flex max-w-xl flex-col flex-wrap rounded-lg">
       <header className="h2">Uncontrolled form</header>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors?.fieldErrors?.name?.[0]}>
-          <Input type="text" name="name" placeholder="Name" label="Name" />
+          <Input autoFocus type="text" name="name" placeholder="Name" label="Name" />
         </FormField>
         <FormField errorMessage={errors?.fieldErrors?.age?.[0]}>
           <Input label="Age" name="age" type="number" placeholder="Age" />

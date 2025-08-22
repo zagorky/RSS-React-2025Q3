@@ -5,7 +5,6 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import react from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactDom from 'eslint-plugin-react-dom';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
@@ -32,7 +31,6 @@ export default tseslint.config(
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'jsx-a11y': jsxA11y,
       'react-dom': reactDom,
       perfectionist: perfectionistPlugin,
       import: importPlugin,
@@ -40,7 +38,6 @@ export default tseslint.config(
     },
     rules: {
       // react
-      ...jsxA11y.configs.recommended.rules,
       ...reactDom.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],

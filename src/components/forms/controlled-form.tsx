@@ -5,6 +5,7 @@ import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
 import { defaultFormConfig } from '~components/forms/default-form-config';
+import { useModal } from '~components/modal/hooks/use-modal';
 import { PasswordStrength } from '~components/password-strength';
 import { formSchema, type FormType } from '~types/form-types';
 import { assertIsNonNullable, convertToBase64 } from '~utils/utilities';
@@ -15,6 +16,7 @@ import { useGenders } from '~/store/use-validation-data-store';
 
 export const ControlledForm = () => {
   const { addForm } = useFormStoreActions();
+  const { close } = useModal();
   const genders = useGenders();
   const {
     handleSubmit,
@@ -33,14 +35,15 @@ export const ControlledForm = () => {
     const image = await convertToBase64(data.image);
 
     addForm({ ...data, image });
+    close();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex max-w-xl flex-col flex-wrap rounded-lg p-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex max-w-xl flex-col flex-wrap rounded-lg">
       <header className="h2">Controlled form</header>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors.name?.message}>
-          <Input register={register('name')} type="text" name="name" placeholder="Name" label="Name" />
+          <Input autoFocus register={register('name')} type="text" name="name" placeholder="Name" label="Name" />
         </FormField>
         <FormField errorMessage={errors.age?.message}>
           <Input
