@@ -1,6 +1,6 @@
-import {FormCard} from '~components/form-card';
+import { FormCard } from '~components/form-card';
 
-import {useCollectedForms} from '~/store/use-form-store';
+import { useCollectedForms } from '~/store/use-form-store';
 
 // On successful form submission close the modal and display the newly entered data on the main page +-
 
