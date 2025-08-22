@@ -1,7 +1,5 @@
-import type { RefObject } from 'react';
-
-import { passwordSchema } from '~types/form-types';
-import { useEffect, useMemo, useState } from 'react';
+import {passwordSchema} from '~types/form-types';
+import {type RefObject, useEffect, useMemo, useState} from 'react';
 
 export type PasswordStrengthProps = {
   password?: string;
@@ -11,7 +9,6 @@ export type PasswordStrengthProps = {
 export const PasswordStrength = ({ api, password }: PasswordStrengthProps) => {
   const [localPassword, setLocalPassword] = useState(password);
 
-  //TODO useImperativeRef попробовать переписать
   useEffect(() => {
     if (api) {
       api.current = {
