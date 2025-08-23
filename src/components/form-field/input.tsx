@@ -21,14 +21,9 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   variant?: keyof typeof variants;
 };
 
-export const Input = ({ variant = 'default', register, label, className, ...props }: InputProps) => {
-  const labelClass = cn(variants[variant].label, className);
-  const inputClass = cn(variants[variant].input);
-
-  return (
-    <label className={labelClass}>
-      {label}
-      <input className={inputClass} {...props} {...register} />
-    </label>
-  );
-};
+export const Input = ({ variant = 'default', register, label, className, ...props }: InputProps) => (
+  <label className={cn(variants[variant].label, className)}>
+    {label}
+    <input className={cn(variants[variant].input)} {...props} {...register} />
+  </label>
+);
