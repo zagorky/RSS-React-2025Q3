@@ -25,7 +25,6 @@ export const Autocomplete = ({ id, register, ...props }: AutocompleteProps) => {
         {...props}
         {...register}
         list={`${id}-countries`}
-        // defaultValue={value}
         onChange={(event) => {
           setValue(event.target.value);
         }}
