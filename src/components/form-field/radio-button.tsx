@@ -10,23 +10,21 @@ type RadioButtonProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-export const RadioButton = ({ options, register, className, label, ...props }: RadioButtonProps) => {
-  return (
-    <div className={cn('flex w-full flex-col', className)}>
-      {label}
-      {options.map((option) => (
-        <label key={option} className={cn('flex items-center space-x-2')}>
-          <input
-            type="radio"
-            value={option}
-            defaultChecked={props.value === option}
-            className="m-2"
-            {...props}
-            {...register}
-          />
-          <span>{option}</span>
-        </label>
-      ))}
-    </div>
-  );
-};
+export const RadioButton = ({ options, register, className, label, ...props }: RadioButtonProps) => (
+  <div className={cn('flex w-full flex-col', className)}>
+    {label}
+    {options.map((option) => (
+      <label key={option} className={cn('flex items-center space-x-2')}>
+        <input
+          type="radio"
+          value={option}
+          defaultChecked={props.value === option}
+          className="m-2"
+          {...props}
+          {...register}
+        />
+        <span>{option}</span>
+      </label>
+    ))}
+  </div>
+);

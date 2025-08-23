@@ -10,13 +10,11 @@ type InfoBadgeProps = {
   color: string;
 };
 
-export const InfoBadge = ({ name, data, testId, color }: InfoBadgeProps) => {
-  return (
-    <div className="w-full text-center">
-      <div className="mb-1 font-semibold">{name}</div>
-      <div {...withDataTestId(`info-${testId}`)} className={cn('text-text-on-primary rounded-md px-2 py-1', color)}>
-        {data}
-      </div>
+export const InfoBadge = ({ name, data, testId, color }: InfoBadgeProps) => (
+  <div className="w-full text-center">
+    <div className="mb-1 font-semibold">{name}</div>
+    <div {...withDataTestId(`info-${testId}`)} className={cn('text-text-on-primary rounded-md px-2 py-1', color)}>
+      {data}
     </div>
-  );
-};
+  </div>
+);

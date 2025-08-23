@@ -30,7 +30,7 @@ export const FormCard = ({ form }: { form: StoreFormType }) => {
       <div className="flex w-full flex-wrap items-center justify-between gap-4">
         <div className="flex w-full items-center justify-between gap-6">
           <div className="w-full max-w-20 overflow-hidden rounded-full">
-            <ItemImg url={image} alt={`${name} image`} />
+            <ItemImg testId={`img-${name}`} url={image} alt={`${name} image`} />
           </div>
           <InfoBadge data={name} testId={name} color="bg-primary-200 text-text-primary" />
         </div>

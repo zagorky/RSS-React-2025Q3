@@ -1,18 +1,18 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { defaultFormConfig } from '~components/forms/default-form-config';
-import { useModal } from '~components/modal/hooks/use-modal';
-import { PasswordStrength } from '~components/password-strength';
-import { formSchema, type FormType } from '~types/form-types';
-import { assertIsNonNullable, convertToBase64 } from '~utils/utilities';
-import { useForm } from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {defaultFormConfig} from '~components/forms/default-form-config';
+import {useModal} from '~components/modal/hooks/use-modal';
+import {PasswordStrength} from '~components/password-strength';
+import {formSchema, type FormType} from '~types/form-types';
+import {assertIsNonNullable, convertToBase64} from '~utils/utilities';
+import {useForm} from 'react-hook-form';
 
-import { useFormStoreActions } from '~/store/use-form-store';
-import { useGenders } from '~/store/use-validation-data-store';
+import {useFormStoreActions} from '~/store/use-form-store';
+import {useGenders} from '~/store/use-validation-data-store';
 
 export const ControlledForm = () => {
   const { addForm } = useFormStoreActions();
@@ -98,13 +98,13 @@ export const ControlledForm = () => {
       <FormField errorMessage={errors.terms?.message}>
         <Input
           register={register('terms')}
-          className="space-x-2 text-center"
+          variant="inline"
           label="By checking this box I accept the Terms and Conditions"
           name="terms"
           type="checkbox"
         />
       </FormField>
-      <Button disabled={!isValid || isSubmitting} variant="secondary" classNames="w-full" type="submit">
+      <Button disabled={!isValid || isSubmitting} variant="secondary" customClassName="w-full" type="submit">
         Submit
       </Button>
     </form>

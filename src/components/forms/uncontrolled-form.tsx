@@ -3,7 +3,6 @@ import { Autocomplete } from '~components/form-field/autocomplete';
 import { FormField } from '~components/form-field/form-field';
 import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
-import { defaultFormConfig } from '~components/forms/default-form-config';
 import { useModal } from '~components/modal/hooks/use-modal';
 import { PasswordStrength } from '~components/password-strength';
 import { formSchema, type FormType, genderSchema } from '~types/form-types';
@@ -48,8 +47,7 @@ export const UncontrolledForm = () => {
   };
 
   const handleFormChange = (event: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(event.currentTarget);
-    const password = formData.get('password');
+    const password = new FormData(event.currentTarget).get('password');
 
     if (isString(password)) {
       passwordApi.current?.setPassword(password);
@@ -92,19 +90,18 @@ export const UncontrolledForm = () => {
           <Input label="Image" name="image" type="file" placeholder="Image" />
         </FormField>
         <FormField errorMessage={errors?.fieldErrors?.country?.[0]}>
-          <Autocomplete id="uncontrolled" label="Counrty" name="country" type="text" />
+          <Autocomplete id="uncontrolled" label="Country" name="country" type="text" />
         </FormField>
       </div>
       <FormField errorMessage={errors?.fieldErrors?.terms?.[0]}>
         <Input
-          defaultChecked={defaultFormConfig.terms}
-          className="space-x-2 text-center"
+          variant="inline"
           label="By checking this box I accept the Terms and Conditions"
           name="terms"
           type="checkbox"
         />
       </FormField>
-      <Button variant="secondary" classNames="w-full" type="submit">
+      <Button variant="secondary" customClassName="w-full" type="submit">
         Submit
       </Button>
     </form>

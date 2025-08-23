@@ -11,7 +11,7 @@ const MAX_LENGTH = 18;
 
 const nameSchema = z
   .string()
-  .min(MIN_LENGTH, 'This field cannot be empty')
+  .min(MIN_LENGTH, { error: 'This field cannot be empty' })
   .max(MAX_LENGTH)
   .refine((value) => /^[A-Z][a-zA-Z]*$/.test(value), {
     error: 'Name must start with a capital letter and contain only Latin letters',
@@ -21,11 +21,11 @@ const ageShema = z.number().int().min(1, { error: 'Age must be more than 0' });
 
 const emailSchema = z
   .string()
-  .min(1, 'Email cannot be empty')
-  .regex(/^\S+$/, 'Email must not contain any whitespace')
-  .regex(/(?=.*@)/, "Email must contain an '@' symbol separating local part and domain name")
-  .regex(/^[^@]+@[^@]+\.[^@]+$/, 'Email must contain a domain name (e.g., example.com)')
-  .email('Email must be properly formatted (e.g., user@example.com)');
+  .min(1, { error: 'Email cannot be empty' })
+  .regex(/^\S+$/, { error: 'Email must not contain any whitespace' })
+  .regex(/(?=.*@)/, { error: "Email must contain an '@' symbol separating local part and domain name" })
+  .regex(/^[^@]+@[^@]+\.[^@]+$/, { error: 'Email must contain a domain name (e.g., example.com)' })
+  .email({ error: 'Email must be properly formatted (e.g., user@example.com)' });
 
 export const passwordSchema = z
   .string()
@@ -46,13 +46,13 @@ export const passwordSchema = z
   });
 
 export const genderSchema = z.enum([...useValidationDataStore.getState().genders], {
-  message: 'Please select a gender',
+  error: 'Please select a gender',
 });
 
 const imageSchema = z
   .custom<FileList | File>()
   .refine((value) => value !== null, {
-    message: 'Image is required',
+    error: 'Image is required',
   })
   .transform((value) => {
     if (value instanceof FileList) {
@@ -68,23 +68,23 @@ const imageSchema = z
 
     throw new Error('expected file type');
   })
-  .refine((file) => file instanceof File, { message: 'Image is required' })
+  .refine((file) => file instanceof File, { error: 'Image is required' })
   .refine((file) => file && file.size <= 5 * 1024 * 1024, {
-    message: 'Max image size is 5MB',
+    error: 'Max image size is 5MB',
   })
   .refine((file) => file && ['image/jpeg', 'image/png'].includes(file.type), {
-    message: 'Only png and jpeg types are allowed',
+    error: 'Only png and jpeg types are allowed',
   });
 
 const termsSchema = z
   .boolean()
-  .refine((value) => value === true, { message: 'You must accept Terms and Conditions agreement' });
+  .refine((value) => value === true, { error: 'You must accept Terms and Conditions agreement' });
 
 const countrySchema = z
   .string()
   .min(1, 'Please select a country')
   .refine((value) => useValidationDataStore.getState().countries.includes(value), {
-    message: 'Please select a valid country',
+    error: 'Please select a valid country',
   });
 
 export const formSchema = z
@@ -100,11 +100,10 @@ export const formSchema = z
     country: countrySchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
+    error: "Passwords don't match",
     path: ['confirmPassword'],
   });
 
 export type FormType = z.infer<typeof formSchema> & {
-  id: string;
   createAt: Date | string;
 };

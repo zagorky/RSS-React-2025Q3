@@ -30,7 +30,7 @@ export const convertToBase64 = (file: File) => {
   });
 };
 
-export const getFormEntries = <T extends Record<string, unknown>>(form: FormData) => {
+export const getFormEntries = <T extends Record<PropertyKey, unknown>>(form: FormData) => {
   return Object.fromEntries(form.entries()) as {
     [K in keyof T]: FormDataEntryValue;
   };

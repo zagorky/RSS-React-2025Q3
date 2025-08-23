@@ -6,16 +6,15 @@ type ItemImgProps = {
   url: string;
   alt: string;
   fallback?: ReactNode;
+  testId?: string;
 };
 
-export const ItemImg = ({ url, alt, fallback }: ItemImgProps) => {
-  return (
-    <>
-      {url ? (
-        <img className="aspect-square object-cover" {...withDataTestId('result-item-img')} src={url} alt={alt} />
-      ) : (
-        fallback
-      )}
-    </>
-  );
-};
+export const ItemImg = ({ url, alt, fallback, testId }: ItemImgProps) => (
+  <>
+    {url ? (
+      <img className="aspect-square object-cover" {...withDataTestId(testId || '')} src={url} alt={alt} />
+    ) : (
+      fallback
+    )}
+  </>
+);

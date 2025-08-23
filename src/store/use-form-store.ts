@@ -6,7 +6,6 @@ import { create } from 'zustand';
 export type Base64String = string & { _base64: true };
 
 export type StoreFormType = Omit<z.infer<typeof formSchema>, 'image'> & {
-  id: string;
   createAt: string;
   image: Base64String;
 };
@@ -14,7 +13,7 @@ export type StoreFormType = Omit<z.infer<typeof formSchema>, 'image'> & {
 type FormStoreType = {
   forms: StoreFormType[];
   actions: {
-    addForm: (form: Omit<StoreFormType, 'id' | 'createAt'>) => void;
+    addForm: (form: Omit<StoreFormType, 'createAt'>) => void;
   };
 };
 
@@ -22,7 +21,7 @@ const useFormStore = create<FormStoreType>()((set) => ({
   forms: [],
   actions: {
     addForm: (form) => {
-      const newForm = { ...form, id: crypto.randomUUID(), createAt: new Date().toISOString() };
+      const newForm = { ...form, createAt: new Date().toISOString() };
 
       set((state) => ({
         forms: [...state.forms, newForm],

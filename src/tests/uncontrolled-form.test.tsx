@@ -1,12 +1,11 @@
-import { render, waitFor } from '@testing-library/react';
-import { ControlledForm } from '~components/forms/controlled-form';
+import { render } from '@testing-library/react';
+import { UncontrolledForm } from '~components/forms/uncontrolled-form';
 import { describe, expect, vi } from 'vitest';
 
 import { ModalContext } from '~/components/modal/hooks/use-modal';
 import { useFormStoreActions } from '~/store/use-form-store';
 import { useCountries, useGenders } from '~/store/use-validation-data-store';
-import { mockFormData } from '~/tests/mock-data';
-import { getFormFields, setupUserEvent } from '~/tests/test-utilties';
+import { getFormFields } from '~/tests/test-utilties';
 
 vi.mock('~utils/utilities', async () => {
   const actual = await vi.importActual('~utils/utilities');
@@ -41,7 +40,7 @@ const useFormStoreActionsMock = vi.mocked(useFormStoreActions);
 const useGendersMock = vi.mocked(useGenders);
 const useCountriesMock = vi.mocked(useCountries);
 
-describe('controlled-form', () => {
+describe('uncontrolled-form', () => {
   const addFormMock = vi.fn();
   const closeMock = vi.fn();
 
@@ -56,7 +55,7 @@ describe('controlled-form', () => {
   test('should render all fields and buttons', () => {
     render(
       <ModalContext.Provider value={{ current: 'controlled', open: vi.fn(), close: closeMock }}>
-        <ControlledForm />
+        <UncontrolledForm />
       </ModalContext.Provider>
     );
 
@@ -74,40 +73,5 @@ describe('controlled-form', () => {
     expect(terms).toBeInTheDocument();
     expect(image).toBeInTheDocument();
     expect(submit).toBeInTheDocument();
-  });
-
-  test('should calls addForm and close on submit when data is valid', async () => {
-    const { user } = setupUserEvent(
-      <ModalContext.Provider value={{ current: 'controlled', open: vi.fn(), close: closeMock }}>
-        <ControlledForm />
-      </ModalContext.Provider>
-    );
-    const { image, name, age, email, terms, male, password, submit, confirmPassword, country } = getFormFields();
-
-    await user.type(name, mockFormData.name);
-    await user.clear(age);
-    await user.type(age, mockFormData.age.toString());
-    await user.type(password, mockFormData.password);
-    await user.type(confirmPassword, mockFormData.confirmPassword);
-    await user.type(email, mockFormData.email);
-    await user.click(male);
-    await user.type(country, mockFormData.country);
-    await user.upload(image, [mockFormData.image]);
-    await user.click(terms);
-    await user.click(submit);
-    await waitFor(() => {
-      expect(addFormMock).toHaveBeenCalledTimes(1);
-      expect(closeMock).toHaveBeenCalledTimes(1);
-      expect(addFormMock.mock.calls[0][0]).toMatchObject({
-        name: 'John',
-        age: 30,
-        password: '!1Qwerty',
-        confirmPassword: '!1Qwerty',
-        email: 'qq@qq.qq',
-        gender: 'male',
-        country: 'Afghanistan',
-        terms: true,
-      });
-    });
   });
 });

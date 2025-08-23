@@ -14,12 +14,12 @@ export type ButtonVariants = keyof typeof variants;
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   dataTestId?: string;
-  classNames?: string;
+  customClassName?: string;
   variant?: ButtonVariants;
 };
 
 export const Button = ({
-  classNames = '',
+  customClassName = '',
   disabled,
   children,
   variant = 'default',
@@ -31,9 +31,8 @@ export const Button = ({
     <button
       {...props}
       {...withDataTestId(dataTestId)}
-      className={cn(variants[variant], classNames, disabled && 'cursor-not-allowed opacity-50')}
+      className={cn(variants[variant], customClassName, { 'cursor-not-allowed opacity-50': disabled })}
       type={type}
-      disabled={disabled}
     >
       {children}
     </button>

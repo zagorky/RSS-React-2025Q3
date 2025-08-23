@@ -48,7 +48,7 @@ const ModalClose = ({ children }: { children: ReactNode }) => {
   const { close } = useModal();
 
   return (
-    <Button onClick={close} classNames="w-full">
+    <Button onClick={close} customClassName="w-full">
       {children}
     </Button>
   );
