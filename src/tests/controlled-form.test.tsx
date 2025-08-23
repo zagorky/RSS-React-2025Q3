@@ -91,6 +91,7 @@ describe('controlled-form', () => {
     await user.type(confirmPassword, mockFormData.confirmPassword);
     await user.type(email, mockFormData.email);
     await user.click(male);
+    await user.clear(country);
     await user.type(country, mockFormData.country);
     await user.upload(image, [mockFormData.image]);
     await user.click(terms);

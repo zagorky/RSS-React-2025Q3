@@ -35,18 +35,3 @@ export const getFormEntries = <T extends Record<PropertyKey, unknown>>(form: For
     [K in keyof T]: FormDataEntryValue;
   };
 };
-
-export const getFile = (value: unknown) => {
-  if (value instanceof FileList) {
-    const value_ = value.item(0);
-
-    assertIsNonNullable(value_, 'Validation error');
-
-    return value_;
-  }
-  if (value instanceof File) {
-    return value;
-  }
-
-  throw new Error('expected file type');
-};

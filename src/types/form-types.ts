@@ -1,4 +1,4 @@
-import { getFile } from '~utils/utilities';
+import { assertIsNonNullable } from '~utils/utilities';
 import { z } from 'zod';
 
 import { useValidationDataStore } from '~/store/use-validation-data-store';
@@ -54,7 +54,20 @@ const imageSchema = z
   .refine((value) => value !== null, {
     error: 'Image is required',
   })
-  .transform((value) => getFile(value))
+  .transform((value) => {
+    if (value instanceof FileList) {
+      const value_ = value.item(0);
+
+      assertIsNonNullable(value_, 'Validation error');
+
+      return value_;
+    }
+    if (value instanceof File) {
+      return value;
+    }
+
+    throw new Error('expected file type');
+  })
   .refine((file) => file instanceof File, { error: 'Image is required' })
   .refine((file) => file && file.size <= 5 * 1024 * 1024, {
     error: 'Max image size is 5MB',
