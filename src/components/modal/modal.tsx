@@ -19,13 +19,11 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
 const ModalTrigger = ({ type, children }: ModalProps) => {
   const { open } = useModal();
 
-  return <div onClick={() => open(type)}>{children}</div>;
+  return <Button onClick={() => open(type)}>{children}</Button>;
 };
 
 const ModalContent = ({ type, children }: ModalProps) => {
   const { current, close } = useModal();
-
-  console.log(current, 'current');
 
   if (current !== type) {
     return null;
