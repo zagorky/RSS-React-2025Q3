@@ -42,7 +42,7 @@ export const ControlledForm = () => {
       <header className="h2">Controlled form</header>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors.name?.message}>
-          <Input autoFocus register={register('name')} type="text" name="name" placeholder="Name" label="Name" />
+          <Input register={register('name')} type="text" name="name" placeholder="Name" label="Name" />
         </FormField>
         <FormField errorMessage={errors.age?.message}>
           <Input

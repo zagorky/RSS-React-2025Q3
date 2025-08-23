@@ -1,16 +1,16 @@
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { useModal } from '~components/modal/hooks/use-modal';
-import { PasswordStrength } from '~components/password-strength/password-strength';
-import { formSchema, type FormType, genderSchema } from '~types/form-types';
-import { convertToBase64, getFormEntries, isString } from '~utils/utilities';
-import { type FormEvent, useRef, useState } from 'react';
-import { z } from 'zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {useModal} from '~components/modal/hooks/use-modal';
+import {PasswordStrength} from '~components/password-strength/password-strength';
+import {formSchema, type FormType, genderSchema} from '~types/form-types';
+import {convertToBase64, getFormEntries, isString} from '~utils/utilities';
+import {type FormEvent, useRef, useState} from 'react';
+import {z} from 'zod';
 
-import { useFormStoreActions } from '~/store/use-form-store';
+import {useFormStoreActions} from '~/store/use-form-store';
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();
@@ -59,7 +59,7 @@ export const UncontrolledForm = () => {
       <header className="h2">Uncontrolled form</header>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors?.fieldErrors?.name?.[0]}>
-          <Input autoFocus type="text" name="name" placeholder="Name" label="Name" />
+          <Input type="text" name="name" placeholder="Name" label="Name" />
         </FormField>
         <FormField errorMessage={errors?.fieldErrors?.age?.[0]}>
           <Input label="Age" name="age" type="number" placeholder="Age" />

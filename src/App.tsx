@@ -1,8 +1,8 @@
-import {CollectedForms} from '~components/collected-forms';
-import {ControlledForm} from '~components/forms/controlled-form';
-import {UncontrolledForm} from '~components/forms/uncontrolled-form';
-import {Modal, ModalProvider} from '~components/modal/modal';
-import {XIcon} from 'lucide-react';
+import { CollectedForms } from '~components/collected-forms';
+import { ControlledForm } from '~components/forms/controlled-form';
+import { UncontrolledForm } from '~components/forms/uncontrolled-form';
+import { Modal, ModalProvider } from '~components/modal/modal';
+import { XIcon } from 'lucide-react';
 
 const App = () => (
   <ModalProvider>
