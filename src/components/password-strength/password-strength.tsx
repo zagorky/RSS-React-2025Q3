@@ -9,13 +9,17 @@ export type PasswordStrengthProps = {
 export const PasswordStrength = ({ api, password }: PasswordStrengthProps) => {
   const [localPassword, setLocalPassword] = useState(password);
 
-  useImperativeHandle(api, () => ({
-    setPassword: (value: string) => {
-      if (api && value !== localPassword) {
-        setLocalPassword(value);
-      }
-    },
-  }));
+  useImperativeHandle(
+    api,
+    () => ({
+      setPassword: (value: string) => {
+        if (api && value !== localPassword) {
+          setLocalPassword(value);
+        }
+      },
+    }),
+    [api, localPassword]
+  );
 
   useEffect(() => {
     setLocalPassword(password);

@@ -19,14 +19,13 @@ export const Autocomplete = ({ id, register, ...props }: AutocompleteProps) => {
 
   const filteredCountries = countries.filter((c) => c.toLowerCase().includes(deferredValue.toLowerCase()));
 
-  // TODO value
   return (
     <div className="relative w-full">
       <Input
         {...props}
         {...register}
         list={`${id}-countries`}
-        value={value}
+        // defaultValue={value}
         onChange={(event) => {
           setValue(event.target.value);
         }}
