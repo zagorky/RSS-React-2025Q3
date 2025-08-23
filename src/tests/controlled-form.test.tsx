@@ -8,6 +8,16 @@ import {useCountries, useGenders} from '~/store/use-validation-data-store';
 import {mockFormData} from '~/tests/mock-data';
 import {getFormFields, setupUserEvent} from '~/tests/test-utilties';
 
+vi.mock('~utils/utilities', async () => {
+  const actual = await vi.importActual('~utils/utilities');
+
+  return {
+    ...actual,
+    assertIsNonNullable: vi.fn(),
+    convertToBase64: vi.fn().mockResolvedValue('mock-base64-string'),
+  };
+});
+
 vi.mock('~/store/use-form-store', async () => {
   const actual = await vi.importActual('~/store/use-form-store');
 
@@ -26,30 +36,6 @@ vi.mock('~/store/use-validation-data-store', async () => {
     useCountries: vi.fn(),
   };
 });
-
-// vi.mock('~types/form-types', async () => {
-//   const actual = await vi.importActual('~types/form-types');
-//
-//   return {
-//     ...actual,
-//     formSchema: z
-//       .object({
-//         name: actual.nameSchema,
-//         age: actual.ageShema,
-//         email: actual.emailSchema,
-//         password: actual.passwordSchema,
-//         confirmPassword: z.string(),
-//         gender: actual.genderSchema,
-//         image: z.any(),
-//         terms: actual.termsSchema,
-//         country: actual.countrySchema,
-//       })
-//       .refine((data) => data.password === data.confirmPassword, {
-//         message: "Passwords don't match",
-//         path: ['confirmPassword'],
-//       }),
-//   };
-// });
 
 const useFormStoreActionsMock = vi.mocked(useFormStoreActions);
 const useGendersMock = vi.mocked(useGenders);
