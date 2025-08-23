@@ -31,7 +31,7 @@ export const ControlledForm = () => {
   });
 
   const onSubmit = async (data: Omit<FormType, 'id' | 'createAt'>) => {
-    assertIsNonNullable(data.image);
+    assertIsNonNullable(data.image, 'Image Error');
     const image = await convertToBase64(data.image);
 
     addForm({ ...data, image });
@@ -89,17 +89,10 @@ export const ControlledForm = () => {
       </div>
       <div className="flex w-full justify-between gap-2">
         <FormField errorMessage={errors.image?.message}>
-          <Input
-            register={register('image')}
-            label="Image"
-            name="image"
-            type="file"
-            onChange={(event) => event.target.files?.[0]}
-            placeholder="Image"
-          />
+          <Input register={register('image')} label="Image" name="image" type="file" placeholder="Image" />
         </FormField>
         <FormField errorMessage={errors.country?.message}>
-          <Autocomplete id="controlled" register={register('country')} label="Counrty" name="country" type="text" />
+          <Autocomplete id="controlled" register={register('country')} label="Country" name="country" type="text" />
         </FormField>
       </div>
       <FormField errorMessage={errors.terms?.message}>

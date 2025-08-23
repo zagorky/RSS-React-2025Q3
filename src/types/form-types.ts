@@ -58,7 +58,7 @@ const imageSchema = z
     if (value instanceof FileList) {
       const value_ = value.item(0);
 
-      assertIsNonNullable(value_);
+      assertIsNonNullable(value_, 'Validation error');
 
       return value_;
     }

@@ -1,9 +1,9 @@
-import {Button} from '~components/button';
-import {CollectedForms} from '~components/collected-forms';
-import {ControlledForm} from '~components/forms/controlled-form';
-import {UncontrolledForm} from '~components/forms/uncontrolled-form';
-import {Modal, ModalProvider} from '~components/modal/modal';
-import {XIcon} from 'lucide-react';
+import { Button } from '~components/button';
+import { CollectedForms } from '~components/collected-forms';
+import { ControlledForm } from '~components/forms/controlled-form';
+import { UncontrolledForm } from '~components/forms/uncontrolled-form';
+import { Modal, ModalProvider } from '~components/modal/modal';
+import { XIcon } from 'lucide-react';
 
 const App = () => (
   <ModalProvider>
@@ -13,14 +13,14 @@ const App = () => (
           <Modal
             type="controlled"
             openButton={<Button variant="outline">Controlled Form</Button>}
-            closeButton={<XIcon className="justify-self-center" />}
+            closeButton={<XIcon aria-label="close form" className="justify-self-center" />}
           >
             <ControlledForm />
           </Modal>
           <Modal
             type="uncontrolled"
             openButton={<Button variant="secondary">Uncontrolled Form</Button>}
-            closeButton={<XIcon className="justify-self-center" />}
+            closeButton={<XIcon aria-label="close form" className="justify-self-center" />}
           >
             <UncontrolledForm />
           </Modal>

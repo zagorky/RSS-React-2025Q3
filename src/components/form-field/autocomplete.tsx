@@ -25,7 +25,7 @@ export const Autocomplete = ({ id, register, ...props }: AutocompleteProps) => {
         {...props}
         {...register}
         list={`${id}-countries`}
-        value={props.value}
+        value={value}
         onChange={(event) => {
           setValue(event.target.value);
         }}
