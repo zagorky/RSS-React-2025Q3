@@ -1,16 +1,16 @@
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { useModal } from '~components/modal/hooks/use-modal';
-import { PasswordStrength } from '~components/password-strength';
-import { formSchema, type FormType, genderSchema } from '~types/form-types';
-import { convertToBase64, getFormEntries, isString } from '~utils/utilities';
-import { type FormEvent, useRef, useState } from 'react';
-import { z } from 'zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {useModal} from '~components/modal/hooks/use-modal';
+import {PasswordStrength} from '~components/password-strength/password-strength';
+import {formSchema, type FormType, genderSchema} from '~types/form-types';
+import {convertToBase64, getFormEntries, isString} from '~utils/utilities';
+import {type FormEvent, useRef, useState} from 'react';
+import {z} from 'zod';
 
-import { useFormStoreActions } from '~/store/use-form-store';
+import {useFormStoreActions} from '~/store/use-form-store';
 
 export const UncontrolledForm = () => {
   const { addForm } = useFormStoreActions();

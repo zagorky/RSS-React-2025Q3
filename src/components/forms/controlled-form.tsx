@@ -6,7 +6,7 @@ import { Input } from '~components/form-field/input';
 import { RadioButton } from '~components/form-field/radio-button';
 import { defaultFormConfig } from '~components/forms/default-form-config';
 import { useModal } from '~components/modal/hooks/use-modal';
-import { PasswordStrength } from '~components/password-strength';
+import { PasswordStrength } from '~components/password-strength/password-strength';
 import { formSchema, type FormType } from '~types/form-types';
 import { convertToBase64 } from '~utils/utilities';
 import { useForm } from 'react-hook-form';
