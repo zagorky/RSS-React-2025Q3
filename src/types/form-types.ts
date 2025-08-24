@@ -24,8 +24,7 @@ const emailSchema = z
   .min(1, { error: 'Email cannot be empty' })
   .regex(/^\S+$/, { error: 'Email must not contain any whitespace' })
   .regex(/(?=.*@)/, { error: "Email must contain an '@' symbol separating local part and domain name" })
-  .regex(/^[^@]+@[^@]+\.[^@]+$/, { error: 'Email must contain a domain name (e.g., example.com)' })
-  .email({ error: 'Email must be properly formatted (e.g., user@example.com)' });
+  .regex(/^[^@]+@[^@]+\.[^@]+$/, { error: 'Email must contain a domain name (e.g., example.com)' });
 
 export const passwordSchema = z
   .string()
@@ -68,7 +67,6 @@ const imageSchema = z
 
     throw new Error('expected file type');
   })
-  .refine((file) => file instanceof File, { error: 'Image is required' })
   .refine((file) => file && file.size <= 5 * 1024 * 1024, {
     error: 'Max image size is 5MB',
   })
@@ -82,7 +80,7 @@ const termsSchema = z
 
 const countrySchema = z
   .string()
-  .min(1, 'Please select a country')
+  .min(MIN_LENGTH, 'Please select a country')
   .refine((value) => useValidationDataStore.getState().countries.includes(value), {
     error: 'Please select a valid country',
   });
@@ -102,6 +100,9 @@ export const formSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     error: "Passwords don't match",
     path: ['confirmPassword'],
+    when(payload) {
+      return formSchema.pick({ password: true, confirmPassword: true }).safeParse(payload.value).success;
+    },
   });
 
 export type FormType = z.infer<typeof formSchema> & {

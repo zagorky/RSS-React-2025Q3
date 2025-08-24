@@ -1,18 +1,18 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '~components/button';
-import { Autocomplete } from '~components/form-field/autocomplete';
-import { FormField } from '~components/form-field/form-field';
-import { Input } from '~components/form-field/input';
-import { RadioButton } from '~components/form-field/radio-button';
-import { defaultFormConfig } from '~components/forms/default-form-config';
-import { useModal } from '~components/modal/hooks/use-modal';
-import { PasswordStrength } from '~components/password-strength/password-strength';
-import { formSchema, type FormType } from '~types/form-types';
-import { convertToBase64 } from '~utils/utilities';
-import { useForm } from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Button} from '~components/button';
+import {Autocomplete} from '~components/form-field/autocomplete';
+import {FormField} from '~components/form-field/form-field';
+import {Input} from '~components/form-field/input';
+import {RadioButton} from '~components/form-field/radio-button';
+import {defaultFormConfig} from '~components/forms/default-form-config';
+import {useModal} from '~components/modal/hooks/use-modal';
+import {PasswordStrength} from '~components/password-strength/password-strength';
+import {formSchema, type FormType} from '~types/form-types';
+import {convertToBase64} from '~utils/utilities';
+import {useForm} from 'react-hook-form';
 
-import { useFormStoreActions } from '~/store/use-form-store';
-import { useGenders } from '~/store/use-validation-data-store';
+import {useFormStoreActions} from '~/store/use-form-store';
+import {useGenders} from '~/store/use-validation-data-store';
 
 export const ControlledForm = () => {
   const { addForm } = useFormStoreActions();
@@ -24,13 +24,13 @@ export const ControlledForm = () => {
     formState: { errors, isSubmitting, isValid },
     watch,
   } = useForm({
-    mode: 'all',
+    mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: zodResolver(formSchema),
     defaultValues: defaultFormConfig,
   });
 
-  const onSubmit = async (data: Omit<FormType, 'id' | 'createAt'>) => {
+  const onSubmit = async (data: Omit<FormType, 'createAt'>) => {
     const image = await convertToBase64(data.image);
 
     addForm({ ...data, image });
