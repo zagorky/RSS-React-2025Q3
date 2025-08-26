@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 const YearlyDataSchema = z.object({
   year: z.number(),
@@ -15,7 +15,7 @@ const YearlyDataSchema = z.object({
 });
 
 const CountryDataSchema = z.object({
-  iso_code: z.string(),
+  iso_code: z.string().optional(),
   data: z.array(YearlyDataSchema),
 });
 
