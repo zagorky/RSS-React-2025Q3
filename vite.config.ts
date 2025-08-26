@@ -18,38 +18,4 @@ export default defineConfig({
     },
   },
   plugins: [react(), tailwindcss(), tsconfigPaths()],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './vitest.setupTests.ts',
-    clearMocks: true,
-    coverage: {
-      provider: 'v8',
-      reporter: ['text'],
-      reportsDirectory: './coverage',
-      include: ['src/**/*.{js,jsx,ts,tsx}'],
-      exclude: [
-        'src/main.tsx',
-        'src/App.tsx',
-        'src/**/*.test.{js,jsx,ts,tsx}',
-        'src/**/*.spec.{js,jsx,ts,tsx}',
-        'src/index.{js,jsx,ts,tsx}',
-        'src/setupTests.{js,ts}',
-        'src/**/*.d.ts',
-        'src/types/**',
-        'node_modules/**',
-        'src/pages/lazy.tsx',
-        'src/tests/**',
-      ],
-      all: true,
-      thresholds: {
-        global: {
-          statements: 80,
-          branches: 50,
-          functions: 50,
-          lines: 50,
-        },
-      },
-    },
-  },
 });
