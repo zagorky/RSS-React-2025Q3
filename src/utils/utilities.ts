@@ -9,3 +9,7 @@ export function assertIsNonNullable<T>(value: unknown, ...infos: unknown[]): ass
     throw new Error(`Nullish assertion Error: "${String(value)}"; ${infos.join(' ')}`);
   }
 }
+
+export const getErrorMessageFromUnknown = (error: unknown) => {
+  return error instanceof Error ? error.message : 'Fetching data error';
+};
