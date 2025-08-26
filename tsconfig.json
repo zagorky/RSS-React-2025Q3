@@ -5,13 +5,11 @@
     "baseUrl": "./src",
     "paths": {
       "~/*": ["*"],
-      "~pages/*": ["pages/*"],
       "~hooks/*": ["hooks/*"],
       "~utils/*": ["utils/*"],
       "~types/*": ["types/*"],
       "~styles/*": ["styles/*"],
       "~components/*": ["components/*"],
-      "~tests": ["tests/*"]
     }
   }
 }

@@ -9,7 +9,3 @@ export function assertIsNonNullable<T>(value: unknown, ...infos: unknown[]): ass
     throw new Error(`Nullish assertion Error: "${String(value)}"; ${infos.join(' ')}`);
   }
 }
-
-export const isString = (data: unknown): data is string => {
-  return typeof data === 'string';
-};
