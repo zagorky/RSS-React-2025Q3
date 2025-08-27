@@ -14,8 +14,8 @@ export const getErrorMessageFromUnknown = (error: unknown) => {
   return error instanceof Error ? error.message : 'Fetching data error';
 };
 
-export const formatNumber = (value: number | undefined): string => {
-  if (value === undefined) {
+export const formatNumber = (value?: number) => {
+  if (!value) {
     return 'N/A';
   }
   if (value === 0) {

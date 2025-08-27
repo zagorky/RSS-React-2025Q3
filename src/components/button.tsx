@@ -26,15 +26,13 @@ export const Button = ({
   dataTestId = '',
   type,
   ...props
-}: ButtonProps) => {
-  return (
-    <button
-      {...props}
-      {...withDataTestId(dataTestId)}
-      className={cn(variants[variant], customClassName, { 'cursor-not-allowed opacity-50': disabled })}
-      type={type}
-    >
-      {children}
-    </button>
-  );
-};
+}: ButtonProps) => (
+  <button
+    {...props}
+    {...withDataTestId(dataTestId)}
+    className={cn(variants[variant], customClassName, { 'cursor-not-allowed opacity-50': disabled })}
+    type={type}
+  >
+    {children}
+  </button>
+);

@@ -1,4 +1,4 @@
-import {createContext, use} from 'react';
+import { createContext, use } from 'react';
 
 export type ModalType = string | null;
 

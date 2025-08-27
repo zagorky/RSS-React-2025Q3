@@ -23,7 +23,7 @@ export const CountriesDataSchema = z.record(z.string(), CountryDataSchema);
 
 export type CountriesDataType = z.infer<typeof CountriesDataSchema>;
 
-export const allExtraFields = [
+export const additionalColumns = [
   'cement_co2',
   'cement_co2_per_capita',
   'cumulative_cement_co2',
@@ -33,4 +33,6 @@ export const allExtraFields = [
   'nitrous_oxide',
 ] as const;
 
-export type ExtraFieldType = (typeof allExtraFields)[number];
+export const mainColumns = ['country', 'iso_code', 'population', 'year', 'co2', 'co2_per_capita'] as const;
+
+export type ExtraColumnType = (typeof additionalColumns)[number];

@@ -1,11 +1,11 @@
-import type { ExtraFieldType } from '~types/types';
+import type { ExtraColumnType } from '~types/types';
 
 import { Input } from '~components/input';
 import { Modal, ModalProvider } from '~components/modal/modal';
 import { TableBody } from '~components/table/table-body';
 import { TableHeader } from '~components/table/table-header';
 import { YearSelect } from '~components/year-select';
-import { allExtraFields } from '~types/types';
+import { additionalColumns } from '~types/types';
 import { use, useState } from 'react';
 
 import { stablePromise } from '~/api/api';
@@ -17,9 +17,9 @@ export const Table = () => {
   );
   const [selectedYear, setSelectedYear] = useState(allYears[0]);
 
-  const [extraColumns, setExtraColumns] = useState<ExtraFieldType[]>([]);
+  const [extraColumns, setExtraColumns] = useState<ExtraColumnType[]>([]);
 
-  const toggleColumn = (col: ExtraFieldType) => {
+  const toggleColumn = (col: ExtraColumnType) => {
     setExtraColumns((previous) => (previous.includes(col) ? previous.filter((c) => c !== col) : [...previous, col]));
   };
 
@@ -32,7 +32,7 @@ export const Table = () => {
           <Modal type="cols" openButton="Select Columns" closeButton="Close">
             <h2 className="mb-4 text-lg font-bold">Select Additional Columns</h2>
             <div>
-              {allExtraFields.map((field) => (
+              {additionalColumns.map((field) => (
                 <Input
                   variant="inline"
                   label={field.replaceAll('_', ' ')}
