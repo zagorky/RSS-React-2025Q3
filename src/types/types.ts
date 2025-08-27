@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 const YearlyDataSchema = z.object({
   year: z.number(),
@@ -21,8 +21,16 @@ const CountryDataSchema = z.object({
 
 export const CountriesDataSchema = z.record(z.string(), CountryDataSchema);
 
-export type YearlyDataType = z.infer<typeof YearlyDataSchema>;
-
-export type CountryDataType = z.infer<typeof CountryDataSchema>;
-
 export type CountriesDataType = z.infer<typeof CountriesDataSchema>;
+
+export const allExtraFields = [
+  'cement_co2',
+  'cement_co2_per_capita',
+  'cumulative_cement_co2',
+  'methane',
+  'methane_per_capita',
+  'nitrous_oxide_per_capita',
+  'nitrous_oxide',
+] as const;
+
+export type ExtraFieldType = (typeof allExtraFields)[number];
