@@ -1,8 +1,10 @@
-import { Cell } from '~components/table/cell';
-import { Row } from '~components/table/row';
-import { type CountriesDataType, type ExtraColumnType } from '~types/types';
-import { formatNumber } from '~utils/utilities';
-import { memo } from 'react';
+import {Prodlyvator} from '~components/prodlyvator';
+import {Cell} from '~components/table/cell';
+import {Row} from '~components/table/row';
+import {type CountriesDataType, type ExtraColumnType} from '~types/types';
+import {cn} from '~utils/cn';
+import {formatNumber} from '~utils/utilities';
+import {memo} from 'react';
 
 type TableBodyProps = {
   additionalColumns: ExtraColumnType[];
@@ -24,11 +26,27 @@ export const TableBody = memo(({ additionalColumns, data, selectedYear }: TableB
           <Cell className="font-medium">{countryName}</Cell>
           <Cell>{countryData.iso_code || 'N/A'}</Cell>
           <Cell>{yearData.year}</Cell>
-          <Cell>{formatNumber(yearData.population)}</Cell>
-          <Cell>{formatNumber(yearData.co2)}</Cell>
-          <Cell> {formatNumber(yearData.co2_per_capita)}</Cell>
+          <Cell>
+            <Prodlyvator value={formatNumber(yearData.population)}>
+              {(value, isProdlyvator) => <span className={cn({ 'text-primary-600': isProdlyvator })}>{value}</span>}
+            </Prodlyvator>
+          </Cell>
+          <Cell>
+            <Prodlyvator value={formatNumber(yearData.co2)}>
+              {(value, isProdlyvator) => <span className={cn({ 'text-primary-600': isProdlyvator })}>{value}</span>}
+            </Prodlyvator>
+          </Cell>
+          <Cell>
+            <Prodlyvator value={formatNumber(yearData.co2_per_capita)}>
+              {(value, isProdlyvator) => <span className={cn({ 'text-primary-600': isProdlyvator })}>{value}</span>}
+            </Prodlyvator>
+          </Cell>
           {additionalColumns.map((column) => (
-            <Cell key={column}>{formatNumber(yearData[column]) || 'N/A'}</Cell>
+            <Cell key={column}>
+              <Prodlyvator value={formatNumber(yearData[column]) || 'N/A'}>
+                {(value, isProdlyvator) => <span className={cn({ 'text-primary-600': isProdlyvator })}>{value}</span>}
+              </Prodlyvator>
+            </Cell>
           ))}
         </Row>
       );

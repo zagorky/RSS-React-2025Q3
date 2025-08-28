@@ -1,4 +1,4 @@
-import {type ReactNode, useEffect, useState, useRef} from 'react';
+import { type ReactNode, useEffect, useState, useRef } from 'react';
 
 type ProdlyatorProps = {
   value: string;
