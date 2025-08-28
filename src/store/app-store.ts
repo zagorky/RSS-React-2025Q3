@@ -9,7 +9,9 @@ type TableStoreType = {
   sortKey: SortKey;
   sortOrder: SortOrder;
   setSelectedYear: (year: number) => void;
+
   actions: {
+    setSelectedYear: (year: number) => void;
     setAdditionalColumns: (columns: ExtraColumnType[]) => void;
     setSearch: (search: string) => void;
     setSortKey: (sortKey: SortKey) => void;
@@ -29,6 +31,10 @@ const useTableStore = create<TableStoreType>()((set) => ({
       selectedYear: newSelectedYear,
     })),
   actions: {
+    setSelectedYear: (newSelectedYear: number) =>
+      set(() => ({
+        selectedYear: newSelectedYear,
+      })),
     setAdditionalColumns: (extraColumns: ExtraColumnType[]) => set({ additionalColumns: extraColumns }),
 
     setSearch: (search: string) => set({ search }),
