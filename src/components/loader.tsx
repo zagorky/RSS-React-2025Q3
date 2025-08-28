@@ -1,4 +1,4 @@
-import {withDataTestId} from '~utils/utilities';
+import { withDataTestId } from '~utils/utilities';
 
 export const Loader = () => (
   <div className="loader-overlay">

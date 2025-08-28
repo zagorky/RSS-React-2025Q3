@@ -8,13 +8,8 @@ type HeaderProps = {
 export const TableHeader = ({ additionalColumns }: HeaderProps) => (
   <thead className="bg-gray-50">
     <Row>
-      {mainColumns.map((column) => (
-        <th key={column} className="border border-gray-200 px-4 py-3 text-left text-sm font-medium capitalize">
-          {column.replaceAll('_', ' ')}
-        </th>
-      ))}
-      {additionalColumns.map((column) => (
-        <th key={column} className="border border-gray-200 px-4 py-3 text-left text-sm font-medium capitalize">
+      {[...mainColumns, ...additionalColumns].map((column) => (
+        <th key={column} className="border-2 border-gray-200 px-4 py-3 text-left text-sm font-medium capitalize">
           {column.replaceAll('_', ' ')}
         </th>
       ))}

@@ -11,7 +11,7 @@ type TableBodyProps = {
 };
 
 export const TableBody = ({ additionalColumns, data, selectedYear }: TableBodyProps) => (
-  <tbody className="bg-bg-secondary/70">
+  <tbody className="bg-gray-200">
     {Object.entries(data).map(([countryName, countryData]) => {
       const yearData = countryData.data.find((data) => data.year === selectedYear);
 

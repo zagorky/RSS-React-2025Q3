@@ -23,6 +23,10 @@ export const CountriesDataSchema = z.record(z.string(), CountryDataSchema);
 
 export type CountriesDataType = z.infer<typeof CountriesDataSchema>;
 
+export type SortKey = 'name' | 'population';
+
+export type SortOrder = 'asc' | 'desc';
+
 export const additionalColumns = [
   'cement_co2',
   'cement_co2_per_capita',
@@ -33,6 +37,6 @@ export const additionalColumns = [
   'nitrous_oxide',
 ] as const;
 
-export const mainColumns = ['country', 'iso_code', 'population', 'year', 'co2', 'co2_per_capita'] as const;
+export const mainColumns = ['country', 'iso_code', 'year', 'population', 'co2', 'co2_per_capita'] as const;
 
 export type ExtraColumnType = (typeof additionalColumns)[number];
