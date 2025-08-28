@@ -1,8 +1,8 @@
-import type { CountriesDataType, ExtraColumnType } from '~types/types';
-
 import { Cell } from '~components/table/cell';
 import { Row } from '~components/table/row';
+import { type CountriesDataType, type ExtraColumnType } from '~types/types';
 import { formatNumber } from '~utils/utilities';
+import { memo } from 'react';
 
 type TableBodyProps = {
   additionalColumns: ExtraColumnType[];
@@ -10,7 +10,7 @@ type TableBodyProps = {
   selectedYear: number;
 };
 
-export const TableBody = ({ additionalColumns, data, selectedYear }: TableBodyProps) => (
+export const TableBody = memo(({ additionalColumns, data, selectedYear }: TableBodyProps) => (
   <tbody className="bg-gray-200">
     {Object.entries(data).map(([countryName, countryData]) => {
       const yearData = countryData.data.find((data) => data.year === selectedYear);
@@ -34,4 +34,6 @@ export const TableBody = ({ additionalColumns, data, selectedYear }: TableBodyPr
       );
     })}
   </tbody>
-);
+));
+
+TableBody.displayName = 'TableBody';

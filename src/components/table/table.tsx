@@ -4,7 +4,7 @@ import {TableBody} from '~components/table/table-body';
 import {TableHeader} from '~components/table/table-header';
 import {YearSelect} from '~components/year-select';
 import {additionalColumns, type ExtraColumnType, type SortKey, type SortOrder} from '~types/types';
-import {use, useMemo, useState} from 'react';
+import {use, useState, useMemo} from 'react';
 
 import {stablePromise} from '~/api/api';
 
