@@ -1,8 +1,6 @@
 import { CountriesDataSchema } from '~types/types';
 
-// TODO поменять на настоящий эндпоинт
-// const url = 'https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json';
-const url = 'src/api/owid-co2-data.json';
+const url = 'https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json';
 
 const dataPromise = fetch(url)
   .then((response) => {

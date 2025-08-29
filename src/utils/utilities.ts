@@ -1,3 +1,5 @@
+import type { CountriesDataType } from '~types/types';
+
 export const withDataTestId = (testID: string) => {
   return {
     'data-testid': testID,
@@ -32,3 +34,8 @@ export const formatNumber = (value?: number) => {
 
   return value.toLocaleString('en-US', { maximumFractionDigits: 2 });
 };
+
+export const getAllYears = (data: CountriesDataType) =>
+  [...new Set(Object.values(data).flatMap((country) => country.data.map((data) => data.year)))].sort((a, b) => b - a);
+
+export const humanize = (string_: string) => string_.replaceAll('_', ' ');

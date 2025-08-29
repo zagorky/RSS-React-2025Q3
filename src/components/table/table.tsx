@@ -3,16 +3,16 @@ import { Modal, ModalProvider } from '~components/modal/modal';
 import { TableBody } from '~components/table/table-body';
 import { TableHeader } from '~components/table/table-header';
 import { YearSelect } from '~components/year-select';
+import { useTableData } from '~hooks/use-table-data';
 import { additionalColumns, type ExtraColumnType, type SortKey, type SortOrder } from '~types/types';
-import { use, useState, useMemo } from 'react';
+import { getAllYears, humanize } from '~utils/utilities';
+import { use, useState } from 'react';
 
 import { stablePromise } from '~/api/api';
 
 export const Table = () => {
   const data = use(stablePromise());
-  const allYears = [...new Set(Object.values(data).flatMap((country) => country.data.map((data) => data.year)))].sort(
-    (a, b) => b - a
-  );
+  const allYears = getAllYears(data);
 
   const [selectedYear, setSelectedYear] = useState(allYears[0]);
   const [extraColumns, setExtraColumns] = useState<ExtraColumnType[]>([]);
@@ -24,30 +24,7 @@ export const Table = () => {
     setExtraColumns((previous) => (previous.includes(col) ? previous.filter((c) => c !== col) : [...previous, col]));
   };
 
-  const filteredAndSortedData = useMemo(() => {
-    let entries = Object.entries(data);
-
-    if (search.trim()) {
-      entries = entries.filter(([countryName]) => countryName.toLowerCase().includes(search.toLowerCase()));
-    }
-
-    entries.sort(([nameA, countryA], [nameB, countryB]) => {
-      if (sortKey === 'name') {
-        return sortOrder === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-      }
-
-      if (sortKey === 'population') {
-        const popA = countryA.data.find((d) => d.year === selectedYear)?.population ?? 0;
-        const popB = countryB.data.find((d) => d.year === selectedYear)?.population ?? 0;
-
-        return sortOrder === 'asc' ? popA - popB : popB - popA;
-      }
-
-      return 0;
-    });
-
-    return Object.fromEntries(entries);
-  }, [data, search, sortKey, sortOrder, selectedYear]);
+  const filteredAndSortedData = useTableData({ data, selectedYear, sortOrder, sortKey, search });
 
   return (
     <ModalProvider>
@@ -87,7 +64,7 @@ export const Table = () => {
                 {additionalColumns.map((field) => (
                   <Input
                     variant="inline"
-                    label={field.replaceAll('_', ' ')}
+                    label={humanize(field)}
                     key={field}
                     type="checkbox"
                     onChange={() => toggleColumn(field)}
