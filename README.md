@@ -42,10 +42,10 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/bf41016b-ba71-4a6a-845e-e8be079ba06b" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/f1d2d02b-003b-4757-bc31-ce6c7ff2c3fe" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/3ec1230a-a850-41b2-ae32-e89e8a7c27ab" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/bbce9afb-bdbb-4643-87d1-0a27d8d8901f" />
 
 ---
 
@@ -61,10 +61,10 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/175ebeec-f71c-446b-91e5-ada3d16b4d48" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/bd4c3da7-78f1-46ad-84f0-8149363afa67" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/10f3f620-eb31-4c89-8a2b-5ba83c6d66da" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/246056d6-6802-47fd-b31f-92aaffaff2c2" />
 
 ---
 
