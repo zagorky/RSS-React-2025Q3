@@ -43,6 +43,7 @@ export default tseslint.config(
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      'react/prop-types': 'off',
       // perfectionist
       'perfectionist/sort-imports': 'error',
       // prettier

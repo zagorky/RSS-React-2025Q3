@@ -1,16 +1,19 @@
-import type { CountriesDataType, SortKey, SortOrder } from '~types/types';
+import type { CountriesDataType } from '~types/types';
 
 import { useMemo } from 'react';
 
+import { useSortKey, useSortOrder, useSelectedYear, useSearch } from '~/store/app-store';
+
 type TableData = {
   data: CountriesDataType;
-  search: string;
-  sortKey: SortKey;
-  sortOrder: SortOrder;
-  selectedYear: number;
 };
 
-export const useTableData = ({ data, search, sortKey, sortOrder, selectedYear }: TableData) => {
+export const useTableData = ({ data }: TableData) => {
+  const sortKey = useSortKey();
+  const sortOrder = useSortOrder();
+  const selectedYear = useSelectedYear();
+  const search = useSearch();
+
   return useMemo(() => {
     let entries = Object.entries(data);
 

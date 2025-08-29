@@ -1,11 +1,11 @@
-import { type ReactNode, useEffect, useState, useRef } from 'react';
+import { type ReactNode, useEffect, useState, useRef, memo } from 'react';
 
 type ProdlyatorProps = {
   value: string;
   children: (value: string, isProdlyator: boolean) => ReactNode;
 };
 
-export const Prodlyvator = ({ value, children }: ProdlyatorProps) => {
+export const Prodlyvator = memo(({ value, children }: ProdlyatorProps) => {
   const [isProdlyvator, setIsProdlyvator] = useState(false);
   const previousValueReference = useRef<string>(undefined);
   const timeoutReference = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -27,4 +27,6 @@ export const Prodlyvator = ({ value, children }: ProdlyatorProps) => {
   }, [value]);
 
   return children(value, isProdlyvator);
-};
+});
+
+Prodlyvator.displayName = 'Prodlyvator';
