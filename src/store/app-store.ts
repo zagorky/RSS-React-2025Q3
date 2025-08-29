@@ -8,7 +8,8 @@ type TableStoreType = {
   search: string;
   sortKey: SortKey;
   sortOrder: SortOrder;
-
+  // for reviewers: actions в зустанде - это стабильные ссылки и не нуждаются в обертке useCallback
+  // подробнее https://tkdodo.eu/blog/working-with-zustand#separate-actions-from-state
   actions: {
     setSelectedYear: (year: number) => void;
     setAdditionalColumns: (columns: ExtraColumnType[]) => void;
@@ -25,7 +26,8 @@ const useTableStore = create<TableStoreType>()((set) => ({
   search: '',
   sortKey: 'name',
   sortOrder: 'asc',
-
+  // for reviewers: actions в зустанде - это стабильные ссылки и не нуждаются в обертке useCallback
+  // подробнее https://tkdodo.eu/blog/working-with-zustand#separate-actions-from-state
   actions: {
     setSelectedYear: (newSelectedYear: number) =>
       set(() => ({
