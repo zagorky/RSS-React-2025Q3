@@ -12,8 +12,18 @@ export const SortBar = () => {
   return (
     <div className="flex w-full items-center gap-2">
       <label className="whitespace-nowrap">Sort by:</label>
-      <Select value={sortKey} onChange={handleSortKeyChange} options={SortKey} />
-      <Select value={sortOrder} onChange={handleSortOrderChange} options={SortOrder} />
+      <Select
+        className="w-full rounded border px-4 py-2.5"
+        value={sortKey}
+        onChange={handleSortKeyChange}
+        options={[...SortKey]}
+      />
+      <Select
+        className="w-full rounded border px-4 py-2.5"
+        value={sortOrder}
+        onChange={handleSortOrderChange}
+        options={[...SortOrder]}
+      />
     </div>
   );
 };
