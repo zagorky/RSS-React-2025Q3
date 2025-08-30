@@ -6,13 +6,11 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 const App = () => {
   return (
-    <div>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<Loader />}>
-          <Table />
-        </Suspense>
-      </ErrorBoundary>
-    </div>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={<Loader />}>
+        <Table />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
