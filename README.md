@@ -23,10 +23,10 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/04e7cfbe-1999-4425-8c20-db64ebb85388" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/1070b111-2dd0-4696-ba0e-8e35ceb75c0f" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/01f86e5e-44b1-4f8a-baaf-1e4059470b07" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/da9c8975-a143-4f68-bc3f-beaf1c4ed58b" />
 
 ---
 
@@ -42,10 +42,10 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/f1d2d02b-003b-4757-bc31-ce6c7ff2c3fe" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/a01ea8ac-0fe1-4b23-840c-f12239d2c293" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/bbce9afb-bdbb-4643-87d1-0a27d8d8901f" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/4111ddca-829c-4cb9-b583-831d30701e03" />
 
 ---
 
@@ -61,10 +61,10 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/bd4c3da7-78f1-46ad-84f0-8149363afa67" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/dbe3accd-befd-4edb-8605-5d54386f9b2c" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/246056d6-6802-47fd-b31f-92aaffaff2c2" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/9383145a-7f66-4b6d-aeaa-551a3f680942" />
 
 ---
 
@@ -80,9 +80,9 @@ Profiling was conducted using React Dev Tools Profiler with the following settin
 
 #### AFTER
 ##### Flame Graph
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/2d94a752-af42-4cb6-aae6-149b92ddaf28" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/034ec780-39ad-4ddf-8f30-ac57be4fa1b9" />
 
 ##### Ranked Chart
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/083083bd-bee6-4aa2-946d-f7b270057634" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/201d8a65-04f3-4d92-b6b6-17a05c89c25c" />
 
 ---
