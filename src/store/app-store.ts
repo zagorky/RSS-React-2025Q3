@@ -1,21 +1,20 @@
-import type { ExtraColumnType, SortKey, SortOrder } from '~types/types';
+import type { ExtraColumnType, SortKeyType, SortOrderType } from '~types/types';
 
+import { SortOrder, SortKey } from '~types/types';
 import { create } from 'zustand';
 
 type TableStoreType = {
   selectedYear: number;
   additionalColumns: ExtraColumnType[];
   search: string;
-  sortKey: SortKey;
-  sortOrder: SortOrder;
-  // for reviewers: actions в зустанде - это стабильные ссылки и не нуждаются в обертке useCallback
-  // подробнее https://tkdodo.eu/blog/working-with-zustand#separate-actions-from-state
+  sortKey: SortKeyType;
+  sortOrder: SortOrderType;
   actions: {
     setSelectedYear: (year: number) => void;
     setAdditionalColumns: (columns: ExtraColumnType[]) => void;
     setSearch: (search: string) => void;
-    setSortKey: (sortKey: SortKey) => void;
-    setSortOrder: (sortOrder: SortOrder) => void;
+    setSortKey: (sortKey: SortKeyType) => void;
+    setSortOrder: (sortOrder: SortOrderType) => void;
     toggleColumn: (col: ExtraColumnType) => void;
   };
 };
@@ -24,10 +23,8 @@ const useTableStore = create<TableStoreType>()((set) => ({
   selectedYear: 0,
   additionalColumns: [],
   search: '',
-  sortKey: 'name',
-  sortOrder: 'asc',
-  // for reviewers: actions в зустанде - это стабильные ссылки и не нуждаются в обертке useCallback
-  // подробнее https://tkdodo.eu/blog/working-with-zustand#separate-actions-from-state
+  sortKey: SortKey[0],
+  sortOrder: SortOrder[0],
   actions: {
     setSelectedYear: (newSelectedYear: number) =>
       set(() => ({
@@ -37,9 +34,9 @@ const useTableStore = create<TableStoreType>()((set) => ({
 
     setSearch: (search: string) => set({ search }),
 
-    setSortKey: (sortKey: SortKey) => set({ sortKey }),
+    setSortKey: (sortKey: SortKeyType) => set({ sortKey }),
 
-    setSortOrder: (sortOrder: SortOrder) => set({ sortOrder }),
+    setSortOrder: (sortOrder: SortOrderType) => set({ sortOrder }),
 
     toggleColumn: (col: ExtraColumnType) =>
       set((state) => ({

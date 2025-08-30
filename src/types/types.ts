@@ -23,9 +23,11 @@ export const CountriesDataSchema = z.record(z.string(), CountryDataSchema);
 
 export type CountriesDataType = z.infer<typeof CountriesDataSchema>;
 
-export type SortKey = 'name' | 'population';
+export const SortOrder = ['asc', 'desc'] as const;
+export const SortKey = ['name', 'population'] as const;
 
-export type SortOrder = 'asc' | 'desc';
+export type SortKeyType = (typeof SortKey)[number];
+export type SortOrderType = (typeof SortOrder)[number];
 
 export const additionalColumns = [
   'cement_co2',

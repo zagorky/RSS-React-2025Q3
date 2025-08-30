@@ -1,6 +1,6 @@
 import type { CountriesDataType } from '~types/types';
 
-import { useMemo } from 'react';
+import { useMemo, useDeferredValue } from 'react';
 
 import { useSortKey, useSortOrder, useSelectedYear, useSearch } from '~/store/app-store';
 
@@ -13,11 +13,12 @@ export const useTableData = ({ data }: TableData) => {
   const sortOrder = useSortOrder();
   const selectedYear = useSelectedYear();
   const search = useSearch();
+  const deferredSearch = useDeferredValue(search);
 
   return useMemo(() => {
     let entries = Object.entries(data);
 
-    if (search.trim()) {
+    if (deferredSearch.trim()) {
       entries = entries.filter(([countryName]) => countryName.toLowerCase().includes(search.toLowerCase()));
     }
 

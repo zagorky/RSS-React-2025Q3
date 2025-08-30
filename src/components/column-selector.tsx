@@ -1,13 +1,14 @@
 import { Input } from '~components/input';
 import { Modal } from '~components/modal/modal';
+import { useTableHandlers } from '~hooks/use-table-handlers';
 import { additionalColumns } from '~types/types';
 import { humanize } from '~utils/utilities';
 
-import { useAdditionalColumns, useTableStoreActions } from '~/store/app-store';
+import { useAdditionalColumns } from '~/store/app-store';
 
 export const ColumnSelector = () => {
   const extraColumns = useAdditionalColumns();
-  const { toggleColumn } = useTableStoreActions();
+  const { handleColumnToggle } = useTableHandlers();
 
   return (
     <div>
@@ -20,7 +21,7 @@ export const ColumnSelector = () => {
               label={humanize(field)}
               key={field}
               type="checkbox"
-              onChange={() => toggleColumn(field)}
+              onChange={() => handleColumnToggle(field)}
               checked={extraColumns.includes(field)}
             />
           ))}
