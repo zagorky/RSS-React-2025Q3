@@ -38,5 +38,5 @@ export const useTableData = ({ data }: TableData) => {
     });
 
     return Object.fromEntries(entries);
-  }, [data, search, selectedYear, sortKey, sortOrder]);
+  }, [data, deferredSearch, search, selectedYear, sortKey, sortOrder]);
 };
